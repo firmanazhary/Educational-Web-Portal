@@ -2,6 +2,7 @@
 
 import AppLayout from '@/Layouts/AppLayout'; // Pastikan file Layout kamu namanya AppLayout.jsx
 import { Link } from '@inertiajs/react';
+import HeroSlider from '@/Layouts/HeroSlider';
 
 export default function Home({ blogs = [], galleries = [] }) {
     return (
@@ -9,30 +10,7 @@ export default function Home({ blogs = [], galleries = [] }) {
         <AppLayout title="Home">
             
             {/* --- HERO SECTION (Sesuai Gambar JIS: Full Width & Overlay) --- */}
-            <section className="relative h-[90vh] overflow-hidden bg-[#002147]">
-                <img 
-                    src="/storage/hero-jis.jpg" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-70" 
-                    alt="JIS Campus"
-                />
-                
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
-                    <div className="max-w-5xl space-y-6">
-                        <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tighter">
-                            Learning to Be Best <span className="text-[#FF6600]">for</span> the World.
-                        </h1>
-                        <p className="text-xl md:text-2xl text-blue-50 max-w-3xl mx-auto leading-relaxed font-light">
-                            At JIS, we prepare students from across the globe to be best in what they aspire for and at the same time, be best for the world they live in.
-                        </p>
-                        <div className="pt-8">
-                            <button className="bg-[#FF6600] hover:bg-white hover:text-[#002147] px-12 py-4 rounded-full text-sm font-bold uppercase tracking-widest transition duration-300 shadow-2xl">
-                                Discover More
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+         <HeroSlider />
             {/* --- STATS SECTION (4 Kolom Bulat-Bulat Sesuai Gambar) --- */}
             <section className="py-20 bg-white relative z-20">
                 <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">

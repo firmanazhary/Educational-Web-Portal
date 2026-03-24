@@ -43,19 +43,38 @@ export default function AppLayout({ children, title }) {
             <main className="relative z-10">{children}</main>
 
             {/* --- FLOATING BUTTONS (Sesuai Gambar JIS Right Side) --- */}
-            <div className="fixed right-6 bottom-12 z-[100] flex flex-col space-y-4">
-                {/* Tombol Search */}
-                <button className="bg-white shadow-2xl p-4 rounded-full border border-slate-100 hover:scale-110 transition duration-300 text-[#003366] group">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 group-hover:text-[#FF6600]">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                </button>
-                {/* Tombol Chat/Contact */}
-                <button className="bg-[#FF6600] shadow-2xl p-4 rounded-full text-white hover:scale-110 transition duration-300 hover:bg-[#E65C00]">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3h5.25M21 12c0 1.69-.91 3.165-2.28 3.974a6.602 6.602 0 0 1-5.72 1.957l-3.332 1.11a.75.75 0 0 1-.904-.904l1.11-3.332a6.602 6.602 0 0 1 1.957-5.72A6.602 6.602 0 0 1 21 12Zm-10.5 4.5a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0Z" />
-                    </svg>
-                </button>
+            <div className="fixed right-6 bottom-12 z-[100] group flex items-center justify-center">
+                
+                {/* Kita buat grid 2x2 yang diputar 45 derajat */}
+                <div className="grid grid-cols-2 gap-1 rotate-45 transform scale-90 hover:scale-100 transition duration-500 ease-out cursor-pointer shadow-2xl shadow-[#003366]/30 rounded-2xl p-1">
+                    
+                    {/* Kotak KUNING (Kiri Atas) - Biasanya info/Portal */}
+                    <div className="w-14 h-14 bg-[#FFC72C] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:-translate-y-1 transition duration-300">
+                        {/* Kembalikan rotasi teks/icon agar lurus */}
+                        <div className="-rotate-45 text-[#003366] font-bold text-sm">Info</div>
+                    </div>
+
+                    {/* Kotak HIJAU (Kanan Atas) - Biasanya Apply/Edit */}
+                    <div className="w-14 h-14 bg-[#008144] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:-translate-y-1 transition duration-300 relative group/icon">
+                        <div className="-rotate-45 text-white text-xs font-black uppercase tracking-widest">Apply</div>
+                        {/* Tooltip Keren */}
+                        <span className="absolute -top-12 -right-4 bg-[#003366] text-white text-[10px] px-3 py-1.5 rounded-md opacity-0 group-hover/icon:opacity-100 transition whitespace-nowrap font-bold">Admissions</span>
+                    </div>
+
+                    {/* Kotak BIRU (Kiri Bawah) - Biasanya Inquiry/Inquire */}
+                    <div className="w-14 h-14 bg-[#0077C8] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:translate-y-1 transition duration-300">
+                        <div className="-rotate-45 text-white text-xs font-black uppercase tracking-widest">Inquire</div>
+                    </div>
+
+                    {/* Kotak ORANGE (Kanan Bawah) - Biasanya Map/Campus */}
+                    <div className="w-14 h-14 bg-[#FF6600] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:translate-y-1 transition duration-300">
+                        <div className="-rotate-45 text-white text-xs font-black uppercase tracking-widest">Visit</div>
+                    </div>
+
+                </div>
+
+                {/* Optional: Tambahkan aura cahaya orange di belakang saat hover */}
+                <div className="absolute -inset-4 bg-[#FF6600]/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-700 -z-10"></div>
             </div>
 
             {/* --- FOOTER (Sesuai Gambar JIS Bottom) --- */}
