@@ -1,10 +1,9 @@
-// resources/js/Components/HeroSlider.jsx Perbaikan Total
+// resources/js/Components/HeroSlider.jsx
 
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
 
-// IMPORT WAJIB (Pastikan terinstall)
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
@@ -14,31 +13,30 @@ export default function HeroSlider() {
     const slides = [
         {
             type: 'image',
-            src: 'https://images.pexels.com/photos/247671/pexels-photo-247671.jpeg?_gl=1*rd9esi*_ga*MTg0OTQ5Nzc0OC4xNzc0MzUyODYx*_ga_8JE65Q40S6*czE3NzQzNTI4NjEkbzEkZzEkdDE3NzQzNTM1MDgkajU4JGwwJGgw', 
-            title: 'Best for the World',
-            desc: 'We learn in Indonesia to be Best for the World. Find out how you can join the JIS community today!'
+            src: 'https://images.pexels.com/photos/247671/pexels-photo-247671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 
+            title: 'Generasi Qurani & Berprestasi',
+            desc: 'Membentuk ananda menjadi pribadi yang cerdas, berakhlak mulia, dan siap menghadapi tantangan zaman di At-Taufiq Jambi.'
         },
         {
             type: 'image',
-            src: 'https://images.pexels.com/photos/459301/pexels-photo-459301.jpeg?_gl=1*1x0rzql*_ga*MTg0OTQ5Nzc0OC4xNzc0MzUyODYx*_ga_8JE65Q40S6*czE3NzQzNTI4NjEkbzEkZzAkdDE3NzQzNTI4NjEkajYwJGwwJGgw',
-            title: 'Intercultural Excellence',
-            desc: 'A vibrant community of lifelong learners, leaders, and best for the world.'
+            src: 'https://images.pexels.com/photos/459301/pexels-photo-459301.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            title: 'Pendidikan Karakter Islami',
+            desc: 'Lingkungan belajar yang kondusif untuk menanamkan nilai-nilai keislaman sejak dini melalui program unggulan kami.'
         },
-             {
+        {
             type: 'image',
-            src: 'https://images.pexels.com/photos/219998/pexels-photo-219998.jpeg?_gl=1*1h2nq4b*_ga*MTg0OTQ5Nzc0OC4xNzc0MzUyODYx*_ga_8JE65Q40S6*czE3NzQzNTI4NjEkbzEkZzEkdDE3NzQzNTM0MzgkajQ2JGwwJGgw',
-            title: 'Intercultural ',
-            desc: 'A vibrant community of lifelong learners, leaders, and best for the world.'
+            src: 'https://images.pexels.com/photos/219998/pexels-photo-219998.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            title: 'Modern & Inovatif',
+            desc: 'Memadukan kurikulum nasional dengan nilai-nilai Islam serta fasilitas teknologi yang mendukung kreativitas santri.'
         },
     ];
 
     return (
-        // Container utama H-SCREEN agar full satu layar
         <section className="relative h-screen w-full overflow-hidden bg-black group">
             
             <Swiper
                 modules={[Autoplay, EffectFade, Pagination, Navigation]}
-                effect="fade" // Wajib Fade agar gak numpuk pas transisi
+                effect="fade"
                 speed={1500} 
                 autoplay={{ delay: 7000, disableOnInteraction: false }}
                 loop={true}
@@ -50,54 +48,43 @@ export default function HeroSlider() {
                 className="h-full w-full"
             >
                 {slides.map((slide, index) => (
-                    <SwiperSlide key={index} className="relative overflow-hidden w-full h-full swiper-slide-custom">
+                    <SwiperSlide key={index} className="relative overflow-hidden w-full h-full">
                         
-                        {/* --- BACKGROUND WITH KEN BURNS EFFECT (Matiin kalau ganggu teks) --- */}
+                        {/* --- BACKGROUND WITH KEN BURNS EFFECT --- */}
                         <div className="absolute inset-0 transform animate-ken-burns">
-                            {slide.type === 'video' ? (
-                                <video autoPlay muted loop playsInline className="h-full w-full object-cover opacity-60">
-                                    <source src={slide.src} type="video/mp4" />
-                                </video>
-                            ) : (
-                                <img src={slide.src} className="h-full w-full object-cover opacity-60" alt={slide.title} />
-                            )}
+                            <img src={slide.src} className="h-full w-full object-cover opacity-60" alt={slide.title} />
                         </div>
 
-                        {/* --- KONTEN TEKS: INI KUNCINYA AGAR RATA KIRI & GAK NABRAK --- 
-                            Pakai 'items-start' untuk align left (bukan items-center)
-                            Pakai 'justify-end' & 'pb-32' untuk naruh di kiri bawah.
-                        */}
+                        {/* --- KONTEN TEKS (RATA KIRI) --- */}
                         <div className="absolute inset-0 flex flex-col justify-end items-start pb-32 px-10 md:px-24 z-10 text-left">
                             <div className="max-w-4xl space-y-6 slide-content-anim">
                                 
-                                {/* Garis Aksen Orange */}
                                 <div className="h-1.5 w-24 bg-[#FF6600]"></div>
                                 
-                                {/* Judul Besar (Rata Kiri, tracking tighter biar premium) */}
-                                <h1 className="text-6xl md:text-8xl font-black leading-tight tracking-tighter text-white text-shadow-xl">
+                                <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tighter text-white text-shadow-xl uppercase">
                                     {slide.title}
                                 </h1>
                                 
-                                {/* Deskripsi (Maksimal lebar agar gak full satu layar) */}
                                 <p className="text-xl md:text-2xl text-white font-light max-w-2xl leading-relaxed text-shadow-md">
                                     {slide.desc}
                                 </p>
                                 
-                                {/* Tombol Learn More */}
                                 <div className="flex pt-6">
-                                    <button className="text-white text-sm font-bold uppercase tracking-[0.3em] group flex items-center hover:text-[#FF6600] transition transition-all duration-300">
-                                        Learn More 
-                                        <span className="ml-4 text-2xl group-hover:ml-8 transition-all duration-300">→</span>
+                                    <button className="text-white text-sm font-bold uppercase tracking-[0.3em] group flex items-center hover:text-[#FF6600] transition duration-300">
+                                        Selengkapnya 
+                                        <span className="ml-4 text-2xl group-hover:ml-8 transition-all">→</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        {/* --- LOGO JIS FLOATING (Kiri Atas) --- */}
+                        {/* --- LOGO AT-TAUFIQ JAMBI (Kiri Atas) --- */}
                         <div className="absolute top-10 left-10 z-40 flex items-center space-x-4">
-                             <div className="text-4xl font-black text-white">JIS<span className="text-[#FF6600]">.</span></div>
+                             <div className="text-3xl font-black text-white tracking-tighter italic">
+                                AT-TAUFIQ<span className="text-[#FF6600]">.</span>
+                             </div>
                              <div className="text-[10px] text-white/70 leading-tight uppercase tracking-[0.2em] font-bold border-l border-white/30 pl-4 py-1">
-                                Jakarta<br/>Intercultural<br/>School
+                                Sekolah Islam Terpadu<br/>Kota Jambi
                              </div>
                         </div>
                     </SwiperSlide>
@@ -116,35 +103,24 @@ export default function HeroSlider() {
                 </svg>
             </button>
 
-            {/* --- STYLE UNTUK ANIMASI & PAGINATION (Wajib!) --- */}
             <style jsx global>{`
-                /* Pagination Dot Orange */
-                .swiper-pagination-bullet { background: white !important; opacity: 0.4; height: 10px; width: 10px; }
+                .swiper-pagination-bullet { background: white !important; opacity: 0.4; }
                 .swiper-pagination-bullet-active { background: #FF6600 !important; opacity: 1; transform: scale(1.3); }
                 
-                /* Trik CSS: Sembunyikan konten secara default */
-                .slide-content-anim {
-                    opacity: 0;
-                }
+                .slide-content-anim { opacity: 0; }
 
-                /* Tampilkan dan animasikan konten HANYA pada slide aktif */
                 .swiper-slide-active .slide-content-anim {
-                    animation: fadeUpJis 1.4s ease-out forwards;
-                    animation-delay: 0.3s; /* Sedikit delay biar background muncul duluan */
+                    animation: fadeUpAtTaufiq 1.4s ease-out forwards;
+                    animation-delay: 0.3s;
                 }
 
-                @keyframes fadeUpJis {
+                @keyframes fadeUpAtTaufiq {
                     0% { opacity: 0; transform: translateY(50px); }
                     100% { opacity: 1; transform: translateY(0); }
                 }
 
-                /* Tambahan text-shadow agar teks terbaca di background terang */
-                .text-shadow-xl {
-                    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                }
-                .text-shadow-md {
-                    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-                }
+                .text-shadow-xl { text-shadow: 0 4px 10px rgba(0,0,0,0.6); }
+                .text-shadow-md { text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
             `}</style>
         </section>
     );

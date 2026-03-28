@@ -14,4 +14,13 @@ class PublicController extends Controller
             'galleries' => Post::where('type', 'gallery')->latest()->get(),
         ]);
     }
+      public function show($slug)
+        {
+            // Cari post berdasarkan slug yang tipenya blog
+            $post = Post::where('slug', $slug)->where('type', 'blog')->firstOrFail();
+
+            return Inertia::render('BlogDetail', [
+                'post' => $post
+            ]);
+        }
 }

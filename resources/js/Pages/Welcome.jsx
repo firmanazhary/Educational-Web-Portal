@@ -45,31 +45,43 @@ export default function Home({ blogs = [], galleries = [] }) {
                         </button>
                     </div>
 
+                  {/* --- LOOPING BLOG / BERITA AT-TAUFIQ --- */}
                     <div className="grid md:grid-cols-3 gap-10">
-                        {blogs.map(post => (
-                            <article key={post.id} className="bg-white rounded-[32px] shadow-xl shadow-slate-200/50 overflow-hidden group hover:-translate-y-3 transition duration-500 flex flex-col">
+                        {blogs.map((post) => (
+                            <Link 
+                                key={post.id} 
+                                href={route('blog.show', post.slug)} // Pastikan ini pakai slug
+                                className="bg-white rounded-[32px] shadow-xl shadow-slate-200/50 overflow-hidden group hover:-translate-y-3 transition duration-500 flex flex-col border border-slate-50 cursor-pointer"
+                            >
+                                {/* Bagian Gambar */}
                                 <div className="h-64 overflow-hidden relative">
                                     <img 
                                         src={`/storage/${post.image}`} 
                                         className="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
                                         alt={post.title} 
                                     />
-                                    <div className="absolute top-4 left-4 bg-[#FF6600] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">
-                                        Update
+                                    <div className="absolute top-4 left-4 bg-[#FF6600] text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                                        Update Berita
                                     </div>
                                 </div>
+
+                                {/* Bagian Konten Teks */}
                                 <div className="p-8 flex-grow">
-                                    <h3 className="font-bold text-2xl text-[#002147] mb-4 leading-tight group-hover:text-[#FF6600] transition">
+                                    {/* Judul Berita */}
+                                    <h3 className="font-bold text-2xl text-[#002147] mb-4 leading-tight group-hover:text-[#FF6600] transition-colors duration-300">
                                         {post.title}
                                     </h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed line-clamp-3">
+                                    {/* Cuplikan Konten (Line Clamp agar rapi) */}
+                                    <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 font-light">
                                         {post.content}
                                     </p>
                                 </div>
-                                <div className="p-8 pt-0 mt-auto flex items-center text-[#FF6600] font-bold text-sm">
-                                    Read Article <span className="ml-2 group-hover:ml-4 transition-all">→</span>
+
+                                {/* Bagian Footer Card (Read More) */}
+                                <div className="p-8 pt-0 mt-auto flex items-center text-[#FF6600] font-black uppercase text-[10px] tracking-[0.2em]">
+                                    Baca Artikel <span className="ml-3 text-lg group-hover:ml-5 transition-all">→</span>
                                 </div>
-                            </article>
+                            </Link>
                         ))}
                     </div>
                 </div>
