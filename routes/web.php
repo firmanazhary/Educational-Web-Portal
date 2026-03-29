@@ -8,6 +8,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Admin\PostController;
 
 Route::get('/', [PublicController::class, 'index']);
+Route::get('/about', [PublicController::class, 'about'])->name('about');
 Route::get('/blog/{slug}', [PublicController::class, 'show'])->name('blog.show');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

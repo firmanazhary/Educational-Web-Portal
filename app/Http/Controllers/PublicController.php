@@ -23,4 +23,9 @@ class PublicController extends Controller
                 'post' => $post
             ]);
         }
+
+            public function about()
+        {
+            return Inertia::render('About');
+        }
 }

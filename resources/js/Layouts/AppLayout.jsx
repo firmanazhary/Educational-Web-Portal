@@ -21,7 +21,7 @@ export default function AppLayout({ children, title }) {
                     {/* Menu Navigasi (Tengah) */}
                     <div className="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-[#003366]/90">
                         <Link href="/" className="hover:text-[#FF6600] transition">Beranda</Link>
-                        <a href="#about" className="hover:text-[#FF6600] transition">Tentang Kami</a>
+                        <Link href="/about" className="hover:text-[#FF6600] transition">Tentang Kami</Link>
                         <a href="#academics" className="hover:text-[#FF6600] transition">Akademik</a>
                         <a href="#blog" className="hover:text-[#FF6600] transition">Berita</a>
                         <a href="#gallery" className="hover:text-[#FF6600] transition">Galeri</a>
