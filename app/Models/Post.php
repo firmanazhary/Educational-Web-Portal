@@ -13,7 +13,7 @@ class Post extends Model
      * Mass Assignment: Field mana saja yang boleh diisi lewat Form.
      */
     protected $fillable = [
-        'type',        // 'blog', 'gallery', atau 'hero'
+    
         'title',       // Judul artikel atau Nama foto
         'slug',        // URL unik (penting buat SEO/Blog)
         'content',     // Isi berita atau caption

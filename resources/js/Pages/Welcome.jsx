@@ -1,24 +1,26 @@
 // resources/js/Pages/Home.jsx
 
-import AppLayout from '@/Layouts/AppLayout'; // Pastikan file Layout kamu namanya AppLayout.jsx
-import { Link } from '@inertiajs/react';
+import AppLayout from '@/Layouts/AppLayout';
+import { Link, Head } from '@inertiajs/react';
 import HeroSlider from '@/Layouts/HeroSlider';
 
-export default function Home({ blogs = [], galleries = [] }) {
+// KUNCINYA DI SINI: Samakan nama props dengan yang dikirim Controller (posts & galleries)
+export default function Home({ auth, posts = [], galleries = [] }) {
     return (
-        /* Gunakan AppLayout sesuai import di atas */
         <AppLayout title="Home">
+            <Head title="SIT At-Taufiq Jambi - Mencetak Generasi Robbani" />
             
-            {/* --- HERO SECTION (Sesuai Gambar JIS: Full Width & Overlay) --- */}
-         <HeroSlider />
-            {/* --- STATS SECTION (4 Kolom Bulat-Bulat Sesuai Gambar) --- */}
+            {/* --- HERO SECTION --- */}
+            <HeroSlider />
+
+            {/* --- STATS SECTION --- */}
             <section className="py-20 bg-white relative z-20">
                 <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
                     {[
-                        { val: '20+', label: 'Nationalities' },
-                        { val: '1951', label: 'Founded' },
-                        { val: '2000+', label: 'Students' },
-                        { val: '150+', label: 'Activities' }
+                        { val: '15+', label: 'Tahun Berdiri' },
+                        { val: '500+', label: 'Santri Aktif' },
+                        { val: '100%', label: 'Kurikulum SIT' },
+                        { val: '30+', label: 'Ekstrakurikuler' }
                     ].map((stat, i) => (
                         <div key={i} className="group p-10 bg-slate-50 rounded-[40px] hover:bg-[#002147] transition duration-500 text-center border border-slate-100">
                             <h2 className="text-5xl font-black text-[#002147] group-hover:text-[#FF6600] transition tracking-tighter">
@@ -32,82 +34,89 @@ export default function Home({ blogs = [], galleries = [] }) {
                 </div>
             </section>
 
-            {/* --- LIFE AT JIS (Section Blog - Grid 3 Kolom) --- */}
+            {/* --- SECTION BLOG (Life at At-Taufiq) --- */}
             <section id="blog" className="py-24 px-6 bg-slate-50">
                 <div className="container mx-auto">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                         <div className="max-w-2xl">
-                            <h3 className="text-[#FF6600] font-black uppercase tracking-widest text-xs mb-3">Our News</h3>
-                            <h2 className="text-5xl font-extrabold text-[#002147] tracking-tighter">Life at JIS</h2>
+                            <h3 className="text-[#FF6600] font-black uppercase tracking-widest text-xs mb-3">Update Berita</h3>
+                            <h2 className="text-5xl font-extrabold text-[#002147] tracking-tighter uppercase">Life at At-Taufiq</h2>
                         </div>
-                        <button className="text-[#002147] font-bold text-sm border-b-2 border-[#FF6600] pb-1 hover:text-[#FF6600] transition">
-                            View All Stories
-                        </button>
+                        <Link href="/blog" className="text-[#002147] font-black text-xs uppercase tracking-widest border-b-2 border-[#FF6600] pb-1 hover:text-[#FF6600] transition">
+                            Lihat Semua Berita →
+                        </Link>
                     </div>
 
-                  {/* --- LOOPING BLOG / BERITA AT-TAUFIQ --- */}
                     <div className="grid md:grid-cols-3 gap-10">
-                        {blogs.map((post) => (
+                        {posts.length > 0 ? posts.map((post) => (
                             <Link 
                                 key={post.id} 
-                                href={route('blog.show', post.slug)} // Pastikan ini pakai slug
+                                href={route('blog.show', post.slug)}
                                 className="bg-white rounded-[32px] shadow-xl shadow-slate-200/50 overflow-hidden group hover:-translate-y-3 transition duration-500 flex flex-col border border-slate-50 cursor-pointer"
                             >
-                                {/* Bagian Gambar */}
-                                <div className="h-64 overflow-hidden relative">
+                                <div className="h-64 overflow-hidden relative bg-slate-200">
                                     <img 
                                         src={`/storage/${post.image}`} 
                                         className="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
                                         alt={post.title} 
+                                        onError={(e) => e.target.src = "https://placehold.co/600x400?text=At-Taufiq+News"}
                                     />
                                     <div className="absolute top-4 left-4 bg-[#FF6600] text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
-                                        Update Berita
+                                        News
                                     </div>
                                 </div>
 
-                                {/* Bagian Konten Teks */}
                                 <div className="p-8 flex-grow">
-                                    {/* Judul Berita */}
-                                    <h3 className="font-bold text-2xl text-[#002147] mb-4 leading-tight group-hover:text-[#FF6600] transition-colors duration-300">
+                                    <h3 className="font-bold text-2xl text-[#002147] mb-4 leading-tight group-hover:text-[#FF6600] transition-colors duration-300 line-clamp-2">
                                         {post.title}
                                     </h3>
-                                    {/* Cuplikan Konten (Line Clamp agar rapi) */}
                                     <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 font-light">
                                         {post.content}
                                     </p>
                                 </div>
 
-                                {/* Bagian Footer Card (Read More) */}
                                 <div className="p-8 pt-0 mt-auto flex items-center text-[#FF6600] font-black uppercase text-[10px] tracking-[0.2em]">
                                     Baca Artikel <span className="ml-3 text-lg group-hover:ml-5 transition-all">→</span>
                                 </div>
                             </Link>
-                        ))}
+                        )) : (
+                            <div className="col-span-3 text-center py-10 text-slate-400 italic font-light uppercase tracking-widest text-xs">
+                                Belum ada berita yang diterbitkan.
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
 
-            {/* --- GALLERY SECTION (4 Kolom Sesuai Gambar) --- */}
+            {/* --- GALLERY SECTION --- */}
             <section id="gallery" className="py-24 px-6 bg-white">
                 <div className="container mx-auto">
                     <div className="text-center mb-16">
                         <h3 className="text-[#FF6600] font-black uppercase tracking-widest text-[10px] mb-3">Moments</h3>
-                        <h2 className="text-5xl font-extrabold text-[#002147] tracking-tighter">School Gallery</h2>
+                        <h2 className="text-5xl font-extrabold text-[#002147] tracking-tighter uppercase">Gallery Santri</h2>
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {galleries.map((item) => (
-                            <div key={item.id} className="relative aspect-square overflow-hidden rounded-[24px] group shadow-lg">
+                        {galleries.length > 0 ? galleries.map((item) => (
+                            <div key={item.id} className="relative aspect-square overflow-hidden rounded-[24px] group shadow-lg bg-slate-100">
                                 <img 
                                     src={`/storage/${item.image}`} 
                                     className="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
                                     alt={item.title}
+                                    onError={(e) => e.target.src = "https://placehold.co/400x400?text=Gallery"}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#002147]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-6">
-                                    <p className="text-white text-sm font-bold tracking-tight">{item.title}</p>
+                                    <div className="translate-y-4 group-hover:translate-y-0 transition duration-500">
+                                        <p className="text-[#FF6600] text-[8px] font-black uppercase tracking-[0.2em] mb-1">{item.category}</p>
+                                        <p className="text-white text-sm font-bold tracking-tight">{item.title}</p>
+                                    </div>
                                 </div>
                             </div>
-                        ))}
+                        )) : (
+                            <div className="col-span-4 text-center py-10 text-slate-300 text-xs font-black uppercase tracking-widest">
+                                Galeri masih kosong.
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

@@ -43,8 +43,8 @@ export default function AuthenticatedLayout({ header, children }) {
 
         {/* Menu Gallery (Masih dummy dulu) */}
         <Link 
-            href="#" 
-            className="flex items-center space-x-3 p-4 rounded-2xl hover:bg-white/5 transition text-white/30 opacity-50 cursor-not-allowed"
+            href={route('admin.gallery.index')} 
+            className={`flex items-center space-x-3 p-4 rounded-2xl transition-all duration-300 ${url.startsWith('/admin/gallery') ? 'bg-[#FF6600] shadow-lg shadow-orange-900/40 text-white' : 'hover:bg-white/5 text-white/70'}`}
         >
             <span className="text-[11px] font-black uppercase tracking-widest">🖼️ Gallery</span>
         </Link>

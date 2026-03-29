@@ -13,7 +13,6 @@ return new class extends Migration
 {
     Schema::create('posts', function (Blueprint $table) {
         $table->id();
-        $table->string('type'); // 'blog' atau 'gallery'
         $table->string('title');
         $table->string('slug')->unique()->nullable();
         $table->text('content')->nullable(); // Isi blog atau caption galeri

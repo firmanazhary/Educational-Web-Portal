@@ -2,31 +2,29 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
+use Illuminate\Support\Str;
+
 class PostSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Data Blog dummy
+        // Data Blog dummy - At-Taufiq Jambi
         Post::create([
-            'type' => 'blog',
-            'title' => 'Opening Ceremony 2026',
-            'content' => 'Welcome to the new academic year at JIS. We are excited to see our students back!',
-            'image' => 'sample-blog.jpg', // Nanti kita bahas cara munculin gambarnya
+            'title' => 'Opening Ceremony SIT At-Taufiq 2026',
+            'slug' => Str::slug('Opening Ceremony SIT At-Taufiq 2026'),
+            'content' => 'Selamat datang di tahun ajaran baru di SIT At-Taufiq Jambi. Mari kita mencetak generasi Robbani bersama!',
+            'image' => 'posts/sample-blog.jpg', 
+            'is_featured' => true,
         ]);
 
-        // Data Gallery dummy
-        for ($i = 1; $i <= 4; $i++) {
-            Post::create([
-                'type' => 'gallery',
-                'title' => "School Activity $i",
-                'image' => "sample-gallery-$i.jpg",
-            ]);
-        }
+        Post::create([
+            'title' => 'Kunjungan Edukasi Santri SD IT',
+            'slug' => Str::slug('Kunjungan Edukasi Santri SD IT'),
+            'content' => 'Para santri SD IT At-Taufiq melakukan kunjungan edukatif untuk mengenal alam lebih dekat.',
+            'image' => 'posts/sample-blog-2.jpg', 
+            'is_featured' => false,
+        ]);
     }
 }
