@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
+import { Info, UserPlus, MessageCircleQuestion, MapPin } from 'lucide-react';
 
 // Menyiapkan konstanta path gambar agar lebih rapi dan mudah di-maintain
 const ASSETS = {
@@ -27,14 +28,16 @@ export default function AppLayout({ children, title }) {
             name: 'Tentang Kami', 
             href: '/about',
             children: [
-                { name: 'Sejarah', href: '/about#sejarah', desc: 'Mengenal rekam jejak & perjalanan sekolah' },
+                { name: 'Sejarah', href: '/sejarah', desc: 'Mengenal rekam jejak & perjalanan sekolah' },
                 { name: 'FAQ', href: '/faq', desc: 'Pertanyaan yang sering ditanyakan' },
                 { name: 'Kontak Us', href: '/contact', desc: 'Hubungi kami & lokasi kampus' },
             ]
         },
-        { name: 'Akademik', href: '/#academics' },
+        { name: 'Jenjang', href: '/#academics' },
+        { name: 'Admission', href: '/#admission' },
+        { name: 'Events', href: '/#events' },
+        { name: 'Programs', href: '/#events' },    
         { name: 'Berita', href: '/#blog' },
-        { name: 'Galeri', href: '/#gallery' },
     ];
 
     return (
@@ -70,7 +73,7 @@ export default function AppLayout({ children, title }) {
                     </Link>
 
                     {/* Menu Navigasi Utama */}
-                    <div className="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest items-center">
+                    <div className="hidden md:flex space-x-8 text-xs font-bold  tracking-widest items-center">
                         {navLinks.map((link) => {
                             const isActive = url === link.href || (link.href !== '/' && url.startsWith(link.href));
                             const hasChildren = link.children && link.children.length > 0;
@@ -152,12 +155,6 @@ export default function AppLayout({ children, title }) {
 
                     {/* Tombol Aksi */}
                     <div className="flex items-center space-x-4">
-                        <a 
-                            href="#portal" 
-                            className="text-xs font-bold uppercase tracking-widest text-blue-100 hover:text-[#F3E5AB] transition hidden sm:inline-block"
-                        >
-                            Portal Santri
-                        </a>
                         
                         <a 
                             href="#ppdb" 
@@ -174,24 +171,49 @@ export default function AppLayout({ children, title }) {
             <main className="relative z-10 flex-grow">{children}</main>
 
             {/* --- FLOATING DIAMOND BUTTONS --- */}
-            <div className="fixed right-6 bottom-12 z-[100] group flex items-center justify-center">
-                <div className="grid grid-cols-2 gap-1 rotate-45 transform scale-90 hover:scale-100 transition duration-500 ease-out cursor-pointer shadow-2xl shadow-[#051C42]/50 rounded-2xl p-1 bg-[#07327F]/20 backdrop-blur-sm border border-[#D4AF37]/30">
-                    <div className="w-14 h-14 bg-[#FFC72C] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:-translate-y-1 transition duration-300">
-                        <div className="-rotate-45 text-[#051C42] font-bold text-[10px] uppercase">Info</div>
-                    </div>
-                    <div className="w-14 h-14 bg-[#008144] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:-translate-y-1 transition duration-300 relative group/icon">
-                        <div className="-rotate-45 text-white text-[10px] font-black uppercase tracking-widest">Daftar</div>
-                        <span className="absolute -top-12 -right-4 bg-[#051C42] border border-[#D4AF37] text-white text-[10px] px-3 py-1.5 rounded-md opacity-0 group-hover/icon:opacity-100 transition whitespace-nowrap font-bold italic shadow-xl">Pendaftaran Santri Baru</span>
-                    </div>
-                    <div className="w-14 h-14 bg-[#07327F] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:translate-y-1 transition duration-300 border border-[#D4AF37]/40">
-                        <div className="-rotate-45 text-white text-[10px] font-black uppercase tracking-widest">Tanya</div>
-                    </div>
-                    <div className="w-14 h-14 bg-[#D4AF37] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:translate-y-1 transition duration-300">
-                        <div className="-rotate-45 text-[#051C42] text-[10px] font-black uppercase tracking-widest">Lokasi</div>
-                    </div>
-                </div>
-                <div className="absolute -inset-4 bg-[#D4AF37]/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-700 -z-10"></div>
+    
+
+<div className="fixed right-6 bottom-12 z-[100] group flex items-center justify-center">
+    <div className="grid grid-cols-2 gap-1 rotate-45 transform scale-90 hover:scale-100 transition duration-500 ease-out cursor-pointer shadow-2xl shadow-[#051C42]/50 rounded-2xl p-1 bg-[#07327F]/20 backdrop-blur-sm border border-[#D4AF37]/30">
+
+        {/* INFO */}
+        <div className="w-14 h-14 bg-[#FFC72C] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:-translate-y-1 transition duration-300">
+            <div className="-rotate-45 flex flex-col items-center gap-0.5 text-[#051C42]">
+                <Info className="w-4 h-4" strokeWidth={2.5} />
+                <span className="font-bold text-[9px] uppercase leading-none">Info</span>
             </div>
+        </div>
+
+        {/* DAFTAR */}
+        <div className="w-14 h-14 bg-[#008144] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:-translate-y-1 transition duration-300 relative group/icon">
+            <div className="-rotate-45 flex flex-col items-center gap-0.5 text-white">
+                <UserPlus className="w-4 h-4" strokeWidth={2.5} />
+                <span className="font-black text-[9px] uppercase tracking-widest leading-none">Daftar</span>
+            </div>
+            <span className="absolute -top-12 -right-4 bg-[#051C42] border border-[#D4AF37] text-white text-[10px] px-3 py-1.5 rounded-md opacity-0 group-hover/icon:opacity-100 transition whitespace-nowrap font-bold italic shadow-xl">
+                Pendaftaran Santri Baru
+            </span>
+        </div>
+
+        {/* TANYA */}
+        <div className="w-14 h-14 bg-[#07327F] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:translate-y-1 transition duration-300 border border-[#D4AF37]/40">
+            <div className="-rotate-45 flex flex-col items-center gap-0.5 text-white">
+                <MessageCircleQuestion className="w-4 h-4" strokeWidth={2.5} />
+                <span className="font-black text-[9px] uppercase tracking-widest leading-none">Tanya</span>
+            </div>
+        </div>
+
+        {/* LOKASI */}
+        <div className="w-14 h-14 bg-[#D4AF37] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:translate-y-1 transition duration-300">
+            <div className="-rotate-45 flex flex-col items-center gap-0.5 text-[#051C42]">
+                <MapPin className="w-4 h-4" strokeWidth={2.5} />
+                <span className="font-black text-[9px] uppercase tracking-widest leading-none">Lokasi</span>
+            </div>
+        </div>
+
+    </div>
+    <div className="absolute -inset-4 bg-[#D4AF37]/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-700 -z-10"></div>
+</div>
 
             {/* --- FOOTER --- */}
             <footer className="relative bg-[#FAF8F5] text-white pt-10 overflow-hidden font-sans">

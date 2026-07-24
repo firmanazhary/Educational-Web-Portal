@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\GalleryController;
 
 Route::get('/', [PublicController::class, 'index']);
 Route::get('/about', [PublicController::class, 'about'])->name('about');
+Route::get('/sejarah', [PublicController::class, 'sejarah'])->name('sejarah');
+Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
+Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 Route::get('/blog/{slug}', [PublicController::class, 'show'])->name('blog.show');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
