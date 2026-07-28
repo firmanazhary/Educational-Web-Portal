@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\GalleryController;
 
 Route::get('/', [PublicController::class, 'index']);
 Route::get('/about', [PublicController::class, 'about'])->name('about');
+Route::get('/jenjang', [PublicController::class, 'jenjang'])->name('jenjang');
 Route::get('/sejarah', [PublicController::class, 'sejarah'])->name('sejarah');
 Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');

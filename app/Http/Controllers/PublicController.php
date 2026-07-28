@@ -43,4 +43,9 @@ class PublicController extends Controller
         {
             return Inertia::render('Contact');
         }
+
+                public function jenjang()
+        {
+            return Inertia::render('Jenjang');
+        }
 }

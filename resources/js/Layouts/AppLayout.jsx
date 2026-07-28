@@ -24,8 +24,8 @@ export default function AppLayout({ children, title }) {
 
     const navLinks = [
         { name: 'Beranda', href: '/' },
-        { 
-            name: 'Tentang Kami', 
+        {
+            name: 'Tentang Kami',
             href: '/about',
             children: [
                 { name: 'Sejarah', href: '/sejarah', desc: 'Mengenal rekam jejak & perjalanan sekolah' },
@@ -33,10 +33,19 @@ export default function AppLayout({ children, title }) {
                 { name: 'Kontak Us', href: '/contact', desc: 'Hubungi kami & lokasi kampus' },
             ]
         },
-        { name: 'Jenjang', href: '/#academics' },
+        {
+            name: 'Jenjang', href: '/jenjang',
+            children: [
+                { name: 'PG', href: '/pg'},
+                { name: 'TK', href: '/tk'},
+                { name: 'SD', href: '/sd'},
+                { name: 'SMP', href: '/smp'},
+                { name: 'SMA', href: '/sma'},
+            ]
+        },
         { name: 'Admission', href: '/#admission' },
         { name: 'Events', href: '/#events' },
-        { name: 'Programs', href: '/#events' },    
+        { name: 'Programs', href: '/#events' },
         { name: 'Berita', href: '/#blog' },
     ];
 
@@ -45,24 +54,23 @@ export default function AppLayout({ children, title }) {
             <Head title={title ? `${title} - SIT At-Taufiq Jambi` : 'SIT At-Taufiq Jambi - Sekolah Islam Terpadu'} />
 
             {/* --- HEADER / NAVBAR --- */}
-            <header 
-                className={`sticky top-0 z-50 transition-all duration-300 border-b border-[#D4AF37]/20 ${
-                    scrolled 
-                        ? 'bg-[#051C42]/95 backdrop-blur-md shadow-lg py-3' 
+            <header
+                className={`sticky top-0 z-50 transition-all duration-300 border-b border-[#D4AF37]/20 ${scrolled
+                        ? 'bg-[#051C42]/95 backdrop-blur-md shadow-lg py-3'
                         : 'bg-[#07327F] py-4'
-                }`}
+                    }`}
             >
                 <nav className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
-                    
+
                     {/* Logo At-Taufiq */}
                     <Link href="/" className="flex items-center space-x-3 group">
                         <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 shadow-md border border-[#D4AF37]">
-                            <img 
-                                src={ASSETS.LOGO} 
-                                alt="At-Taufiq Logo" 
+                            <img
+                                src={ASSETS.LOGO}
+                                alt="At-Taufiq Logo"
                                 className="w-full h-full object-contain"
                                 onError={(e) => {
-                                    e.target.onerror = null; 
+                                    e.target.onerror = null;
                                     e.target.style.display = 'none';
                                 }}
                             />
@@ -79,19 +87,18 @@ export default function AppLayout({ children, title }) {
                             const hasChildren = link.children && link.children.length > 0;
 
                             return (
-                                <div 
+                                <div
                                     key={link.name}
                                     className="relative group py-2"
                                     onMouseEnter={() => hasChildren && setOpenDropdown(link.name)}
                                     onMouseLeave={() => setOpenDropdown(null)}
                                 >
-                                    <Link 
-                                        href={link.href} 
-                                        className={`flex items-center space-x-1 transition py-1 ${
-                                            isActive 
-                                                ? 'text-white font-bold' 
+                                    <Link
+                                        href={link.href}
+                                        className={`flex items-center space-x-1 transition py-1 ${isActive
+                                                ? 'text-white font-bold'
                                                 : 'text-blue-100/80 hover:text-[#F3E5AB]'
-                                        }`}
+                                            }`}
                                     >
                                         <span>{link.name}</span>
                                         {hasChildren && (
@@ -111,12 +118,11 @@ export default function AppLayout({ children, title }) {
 
                                     {/* --- SUBMENU BOX --- */}
                                     {hasChildren && (
-                                        <div 
-                                            className={`absolute left-0 top-full pt-2 w-64 transition-all duration-300 transform ${
-                                                openDropdown === link.name 
-                                                    ? 'opacity-100 visible translate-y-0' 
+                                        <div
+                                            className={`absolute left-0 top-full pt-2 w-64 transition-all duration-300 transform ${openDropdown === link.name
+                                                    ? 'opacity-100 visible translate-y-0'
                                                     : 'opacity-0 invisible -translate-y-2 pointer-events-none'
-                                            }`}
+                                                }`}
                                         >
                                             <div className="bg-white rounded-2xl shadow-2xl border border-[#D4AF37]/30 p-2 overflow-hidden relative">
                                                 <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#D4AF37]/10 to-transparent rounded-bl-full pointer-events-none"></div>
@@ -155,9 +161,9 @@ export default function AppLayout({ children, title }) {
 
                     {/* Tombol Aksi */}
                     <div className="flex items-center space-x-4">
-                        
-                        <a 
-                            href="#ppdb" 
+
+                        <a
+                            href="#ppdb"
                             className="bg-[#D4AF37] hover:bg-[#F3E5AB] text-[#051C42] px-6 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                         >
                             PPDB Online
@@ -171,58 +177,58 @@ export default function AppLayout({ children, title }) {
             <main className="relative z-10 flex-grow">{children}</main>
 
             {/* --- FLOATING DIAMOND BUTTONS --- */}
-    
 
-<div className="fixed right-6 bottom-12 z-[100] group flex items-center justify-center">
-    <div className="grid grid-cols-2 gap-1 rotate-45 transform scale-90 hover:scale-100 transition duration-500 ease-out cursor-pointer shadow-2xl shadow-[#051C42]/50 rounded-2xl p-1 bg-[#07327F]/20 backdrop-blur-sm border border-[#D4AF37]/30">
 
-        {/* INFO */}
-        <div className="w-14 h-14 bg-[#FFC72C] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:-translate-y-1 transition duration-300">
-            <div className="-rotate-45 flex flex-col items-center gap-0.5 text-[#051C42]">
-                <Info className="w-4 h-4" strokeWidth={2.5} />
-                <span className="font-bold text-[9px] uppercase leading-none">Info</span>
+            <div className="fixed right-6 bottom-12 z-[100] group flex items-center justify-center">
+                <div className="grid grid-cols-2 gap-1 rotate-45 transform scale-90 hover:scale-100 transition duration-500 ease-out cursor-pointer shadow-2xl shadow-[#051C42]/50 rounded-2xl p-1 bg-[#07327F]/20 backdrop-blur-sm border border-[#D4AF37]/30">
+
+                    {/* INFO */}
+                    <div className="w-14 h-14 bg-[#FFC72C] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:-translate-y-1 transition duration-300">
+                        <div className="-rotate-45 flex flex-col items-center gap-0.5 text-[#051C42]">
+                            <Info className="w-4 h-4" strokeWidth={2.5} />
+                            <span className="font-bold text-[9px] uppercase leading-none">Info</span>
+                        </div>
+                    </div>
+
+                    {/* DAFTAR */}
+                    <div className="w-14 h-14 bg-[#008144] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:-translate-y-1 transition duration-300 relative group/icon">
+                        <div className="-rotate-45 flex flex-col items-center gap-0.5 text-white">
+                            <UserPlus className="w-4 h-4" strokeWidth={2.5} />
+                            <span className="font-black text-[9px] uppercase tracking-widest leading-none">Daftar</span>
+                        </div>
+                        <span className="absolute -top-12 -right-4 bg-[#051C42] border border-[#D4AF37] text-white text-[10px] px-3 py-1.5 rounded-md opacity-0 group-hover/icon:opacity-100 transition whitespace-nowrap font-bold italic shadow-xl">
+                            Pendaftaran Santri Baru
+                        </span>
+                    </div>
+
+                    {/* TANYA */}
+                    <div className="w-14 h-14 bg-[#07327F] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:translate-y-1 transition duration-300 border border-[#D4AF37]/40">
+                        <div className="-rotate-45 flex flex-col items-center gap-0.5 text-white">
+                            <MessageCircleQuestion className="w-4 h-4" strokeWidth={2.5} />
+                            <span className="font-black text-[9px] uppercase tracking-widest leading-none">Tanya</span>
+                        </div>
+                    </div>
+
+                    {/* LOKASI */}
+                    <div className="w-14 h-14 bg-[#D4AF37] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:translate-y-1 transition duration-300">
+                        <div className="-rotate-45 flex flex-col items-center gap-0.5 text-[#051C42]">
+                            <MapPin className="w-4 h-4" strokeWidth={2.5} />
+                            <span className="font-black text-[9px] uppercase tracking-widest leading-none">Lokasi</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="absolute -inset-4 bg-[#D4AF37]/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-700 -z-10"></div>
             </div>
-        </div>
-
-        {/* DAFTAR */}
-        <div className="w-14 h-14 bg-[#008144] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:-translate-y-1 transition duration-300 relative group/icon">
-            <div className="-rotate-45 flex flex-col items-center gap-0.5 text-white">
-                <UserPlus className="w-4 h-4" strokeWidth={2.5} />
-                <span className="font-black text-[9px] uppercase tracking-widest leading-none">Daftar</span>
-            </div>
-            <span className="absolute -top-12 -right-4 bg-[#051C42] border border-[#D4AF37] text-white text-[10px] px-3 py-1.5 rounded-md opacity-0 group-hover/icon:opacity-100 transition whitespace-nowrap font-bold italic shadow-xl">
-                Pendaftaran Santri Baru
-            </span>
-        </div>
-
-        {/* TANYA */}
-        <div className="w-14 h-14 bg-[#07327F] rounded-xl flex items-center justify-center shadow-md hover:-translate-x-1 hover:translate-y-1 transition duration-300 border border-[#D4AF37]/40">
-            <div className="-rotate-45 flex flex-col items-center gap-0.5 text-white">
-                <MessageCircleQuestion className="w-4 h-4" strokeWidth={2.5} />
-                <span className="font-black text-[9px] uppercase tracking-widest leading-none">Tanya</span>
-            </div>
-        </div>
-
-        {/* LOKASI */}
-        <div className="w-14 h-14 bg-[#D4AF37] rounded-xl flex items-center justify-center shadow-md hover:translate-x-1 hover:translate-y-1 transition duration-300">
-            <div className="-rotate-45 flex flex-col items-center gap-0.5 text-[#051C42]">
-                <MapPin className="w-4 h-4" strokeWidth={2.5} />
-                <span className="font-black text-[9px] uppercase tracking-widest leading-none">Lokasi</span>
-            </div>
-        </div>
-
-    </div>
-    <div className="absolute -inset-4 bg-[#D4AF37]/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-700 -z-10"></div>
-</div>
 
             {/* --- FOOTER --- */}
             <footer className="relative bg-[#FAF8F5] text-white pt-10 overflow-hidden font-sans">
                 <div className="container mx-auto px-4 max-w-7xl relative z-10">
                     <div className="relative bg-[#0047BA] rounded-t-[50px] md:rounded-t-[80px] border-t-2 border-x-2 border-[#D4AF37] p-8 md:p-14 overflow-hidden shadow-2xl">
                         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-                            <img 
-                                src={ASSETS.BUILDING_HERO} 
-                                alt="Mosque Pattern Background" 
+                            <img
+                                src={ASSETS.BUILDING_HERO}
+                                alt="Mosque Pattern Background"
                                 className="w-full h-full object-cover object-center"
                             />
                             <div className="absolute inset-0 bg-gradient-to-r from-[#003B99] via-[#0047BA]/90 to-[#003B99]"></div>
@@ -236,9 +242,9 @@ export default function AppLayout({ children, title }) {
                             <div className="lg:col-span-4 space-y-4 pr-0 lg:pr-4 border-b lg:border-b-0 lg:border-r border-blue-400/30 pb-8 lg:pb-0">
                                 <div className="flex items-center space-x-3">
                                     <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center p-2 shadow-md">
-                                        <img 
-                                            src={ASSETS.LOGO} 
-                                            alt="At-Taufiq Logo" 
+                                        <img
+                                            src={ASSETS.LOGO}
+                                            alt="At-Taufiq Logo"
                                             className="w-full h-full object-contain"
                                             onError={(e) => {
                                                 e.target.onerror = null;
