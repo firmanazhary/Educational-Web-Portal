@@ -15,6 +15,7 @@ Route::get('/sejarah', [PublicController::class, 'sejarah'])->name('sejarah');
 Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 Route::get('/blog/{slug}', [PublicController::class, 'show'])->name('blog.show');
+Route::get('/blog', [PublicController::class, 'blog'])->name('blog');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

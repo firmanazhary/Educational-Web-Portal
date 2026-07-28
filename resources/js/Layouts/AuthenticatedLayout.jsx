@@ -51,10 +51,10 @@ export default function AuthenticatedLayout({ header, children }) {
 
         {/* Menu Slider (Masih dummy dulu) */}
         <Link 
-            href="#" 
+            href={route('admin.categories.index')} 
             className="flex items-center space-x-3 p-4 rounded-2xl hover:bg-white/5 transition text-white/30 opacity-50 cursor-not-allowed"
         >
-            <span className="text-[11px] font-black uppercase tracking-widest">🎡 Slider Hero</span>
+            <span className="text-[11px] font-black uppercase tracking-widest">🎡 Category</span>
         </Link>
     </nav>
 

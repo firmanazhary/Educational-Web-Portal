@@ -36,6 +36,16 @@ class PublicController extends Controller
             'relatedPosts' => $relatedPosts,
         ]);
     }
+    public function blog(){
+
+     return Inertia::render('Blog', [
+        // Ambil data postingan beserta relasi kategorinya
+        'posts' => Post::with('category')->latest()->get(),
+        
+        // Ambil semua kategori dari hasil CRUD database
+        'categories' => Category::select('id', 'name', 'slug')->get(),
+    ]);
+    }
 
     // --- HALAMAN HALAMAN STATIS (Persiapan Dynamic CMS) ---
 
