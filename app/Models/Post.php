@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
+
 class Post extends Model
 {
     use HasFactory;
@@ -16,10 +17,21 @@ class Post extends Model
     
         'title',       // Judul artikel atau Nama foto
         'slug',        // URL unik (penting buat SEO/Blog)
+        'category_id',
         'content',     // Isi berita atau caption
         'image',       // Path file gambar di storage
         'is_featured', // Untuk menandai konten utama/headline
         'order',       // Untuk mengatur urutan foto di galeri/slider
+    ];
+    public function  category (){
+        return $this ->belongsTo(Category::class);
+    }
+    /**
+     * Format otomatis tipe data untuk field tertentu.
+     */
+    protected $casts = [
+        'is_featured'  => 'boolean',
+        'published_at' => 'datetime',
     ];
 
     /**

@@ -4,32 +4,35 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Category; // Import model Category
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str; // Tambahkan ini buat generate slug otomatis
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     public function index()
     {
         return Inertia::render('Admin/Posts/Index', [
-            // HAPUS ->where('type', 'blog')
-            'posts' => Post::latest()->get()
+            'posts' => Post::with('category')->latest()->get() // Load nama kategorinya
         ]);
     }
    
     public function create()
     {
-        return Inertia::render('Admin/Posts/Create');
+        return Inertia::render('Admin/Posts/Create', [
+            'categories' => Category::select('id', 'name')->get() // Oper list kategori ke form create
+        ]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'title'       => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id', // Validasi ID kategori
+            'content'     => 'required',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $imagePath = null;
@@ -38,12 +41,12 @@ class PostController extends Controller
         }
 
         Post::create([
-            // HAPUS 'type' => 'blog'
-            'title' => $request->input('title'),
-            'slug' => Str::slug($request->input('title')), // Tambahkan slug otomatis biar link blog cantik
-            'content' => $request->input('content'),
-            'image' => $imagePath,
-            'is_featured' => false,
+            'title'       => $request->input('title'),
+            'slug'        => Str::slug($request->input('title')),
+            'category_id' => $request->input('category_id'), // Simpan category_id
+            'content'     => $request->input('content'),
+            'image'       => $imagePath,
+            'is_featured' => $request->boolean('is_featured', false),
         ]);
 
         return redirect()->route('admin.posts.index')->with('message', 'Berita SIT At-Taufiq berhasil diterbitkan!');
@@ -52,21 +55,24 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         return Inertia::render('Admin/Posts/Edit', [
-            'post' => $post
+            'post'       => $post,
+            'categories' => Category::select('id', 'name')->get() // Oper list kategori ke form edit
         ]);
     }
 
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'title'       => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'content'     => 'required',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $post->title = $request->input('title');
-        $post->slug = Str::slug($request->input('title')); // Update slug juga kalau judul ganti
-        $post->content = $request->input('content');
+        $post->title       = $request->input('title');
+        $post->slug        = Str::slug($request->input('title'));
+        $post->category_id = $request->input('category_id');
+        $post->content     = $request->input('content');
 
         if ($request->hasFile('image')) {
             if ($post->image) {
