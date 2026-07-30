@@ -119,7 +119,7 @@ export default function BlogIndex({
                                         </div>
 
                                         <Link
-                                            href="#"
+                                            href={route('blog.show', featuredPost?.slug || 'slug-berita')}
                                             onClick={(e) => e.preventDefault()}
                                             className="font-bold text-[#051736] hover:text-[#D4AF37] transition flex items-center space-x-1 text-xs"
                                         >
@@ -253,7 +253,7 @@ export default function BlogIndex({
 function ArticleCard({ item }) {
     return (
         <Link
-            href="#"
+            href={route('blog.show', featuredPost?.slug || 'slug-berita')}
             onClick={(e) => e.preventDefault()}
             className="group bg-white rounded-3xl border border-[#E0D3BC] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col"
         >
