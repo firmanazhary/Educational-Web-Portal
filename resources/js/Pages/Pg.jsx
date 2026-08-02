@@ -69,14 +69,12 @@ export default function Pg({
     bgpilar = "/images/jenjang/bgpilar.png",
     bgpilarYellow = "/images/jenjang/bgpilaryellow.png",
     bgsection = "/images/jenjang/bgsection.png",
+    bgsection2 = "/images/jenjang/bgsection2.png"
 }) {
     const [activeTab, setActiveTab] = useState('PG-TK');
 
     // Ref untuk Masing-masing Section Animasi
     const [heroRef, heroInView] = useInView();
-    const [sejarahRef, sejarahInView] = useInView();
-    const [todayRef, todayInView] = useInView();
-    const [quoteRef, quoteInView] = useInView();
     const [pillarRef, pillarInView] = useInView();
 
     return (
@@ -87,7 +85,7 @@ export default function Pg({
                 1. HERO SECTION (FADE IN SANTAI)
             ========================================== */}
             {/* Ditambahkan `flex items-center` agar seluruh konten tepat di tengah vertikal */}
-            <section ref={pillarRef} className="relative overflow-hidden min-h-[70vh] lg:min-h-[600px] flex items-center">
+            <section className="relative overflow-hidden min-h-[70vh] lg:min-h-[600px] flex items-center">
 
                 {/* Background Image */}
                 <img
@@ -158,10 +156,11 @@ export default function Pg({
         height="120"
       >
         <image
-          href={bgsection} // Variabel URL gambar kamu
+          href={bgsection2} // Variabel URL gambar kamu
           width="1440" // Lebar viewBox SVG
           height="120"
           preserveAspectRatio="none" // Agar gambar stretch mengikuti bentuk
+          className='bg-bottom'
         />
       </pattern>
     </defs>
@@ -185,8 +184,8 @@ export default function Pg({
             {/* ==========================================
                 2. PILAR SECTION
             ========================================== */}
-            <section ref={pillarRef} className="relative w-full bg-[#FAF5EE] z-10 pt-16 mt-[-30px] px-4 font-serif" style={{
-    backgroundImage: `url(${bgsection})`, // Variabel gambar background kamu
+            <section ref={pillarRef} className="relative w-full bg-[#FAF5EE] z-10 pt-16 mt-[-30px] px-4 font-serif bg-cover" style={{
+    backgroundImage: `url(${bgsection2})`, // Variabel gambar background kamu
   }}>
         <div className="max-w-6xl mx-auto flex flex-col items-center">
 
