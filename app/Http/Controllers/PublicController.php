@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Gallery; // Import model Gallery
 use Inertia\Inertia;
+
 class PublicController extends Controller
 {
     public function index()
     {
-      return Inertia::render('Welcome', [
-        // HAPUS ->where('type', 'blog') KARENA SUDAH GAK ADA KOLOMNYA
-        'posts' => Post::latest()->get(), 
-        'galleries' => Gallery::latest()->take(6)->get() // Ambil dari tabel Gallery
-    ]);
+        return Inertia::render('Welcome', [
+            // HAPUS ->where('type', 'blog') KARENA SUDAH GAK ADA KOLOMNYA
+            'posts' => Post::latest()->get(),
+            'galleries' => Gallery::latest()->take(6)->get() // Ambil dari tabel Gallery
+        ]);
     }
 
     public function show($slug)
@@ -27,25 +28,30 @@ class PublicController extends Controller
         ]);
     }
 
-            public function about()
-        {
-            return Inertia::render('About');
-        }
-             public function sejarah()
-        {
-            return Inertia::render('Sejarah');
-        }
-               public function faq()
-        {
-            return Inertia::render('Faq');
-        }
-                 public function contact()
-        {
-            return Inertia::render('Contact');
-        }
+    public function about()
+    {
+        return Inertia::render('About');
+    }
+    public function sejarah()
+    {
+        return Inertia::render('Sejarah');
+    }
+    public function faq()
+    {
+        return Inertia::render('Faq');
+    }
+    public function contact()
+    {
+        return Inertia::render('Contact');
+    }
 
-                public function jenjang()
-        {
-            return Inertia::render('Jenjang');
-        }
+    public function jenjang()
+    {
+        return Inertia::render('Jenjang');
+    }
+
+    public function pg()
+    {
+        return Inertia::render('Pg');
+    }
 }
