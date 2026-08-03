@@ -61,7 +61,7 @@ export default function BlogDetail({ post, relatedPosts = [], prevPost, nextPost
                             </span>
                             <span className="flex items-center space-x-2">
                                 <span>📅</span>
-                                <span>{new Date(post?.created_at || Date.now()).toLocaleDateString('id-ID', { day: 'numeric', month: 'Long', year: 'numeric' })}</span>
+                                <span>{new Date(post?.created_at || Date.now()).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                             </span>
                             <span className="flex items-center space-x-2">
                                 <span>👤</span>
@@ -158,7 +158,7 @@ export default function BlogDetail({ post, relatedPosts = [], prevPost, nextPost
                             <div className="bg-[#F3EBDD] border border-[#E0D3BC] rounded-3xl p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                                 {/* Artikel Sebelumnya */}
                                 <Link 
-                                    href={prevPost ? route('public.show', prevPost.slug) : '#'} 
+                                    href={prevPost ? route('blog.show', prevPost.slug) : '#'} 
                                     className={`flex items-center space-x-4 p-3 rounded-2xl transition hover:bg-white/60 ${!prevPost && 'opacity-50 pointer-events-none'}`}
                                 >
                                     <span className="text-slate-400 font-bold">‹</span>
@@ -173,7 +173,7 @@ export default function BlogDetail({ post, relatedPosts = [], prevPost, nextPost
 
                                 {/* Artikel Selanjutnya */}
                                 <Link 
-                                    href={nextPost ? route('public.show', nextPost.slug) : '#'} 
+                                    href={nextPost ? route('blog.show', nextPost.slug) : '#'} 
                                     className={`flex items-center justify-end space-x-4 p-3 rounded-2xl transition hover:bg-white/60 text-right ${!nextPost && 'opacity-50 pointer-events-none'}`}
                                 >
                                     <div className="overflow-hidden">
@@ -287,7 +287,7 @@ export default function BlogDetail({ post, relatedPosts = [], prevPost, nextPost
                                         relatedPosts.map((related) => (
                                             <Link 
                                                 key={related.id} 
-                                                href={route('public.show', related.slug)}
+                                                href={route('blog.show', related.slug)}
                                                 className="pt-3 first:pt-0 flex items-center space-x-3 group"
                                             >
                                                 <div className="w-16 h-14 rounded-xl overflow-hidden bg-slate-200 flex-shrink-0 border border-slate-200">

@@ -19,8 +19,6 @@ import {
    HELPERS
    ========================================== */
 
-// Perkiraan waktu baca dihitung dari jumlah kata di konten asli
-// (bukan data yang dikarang — turunan langsung dari `content`)
 function getReadingTime(htmlContent = '') {
     const text = htmlContent.replace(/<[^>]*>?/gm, '').trim();
     if (!text) return 1;
@@ -33,8 +31,6 @@ function getExcerpt(htmlContent = '', length = 110) {
     return text.length > length ? `${text.slice(0, length)}…` : text;
 }
 
-// Ikon per kategori. Kalau nama kategori belum terdaftar di sini,
-// otomatis jatuh ke ikon default (Sparkles) — tidak perlu asset gambar.
 const CATEGORY_ICONS = {
     parenting: Users,
     tahfizh: BookOpen,
@@ -52,9 +48,6 @@ function getCategoryIcon(name = '') {
 export default function BlogIndex({
     posts = [],
     categories = [],
-    // Link pagination gaya Laravel (hasil dari ->paginate()->links() yang
-    // diteruskan lewat Inertia). Kalau prop ini kosong, blok pagination
-    // tidak dirender sama sekali — daripada dipaksakan dengan angka palsu.
     paginationLinks = [],
 }) {
     const [selectedCategory, setSelectedCategory] = useState('Semua');
@@ -71,7 +64,6 @@ export default function BlogIndex({
         <AppLayout title="Blog & Berita - SIT At-Taufiq">
             <Head title="Berita & Artikel | SIT At-Taufiq Jambi" />
 
-            {/* Canvas Utama dengan Background Warm Sand/Beige */}
             <div className="bg-[#FAF4EB] min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-[#051736]">
                 <div className="max-w-6xl mx-auto space-y-10">
 
@@ -118,9 +110,9 @@ export default function BlogIndex({
                                             </span>
                                         </div>
 
+                                        {/* HAPUS onClick preventDefault */}
                                         <Link
                                             href={route('blog.show', featuredPost?.slug || 'slug-berita')}
-                                            onClick={(e) => e.preventDefault()}
                                             className="font-bold text-[#051736] hover:text-[#D4AF37] transition flex items-center space-x-1 text-xs"
                                         >
                                             <span>Baca Selengkapnya</span>
@@ -185,7 +177,7 @@ export default function BlogIndex({
 
 
                     {/* ==========================================
-                        4. GRID ARTIKEL (kartu simpel, bukan rak buku)
+                        4. GRID ARTIKEL
                     ========================================== */}
                     {filteredPosts.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
@@ -201,12 +193,6 @@ export default function BlogIndex({
 
                     {/* ==========================================
                         5. PAGINATION
-                        Hanya dirender kalau backend mengirim `paginationLinks`
-                        (mis. hasil Post::paginate()->links() dari Laravel).
-                        Catatan: karena filter kategori di atas berjalan di
-                        client-side sedangkan pagination ini server-side,
-                        untuk menggabungkan keduanya nanti filter kategori
-                        perlu dikirim sebagai query param ke backend.
                     ========================================== */}
                     {paginationLinks.length > 3 && (
                         <div className="flex items-center justify-center gap-1.5 pt-2">
@@ -248,13 +234,12 @@ export default function BlogIndex({
 
 /* ==========================================
    KARTU ARTIKEL SEDERHANA
-   (gambar di atas, judul + ringkasan di bawah — seperti referensi)
    ========================================== */
 function ArticleCard({ item }) {
     return (
+        /* HAPUS onClick preventDefault */
         <Link
-            href={route('blog.show', featuredPost?.slug || 'slug-berita')}
-            onClick={(e) => e.preventDefault()}
+            href={route('blog.show', item?.slug || 'slug-berita')}
             className="group bg-white rounded-3xl border border-[#E0D3BC] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col"
         >
             {/* Gambar */}
