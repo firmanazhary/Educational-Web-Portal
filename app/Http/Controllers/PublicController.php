@@ -47,11 +47,11 @@ class PublicController extends Controller
 
     public function jenjang()
     {
-        return Inertia::render('Jenjang');
+        return Inertia::render('Jenjang/Jenjang');
     }
 
     public function pg()
     {
-        return Inertia::render('Pg');
+        return Inertia::render('Jenjang/Pg');
     }
 }
