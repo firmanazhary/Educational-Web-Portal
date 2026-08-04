@@ -63,5 +63,5 @@ class PublicController extends Controller
     public function sejarah() { return Inertia::render('Sejarah'); }
     public function faq()     { return Inertia::render('Faq'); }
     public function contact() { return Inertia::render('Contact'); }
-    public function event() { return Inertia::render('Event'); }
+    public function event() { return Inertia::render('Events'); }
 }
