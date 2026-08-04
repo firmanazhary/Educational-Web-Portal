@@ -12,6 +12,7 @@ import {
     HeartPulse,
     Users,
     ClipboardList,
+    Quote
 
 } from 'lucide-react';
 
@@ -174,6 +175,30 @@ const stepsData = [
     }
 ];
 
+const testimonials = [
+    {
+        id: 1,
+        quote: "Anak kami sekarang lebih mandiri, berani, dan senang beribadah. Terima kasih PG Attaufiq yang membimbing dengan penuh cinta.",
+        name: "Bunda Aisyah",
+        role: "Orang Tua dari Aqeela (PG B)",
+        image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200" // Ganti dengan URL foto Bunda Aisyah
+    },
+    {
+        id: 2,
+        quote: "Lingkungannya sangat Islami dan guru-gurunya luar biasa sabar. Anak kami betah setiap hari berangkat sekolah.",
+        name: "Bunda Rina",
+        role: "Orang Tua dari Zayn (PG A)",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200" // Ganti dengan URL foto Bunda Rina
+    },
+    {
+        id: 3,
+        quote: "Programnya seimbang antara belajar dan bermain. Anak kami berkembang pesat di sini.",
+        name: "Bunda Nana",
+        role: "Orang Tua dari Khalid (PG B)",
+        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200" // Ganti dengan URL foto Bunda Nana
+    }
+];
+
 
 // Custom Hook Animasi Scroll Reveal
 function useInView(options = { threshold: 0.15 }) {
@@ -199,6 +224,8 @@ function useInView(options = { threshold: 0.15 }) {
 
     return [ref, isInView];
 }
+
+
 
 
 
@@ -269,20 +296,20 @@ export default function Pg({
             {/* ==========================================
                 1. HERO SECTION (FADE IN SANTAI)
             ========================================== */}
-           <section className="relative overflow-hidden min-h-[70vh] lg:min-h-[600px] flex items-center">
+            <section className="relative overflow-hidden min-h-[70vh] lg:min-h-[600px] flex items-center">
 
-    {/* Background Image */}
-    <img
-        src={patternImage}
-        alt="Hero PG"
-        className="absolute inset-0 w-full h-full object-cover object-center"
-    />
+                {/* Background Image */}
+                <img
+                    src={patternImage}
+                    alt="Hero PG"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                />
 
-    {/* Overlay Biru */}
-    <div
-        className="absolute inset-0"
-        style={{
-            background: `linear-gradient(
+                {/* Overlay Biru */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: `linear-gradient(
                 90deg,
                 rgba(8,43,102,0.98) 0%,
                 rgba(8,43,102,0.95) 30%,
@@ -291,95 +318,95 @@ export default function Pg({
                 rgba(8,43,102,0.15) 72%,
                 rgba(8,43,102,0) 100%
             )`,
-        }}
-    />
+                    }}
+                />
 
-    {/* Elemen Aesthetic Tambahan 1: Ambient Golden Light Bulb */}
-    <div className="absolute top-1/4 left-10 w-72 h-72 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
+                {/* Elemen Aesthetic Tambahan 1: Ambient Golden Light Bulb */}
+                <div className="absolute top-1/4 left-10 w-72 h-72 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
 
-    {/* Content */}
-    <div className="relative z-20 container mx-auto px-8 lg:px-20 py-20">
+                {/* Content */}
+                <div className="relative z-20 container mx-auto px-8 lg:px-20 py-20">
 
-        <div className="max-w-2xl relative">
+                    <div className="max-w-2xl relative">
 
-            {/* Sparkle 1 (Kiri Atas Besar) */}
-            <div className="absolute -left-10 -top-10 text-[#D4AF37] text-3xl animate-pulse drop-shadow-[0_0_8px_rgba(212,175,55,0.8)] pointer-events-none">
-                ✦
-            </div>
+                        {/* Sparkle 1 (Kiri Atas Besar) */}
+                        <div className="absolute -left-10 -top-10 text-[#D4AF37] text-3xl animate-pulse drop-shadow-[0_0_8px_rgba(212,175,55,0.8)] pointer-events-none">
+                            ✦
+                        </div>
 
-            {/* Sparkle 2 (Kanan Atas Kecil) */}
-            <div className="absolute right-12 -top-6 text-amber-300/80 text-xl animate-ping pointer-events-none" style={{ animationDuration: '3s' }}>
-                ✦
-            </div>
+                        {/* Sparkle 2 (Kanan Atas Kecil) */}
+                        <div className="absolute right-12 -top-6 text-amber-300/80 text-xl animate-ping pointer-events-none" style={{ animationDuration: '3s' }}>
+                            ✦
+                        </div>
 
-            {/* Elemen Aesthetic Tambahan 2: Garis Aksen Vertikal + Konten Teks */}
-            <div className="pl-6 border-l-2 border-gradient-to-b border-[#D4AF37] relative">
-                
-                {/* Glow Line effect */}
-                <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#D4AF37] via-amber-200 to-transparent shadow-[0_0_12px_#D4AF37]" />
+                        {/* Elemen Aesthetic Tambahan 2: Garis Aksen Vertikal + Konten Teks */}
+                        <div className="pl-6 border-l-2 border-gradient-to-b border-[#D4AF37] relative">
 
-                <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white leading-tight tracking-wide">
-                    PG (Playgroup)
-                </h1>
+                            {/* Glow Line effect */}
+                            <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#D4AF37] via-amber-200 to-transparent shadow-[0_0_12px_#D4AF37]" />
 
-                {/* Subtitle dengan Text-Gradient Emas */}
-                <h2 className="mt-6 text-3xl font-serif leading-snug bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent drop-shadow-sm">
-                    Tempat terbaik untuk
-                    <br />
-                    langkah pertama mereka.
-                </h2>
+                            <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white leading-tight tracking-wide">
+                                PG (Playgroup)
+                            </h1>
 
-                <p className="mt-8 text-lg leading-8 text-gray-200 font-light">
-                    Lingkungan belajar yang hangat, aman, dan menyenangkan
-                    untuk menumbuhkan kemandirian, rasa ingin tahu,
-                    dan kecintaan pada Islam sejak dini.
-                </p>
-            </div>
+                            {/* Subtitle dengan Text-Gradient Emas */}
+                            <h2 className="mt-6 text-3xl font-serif leading-snug bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent drop-shadow-sm">
+                                Tempat terbaik untuk
+                                <br />
+                                langkah pertama mereka.
+                            </h2>
 
-        </div>
+                            <p className="mt-8 text-lg leading-8 text-gray-200 font-light">
+                                Lingkungan belajar yang hangat, aman, dan menyenangkan
+                                untuk menumbuhkan kemandirian, rasa ingin tahu,
+                                dan kecintaan pada Islam sejak dini.
+                            </p>
+                        </div>
 
-    </div>
+                    </div>
 
-    {/* Wave di bagian bawah Hero Section */}
-    <div className="absolute bottom-0 left-0 w-full pointer-events-none z-10">
-        <svg
-            viewBox="0 0 1440 120"
-            className="w-full h-[120px]"
-            preserveAspectRatio="none"
-        >
-            <defs>
-                {/* Pattern Gambar */}
-                <pattern
-                    id="bgSectionPattern"
-                    patternUnits="userSpaceOnUse"
-                    width="100%"
-                    height="120"
-                >
-                    <image
-                        href={bgsection2}
-                        width="1440"
-                        height="120"
+                </div>
+
+                {/* Wave di bagian bawah Hero Section */}
+                <div className="absolute bottom-0 left-0 w-full pointer-events-none z-10">
+                    <svg
+                        viewBox="0 0 1440 120"
+                        className="w-full h-[120px]"
                         preserveAspectRatio="none"
-                        className="bg-bottom"
-                    />
-                </pattern>
-            </defs>
+                    >
+                        <defs>
+                            {/* Pattern Gambar */}
+                            <pattern
+                                id="bgSectionPattern"
+                                patternUnits="userSpaceOnUse"
+                                width="100%"
+                                height="120"
+                            >
+                                <image
+                                    href={bgsection2}
+                                    width="1440"
+                                    height="120"
+                                    preserveAspectRatio="none"
+                                    className="bg-bottom"
+                                />
+                            </pattern>
+                        </defs>
 
-            {/* Path Garis Emas */}
-            <path
-                fill="#D4AF37"
-                d="M0,55 C350,120 1100,0 1440,55 L1440,120 L0,120 Z"
-            />
+                        {/* Path Garis Emas */}
+                        <path
+                            fill="#D4AF37"
+                            d="M0,55 C350,120 1100,0 1440,55 L1440,120 L0,120 Z"
+                        />
 
-            {/* Perbaikan Path Lengkungan Bawah */}
-            <path
-                fill="url(#bgSectionPattern)"
-                d="M0,70 C350,135 1100,15 1440,70 L1440,120 L0,120 Z"
-            />
-        </svg>
-    </div>
+                        {/* Perbaikan Path Lengkungan Bawah */}
+                        <path
+                            fill="url(#bgSectionPattern)"
+                            d="M0,70 C350,135 1100,15 1440,70 L1440,120 L0,120 Z"
+                        />
+                    </svg>
+                </div>
 
-</section>
+            </section>
 
             {/* ==========================================
                 2. PILAR SECTION
@@ -949,6 +976,124 @@ export default function Pg({
 
                         </div>
 
+                    </div>
+
+                </div>
+            </section>
+
+            {/* ==========================================
+                7. Testimoni SECTION
+            ========================================== */}
+            <section className="w-full bg-gradient-to-b from-[#0B1A30] via-[#0E223F] to-[#071324] py-24 px-4 md:px-8 font-sans relative overflow-hidden text-white">
+
+                {/* 1. Ambient Golden Glow Orbs (Bikin Background Hidup) */}
+                <div className="absolute top-1/4 -left-20 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+                <div className="absolute bottom-10 -right-20 w-96 h-96 bg-amber-400/10 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDuration: '4s' }} />
+
+                {/* 2. Sparkle Decor Melayang */}
+                <div className="absolute top-12 right-12 text-amber-300/40 animate-bounce pointer-events-none" style={{ animationDuration: '5s' }}>
+                    <Sparkles size={28} />
+                </div>
+                <div className="absolute bottom-20 left-10 text-amber-400/30 animate-pulse pointer-events-none">
+                    ✦
+                </div>
+
+                <div className="max-w-7xl mx-auto relative z-10">
+
+                    {/* Header Section */}
+                    <div className="flex flex-col items-center mb-16 text-center">
+
+                        {/* Badge Icon 6 dengan Effect Glow & Double Ring */}
+                        <div className="relative mb-4 flex items-center justify-center group cursor-pointer">
+                            <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-xl transition-all duration-500" />
+
+                            {/* Outer Box Emas Berputar */}
+                            <div className="relative w-12 h-12 bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 rotate-45 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20 border border-amber-200/50 transition-transform duration-700 group-hover:rotate-[225deg]">
+
+                                {/* Angka 6 Tetap Tegak Lurus */}
+                                <span className="-rotate-45 -group-hover:rotate-[225deg] text-[#0B1A30] font-extrabold text-lg transition-transform duration-500 group-hover:scale-110">
+                                    6
+                                </span>
+                            </div>
+                        </div>
+
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-300 to-amber-100 tracking-wide drop-shadow-sm">
+                            Apa Kata Orang Tua?
+                        </h2>
+                        <div className="w-16 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent rounded-full mt-3" />
+                    </div>
+
+                    {/* Grid Testimoni */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {testimonials.map((item) => (
+                            <div
+                                key={item.id}
+                                className="group relative bg-[#FFFBF5] rounded-t-[100px] rounded-b-3xl p-7 lg:p-9 flex flex-col justify-between transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(212,175,55,0.15)] border border-amber-200/50"
+                            >
+
+                                {/* SVG Ornaments - Kubah Islami Presisi */}
+                                <div className="absolute inset-0 pointer-events-none">
+                                    <svg
+                                        viewBox="0 0 300 380"
+                                        className="w-full h-full text-[#E8D7C5] group-hover:text-amber-500 transition-colors duration-500"
+                                        fill="none"
+                                        preserveAspectRatio="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M10 120 C10 40, 60 10, 150 10 C240 10, 290 40, 290 120 L290 370 L10 370 Z"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                        />
+                                        <path
+                                            d="M18 122 C18 46, 65 18, 150 18 C235 18, 282 46, 282 122"
+                                            stroke="currentColor"
+                                            strokeWidth="0.8"
+                                            strokeOpacity="0.6"
+                                        />
+                                    </svg>
+                                </div>
+
+                                {/* Top Content: Quote & Teks */}
+                                <div className="relative z-10 pt-4">
+
+                                    {/* Quote Icon dengan Efek Hover Scale */}
+                                    <div className="mb-5 text-amber-500 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 origin-left">
+                                        <Quote size={40} className="rotate-180 fill-amber-500/20 stroke-amber-500" />
+                                    </div>
+
+                                    <p className="text-[#2C3E50] text-sm lg:text-base leading-relaxed font-normal italic group-hover:text-[#0B1A30] transition-colors">
+                                        "{item.quote}"
+                                    </p>
+                                </div>
+
+                                {/* Bottom Content: Profile Person */}
+                                <div className="relative z-10 flex items-center gap-4 mt-8 pt-5 border-t border-[#F3E5D8]">
+
+                                    {/* Avatar dengan Pulsing Ring */}
+                                    <div className="relative w-14 h-14 flex-shrink-0">
+                                        <div className="absolute inset-0 bg-amber-400/30 rounded-full opacity-75 group-hover:opacity-100" />
+                                        <img
+                                            src={item.image}
+                                            alt={item.name}
+                                            className="relative w-full h-full object-cover rounded-full border-2 border-amber-400 shadow-md group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                    </div>
+
+                                    {/* Profile Detail */}
+                                    <div className="flex flex-col">
+                                        <h3 className="font-bold text-[#0B1A30] text-base group-hover:text-amber-700 transition-colors">
+                                            {item.name}
+                                        </h3>
+                                        <p className="text-xs text-gray-500 font-medium">
+                                            {item.role}
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        ))}
                     </div>
 
                 </div>
