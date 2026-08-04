@@ -535,9 +535,9 @@ export default function Pg({
             {/* ==========================================
                 3. WHY ATTAUFIQ SECTION
             ========================================== */}
-            <section className="w-full max-w-6xl mx-auto p-4 sm:p-6 md:p-8 my-10">
+            <section className="w-full flex flex-col items-center  mx-auto p-4 sm:p-6 md:p-8 my-10">
                 {/* Outer Card Container */}
-                <div className="relative overflow-hidden bg-[#f9f2ed] border border-[#F3E2D4] rounded-3xl p-6 sm:p-8 md:p-10 shadow-sm transition-all duration-300 hover:shadow-md">
+                <div className="relative max-w-6xl overflow-hidden bg-[#f9f2ed] border border-[#F3E2D4] rounded-3xl p-6 sm:p-8 md:p-10 shadow-sm transition-all duration-300 hover:shadow-md">
 
                     {/* Gambar Hiasan Ornamen dengan Animasi Melayang Soft (Pulse/Bounce Slow) */}
                     <img
@@ -613,158 +613,251 @@ export default function Pg({
             {/* ==========================================
                 4. WHY ATTAUFIQ SECTION
             ========================================== */}
-            <section className="w-full flex flex-col items-center mx-auto p-8 sm:p-6 md:p-8 bg-[#f9f2ed]">
-                {/* Outer Card Container */}
-                <div className="relative max-w-6xl mx-auto w-full overflow-hidden bg-[#faf8f5] border border-[#F3E2D4] rounded-3xl p-6 sm:p-8 md:p-10 shadow-sm my-10 transition-all duration-300 hover:shadow-md">
+           <section className="w-full flex flex-col items-center mx-auto p-4 sm:p-6 md:p-8 bg-[#FAF6F0] relative overflow-hidden font-sans">
+      
+      {/* 1. Warm Golden Ambient Glow Orbs */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-10 right-10 w-64 h-64 bg-amber-300/15 rounded-full blur-[90px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-72 h-72 bg-[#0F223D]/5 rounded-full blur-[100px] pointer-events-none" />
 
-                    {/* Header Section */}
-                    <div className="flex items-center justify-center gap-3.5 mb-8 group cursor-default">
-                        {/* Badge Number dengan Efek Rotasi saat Hover */}
-                        <div className="relative flex items-center justify-center w-10 h-10 bg-[#0F223D] text-white font-bold rounded-lg rotate-45 flex-shrink-0 shadow-sm transition-transform duration-500 group-hover:rotate-[225deg]">
-                            <span className="-rotate-45 text-lg font-serif transition-transform duration-500 group-hover:-rotate-[225deg]">
-                                3
-                            </span>
-                        </div>
-                        <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0F223D]">
-                            Fasilitas Kami
-                        </h2>
-                    </div>
+      {/* 2. Floating Aesthetic Sparkles */}
+      <div className="absolute top-12 left-10 text-amber-500/30 text-xl pointer-events-none animate-pulse">✦</div>
+      <div className="absolute top-24 right-12 text-amber-600/30 text-lg pointer-events-none">✨</div>
+      <div className="absolute bottom-12 right-16 text-amber-500/30 text-xl pointer-events-none animate-pulse" style={{ animationDuration: '3s' }}>✦</div>
 
-                    {/* Content Layout */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      {/* Outer Card Container */}
+      <div className="relative max-w-6xl mx-auto w-full overflow-hidden bg-[#FFFBF5]/90 backdrop-blur-md border border-[#F1E4D5] rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl shadow-amber-900/5 my-6 transition-all duration-300 relative z-10">
+        
+        {/* Corner Ornaments */}
+        <div className="absolute top-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+        <div className="absolute top-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+        <div className="absolute bottom-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+        <div className="absolute bottom-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
 
-                        {/* 1. Tombol Daftar Fasilitas (Sisi Kiri) */}
-                        <div className="lg:col-span-3 flex flex-col justify-center space-y-2.5">
-                            {facilitiesData.map((item, index) => {
-                                const IconComponent = item.icon;
-                                const isActive = index === activeIndex;
+        {/* Header Section */}
+        <div className="flex flex-col items-center justify-center mb-10 group cursor-default text-center">
+          
+          {/* Badge Number dengan Efek Rotasi & Glow saat Hover */}
+          <div className="relative mb-3 flex items-center justify-center">
+            <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
+            <div className="relative flex items-center justify-center w-11 h-11 bg-[#0F223D] text-amber-400 font-bold rounded-xl rotate-45 flex-shrink-0 shadow-lg border border-amber-300/40 transition-transform duration-500 group-hover:rotate-[225deg]">
+              <span className="-rotate-45 font-extrabold text-base transition-transform duration-500 group-hover:-rotate-[225deg]">
+                3
+              </span>
+            </div>
+          </div>
 
-                                return (
-                                    <button
-                                        key={item.id}
-                                        onClick={() => setActiveIndex(index)}
-                                        className={`flex items-center gap-3 px-4 py-3 rounded-full text-left text-xs sm:text-sm font-semibold transition-all duration-300 ease-out w-full group ${isActive
-                                            ? 'bg-[#0F223D] text-white shadow-md translate-x-2'
-                                            : 'bg-[#FAF4EE] text-gray-700 hover:bg-[#F0E4D8] border border-[#F3E2D4]/50 hover:translate-x-1'
-                                            }`}
-                                    >
-                                        <div
-                                            className={`p-1.5 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110 ${isActive ? 'bg-white/10 text-white' : 'text-[#0F223D]'
-                                                }`}
-                                        >
-                                            <IconComponent className="w-4 h-4" />
-                                        </div>
-                                        <span className="truncate">{item.title}</span>
-                                    </button>
-                                );
-                            })}
-                        </div>
+          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#0F223D] tracking-wide">
+            Fasilitas Kami
+          </h2>
 
-                        {/* 2. Display Gambar Utama (Tengah) */}
-                        <div className="lg:col-span-5 relative w-full h-64 sm:h-80 lg:h-[380px] overflow-hidden rounded-2xl shadow-sm border border-[#F3E2D4]/60 bg-gray-100 group">
-                            <img
-                                key={currentFacility.id} // Re-render image animation saat index berubah
-                                src={currentFacility.image}
-                                alt={currentFacility.title}
-                                className="w-full h-full object-cover object-center transition-all duration-700 ease-out group-hover:scale-105 animate-fadeIn"
-                            />
-                        </div>
+          {/* Decorative Divider Line */}
+          <div className="flex items-center gap-2 mt-3">
+            <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-amber-400" />
+            <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
+            <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-amber-400" />
+          </div>
+        </div>
 
-                        {/* 3. Panel Informasi & Control Carousel (Sisi Kanan) */}
-                        <div className="lg:col-span-4 relative flex flex-col justify-between p-6 sm:p-8 bg-[#FFFBF7]/80 border border-[#F3E2D4] rounded-2xl shadow-sm overflow-hidden">
+        {/* Content Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-                            {/* Hiasan Vector Masjid/Kubah dengan Animasi Floating Soft */}
-                            <div className="absolute top-4 right-4 text-[#D9A04B]/20 pointer-events-none select-none animate-pulse duration-1000">
-                                <Building2 className="w-16 h-16 stroke-[1]" />
-                            </div>
+          {/* 1. Tombol Daftar Fasilitas (Sisi Kiri) */}
+          <div className="lg:col-span-3 flex flex-col justify-center space-y-3">
+            {facilitiesData.map((item, index) => {
+              const IconComponent = item.icon;
+              const isActive = index === activeIndex;
 
-                            {/* Sparkles Hiasan Tambahan */}
-                            <div className="absolute top-12 right-16 text-[#D9A04B]/50 pointer-events-none select-none">
-                                <Sparkles className="w-4 h-4 animate-bounce" />
-                            </div>
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveIndex(index)}
+                  className={`flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-left text-xs sm:text-sm font-semibold transition-all duration-300 ease-out w-full group relative ${
+                    isActive
+                      ? 'bg-[#0F223D] text-white shadow-lg shadow-blue-950/20 translate-x-2 border border-amber-400/30'
+                      : 'bg-[#FFFBF7] text-gray-700 hover:bg-[#FAF0E6] border border-[#F3E2D4] hover:border-amber-300/60 hover:translate-x-1'
+                  }`}
+                >
+                  {/* Indicator Dot Aktif */}
+                  {isActive && (
+                    <span className="absolute left-1.5 w-1.5 h-6 bg-amber-400 rounded-full" />
+                  )}
 
-                            {/* Deskripsi Teks dengan Key Animation */}
-                            <div key={currentFacility.id} className="relative z-10 space-y-4 my-auto animate-fadeIn">
-                                <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0F223D] transition-colors duration-300">
-                                    {currentFacility.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                                    {currentFacility.description}
-                                </p>
-                            </div>
+                  <div
+                    className={`p-2 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 ${
+                      isActive ? 'bg-amber-400/20 text-amber-300' : 'bg-amber-100/60 text-[#0F223D]'
+                    }`}
+                  >
+                    <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </div>
+                  
+                  <span className="truncate font-medium flex-1">{item.title}</span>
 
-                            {/* Navigasi Carousel (Panah Left/Right & Indicator Dots) */}
-                            <div className="relative z-10 flex items-center justify-center gap-4 pt-6">
-                                {/* Button Prev */}
-                                <button
-                                    onClick={handlePrev}
-                                    className="p-2.5 rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-[#0F223D] hover:text-white hover:border-[#0F223D] active:scale-95 transition-all duration-200 shadow-sm"
-                                    aria-label="Previous Facility"
-                                >
-                                    <ChevronLeft className="w-4 h-4" />
-                                </button>
+                  <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${
+                    isActive ? 'text-amber-300 translate-x-0.5' : 'text-gray-400 opacity-0 group-hover:opacity-100'
+                  }`} />
+                </button>
+              );
+            })}
+          </div>
 
-                                {/* Indicator Dots */}
-                                <div className="flex items-center gap-2">
-                                    {facilitiesData.map((_, idx) => (
-                                        <button
-                                            key={idx}
-                                            onClick={() => setActiveIndex(idx)}
-                                            className={`h-2.5 rounded-full transition-all duration-300 ${idx === activeIndex
-                                                ? 'w-6 bg-[#0F223D]'
-                                                : 'w-2.5 bg-[#D9A04B]/40 hover:bg-[#D9A04B]'
-                                                }`}
-                                        />
-                                    ))}
-                                </div>
+          {/* 2. Display Gambar Utama (Tengah) */}
+          <div className="lg:col-span-5 relative w-full h-64 sm:h-80 lg:h-[390px] overflow-hidden rounded-2xl shadow-md border border-amber-500/20 bg-gray-900 group">
+            
+            {/* Overlay Inner Gold Frame */}
+            <div className="absolute inset-3 border border-amber-300/30 rounded-xl z-10 pointer-events-none group-hover:border-amber-300/60 transition-colors duration-500" />
 
-                                {/* Button Next */}
-                                <button
-                                    onClick={handleNext}
-                                    className="p-2.5 rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-[#0F223D] hover:text-white hover:border-[#0F223D] active:scale-95 transition-all duration-200 shadow-sm"
-                                    aria-label="Next Facility"
-                                >
-                                    <ChevronRight className="w-4 h-4" />
-                                </button>
-                            </div>
+            {/* Gambar Utama */}
+            <img
+              key={currentFacility.id}
+              src={currentFacility.image}
+              alt={currentFacility.title}
+              className="w-full h-full object-cover object-center transition-all duration-700 ease-out group-hover:scale-105 animate-fadeIn"
+            />
 
-                        </div>
+            {/* Gradient Overlay Bawah Gambar */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F223D]/80 via-transparent to-transparent z-10" />
 
-                    </div>
+            {/* Badge Indicator Nomor Gambar di Dalam Visual */}
+            <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 bg-[#0F223D]/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-amber-400/30 text-xs text-amber-300 font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>0{activeIndex + 1} / 0{facilitiesData.length}</span>
+            </div>
+          </div>
 
-                </div>
-            </section>
+          {/* 3. Panel Informasi & Control Carousel (Sisi Kanan) */}
+          <div className="lg:col-span-4 relative flex flex-col justify-between p-6 sm:p-8 bg-gradient-to-br from-[#FFFBF7] via-[#FFF8F0] to-[#FAF2E8] border border-[#F3E2D4] rounded-2xl shadow-sm overflow-hidden">
+
+            {/* Ambient Corner Light */}
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-amber-300/20 rounded-full blur-2xl pointer-events-none" />
+
+            {/* Hiasan Vector Kubah / Islamic Arch Background */}
+            <div className="absolute top-4 right-4 text-[#D9A04B]/15 pointer-events-none select-none">
+              <svg viewBox="0 0 100 120" className="w-20 h-24 stroke-current" fill="none" strokeWidth="1.2">
+                <path d="M50 5 C30 25 10 35 10 65 L10 115 L90 115 L90 65 C90 35 70 25 50 5 Z" />
+              </svg>
+            </div>
+
+            {/* Sparkles Hiasan Tambahan */}
+            <div className="absolute top-8 right-12 text-[#D9A04B]/60 pointer-events-none select-none">
+              <Sparkles className="w-4 h-4 animate-bounce" />
+            </div>
+
+            {/* Deskripsi Teks dengan Key Animation */}
+            <div key={currentFacility.id} className="relative z-10 space-y-3.5 my-auto animate-fadeIn">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-700 font-semibold text-xs uppercase tracking-wider">
+                <span>✦</span> Detail Fasilitas
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0F223D] transition-colors duration-300">
+                {currentFacility.title}
+              </h3>
+
+              <div className="w-10 h-0.5 bg-amber-400/60 rounded-full" />
+
+              <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                {currentFacility.description}
+              </p>
+            </div>
+
+            {/* Navigasi Carousel (Panah Left/Right & Indicator Dots) */}
+            <div className="relative z-10 flex items-center justify-between pt-6 border-t border-[#F3E2D4]">
+              
+              {/* Button Prev */}
+              <button
+                onClick={handlePrev}
+                className="p-2.5 rounded-xl border border-[#F3E2D4] bg-white text-gray-700 hover:bg-[#0F223D] hover:text-amber-400 hover:border-[#0F223D] active:scale-95 transition-all duration-200 shadow-sm"
+                aria-label="Previous Facility"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              {/* Indicator Dots */}
+              <div className="flex items-center gap-2">
+                {facilitiesData.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveIndex(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      idx === activeIndex
+                        ? 'w-7 bg-[#0F223D] shadow-sm'
+                        : 'w-2 bg-amber-300/50 hover:bg-amber-400'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Button Next */}
+              <button
+                onClick={handleNext}
+                className="p-2.5 rounded-xl border border-[#F3E2D4] bg-white text-gray-700 hover:bg-[#0F223D] hover:text-amber-400 hover:border-[#0F223D] active:scale-95 transition-all duration-200 shadow-sm"
+                aria-label="Next Facility"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
 
             {/* ==========================================
                 5. ACTIVITY SECTION
             ========================================== */}
-            <section className="w-full bg-[#FAF6F0] py-16 px-4 md:px-8 font-sans overflow-hidden">
+            <section className="w-full bg-[#FAF6F0] py-20 px-4 md:px-8 font-sans relative overflow-hidden">
+
+                {/* 1. Ambient Golden Glow Orbs (Soft Lighting Background) */}
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
+                <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
+
+                {/* 2. Sparkles Ornaments Background Melayang */}
+                <div className="absolute top-12 left-10 text-amber-500/30 text-2xl pointer-events-none animate-pulse">✦</div>
+                <div className="absolute top-20 right-14 text-amber-600/30 text-xl pointer-events-none">✨</div>
+                <div className="absolute bottom-16 right-20 text-amber-500/30 text-2xl pointer-events-none animate-pulse" style={{ animationDuration: '3s' }}>✦</div>
+                <div className="absolute bottom-24 left-16 text-amber-600/25 text-lg pointer-events-none">✨</div>
+
                 {/* Container utama dengan animasi fade-in-up */}
                 <div
-                    className={`max-w-7xl mx-auto bg-[#FFFBF5]/90 backdrop-blur-md rounded-3xl border border-[#F1E4D5] p-6 md:p-12 shadow-xl shadow-amber-900/5 transition-all duration-1000 ease-out transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                    className={`max-w-7xl mx-auto bg-[#FFFBF5]/90 backdrop-blur-md rounded-3xl border border-[#F1E4D5] p-6 md:p-12 shadow-xl shadow-amber-900/5 transition-all duration-1000 ease-out transform relative ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}
                 >
+                    {/* Corner Ornaments di Dalam Container */}
+                    <div className="absolute top-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute top-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute bottom-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute bottom-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
 
                     {/* Header Section */}
-                    <div className="flex flex-col items-center mb-10 text-center">
-                        {/* Badge Icon dengan Sentuhan Aesthetic Light/Glow */}
-                        <div className="relative mb-4 flex items-center justify-center group">
-                            <div className="absolute inset-0 bg-amber-400/30 rounded-xl blur-md group-hover:blur-lg transition-all duration-500"></div>
-                            <div className="relative w-11 h-11 bg-[#0B1A30] rotate-45 rounded-xl flex items-center justify-center shadow-lg border border-amber-300/30 transition-transform duration-500 hover:rotate-[225deg]">
-                                <span className="-rotate-45 text-amber-400 font-bold text-base transition-transform duration-500 group-hover:scale-110">
+                    <div className="flex flex-col items-center mb-10 text-center relative z-10">
+
+                        {/* Badge Icon 4 dengan Sentuhan Aesthetic Light/Glow */}
+                        <div className="relative mb-4 flex items-center justify-center group cursor-pointer">
+                            <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
+                            <div className="relative w-11 h-11 bg-[#0B1A30] rotate-45 rounded-xl flex items-center justify-center shadow-lg border border-amber-300/40 transition-transform duration-500 group-hover:rotate-[225deg]">
+                                <span className="-rotate-45 group-hover:-rotate-[225deg] text-amber-400 font-extrabold text-base transition-transform duration-500 group-hover:scale-110">
                                     4
                                 </span>
                             </div>
                         </div>
 
-                        <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#0B1A30] tracking-wide">
+                        <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#0B1A30] tracking-wide flex items-center gap-2">
                             Kegiatan Ananda
                         </h2>
-                        <div className="w-12 h-0.5 bg-amber-400/60 rounded-full mt-2"></div>
+
+                        {/* Decorative Divider Line */}
+                        <div className="flex items-center gap-2 mt-3">
+                            <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-amber-400" />
+                            <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
+                            <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-amber-400" />
+                        </div>
                     </div>
 
                     {/* Filter Categories */}
-                    <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-10">
+                    <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-12 relative z-10">
                         {categories.map((category) => {
                             const isActive = activeCategory === category;
                             return (
@@ -772,8 +865,8 @@ export default function Pg({
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
                                     className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 transform active:scale-95 ${isActive
-                                        ? 'bg-[#0B1A30] text-amber-300 shadow-md shadow-navy-900/20 scale-105'
-                                        : 'bg-[#FAF0E6] text-[#5A5A5A] border border-[#E8D7C5] hover:bg-[#F3E3D3] hover:text-[#0B1A30]'
+                                            ? 'bg-[#0B1A30] text-amber-300 shadow-md shadow-navy-900/20 scale-105 border border-amber-400/30'
+                                            : 'bg-[#FAF0E6] text-[#5A5A5A] border border-[#E8D7C5] hover:bg-[#F3E3D3] hover:text-[#0B1A30]'
                                         }`}
                                 >
                                     {category}
@@ -783,11 +876,12 @@ export default function Pg({
                     </div>
 
                     {/* Carousel Container */}
-                    <div className="relative px-2 md:px-10">
+                    <div className="relative px-2 md:px-10 z-10">
+
                         {/* Tombol Prev */}
                         <button
                             onClick={() => handleScroll('left')}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 z-20 w-11 h-11 bg-white/90 backdrop-blur-sm border border-[#E8D7C5] rounded-full flex items-center justify-center shadow-lg text-[#0B1A30] hover:bg-[#0B1A30] hover:text-white hover:border-[#0B1A30] transition-all duration-300 transform hover:scale-110 active:scale-90"
+                            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 z-20 w-11 h-11 bg-white/90 backdrop-blur-sm border border-[#E8D7C5] rounded-full flex items-center justify-center shadow-lg text-[#0B1A30] hover:bg-[#0B1A30] hover:text-amber-300 hover:border-[#0B1A30] transition-all duration-300 transform hover:scale-110 active:scale-90"
                             aria-label="Previous image"
                         >
                             <ChevronLeft size={22} />
@@ -796,7 +890,7 @@ export default function Pg({
                         {/* Wrapper Scroll */}
                         <div
                             ref={scrollContainerRef}
-                            className="flex gap-6 overflow-x-auto scroll-smooth py-4 px-2 snap-x snap-mandatory"
+                            className="flex gap-6 overflow-x-auto scroll-smooth py-6 px-2 snap-x snap-mandatory"
                             style={{
                                 scrollbarWidth: 'none',
                                 msOverflowStyle: 'none',
@@ -808,22 +902,41 @@ export default function Pg({
                                     ref={index === 0 ? cardRef : null}
                                     className="flex-shrink-0 w-[240px] sm:w-[260px] md:w-[280px] snap-start flex flex-col items-center group/card transition-all duration-500 hover:-translate-y-2"
                                 >
-                                    {/* Frame Gambar Aesthetic */}
-                                    <div className="relative w-full h-[200px] sm:h-[220px] md:h-[250px] rounded-2xl overflow-hidden shadow-md shadow-amber-950/5 border border-[#EFE5D9]">
-                                        {/* Overlay gradien halus */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-10" />
+                                    {/* Frame Gambar Aesthetic dengan Corner Border Accent */}
+                                    <div className="relative w-full h-[200px] sm:h-[220px] md:h-[250px] rounded-2xl overflow-hidden shadow-md shadow-amber-950/10 border border-[#EFE5D9] bg-[#FAF0E6]">
 
+                                        {/* Outer Inner Frame Ornament (Aksentuasi Garis Tipis Emas) */}
+                                        <div className="absolute inset-2 border border-amber-300/40 rounded-xl z-10 pointer-events-none group-hover/card:border-amber-400/80 transition-colors duration-500" />
+
+                                        {/* Ornaments Sparkle di Pojok Kartu */}
+                                        <div className="absolute top-3 left-3 text-amber-300/80 text-[10px] z-20 pointer-events-none">✦</div>
+                                        <div className="absolute top-3 right-3 text-amber-300/80 text-[10px] z-20 pointer-events-none">✦</div>
+
+                                        {/* Overlay Gradien Halus */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A30]/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-10" />
+
+                                        {/* Gambar Utama */}
                                         <img
                                             src={item.image}
                                             alt={item.title}
                                             className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-700 ease-out"
                                         />
+
+                                        {/* Badge Category Tag di Atas Foto */}
+                                        {item.category && (
+                                            <span className="absolute bottom-3 left-3 z-20 px-2.5 py-1 bg-white/80 backdrop-blur-md rounded-md text-[10px] font-semibold text-[#0B1A30] shadow-sm border border-white/50">
+                                                {item.category}
+                                            </span>
+                                        )}
                                     </div>
 
-                                    {/* Title dengan efek underline saat hover */}
-                                    <p className="mt-4 text-sm md:text-base font-semibold text-[#0B1A30] text-center group-hover/card:text-amber-700 transition-colors duration-300">
-                                        {item.title}
-                                    </p>
+                                    {/* Title dengan Efek Glow Underline saat Hover */}
+                                    <div className="relative mt-4 flex flex-col items-center">
+                                        <p className="text-sm md:text-base font-semibold text-[#0B1A30] text-center group-hover/card:text-amber-700 transition-colors duration-300">
+                                            {item.title}
+                                        </p>
+                                        <div className="w-0 group-hover/card:w-8 h-0.5 bg-amber-500 rounded-full transition-all duration-300 mt-1" />
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -831,7 +944,7 @@ export default function Pg({
                         {/* Tombol Next */}
                         <button
                             onClick={() => handleScroll('right')}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 z-20 w-11 h-11 bg-white/90 backdrop-blur-sm border border-[#E8D7C5] rounded-full flex items-center justify-center shadow-lg text-[#0B1A30] hover:bg-[#0B1A30] hover:text-white hover:border-[#0B1A30] transition-all duration-300 transform hover:scale-110 active:scale-90"
+                            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 z-20 w-11 h-11 bg-white/90 backdrop-blur-sm border border-[#E8D7C5] rounded-full flex items-center justify-center shadow-lg text-[#0B1A30] hover:bg-[#0B1A30] hover:text-amber-300 hover:border-[#0B1A30] transition-all duration-300 transform hover:scale-110 active:scale-90"
                             aria-label="Next image"
                         >
                             <ChevronRight size={22} />
@@ -844,142 +957,185 @@ export default function Pg({
             {/* ==========================================
                 6. JOIN SECTION
             ========================================== */}
-            <section className="w-full bg-[#FAF6F0] py-16 px-4 md:px-8 font-sans overflow-hidden">
-                {/* Container Utama dengan Animasi Smooth Fade-In */}
-                <div
-                    className={`max-w-7xl mx-auto bg-[#FFFBF5]/90 backdrop-blur-md rounded-3xl border border-[#F1E4D5] p-6 md:p-12 shadow-xl shadow-amber-900/5 relative transition-all duration-1000 ease-out transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                        }`}
-                >
+            <section className="w-full bg-[#FAF6F0] py-20 px-4 md:px-8 font-sans relative overflow-hidden">
+      
+      {/* 1. Warm Golden Ambient Glow Orbs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-200/20 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-10 right-10 w-72 h-72 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-80 h-80 bg-blue-900/5 rounded-full blur-[120px] pointer-events-none" />
 
-                    {/* Header Section */}
-                    <div className="flex flex-col items-center mb-10 text-center">
-                        {/* Badge Icon 5 dengan Glow Effect */}
-                        {/* Badge Icon 5 dengan Glow Effect & Rotasi Bingkai */}
-                        <div className="relative mb-4 flex items-center justify-center group">
-                            {/* Glow lembut di belakang */}
-                            <div className="absolute inset-0 bg-amber-400/30 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
+      {/* 2. Floating Aesthetic Sparkles */}
+      <div className="absolute top-14 left-12 text-amber-500/30 text-2xl pointer-events-none animate-pulse">✦</div>
+      <div className="absolute top-28 right-16 text-amber-600/30 text-xl pointer-events-none">✨</div>
+      <div className="absolute bottom-16 right-24 text-amber-500/30 text-2xl pointer-events-none animate-pulse" style={{ animationDuration: '3.5s' }}>✦</div>
+      <div className="absolute bottom-20 left-20 text-amber-600/25 text-lg pointer-events-none">✨</div>
 
-                            {/* Kotak Bingkai (Berputar saat hover) */}
-                            <div className="relative w-11 h-11 bg-[#0B1A30] rotate-45 rounded-xl flex items-center justify-center shadow-lg border border-amber-300/30 transition-transform duration-500 group-hover:rotate-[225deg]">
+      {/* Container Utama dengan Animasi Smooth Fade-In */}
+      <div
+        className={`max-w-7xl mx-auto bg-[#FFFBF5]/90 backdrop-blur-md rounded-3xl border border-[#F1E4D5] p-6 md:p-12 shadow-xl shadow-amber-900/5 relative transition-all duration-1000 ease-out transform ${
+          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
+        {/* Corner Ornaments di Dalam Container */}
+        <div className="absolute top-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+        <div className="absolute top-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+        <div className="absolute bottom-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+        <div className="absolute bottom-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
 
-                                {/* Angka 5 (Selalu tegak, ikut menyesuaikan rotasi agar tidak terbalik) */}
-                                <span className="-rotate-45 -group-hover:rotate-[225deg] text-amber-400 font-bold text-base transition-transform duration-500 group-hover:scale-110">
-                                    5
-                                </span>
+        {/* Header Section */}
+        <div className="flex flex-col items-center mb-12 text-center relative z-10">
+          
+          {/* Badge Icon 5 dengan Glow Effect & Rotasi Bingkai */}
+          <div className="relative mb-4 flex items-center justify-center group cursor-pointer">
+            <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
+            
+            <div className="relative w-11 h-11 bg-[#0B1A30] rotate-45 rounded-xl flex items-center justify-center shadow-lg border border-amber-300/40 transition-transform duration-500 group-hover:rotate-[225deg]">
+              <span className="-rotate-45 group-hover:-rotate-[225deg] text-amber-400 font-extrabold text-base transition-transform duration-500 group-hover:scale-110">
+                5
+              </span>
+            </div>
+          </div>
 
-                            </div>
-                        </div>
+          <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#0B1A30] tracking-wide">
+            Cara Bergabung di PG Attaufiq
+          </h2>
+          
+          {/* Decorative Divider Line */}
+          <div className="flex items-center gap-2 mt-3">
+            <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-amber-400" />
+            <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
+            <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-amber-400" />
+          </div>
+        </div>
 
-                        <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#0B1A30] tracking-wide">
-                            Cara Bergabung di PG Attaufiq
-                        </h2>
-                        <div className="w-12 h-0.5 bg-amber-400/60 rounded-full mt-2" />
-                    </div>
+        {/* Content Layout Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative z-10">
 
-                    {/* Content Layout Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+         {/* Langkah 1-3 Container (Kiri) */}
+<div className="lg:col-span-7 bg-[#FFFBF5] rounded-2xl border border-[#E8D7C5]/70 p-4 md:p-6 flex flex-col gap-6 justify-between relative shadow-sm">
 
-                        {/* Langkah 1-3 Container (Kiri) - Luas & Beranimasi */}
-                        <div className="lg:col-span-7 bg-[#FFFBF5] rounded-2xl border border-[#E8D7C5]/70 p-4 md:p-6 flex flex-col gap-5 justify-between relative shadow-sm">
-                            {stepsData.map((step, index) => (
-                                <div
-                                    key={index}
-                                    style={{ transitionDelay: `${(index + 1) * 200}ms` }}
-                                    className={`group relative flex flex-row items-center gap-5 p-4 md:p-5 rounded-2xl transition-all duration-500 ease-out transform hover:-translate-y-1.5 hover:shadow-lg hover:shadow-amber-900/5 hover:bg-gradient-to-r hover:from-[#FAF0E6] hover:to-[#FFFBF5] border border-transparent hover:border-[#E8D7C5] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                                        }`}
-                                >
-                                    {/* SISI KIRI: SVG Frame Kubah dengan Hover Effect */}
-                                    <div className="relative w-18 h-22 sm:w-20 sm:h-24 flex-shrink-0 flex items-center justify-center">
-                                        {/* Glow lembut di belakang kubah saat hover */}
-                                        <div className="absolute inset-0 bg-amber-300/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+  {stepsData.map((step, index) => (
+    <div
+      key={index}
+      style={{ transitionDelay: `${(index + 1) * 150}ms` }}
+      className={`group relative flex flex-row items-center gap-5 p-4 md:p-5 rounded-2xl transition-all duration-500 ease-out transform hover:-translate-y-1 hover:shadow-md hover:shadow-amber-900/5 hover:bg-gradient-to-r hover:from-[#FAF0E6] hover:to-[#FFFBF5] border border-transparent hover:border-[#E8D7C5] bg-white/40 ${
+        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+      }`}
+    >
+      {/* SISI KIRI: SVG Frame Kubah dengan Inner Accent */}
+      <div className="relative w-16 h-20 sm:w-20 sm:h-24 flex-shrink-0 flex items-center justify-center">
+        
+        {/* Glow lembut di belakang kubah saat hover */}
+        <div className="absolute inset-0 bg-amber-300/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                        <svg
-                                            viewBox="0 0 100 120"
-                                            className="absolute inset-0 w-full h-full text-[#E8D7C5] group-hover:text-amber-500/60 transition-colors duration-500"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M50 5 C30 25 10 35 10 65 L10 115 L90 115 L90 65 C90 35 70 25 50 5 Z"
-                                                stroke="currentColor"
-                                                strokeWidth="2.5"
-                                                fill="none"
-                                            />
-                                        </svg>
+        <svg
+          viewBox="0 0 100 120"
+          className="absolute inset-0 w-full h-full text-[#E8D7C5] group-hover:text-amber-500/70 transition-colors duration-500 filter drop-shadow-sm"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Frame Luar */}
+          <path
+            d="M50 5 C30 25 10 35 10 65 L10 115 L90 115 L90 65 C90 35 70 25 50 5 Z"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            fill="none"
+          />
+          {/* Frame Dalam Halus */}
+          <path
+            d="M50 12 C35 29 18 38 18 65 L18 108 L82 108 L82 65 C82 38 65 29 50 12 Z"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeDasharray="2 2"
+            opacity="0.6"
+            fill="none"
+          />
+        </svg>
 
-                                        {/* Icon di dalam Frame Kubah dengan efek bounce/scale */}
-                                        <div className="relative z-10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
-                                            {step.icon}
-                                        </div>
-                                    </div>
+        {/* Icon di dalam Frame Kubah */}
+        <div className="relative z-10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+          {step.icon}
+        </div>
+      </div>
 
-                                    {/* SISI KANAN: Text Content (Lega & Sangat Mudah Dibaca) */}
-                                    <div className="flex-1 text-left">
-                                        <span className="text-amber-600 font-extrabold text-xs md:text-sm tracking-wider uppercase mb-1 block">
-                                            Langkah 0{step.number}
-                                        </span>
-                                        <h3 className="font-bold text-[#0B1A30] text-base md:text-xl leading-snug mb-1.5 group-hover:text-amber-800 transition-colors duration-300">
-                                            {step.title}
-                                        </h3>
-                                        <p className="text-[#5A5A5A] text-xs md:text-sm leading-relaxed">
-                                            {step.description}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+      {/* SISI KANAN: Text Content */}
+      <div className="flex-1 text-left">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-amber-600 font-extrabold text-xs md:text-sm tracking-wider uppercase">
+            Langkah 0{step.number}
+          </span>
+          <span className="text-amber-400 text-xs">✦</span>
+        </div>
+        <h3 className="font-bold text-[#0B1A30] text-base md:text-xl leading-snug mb-1.5 group-hover:text-amber-800 transition-colors duration-300">
+          {step.title}
+        </h3>
+        <p className="text-[#5A5A5A] text-xs md:text-sm leading-relaxed">
+          {step.description}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
 
-                        {/* Banner Admission (Kanan) dengan Gradien Hidup & Animasi Floating */}
-                        <div className="lg:col-span-5 bg-gradient-to-br from-[#0B1A30] via-[#102544] to-[#081324] rounded-2xl p-6 md:p-8 text-white relative overflow-hidden flex flex-col justify-between shadow-xl border border-amber-500/20 group min-h-[320px]">
+          {/* Banner Admission (Kanan) dengan Gradien & Ornaments */}
+          <div className="lg:col-span-5 bg-gradient-to-br from-[#0B1A30] via-[#102544] to-[#081324] rounded-2xl p-6 md:p-8 text-white relative overflow-hidden flex flex-col justify-between shadow-xl border border-amber-500/30 group min-h-[340px]">
+            
+            {/* Inner Border Line Gold */}
+            <div className="absolute inset-3 border border-amber-400/20 rounded-xl pointer-events-none group-hover:border-amber-400/40 transition-colors duration-500" />
 
-                            {/* Ambient Animated Light/Orb Background */}
-                            <div className="absolute -top-12 -right-12 w-40 h-40 bg-amber-400/10 rounded-full blur-2xl animate-pulse" />
-                            <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-blue-500/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+            {/* Ambient Animated Light Background */}
+            <div className="absolute -top-12 -right-12 w-48 h-48 bg-amber-400/15 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-blue-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }} />
 
-                            {/* Teks Informasi */}
-                            <div className="relative z-10 max-w-xs mb-6">
-                                <span className="inline-block px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 font-semibold text-xs tracking-wider uppercase mb-3 backdrop-blur-sm">
-                                    Pendaftaran Siswa Baru
-                                </span>
-                                <p className="text-lg md:text-xl font-medium leading-relaxed text-slate-100 font-serif">
-                                    Info lengkap & pendaftaran kunjungi halaman Admission
-                                </p>
-                            </div>
+            {/* Sparkles Ornaments di Atas Banner */}
+            <div className="absolute top-6 right-6 text-amber-300/40 text-sm pointer-events-none">✨</div>
+            <div className="absolute top-12 right-12 text-amber-300/30 text-xs pointer-events-none">✦</div>
 
-                            {/* Tombol Action Shimmering */}
-                            <div className="relative z-10">
-                                <a
-                                    href="#admission"
-                                    className="relative overflow-hidden inline-flex items-center justify-between gap-3 w-full sm:w-auto bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-600 text-[#0B1A30] font-bold text-sm py-3.5 px-6 rounded-xl shadow-lg shadow-amber-500/20 transition-all duration-300 transform hover:scale-[1.02] active:scale-95 group/btn"
-                                >
-                                    <span className="relative z-10">Lihat Halaman Admission</span>
-                                    <ChevronRight size={18} className="relative z-10 transform group-hover/btn:translate-x-1 transition-transform duration-300" />
+            {/* Teks Informasi */}
+            <div className="relative z-10 max-w-xs mb-6 mt-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 font-semibold text-xs tracking-wider uppercase mb-4 backdrop-blur-sm shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+                Pendaftaran Siswa Baru
+              </span>
+              <p className="text-xl md:text-2xl font-serif font-medium leading-relaxed text-slate-100">
+                Info lengkap & pendaftaran kunjungi halaman <span className="text-amber-300 italic">Admission</span>
+              </p>
+            </div>
 
-                                    {/* Effect kilatan cahaya pada button */}
-                                    <div className="absolute inset-0 -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                                </a>
-                            </div>
+            {/* Tombol Action Shimmering */}
+            <div className="relative z-10 mb-2">
+              <a
+                href="#admission"
+                className="relative overflow-hidden inline-flex items-center justify-between gap-3 w-full sm:w-auto bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-600 text-[#0B1A30] font-bold text-sm py-3.5 px-6 rounded-xl shadow-lg shadow-amber-500/20 transition-all duration-300 transform hover:scale-[1.02] active:scale-95 group/btn"
+              >
+                <span className="relative z-10">Lihat Halaman Admission</span>
+                <ChevronRight size={18} className="relative z-10 transform group-hover/btn:translate-x-1 transition-transform duration-300" />
 
-                            {/* Decorative Masjid Line Art Background (Glow saat hovered) */}
-                            <div className="absolute right-0 bottom-0 top-0 opacity-20 group-hover:opacity-35 transition-opacity duration-700 pointer-events-none flex items-center justify-end pr-2">
-                                <svg
-                                    viewBox="0 0 160 200"
-                                    className="h-full w-auto text-amber-300 stroke-current transform group-hover:scale-105 transition-transform duration-700"
-                                    fill="none"
-                                    strokeWidth="1.5"
-                                >
-                                    <path d="M100 40 C70 70 40 85 40 130 L40 200 L160 200 L160 130 C160 85 130 70 100 40 Z" />
-                                    <path d="M100 120 C85 135 70 145 70 170 L70 200 L130 200 L130 170 C130 145 115 135 100 120 Z" />
-                                    <path d="M100 25 L100 35 M95 30 L105 30" />
-                                </svg>
-                            </div>
+                {/* Effect kilatan cahaya pada button */}
+                <div className="absolute inset-0 -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+              </a>
+            </div>
 
-                        </div>
+            {/* Decorative Masjid Line Art Background */}
+            <div className="absolute right-0 bottom-0 top-0 opacity-20 group-hover:opacity-35 transition-opacity duration-700 pointer-events-none flex items-center justify-end pr-2">
+              <svg
+                viewBox="0 0 160 200"
+                className="h-full w-auto text-amber-300 stroke-current transform group-hover:scale-105 transition-transform duration-700"
+                fill="none"
+                strokeWidth="1.5"
+              >
+                <path d="M100 40 C70 70 40 85 40 130 L40 200 L160 200 L160 130 C160 85 130 70 100 40 Z" />
+                <path d="M100 120 C85 135 70 145 70 170 L70 200 L130 200 L130 170 C130 145 115 135 100 120 Z" />
+                <path d="M100 25 L100 35 M95 30 L105 30" />
+              </svg>
+            </div>
 
-                    </div>
+          </div>
 
-                </div>
-            </section>
+        </div>
+
+      </div>
+    </section>
 
             {/* ==========================================
                 7. Testimoni SECTION
