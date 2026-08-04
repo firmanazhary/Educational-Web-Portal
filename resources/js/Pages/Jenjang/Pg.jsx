@@ -580,7 +580,7 @@ export default function Pg({
             {/* ==========================================
                 3. WHY ATTAUFIQ SECTION
             ========================================== */}
-            <section className="w-full flex flex-col items-center mx-auto p-4 sm:p-6 md:p-8 bg-[#FAF6F0] relative overflow-hidden font-sans">
+            <section className="w-full flex flex-col items-center mx-auto p-8 sm:p-6 md:p-8 bg-[#FAF6F0] relative overflow-hidden font-sans">
 
                 {/* 1. Warm Golden Ambient Glow Orbs */}
                 <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
@@ -593,7 +593,7 @@ export default function Pg({
                 <div className="absolute bottom-12 left-16 text-amber-500/30 text-xl pointer-events-none animate-pulse" style={{ animationDuration: '3.5s' }}>✦</div>
 
                 {/* Outer Card Container */}
-                <div className="relative max-w-6xl w-full overflow-hidden bg-[#FFFBF5]/90 backdrop-blur-md border border-[#F1E4D5] rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl shadow-amber-900/5 my-6 transition-all duration-300 z-10">
+                <div className="relative max-w-6xl w-full overflow-hidden bg-[#FFFBF5]/90 backdrop-blur-md border border-[#F1E4D5] rounded-3xl p-6 sm:p-8 md:p-14 shadow-xl shadow-amber-900/5 my-6 transition-all duration-300 z-10">
 
                     {/* Corner Ornaments */}
                     <div className="absolute top-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
@@ -671,9 +671,9 @@ export default function Pg({
                                 </div>
 
                                 {/* Decorative Divider Line */}
-                                <div className="flex items-center gap-2 mt-1 pl-1">
+                                {/* <div className="flex items-center gap-2 mt-1 pl-1">
                                     <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
-                                </div>
+                                </div> */}
                             </div>
 
                             {/* Daftar Poin Keunggulan (Card List) */}
@@ -706,7 +706,7 @@ export default function Pg({
             </section>
 
             {/* ==========================================
-                4. WHY ATTAUFIQ SECTION
+                4. Facility ATTAUFIQ SECTION
             ========================================== */}
             <section className="w-full flex flex-col items-center mx-auto p-4 sm:p-6 md:p-8 bg-[#FAF6F0] relative overflow-hidden font-sans">
 
