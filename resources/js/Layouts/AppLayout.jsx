@@ -33,11 +33,11 @@ export default function AppLayout({ children, title }) {
                 { name: 'Kontak Us', href: '/contact', desc: 'Hubungi kami & lokasi kampus' },
             ]
         },
-        { name: 'Jenjang', href: '/#academics' },
-        { name: 'Admission', href: '/#admission' },
-        { name: 'Events', href: '/#events' },
-        { name: 'Programs', href: '/#events' },    
-        { name: 'Berita', href: '/#blog' },
+        { name: 'Jenjang', href: '/academics' },
+        { name: 'Admission', href: '/admission' },
+        { name: 'Events', href: '/event' },
+        { name: 'Programs', href: '/programs' },
+        { name: 'Berita', href: '/blog' },
     ];
 
     return (

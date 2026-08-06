@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Gallery;
 use App\Models\Category;
+use App\Models\Event;
 use Inertia\Inertia;
 
 class PublicController extends Controller
@@ -14,7 +15,7 @@ class PublicController extends Controller
     public function index()
     {
         return Inertia::render('Welcome', [
-            'posts' => Post::with('category')->latest()->take(6)->get(), 
+            'posts' => Post::with('category')->latest()->take(6)->get(),
             'galleries' => Gallery::latest()->take(6)->get(),
             'categories' => Category::all(),
         ]);
@@ -22,46 +23,85 @@ class PublicController extends Controller
 
     public function show($slug)
     {
-      // Cari artikel berdasarkan slug beserta kategorinya
-    $post = Post::with('category')->where('slug', $slug)->firstOrFail();
+        // Cari artikel berdasarkan slug beserta kategorinya
+        $post = Post::with('category')->where('slug', $slug)->firstOrFail();
 
-    // Ambil 3 artikel terkait dari kategori yang sama
-    $relatedPosts = Post::with('category')
-        ->where('id', '!=', $post->id)
-        ->when($post->category_id, function ($query) use ($post) {
-            return $query->where('category_id', $post->category_id);
-        })
-        ->latest()
-        ->take(3)
-        ->get();
+        // Ambil 3 artikel terkait dari kategori yang sama
+        $relatedPosts = Post::with('category')
+            ->where('id', '!=', $post->id)
+            ->when($post->category_id, function ($query) use ($post) {
+                return $query->where('category_id', $post->category_id);
+            })
+            ->latest()
+            ->take(3)
+            ->get();
 
-    // (Opsional) Ambil artikel sebelum & sesudahnya
-    $prevPost = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
-    $nextPost = Post::where('id', '>', $post->id)->orderBy('id', 'asc')->first();
+        // (Opsional) Ambil artikel sebelum & sesudahnya
+        $prevPost = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
+        $nextPost = Post::where('id', '>', $post->id)->orderBy('id', 'asc')->first();
 
-    return Inertia::render('BlogDetail', [
-        'post'         => $post,
-        'relatedPosts' => $relatedPosts,
-        'prevPost'     => $prevPost,
-        'nextPost'     => $nextPost,
-    ]);
+        return Inertia::render('BlogDetail', [
+            'post' => $post,
+            'relatedPosts' => $relatedPosts,
+            'prevPost' => $prevPost,
+            'nextPost' => $nextPost,
+        ]);
     }
-    public function blog(){
+    public function blog()
+    {
 
-     return Inertia::render('Blog', [
-        // Ambil data postingan beserta relasi kategorinya
-        'posts' => Post::with('category')->latest()->get(),
-        
-        // Ambil semua kategori dari hasil CRUD database
-        'categories' => Category::select('id', 'name', 'slug')->get(),
-    ]);
+        return Inertia::render('Blog', [
+            // Ambil data postingan beserta relasi kategorinya
+            'posts' => Post::with('category')->latest()->get(),
+
+            // Ambil semua kategori dari hasil CRUD database
+            'categories' => Category::select('id', 'name', 'slug')->get(),
+        ]);
     }
 
     // --- HALAMAN HALAMAN STATIS (Persiapan Dynamic CMS) ---
 
-    public function about()   { return Inertia::render('About'); }
-    public function sejarah() { return Inertia::render('Sejarah'); }
-    public function faq()     { return Inertia::render('Faq'); }
-    public function contact() { return Inertia::render('Contact'); }
-    public function event() { return Inertia::render('Events'); }
+    public function about()
+    {
+        return Inertia::render('About');
+    }
+    public function sejarah()
+    {
+        return Inertia::render('Sejarah');
+    }
+    public function faq()
+    {
+        return Inertia::render('Faq');
+    }
+    public function contact()
+    {
+        return Inertia::render('Contact');
+    }
+    public function events()
+    {
+        $events = Event::where('is_active', true)
+            ->latest()
+            ->get();
+
+        return Inertia::render('Event', [
+            'events' => $events,
+        ]);
+    }
+
+    // Halaman Detail Event / Program
+    public function eventShow($slug)
+    {
+        $event = Event::where('slug', $slug)->firstOrFail();
+
+        // Mengambil 3 event/program terkait
+        $relatedEvents = Event::where('id', '!=', $event->id)
+            ->where('is_active', true)
+            ->take(3)
+            ->get();
+
+        return Inertia::render('EventDetail', [
+            'event' => $event,
+            'relatedEvents' => $relatedEvents,
+        ]);
+    }
 }
