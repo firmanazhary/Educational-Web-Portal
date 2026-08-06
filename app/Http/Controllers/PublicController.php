@@ -77,6 +77,8 @@ class PublicController extends Controller
     {
         return Inertia::render('Contact');
     }
+
+    // Tambahkan method ini:
     public function events()
     {
         $events = Event::where('is_active', true)
@@ -88,20 +90,13 @@ class PublicController extends Controller
         ]);
     }
 
-    // Halaman Detail Event / Program
+    // Method detail event (jika diperlukan)
     public function eventShow($slug)
     {
         $event = Event::where('slug', $slug)->firstOrFail();
 
-        // Mengambil 3 event/program terkait
-        $relatedEvents = Event::where('id', '!=', $event->id)
-            ->where('is_active', true)
-            ->take(3)
-            ->get();
-
         return Inertia::render('EventDetail', [
             'event' => $event,
-            'relatedEvents' => $relatedEvents,
         ]);
     }
 }

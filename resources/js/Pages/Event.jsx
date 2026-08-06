@@ -18,18 +18,7 @@ import {
    CONFIG & HELPERS
    ========================================== */
 
-// Mapping Ikon Lucide untuk setiap program/kategori
-const PROGRAM_ICONS = {
-    'tahfidz & qur\'an': BookOpen,
-    'akademik': GraduationCap,
-    'seni & kreativitas': Palette,
-    'olahraga': Dumbbell,
-    'kepemimpinan': Flag,
-    'keluarga & parenting': HeartHandshake,
-    'spiritual & keislaman': Sparkles,
-    'community service': Sprout,
-    'wisuda & pelepasan': Award,
-};
+
 
 function getProgramIcon(title = '') {
     const key = title.toLowerCase();
@@ -65,14 +54,13 @@ export default function EventsIndex({
     mosqueImage = "/images/hero/building-attaufiq.png"
 }) {
     const [heroRef, heroInView] = useInView();
-
-    // Default Data jika backend belum melempar data dinamis
+// 1. Data Dummy Default jika database masih kosong
     const defaultPrograms = [
         {
             id: 1,
             title: "Tahfidz & Qur'an",
             description: "Membina generasi penghafal Al-Qur'an yang cinta ilmu dan berakhlak mulia.",
-            image: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2Vrb2xhaHxlbnwwfHwwfHx8MA%3D%3D",
+            image: "/images/events/tahfidz.jpg",
             slug: "tahfidz-quran"
         },
         {
@@ -81,59 +69,12 @@ export default function EventsIndex({
             description: "Pembelajaran berbasis karakter dan kompetensi unggul untuk masa depan.",
             image: "/images/events/akademik.jpg",
             slug: "akademik"
-        },
-        {
-            id: 3,
-            title: "Seni & Kreativitas",
-            description: "Mengembangkan potensi dan kreativitas melalui berbagai kegiatan seni.",
-            image: "/images/events/seni.jpg",
-            slug: "seni-kreativitas"
-        },
-        {
-            id: 4,
-            title: "Olahraga",
-            description: "Membentuk jiwa sehat, sportif, dan berdaya saing melalui kegiatan olahraga.",
-            image: "/images/events/olahraga.jpg",
-            slug: "olahraga"
-        },
-        {
-            id: 5,
-            title: "Kepemimpinan",
-            description: "Melatih jiwa kepemimpinan, tanggung jawab, dan percaya diri siswa.",
-            image: "/images/events/kepemimpinan.jpg",
-            slug: "kepemimpinan"
-        },
-        {
-            id: 6,
-            title: "Keluarga & Parenting",
-            description: "Bersama orang tua membangun lingkungan terbaik untuk tumbuh kembang anak.",
-            image: "/images/events/parenting.jpg",
-            slug: "keluarga-parenting"
-        },
-        {
-            id: 7,
-            title: "Spiritual & Keislaman",
-            description: "Menumbuhkan keimanan dan kecintaan kepada Allah melalui kegiatan keislaman.",
-            image: "/images/events/spiritual.jpg",
-            slug: "spiritual-keislaman"
-        },
-        {
-            id: 8,
-            title: "Community Service",
-            description: "Menanamkan kepedulian sosial dan semangat berbagi untuk sesama dan lingkungan.",
-            image: "/images/events/community.jpg",
-            slug: "community-service"
-        },
-        {
-            id: 9,
-            title: "Wisuda & Pelepasan",
-            description: "Momen berharga merayakan perjuangan dan pencapaian siswa Attaufiq.",
-            image: "/images/events/wisuda.jpg",
-            slug: "wisuda-pelepasan"
         }
     ];
 
-    const displayPrograms = events.length > 0 ? events : defaultPrograms;
+    // 2. PASTI KAN BARIS INI ADA:
+    // Jika data `events` dari backend ada passes, pakai `events`. Kalau kosong, fallback ke `defaultPrograms`.
+    const displayPrograms = events && events.length > 0 ? events : defaultPrograms;
 
     return (
         <AppLayout title="Program & Kegiatan - SIT At-Taufiq">
@@ -251,26 +192,30 @@ export default function EventsIndex({
 // Komponen Kartu Program Berbentuk Orb/Lingkaran
 function ProgramOrbCard({ program, index }) {
     const IconComponent = getProgramIcon(program.title);
-
-    // Memberikan offset vertikal pada screen desktop (efek gelombang naik-turun)
     const isEven = index % 2 === 0;
+
+    // Helper Penanganan Gambar dari DB Storage / Fallback Image
+    const imageUrl = program.image 
+        ? (program.image.startsWith('http') || program.image.startsWith('/images') 
+            ? program.image 
+            : `/storage/${program.image}`)
+        : '/images/placeholder.jpg';
 
     return (
         <div className={`flex flex-col items-center transition-all duration-500 transform hover:-translate-y-2 ${
             isEven ? 'lg:-translate-y-6' : 'lg:translate-y-6'
         }`}>
-            {/* Lingkaran Utama Card */}
             <div className="w-[260px] h-[340px] rounded-[130px] bg-[#FAF8F3] border border-[#E8DFC8] shadow-lg hover:shadow-2xl transition-all duration-500 p-3 flex flex-col justify-between items-center relative group overflow-hidden">
 
                 {/* 1. HALF-CIRCLE IMAGE BANNER */}
                 <div className="w-full h-[145px] rounded-t-[120px] rounded-b-2xl overflow-hidden relative bg-slate-200">
                     <img
-                        src={program.image}
+                        src={imageUrl}
                         alt={program.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                     />
 
-                    {/* Floating Badge Icon Kategori */}
+                    {/* Floating Badge Icon */}
                     <div className="absolute -bottom-1 left-4 w-9 h-9 rounded-full bg-[#FAF8F3] border border-[#E8DFC8] shadow-md flex items-center justify-center text-[#8B6B13] z-10">
                         <IconComponent size={16} />
                     </div>
@@ -288,9 +233,9 @@ function ProgramOrbCard({ program, index }) {
                         </p>
                     </div>
 
-                    {/* 3. CIRCULAR ARROW BUTTON LINK */}
+                    {/* 3. ROUTE LINK KE DETAIL PAGE */}
                     <Link
-                        href={`/events/${program.slug || 'program-detail'}`}
+                        href={route('events.show', program.slug)}
                         className="w-8 h-8 rounded-full bg-[#C29D38] hover:bg-[#051736] text-white flex items-center justify-center transition-all duration-300 shadow-md group-hover:scale-110 mt-2"
                         title="Lihat Informasi Selengkapnya"
                     >
