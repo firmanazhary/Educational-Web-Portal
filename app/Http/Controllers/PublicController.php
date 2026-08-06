@@ -93,10 +93,17 @@ class PublicController extends Controller
     // Method detail event (jika diperlukan)
     public function eventShow($slug)
     {
+        // Pastikan query ke model Event menggunakan slug
         $event = Event::where('slug', $slug)->firstOrFail();
+
+        $relatedEvents = Event::where('id', '!=', $event->id)
+            ->where('is_active', true)
+            ->take(3)
+            ->get();
 
         return Inertia::render('EventDetail', [
             'event' => $event,
+            'relatedEvents' => $relatedEvents,
         ]);
     }
 }

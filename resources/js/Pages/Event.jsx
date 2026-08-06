@@ -18,14 +18,25 @@ import {
    CONFIG & HELPERS
    ========================================== */
 
-
+// Object Mapping Ikon Lucide
+const PROGRAM_ICONS = {
+    'tahfidz & qur\'an': BookOpen,
+    'akademik': GraduationCap,
+    'seni & kreativitas': Palette,
+    'olahraga': Dumbbell,
+    'kepemimpinan': Flag,
+    'keluarga & parenting': HeartHandshake,
+    'spiritual & keislaman': Sparkles,
+    'community service': Sprout,
+    'wisuda & pelepasan': Award,
+};
 
 function getProgramIcon(title = '') {
     const key = title.toLowerCase();
     return PROGRAM_ICONS[key] || Sparkles;
 }
 
-// Hook harus dipanggil di dalam komponen, bukan di top-level module
+// Hook Intersection Observer
 function useInView(options = { threshold: 0.15 }) {
     const ref = useRef(null);
     const [isInView, setIsInView] = useState(false);
@@ -54,7 +65,8 @@ export default function EventsIndex({
     mosqueImage = "/images/hero/building-attaufiq.png"
 }) {
     const [heroRef, heroInView] = useInView();
-// 1. Data Dummy Default jika database masih kosong
+
+    // Data Dummy Default jika database masih kosong
     const defaultPrograms = [
         {
             id: 1,
@@ -72,8 +84,6 @@ export default function EventsIndex({
         }
     ];
 
-    // 2. PASTI KAN BARIS INI ADA:
-    // Jika data `events` dari backend ada passes, pakai `events`. Kalau kosong, fallback ke `defaultPrograms`.
     const displayPrograms = events && events.length > 0 ? events : defaultPrograms;
 
     return (
@@ -142,9 +152,7 @@ export default function EventsIndex({
 
                 <div className="max-w-7xl mx-auto space-y-12 relative z-10">
 
-                    {/* ==========================================
-                        HEADER SECTION
-                    ========================================== */}
+                    {/* HEADER SECTION */}
                     <div className="text-center space-y-2 max-w-2xl mx-auto">
                         <p className="text-xs md:text-sm font-medium text-slate-600 tracking-wide">
                             Pilih kegiatan untuk melihat informasi selengkapnya
@@ -154,9 +162,7 @@ export default function EventsIndex({
                         </div>
                     </div>
 
-                    {/* ==========================================
-                        ORBITAL GRID PROGRAM CONTAINER
-                    ========================================== */}
+                    {/* ORBITAL GRID PROGRAM CONTAINER */}
                     <div className="relative py-8">
 
                         {/* Line Orbit Golden Path (Visual Desktop SVG) */}
@@ -174,7 +180,7 @@ export default function EventsIndex({
                             />
                         </svg>
 
-                        {/* Flex Grid Display: Top Row & Bottom Row Staggered */}
+                        {/* Flex Grid Display */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-y-16 items-center justify-center">
                             {displayPrograms.map((program, index) => (
                                 <ProgramOrbCard key={program.id || index} program={program} index={index} />
@@ -194,12 +200,14 @@ function ProgramOrbCard({ program, index }) {
     const IconComponent = getProgramIcon(program.title);
     const isEven = index % 2 === 0;
 
-    // Helper Penanganan Gambar dari DB Storage / Fallback Image
     const imageUrl = program.image 
         ? (program.image.startsWith('http') || program.image.startsWith('/images') 
             ? program.image 
             : `/storage/${program.image}`)
         : '/images/placeholder.jpg';
+
+    // Buat URL Detail
+    const detailUrl = route('events.show', program.slug);
 
     return (
         <div className={`flex flex-col items-center transition-all duration-500 transform hover:-translate-y-2 ${
@@ -208,7 +216,7 @@ function ProgramOrbCard({ program, index }) {
             <div className="w-[260px] h-[340px] rounded-[130px] bg-[#FAF8F3] border border-[#E8DFC8] shadow-lg hover:shadow-2xl transition-all duration-500 p-3 flex flex-col justify-between items-center relative group overflow-hidden">
 
                 {/* 1. HALF-CIRCLE IMAGE BANNER */}
-                <div className="w-full h-[145px] rounded-t-[120px] rounded-b-2xl overflow-hidden relative bg-slate-200">
+                <Link href={detailUrl} className="w-full h-[145px] rounded-t-[120px] rounded-b-2xl overflow-hidden relative bg-slate-200 block">
                     <img
                         src={imageUrl}
                         alt={program.title}
@@ -219,14 +227,16 @@ function ProgramOrbCard({ program, index }) {
                     <div className="absolute -bottom-1 left-4 w-9 h-9 rounded-full bg-[#FAF8F3] border border-[#E8DFC8] shadow-md flex items-center justify-center text-[#8B6B13] z-10">
                         <IconComponent size={16} />
                     </div>
-                </div>
+                </Link>
 
                 {/* 2. CARD CONTENT DETAILS */}
                 <div className="px-3 pt-3 pb-2 text-center flex-1 flex flex-col justify-between items-center w-full">
                     <div className="space-y-1.5">
-                        <h3 className="font-serif text-base font-bold text-[#051736] group-hover:text-[#D4AF37] transition leading-snug">
-                            {program.title}
-                        </h3>
+                        <Link href={detailUrl} className="block">
+                            <h3 className="font-serif text-base font-bold text-[#051736] group-hover:text-[#D4AF37] transition leading-snug">
+                                {program.title}
+                            </h3>
+                        </Link>
 
                         <p className="text-[11px] text-slate-500 font-light leading-relaxed line-clamp-3 px-1">
                             {program.description}
@@ -235,7 +245,7 @@ function ProgramOrbCard({ program, index }) {
 
                     {/* 3. ROUTE LINK KE DETAIL PAGE */}
                     <Link
-                        href={route('events.show', program.slug)}
+                        href={detailUrl}
                         className="w-8 h-8 rounded-full bg-[#C29D38] hover:bg-[#051736] text-white flex items-center justify-center transition-all duration-300 shadow-md group-hover:scale-110 mt-2"
                         title="Lihat Informasi Selengkapnya"
                     >

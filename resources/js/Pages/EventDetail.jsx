@@ -1,75 +1,147 @@
 import React from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import { Head, Link } from '@inertiajs/react';
-import { ArrowLeft, Sparkles, Calendar, ArrowRight } from 'lucide-react';
+import { 
+    ArrowLeft, 
+    Calendar, 
+    Clock, 
+    ArrowRight, 
+    Sparkles,
+    Share2,
+    BookOpen
+} from 'lucide-react';
 
 export default function EventDetail({ event, relatedEvents = [] }) {
-    const imageUrl = event.image 
+    // Helper Penanganan Gambar dari DB Storage / Fallback Image
+    const imageUrl = event?.image 
         ? (event.image.startsWith('http') || event.image.startsWith('/images') 
             ? event.image 
             : `/storage/${event.image}`)
         : '/images/placeholder.jpg';
 
+    // Format Tanggal
+    const formattedDate = event?.created_at 
+        ? new Date(event.created_at).toLocaleDateString('id-ID', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          })
+        : 'SIT At-Taufiq';
+
     return (
-        <AppLayout title={`${event.title} - SIT At-Taufiq`}>
-            <Head title={`${event.title} | Program & Kegiatan SIT At-Taufiq`} />
+        <AppLayout title={`${event?.title || 'Detail Program'} - SIT At-Taufiq`}>
+            <Head title={`${event?.title || 'Detail Program'} | SIT At-Taufiq Jambi`} />
 
-            <div className="bg-[#FAF4EB] min-h-screen py-12 px-4 sm:px-6 lg:px-8 text-[#051736]">
-                <div className="max-w-4xl mx-auto space-y-8">
-                    
-                    {/* Back Button */}
-                    <Link 
-                        href={route('events.index')} 
-                        className="inline-flex items-center space-x-2 text-xs font-bold text-[#051736] hover:text-[#D4AF37] transition"
-                    >
-                        <ArrowLeft size={16} />
-                        <span>Kembali ke Semua Kegiatan</span>
-                    </Link>
+            {/* Canvas Utama - Warm Sand/Beige */}
+            <div className="bg-[#FAF4EB] min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-[#051736] relative overflow-hidden">
+                
+                {/* Background Pattern Ornament */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-                    {/* Main Banner Header */}
-                    <div className="bg-[#FAF8F3] border border-[#E8DFC8] rounded-[32px] p-6 md:p-10 shadow-sm space-y-6">
-                        <div className="aspect-[16/9] rounded-[24px] overflow-hidden border border-[#E8DFC8] shadow-md bg-slate-100">
-                            <img src={imageUrl} alt={event.title} className="w-full h-full object-cover" />
-                        </div>
+                <div className="max-w-4xl mx-auto space-y-8 relative z-10">
 
-                        <div className="space-y-3">
-                            <span className="inline-block border border-[#D4AF37]/60 text-[#8B6B13] text-[10px] font-extrabold tracking-widest px-3 py-1 rounded-full uppercase bg-[#FAF8F5]">
-                                {event.type || 'PROGRAM UNGGULAN'}
-                            </span>
-                            <h1 className="font-serif text-3xl md:text-5xl text-[#051736] font-normal leading-tight">
-                                {event.title}
-                            </h1>
-                            <p className="text-slate-600 text-sm md:text-base leading-relaxed font-light">
-                                {event.description}
-                            </p>
-                        </div>
+                    {/* 1. TOMBOL KEMBALI */}
+                    <div className="flex items-center justify-between">
+                        <Link 
+                            href={route('events.index')} 
+                            className="inline-flex items-center space-x-2 text-xs font-bold text-[#051736] hover:text-[#D4AF37] transition bg-[#FAF8F3] border border-[#E8DFC8] px-4 py-2.5 rounded-full shadow-sm"
+                        >
+                            <ArrowLeft size={16} />
+                            <span>Kembali ke Semua Program</span>
+                        </Link>
 
-                        <div className="pt-6 border-t border-[#E8DFC8] prose max-w-none text-slate-700 font-light leading-relaxed">
-                            {event.content ? (
-                                <div dangerouslySetInnerHTML={{ __html: event.content }} />
-                            ) : (
-                                <p>Informasi detail mengenai {event.title} di SIT At-Taufiq Jambi.</p>
-                            )}
-                        </div>
+                        <span className="text-xs font-bold tracking-widest text-[#8B6B13] uppercase bg-[#FAF8F3] border border-[#D4AF37]/40 px-3 py-1 rounded-full">
+                            {event?.type || 'PROGRAM UNGGULAN'}
+                        </span>
                     </div>
 
-                    {/* Related Events Section */}
+                    {/* 2. KARTU DETAIL UTAMA */}
+                    <article className="bg-[#FAF8F3] border border-[#E8DFC8] rounded-[32px] p-6 md:p-10 shadow-sm space-y-8">
+                        
+                        {/* Header Title & Meta */}
+                        <div className="space-y-4 border-b border-[#E8DFC8] pb-6">
+                            <h1 className="font-serif text-3xl md:text-5xl font-normal text-[#051736] leading-tight">
+                                {event?.title}
+                            </h1>
+
+                            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 font-light">
+                                <span className="flex items-center gap-1.5">
+                                    <Calendar size={14} className="text-[#D4AF37]" />
+                                    {formattedDate}
+                                </span>
+                                <span className="flex items-center gap-1.5">
+                                    <Sparkles size={14} className="text-[#D4AF37]" />
+                                    SIT At-Taufiq Jambi
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Banner Image / Thumbnail */}
+                        <div className="aspect-[16/9] rounded-[24px] overflow-hidden border border-[#E8DFC8] shadow-md bg-slate-200 relative group">
+                            <img 
+                                src={imageUrl} 
+                                alt={event?.title} 
+                                className="w-full h-full object-cover group-hover:scale-105 transition duration-700" 
+                            />
+                        </div>
+
+                        {/* Ringkasan Singkat (Excerpt) */}
+                        {event?.description && (
+                            <div className="p-4 rounded-2xl bg-[#F3EBDD] border-l-4 border-[#D4AF37] text-slate-700 text-sm md:text-base leading-relaxed italic">
+                                "{event.description}"
+                            </div>
+                        )}
+
+                        {/* Konten Lengkap (HTML Content) */}
+                        <div className="prose max-w-none text-slate-700 font-light leading-relaxed space-y-4 text-sm md:text-base">
+                            {event?.content ? (
+                                <div dangerouslySetInnerHTML={{ __html: event.content }} />
+                            ) : (
+                                <p>
+                                    Program <strong>{event?.title}</strong> merupakan salah satu pilar kegiatan unggulan di SIT At-Taufiq Jambi yang dirancang untuk membimbing siswa-siswi mencapai potensi terbaik dalam aspek akademik, karakter, serta nilai-nilai keislaman.
+                                </p>
+                            )}
+                        </div>
+
+                    </article>
+
+                    {/* 3. KEGIATAN LAINNYA (RELATED EVENTS) */}
                     {relatedEvents.length > 0 && (
-                        <div className="space-y-4 pt-6">
-                            <h3 className="font-serif text-xl font-bold text-[#051736]">Kegiatan Lainnya</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="space-y-6 pt-6 border-t border-[#E8DFC8]">
+                            <div className="flex items-center justify-between">
+                                <h3 className="font-serif text-xl md:text-2xl text-[#051736] font-normal">
+                                    Kegiatan & Program Lainnya
+                                </h3>
+                                <Link 
+                                    href={route('events.index')}
+                                    className="text-xs font-bold text-[#8B6B13] hover:text-[#051736] flex items-center gap-1"
+                                >
+                                    <span>Lihat Semua</span>
+                                    <ArrowRight size={14} />
+                                </Link>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                                 {relatedEvents.map((item) => (
                                     <Link 
                                         key={item.id} 
                                         href={route('events.show', item.slug)}
-                                        className="bg-white p-4 rounded-2xl border border-[#E8DFC8] hover:shadow-md transition flex flex-col justify-between"
+                                        className="bg-[#FAF8F3] p-5 rounded-2xl border border-[#E8DFC8] hover:shadow-md transition flex flex-col justify-between group"
                                     >
                                         <div className="space-y-2">
-                                            <h4 className="font-serif font-bold text-sm text-[#051736] line-clamp-1">{item.title}</h4>
-                                            <p className="text-xs text-slate-500 line-clamp-2">{item.description}</p>
+                                            <span className="text-[10px] font-extrabold text-[#8B6B13] uppercase tracking-wider">
+                                                {item.type || 'PROGRAM'}
+                                            </span>
+                                            <h4 className="font-serif font-bold text-sm text-[#051736] group-hover:text-[#D4AF37] transition line-clamp-2">
+                                                {item.title}
+                                            </h4>
+                                            <p className="text-xs text-slate-500 line-clamp-2 font-light">
+                                                {item.description || 'Lihat informasi lengkap mengenai program ini...'}
+                                            </p>
                                         </div>
-                                        <div className="pt-3 flex items-center text-xs font-bold text-[#D4AF37] space-x-1">
-                                            <span>Lihat</span>
+
+                                        <div className="pt-4 flex items-center text-xs font-bold text-[#051736] group-hover:text-[#D4AF37] space-x-1">
+                                            <span>Selengkapnya</span>
                                             <ArrowRight size={12} />
                                         </div>
                                     </Link>
