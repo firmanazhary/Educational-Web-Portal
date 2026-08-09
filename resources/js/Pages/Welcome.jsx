@@ -5,11 +5,102 @@ import { Link, Head } from '@inertiajs/react';
 import HeroSlider from '@/Layouts/HeroSlider';
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import {
+  Sparkles,
+  BookOpen,
+  GraduationCap,
+  Heart,
+  Cloud,
+  Sun,
+  Star,
+  Smile,
+  Compass
+} from 'lucide-react';
+
+// ==========================================
+// DATA ORNAMEN BACKGROUND (Parallax)
+// ==========================================
+const BACKGROUND_ORNAMENTS = [
+  {
+    id: 1,
+    Icon: Sparkles,
+    size: 28,
+    color: "text-amber-400/60",
+    top: "6%",
+    left: "8%",
+    depth: 0.1,
+  },
+  {
+    id: 2,
+    Icon: Cloud,
+    size: 48,
+    color: "text-amber-200/50",
+    top: "18%",
+    right: "6%",
+    depth: 0.15,
+  },
+  {
+    id: 3,
+    Icon: BookOpen,
+    size: 34,
+    color: "text-amber-600/30",
+    top: "32%",
+    left: "5%",
+    depth: 0.08,
+  },
+  {
+    id: 4,
+    Icon: Smile,
+    size: 30,
+    color: "text-amber-400/40",
+    top: "45%",
+    right: "10%",
+    depth: 0.12,
+  },
+  {
+    id: 5,
+    Icon: Heart,
+    size: 32,
+    color: "text-rose-400/35",
+    top: "58%",
+    left: "7%",
+    depth: 0.18,
+  },
+  {
+    id: 6,
+    Icon: Compass,
+    size: 36,
+    color: "text-amber-500/25",
+    top: "72%",
+    right: "8%",
+    depth: 0.1,
+  },
+  {
+    id: 7,
+    Icon: GraduationCap,
+    size: 44,
+    color: "text-amber-700/25",
+    top: "84%",
+    left: "6%",
+    depth: 0.14,
+  },
+  {
+    id: 8,
+    Icon: Star,
+    size: 26,
+    color: "text-amber-400/50",
+    top: "94%",
+    right: "12%",
+    depth: 0.06,
+  },
+];
+
+
 
 // ==========================================
 // 1. DATA PATH / ALAMAT GAMBAR
 // ==========================================
-const ROAD_IMAGE = "/images/home/jalan.png";
+const ROAD_IMAGE = "/images/home/jalan2.png";
 const PEOPLE_IMAGE = "/images/home/people.png";
 
 // ==========================================
@@ -52,7 +143,7 @@ const JENJANG_DATA = [
     desc: 'Menumbuhkan ilmu, rasa ingin tahu, dan akhlak mulia.',
     btnText: 'Lihat Program SD',
     align: 'left',
-    imgSrc: '/images/home/sd.png',
+    imgSrc: '/images/home/sd.JPG',
     triggerScroll: 0.52,
   },
   {
@@ -63,7 +154,7 @@ const JENJANG_DATA = [
     desc: 'Menguatkan karakter, logika, dan kepemimpinan diri.',
     btnText: 'Lihat Program SMP',
     align: 'right',
-    imgSrc: '/images/home/smp.png',
+    imgSrc: '/images/home/smp.JPG',
     triggerScroll: 0.72,
   },
   {
@@ -74,7 +165,7 @@ const JENJANG_DATA = [
     desc: 'Menjadi generasi pembawa manfaat dan pemimpin masa depan.',
     btnText: 'Lihat Program SMA',
     align: 'left',
-    imgSrc: '/images/home/sma.png',
+    imgSrc: '/images/home/sma.JPG',
     triggerScroll: 0.90,
   }
 ];
@@ -105,27 +196,27 @@ function useInView(options = { threshold: 0.15 }) {
 // ==========================================
 const StepCard = ({ step, smoothProgress }) => {
   const opacity = useTransform(
-    smoothProgress, 
-    [step.triggerScroll - 0.08, step.triggerScroll], 
+    smoothProgress,
+    [step.triggerScroll - 0.08, step.triggerScroll],
     [0, 1]
   );
-  
+
   const y = useTransform(
-    smoothProgress, 
-    [step.triggerScroll - 0.08, step.triggerScroll], 
+    smoothProgress,
+    [step.triggerScroll - 0.08, step.triggerScroll],
     [40, 0]
   );
 
   const scale = useTransform(
-    smoothProgress, 
-    [step.triggerScroll - 0.08, step.triggerScroll], 
+    smoothProgress,
+    [step.triggerScroll - 0.08, step.triggerScroll],
     [0.9, 1]
   );
 
   return (
-    <motion.div 
+    <motion.div
       style={{ opacity, y, scale }}
-      className={`flex items-center gap-6 pointer-events-auto my-16 ${
+      className={`flex items-center gap-6 pointer-events-auto my-4 ${
         step.align === 'right' ? 'flex-row-reverse text-left' : 'flex-row text-left'
       }`}
     >
@@ -136,7 +227,7 @@ const StepCard = ({ step, smoothProgress }) => {
         <h3 className="text-2xl font-bold text-[#0F1E56]">{step.title}</h3>
         <p className="text-xs font-semibold text-slate-400 mb-2">{step.age}</p>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">{step.desc}</p>
-        
+
         <button className="text-xs font-semibold text-[#0F1E56] bg-amber-400 hover:bg-amber-500 px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-2">
           {step.btnText} &rarr;
         </button>
@@ -244,9 +335,12 @@ const roadSectionRef = useRef(null);
 
     // Setup Animation Scroll untuk Section Jalan
     const { scrollYProgress } = useScroll({
-      target: roadSectionRef,
-      offset: ["start start", "end end"]
-    });
+  target: roadSectionRef,
+  // Kita majukan awal animasinya.
+  // "start 80%" artinya progress 0 dimulai saat start section masih 80% di bawah layar.
+  // Saat start section akhirnya menyentuh top layar (start start), progress sudah jalan.
+  offset: ["start 40%", "end end"] 
+});
 
     const smoothProgress = useSpring(scrollYProgress, {
       stiffness: 60,
@@ -255,10 +349,21 @@ const roadSectionRef = useRef(null);
     });
 
     const rawX = useTransform(
-      smoothProgress,
-      SCROLL_STOPS,
-      ROAD_CURVES.map(val => `${val}%`)
-    );
+  smoothProgress,
+  SCROLL_STOPS,
+  ROAD_CURVES.map(val => `${val}%`),
+  { clamp: true } // Pastikan ini ada agar tidak error di ujung
+);
+
+// TAMBAHKAN INI: Mengontrol muncul/hilang orang
+const opacityPeople = useTransform(
+  smoothProgress,
+  // RENTANG PROGRESS: [Awal Sekali (PG), Menjelang Akhir SMA, Akhir Sekali]
+  // Kita hilangkan titik transisi 0.02 agar tidak ada fade-in di atas.
+  [0, 0.94, 1.0], 
+  // RENTANG OPACITY: [Muncul Penuh, Muncul Penuh, Hilang Total]
+  [1, 1, 0]
+);
 
 
     return (
@@ -598,48 +703,87 @@ const roadSectionRef = useRef(null);
 
     </section>
 
-    {/* SECTION JALANAN BERKELOK */}
-            <section 
-              ref={roadSectionRef} 
-              className="relative w-full bg-[#FAF6EE] min-h-[400vh] font-sans"
-            >
-              {/* Character Floating */}
-              <div className="sticky top-0 h-screen w-full pointer-events-none z-30 overflow-hidden">
-                <motion.div 
-                  className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-                  style={{ left: rawX }}
-                >
-                  <img 
-                    src={PEOPLE_IMAGE} 
-                    alt="People Character" 
-                    className="w-16 sm:w-20 md:w-24 h-auto object-contain drop-shadow-2xl"
-                  />
-                </motion.div>
-              </div>
+    {/* SECTION JALANAN BERKELOK DENGAN ORNAMEN BACKGROUND */}
+<section
+  ref={roadSectionRef}
+//   {/* Hapus overflow-hidden dari section utama agar sticky tidak terkunci */}
+  className="relative w-full bg-[#FAF6EE] min-h-[250vh] font-sans"
+  style={{
+    background: 'radial-gradient(circle at 50% 50%, #FAF6EE 0%, #F4ECE0 100%)',
+  }}
+>
+  {/* ======================================================== */}
+  {/* LAYER ORNAMEN BACKGROUND */}
+  {/* ======================================================== */}
+  <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+    {BACKGROUND_ORNAMENTS.map(({ id, Icon, size, color, top, left, right, depth }) => {
+      const yVal = useTransform(smoothProgress, [0, 1], [0, depth * 400]);
 
-              {/* Road & Cards */}
-              <div className="absolute inset-0 w-full h-full flex flex-col justify-between py-32 pointer-events-none">
-                <div className="absolute inset-0 w-full h-full flex justify-center items-center overflow-hidden">
-                  <img 
-                    src={ROAD_IMAGE} 
-                    alt="Jalan Path" 
-                    className="w-full max-w-4xl h-full object-cover md:object-contain opacity-95"
-                  />
-                </div>
+      return (
+        <motion.div
+          key={id}
+          className="absolute"
+          style={{
+            top,
+            left: left || 'auto',
+            right: right || 'auto',
+            y: yVal,
+          }}
+        >
+          <Icon className={`${color} animate-pulse`} size={size} />
+        </motion.div>
+      );
+    })}
+  </div>
 
-                <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col justify-between h-full">
-                  {JENJANG_DATA.map((step) => (
-                    <StepCard 
-                      key={step.id} 
-                      step={step} 
-                      smoothProgress={smoothProgress} 
-                    />
-                  ))}
-                </div>
-              </div>
-            </section>
+  {/* ======================================================== */}
+  {/* CHARACTER FLOATING (DIBERSIHKAN & DIPERTINGGI Z-INDEX) */}
+  {/* ======================================================== */}
+  {/* Container sticky ini harus sejajar langsung dengan konten jalan & card */}
+ <div className="sticky top-0 h-screen w-full pointer-events-none z-50 flex items-center justify-center">
+  <motion.div
+    className="absolute"
+    style={{ 
+      left: rawX, 
+      top: '35%', // Menggunakan nilai dari permintaan sebelumnya
+      opacity: opacityPeople // <--- TAMBAHKAN INI
+    }}
+  >
+    <img
+      src={PEOPLE_IMAGE}
+      alt="People Character"
+      // Tambahkan drop-shadow agar lebih estetis
+      className="w-16 sm:w-20 md:w-24 h-auto object-contain drop-shadow-3xl -translate-x-1/2 -translate-y-1/2"
+    />
+  </motion.div>
+</div>
 
-    
+  {/* ======================================================== */}
+  {/* ROAD & CARDS (Gunakan margin negatif agar sejajar dengan sticky) */}
+  {/* ======================================================== */}
+  <div className="relative -mt-[100vh] z-10 w-full min-h-[250vh] flex flex-col justify-between py-16 pointer-events-none">
+
+    {/* GAMBAR JALAN MURNI */}
+    <div className="absolute inset-0 w-full h-full flex justify-center items-center">
+      <img
+        src={ROAD_IMAGE}
+        alt="Jalan Path"
+        className="w-full max-w-3xl h-full object-fill opacity-95"
+      />
+    </div>
+
+    {/* LIST CARD JENJANG */}
+    <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col justify-between h-full">
+      {JENJANG_DATA.map((step) => (
+        <StepCard
+          key={step.id}
+          step={step}
+          smoothProgress={smoothProgress}
+        />
+      ))}
+    </div>
+  </div>
+</section>
 
         </AppLayout>
     );
