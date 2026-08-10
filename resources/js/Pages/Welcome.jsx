@@ -4,7 +4,7 @@ import AppLayout from '@/Layouts/AppLayout';
 import { Link, Head } from '@inertiajs/react';
 import HeroSlider from '@/Layouts/HeroSlider';
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import {
     Sparkles,
     BookOpen,
@@ -169,6 +169,61 @@ const JENJANG_DATA = [
         triggerScroll: 0.90,
     }
 ];
+
+// Data konten keunggulan
+const dataKeunggulan = [
+  {
+    id: 1,
+    title: "Pendidikan Islam Berkualitas",
+    desc: "Mengintegrasikan ilmu dunia dan nilai-nilai Islam dalam setiap kegiatan, membentuk pribadi berakhlak, berilmu, dan bertakwa.",
+    position: "left", // Frame foto di kiri, Teks di kanan, Gedung di kanan
+    sunPos: { x: "88%", y: "70%" }, // Posisi relatif matahari pada lintasan
+    icon: (
+      <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+    )
+  },
+  {
+    id: 2,
+    title: "Akademik Berkualitas",
+    desc: "Proses pembelajaran aktif dan bermakna yang menumbuhkan kemampuan berpikir, kreativitas, dan kemandirian.",
+    position: "right", // Frame foto di kanan, Teks di kiri, Gedung di kiri
+    sunPos: { x: "62%", y: "22%" },
+    icon: (
+      <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+      </svg>
+    )
+  },
+  {
+    id: 3,
+    title: "Prestasi Nyata, Membanggakan",
+    desc: "Mendorong siswa untuk berprestasi di berbagai bidang, baik akademik, tahfiz, olahraga, seni, maupun kepemimpinan.",
+    position: "left", // Frame foto di kiri, Teks di kanan, Gedung di kanan
+    sunPos: { x: "32%", y: "10%" },
+    icon: (
+      <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    )
+  },
+  {
+    id: 4,
+    title: "Guru & Pendamping yang Berdedikasi",
+    desc: "Dibimbing oleh guru dan pendamping yang amanah, berpengalaman, dan tulus mendampingi tumbuh kembang ananda setiap hari.",
+    position: "right", // Frame foto di kanan, Teks di kiri, Gedung di kiri
+    sunPos: { x: "12%", y: "45%" },
+    icon: (
+      <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    )
+  }
+];
+
+// Data Kategori Keunggulan
 
 
 // Hook Animasi Scroll Reveal
@@ -373,6 +428,50 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     const primaryTextColor = "text-[#0F1E56]"; // Biru Tua
     // Warna bayangan teks untuk menciptakan kontras di atas area terang
     const textShadowStyle = { textShadow: '0 2px 4px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 1)' };
+
+    // UNTUK KEUNGGULAN
+   const containerRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const { scrollYProgress: sectionScrollProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Listener untuk menentukan item aktif secara pasti dari posisi scroll
+  useEffect(() => {
+    const unsubscribe = sectionScrollProgress.on("change", (latest) => {
+      if (latest < 0.25) {
+        setActiveIndex(0);
+      } else if (latest >= 0.25 && latest < 0.50) {
+        setActiveIndex(1);
+      } else if (latest >= 0.50 && latest < 0.75) {
+        setActiveIndex(2);
+      } else {
+        setActiveIndex(3);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [sectionScrollProgress]);
+
+  // Pergerakan Horizontal Matahari
+  const sunX = useTransform(
+    sectionScrollProgress, 
+    [0,     0.25,   0.50,   0.75,   1], 
+    ["85%", "65%",  "46%",  "27%",  "13%"]
+  );
+
+  // Pergerakan Vertikal Matahari
+  const sunY = useTransform(
+    sectionScrollProgress, 
+    [0,     0.25,   0.50,   0.75,   1], 
+    ["58%", "21%",  "11%",  "23%",  "69%"]
+  );
+
+  const currentItem = dataKeunggulan[activeIndex];
+   
+  
 
 
     return (
@@ -795,133 +894,294 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
             {/* 4. CAHAYA MASA DEPAN SECTION */}
             <section className="relative w-full min-h-[450px] lg:min-h-[550px] flex items-center justify-center overflow-hidden font-sans">
-    
-    {/* 1. LAYER BASE: Background Daun-daun (bgCahaya.png) */}
-    <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-out"
-        style={{ backgroundImage: 'url(/images/home/bgCahaya.png)' }}
-    >
-        {/* Overlay Tipis & Halus */}
-        <div className="absolute inset-0 bg-[#FAF6EE]/40"></div>
-    </div>
 
-    {/* ======================================================== */}
-    {/* ORNAMEN VISUAL DENGAN ANIMASI ENTRANCE & CONTINUOUS ANIMATION */}
-    {/* ======================================================== */}
-    <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-        
-        {/* --- ORNAMEN 1: Radial Sunburst / Sinar Cahaya di Latar (Entrance: Fade & Zoom) --- */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(251,191,36,0.15)_0%,transparent_70%)] rounded-full animate-[spin_60s_linear_infinite] motion-safe:animate-fade-in duration-1000"></div>
-
-        {/* --- ORNAMEN 2: Floating Badge Kiri Atas (Entrance: Slide down + Fade) --- */}
-        <div className="absolute top-8 left-4 md:left-10 flex items-center gap-2.5 bg-white/80 backdrop-blur-md px-4 py-2 rounded-2xl border border-amber-200 shadow-lg -rotate-3 transition-all duration-700 animate-[bounce_4s_infinite] motion-safe:animate-slide-down">
-            <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
-            </span>
-            <span className="text-xs font-semibold text-[#0F1E56] tracking-wide">✨ Berkah & Cahaya</span>
-        </div>
-
-        {/* --- ORNAMEN 3: Garis Emas Lengkung & Ring Dekoratif (Entrance: Scale Up) --- */}
-        <div className="absolute top-4 -right-8 w-64 h-32 text-amber-400/50 motion-safe:animate-zoom-in duration-700">
-            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,80 Q50,0 120,40 T200,20" stroke="currentColor" strokeWidth="3" strokeDasharray="6 6" />
-                <circle cx="120" cy="40" r="6" fill="#F59E0B" className="animate-pulse" />
-            </svg>
-        </div>
-
-        {/* --- ORNAMEN 4: Floating Card Kanan Atas (Entrance: Slide Left + Fade) --- */}
-        <div className="absolute top-1/4 right-3 md:right-10 bg-amber-50/90 backdrop-blur-md p-3.5 rounded-2xl border border-amber-300/60 shadow-xl rotate-6 hidden sm:flex items-center gap-3 transition-transform duration-500 hover:scale-105 motion-safe:animate-slide-left">
-            <div className="w-10 h-10 bg-gradient-to-br from-amber-300 to-amber-500 rounded-xl flex items-center justify-center text-amber-950 shadow-inner font-bold text-lg">
-                🌱
-            </div>
-            <div className="text-left pr-1">
-                <p className="text-[10px] uppercase tracking-wider text-amber-800 font-extrabold">Masa Depan</p>
-                <p className="text-xs font-bold text-[#0F1E56]">Tumbuh Bersama</p>
-            </div>
-        </div>
-
-        {/* --- ORNAMEN 5: Badge Islami / Al-Qur'an Kiri Tengah (NEW) --- */}
-        <div className="absolute top-1/2 left-3 md:left-8 -translate-y-1/2 bg-white/70 backdrop-blur-md p-2.5 rounded-2xl border border-emerald-200 shadow-md -rotate-6 hidden lg:flex items-center gap-2.5 motion-safe:animate-slide-right">
-            <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-700 text-sm">
-                📖
-            </div>
-            <span className="text-xs font-bold text-[#0F1E56] pr-2">Generasi Rabbani</span>
-        </div>
-
-        {/* --- ORNAMEN 6: Elemen Daun & Wave Lengkung (Entrance: Slide Up) --- */}
-        <div className="absolute bottom-10 left-4 md:left-12 flex items-center gap-3 -rotate-2 motion-safe:animate-slide-up">
-            <div className="w-11 h-11 bg-emerald-500/15 backdrop-blur-md rounded-2xl border border-emerald-500/30 flex items-center justify-center text-emerald-800 shadow-md animate-bounce">
-                🍃
-            </div>
-            <div className="hidden sm:block">
-                <svg className="w-28 h-8 text-emerald-600/40" viewBox="0 0 100 30" fill="none">
-                    <path d="M0,15 C30,5 70,25 100,15" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-                </svg>
-            </div>
-        </div>
-
-        {/* --- ORNAMEN 7: Sparkles & Stars Kanan Bawah (Continuous Float) --- */}
-        <div className="absolute -bottom-10 -right-10 w-60 h-60 bg-amber-300/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-16 right-8 md:right-20 text-amber-500 text-3xl animate-[bounce_3s_infinite] motion-safe:animate-zoom-in">
-            ✦
-        </div>
-        <div className="absolute bottom-32 right-16 text-amber-400 text-lg animate-pulse">
-            ✦
-        </div>
-
-        {/* --- ORNAMEN 8: Floating Glow Particles --- */}
-        <div className="absolute top-1/3 left-1/4 w-3.5 h-3.5 bg-amber-400 rounded-full blur-[0.5px] shadow-[0_0_10px_#F59E0B] animate-ping"></div>
-        <div className="absolute top-2/3 right-1/3 w-2.5 h-2.5 bg-amber-300 rounded-full blur-[0.5px] shadow-[0_0_8px_#FCD34D] animate-pulse"></div>
-    </div>
-    {/* ======================================================== */}
-
-    {/* 3. LAYER TENGAH: Konten Utama (Orang, Teks, Tombol) */}
-    <div className="relative z-20 container mx-auto px-6 py-20 flex flex-col items-center text-center">
-        
-        {/* Container untuk perataan konten tengah */}
-        <div className="relative flex flex-col items-center max-w-4xl">
-            
-            {/* Area Blending Gambar Tengah & Meredam Kecerahan di Bawah Teks */}
-            <div className="absolute -top-32 md:-top-40 inset-x-0 h-[400px] md:h-[500px] z-0 pointer-events-none transition-all duration-1000 ease-out">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,246,238,0)_0%,rgba(250,246,238,0.7)_50%,rgba(250,246,238,0)_100%)]"></div>
-                
-                {/* Gambar Utama dengan Animasi Entrance Fade & Zoom In */}
-                <img 
-                    src="/images/home/cahaya.png" 
-                    alt="Cahaya Masa Depan" 
-                    className="w-full h-full object-contain opacity-95 filter drop-shadow-[0_12px_15px_rgba(251,191,36,0.35)] animate-[zoom-in_1s_ease-out]"
-                />
-            </div>
-
-            {/* Teks Kuote dengan Animasi Entrance Slide Up */}
-            <h2 
-                className={`relative z-10 mt-28 md:mt-36 text-xl md:text-2xl lg:text-3xl font-medium ${primaryTextColor} leading-relaxed md:leading-snug tracking-wide transition-all duration-700 animate-[slide-up_0.8s_ease-out]`}
-                style={textShadowStyle}
-            >
-                Setiap langkah hari ini adalah cahaya masa <br className="hidden md:inline" />
-                depan yang sedang Allah siapkan.
-            </h2>
-
-            {/* Tombol CTA dengan Animasi Entrance Fade & Pop Up */}
-            <button className="relative z-10 mt-12 md:mt-14 flex items-center gap-2.5 px-9 py-4 bg-amber-400 hover:bg-amber-500 text-[#0F1E56] font-semibold text-sm md:text-base rounded-full shadow-[0_8px_16px_rgba(15,30,86,0.15)] hover:shadow-[0_12px_20px_rgba(15,30,86,0.25)] transition-all duration-300 ease-out hover:-translate-y-1 active:scale-95 group focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 animate-[zoom-in_1s_ease-out]">
-                Mari tumbuh bersama Attaufiq
-                
-                <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor" 
-                    className={`w-4 h-4 md:w-5 md:h-5 ${primaryTextColor} group-hover:animate-bounce-short`}
+                {/* 1. LAYER BASE: Background Daun-daun (bgCahaya.png) */}
+                <div
+                    className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-out"
+                    style={{ backgroundImage: 'url(/images/home/bgCahaya.png)' }}
                 >
-                    <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
-                </svg>
-            </button>
+                    {/* Overlay Tipis & Halus */}
+                    <div className="absolute inset-0 bg-[#FAF6EE]/40"></div>
+                </div>
+
+                {/* ======================================================== */}
+                {/* ORNAMEN VISUAL DENGAN ANIMASI ENTRANCE & CONTINUOUS ANIMATION */}
+                {/* ======================================================== */}
+                <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+
+                    {/* --- ORNAMEN 1: Radial Sunburst / Sinar Cahaya di Latar (Entrance: Fade & Zoom) --- */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(251,191,36,0.15)_0%,transparent_70%)] rounded-full animate-[spin_60s_linear_infinite] motion-safe:animate-fade-in duration-1000"></div>
+
+                    {/* --- ORNAMEN 2: Floating Badge Kiri Atas (Entrance: Slide down + Fade) --- */}
+                    <div className="absolute top-8 left-4 md:left-10 flex items-center gap-2.5 bg-white/80 backdrop-blur-md px-4 py-2 rounded-2xl border border-amber-200 shadow-lg -rotate-3 transition-all duration-700 animate-[bounce_4s_infinite] motion-safe:animate-slide-down">
+                        <span className="relative flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                        </span>
+                        <span className="text-xs font-semibold text-[#0F1E56] tracking-wide">✨ Berkah & Cahaya</span>
+                    </div>
+
+                    {/* --- ORNAMEN 3: Garis Emas Lengkung & Ring Dekoratif (Entrance: Scale Up) --- */}
+                    <div className="absolute top-4 -right-8 w-64 h-32 text-amber-400/50 motion-safe:animate-zoom-in duration-700">
+                        <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0,80 Q50,0 120,40 T200,20" stroke="currentColor" strokeWidth="3" strokeDasharray="6 6" />
+                            <circle cx="120" cy="40" r="6" fill="#F59E0B" className="animate-pulse" />
+                        </svg>
+                    </div>
+
+                    {/* --- ORNAMEN 4: Floating Card Kanan Atas (Entrance: Slide Left + Fade) --- */}
+                    <div className="absolute top-1/4 right-3 md:right-10 bg-amber-50/90 backdrop-blur-md p-3.5 rounded-2xl border border-amber-300/60 shadow-xl rotate-6 hidden sm:flex items-center gap-3 transition-transform duration-500 hover:scale-105 motion-safe:animate-slide-left">
+                        <div className="w-10 h-10 bg-gradient-to-br from-amber-300 to-amber-500 rounded-xl flex items-center justify-center text-amber-950 shadow-inner font-bold text-lg">
+                            🌱
+                        </div>
+                        <div className="text-left pr-1">
+                            <p className="text-[10px] uppercase tracking-wider text-amber-800 font-extrabold">Masa Depan</p>
+                            <p className="text-xs font-bold text-[#0F1E56]">Tumbuh Bersama</p>
+                        </div>
+                    </div>
+
+                    {/* --- ORNAMEN 5: Badge Islami / Al-Qur'an Kiri Tengah (NEW) --- */}
+                    <div className="absolute top-1/2 left-3 md:left-8 -translate-y-1/2 bg-white/70 backdrop-blur-md p-2.5 rounded-2xl border border-emerald-200 shadow-md -rotate-6 hidden lg:flex items-center gap-2.5 motion-safe:animate-slide-right">
+                        <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-700 text-sm">
+                            📖
+                        </div>
+                        <span className="text-xs font-bold text-[#0F1E56] pr-2">Generasi Rabbani</span>
+                    </div>
+
+                    {/* --- ORNAMEN 6: Elemen Daun & Wave Lengkung (Entrance: Slide Up) --- */}
+                    <div className="absolute bottom-10 left-4 md:left-12 flex items-center gap-3 -rotate-2 motion-safe:animate-slide-up">
+                        <div className="w-11 h-11 bg-emerald-500/15 backdrop-blur-md rounded-2xl border border-emerald-500/30 flex items-center justify-center text-emerald-800 shadow-md animate-bounce">
+                            🍃
+                        </div>
+                        <div className="hidden sm:block">
+                            <svg className="w-28 h-8 text-emerald-600/40" viewBox="0 0 100 30" fill="none">
+                                <path d="M0,15 C30,5 70,25 100,15" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    {/* --- ORNAMEN 7: Sparkles & Stars Kanan Bawah (Continuous Float) --- */}
+                    <div className="absolute -bottom-10 -right-10 w-60 h-60 bg-amber-300/30 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-16 right-8 md:right-20 text-amber-500 text-3xl animate-[bounce_3s_infinite] motion-safe:animate-zoom-in">
+                        ✦
+                    </div>
+                    <div className="absolute bottom-32 right-16 text-amber-400 text-lg animate-pulse">
+                        ✦
+                    </div>
+
+                    {/* --- ORNAMEN 8: Floating Glow Particles --- */}
+                    <div className="absolute top-1/3 left-1/4 w-3.5 h-3.5 bg-amber-400 rounded-full blur-[0.5px] shadow-[0_0_10px_#F59E0B] animate-ping"></div>
+                    <div className="absolute top-2/3 right-1/3 w-2.5 h-2.5 bg-amber-300 rounded-full blur-[0.5px] shadow-[0_0_8px_#FCD34D] animate-pulse"></div>
+                </div>
+                {/* ======================================================== */}
+
+                {/* 3. LAYER TENGAH: Konten Utama (Orang, Teks, Tombol) */}
+                <div className="relative z-20 container mx-auto px-6 py-20 flex flex-col items-center text-center">
+
+                    {/* Container untuk perataan konten tengah */}
+                    <div className="relative flex flex-col items-center max-w-4xl">
+
+                        {/* Area Blending Gambar Tengah & Meredam Kecerahan di Bawah Teks */}
+                        <div className="absolute -top-32 md:-top-40 inset-x-0 h-[400px] md:h-[500px] z-0 pointer-events-none transition-all duration-1000 ease-out">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,246,238,0)_0%,rgba(250,246,238,0.7)_50%,rgba(250,246,238,0)_100%)]"></div>
+
+                            {/* Gambar Utama dengan Animasi Entrance Fade & Zoom In */}
+                            <img
+                                src="/images/home/cahaya.png"
+                                alt="Cahaya Masa Depan"
+                                className="w-full h-full object-contain opacity-95 filter drop-shadow-[0_12px_15px_rgba(251,191,36,0.35)] animate-[zoom-in_1s_ease-out]"
+                            />
+                        </div>
+
+                        {/* Teks Kuote dengan Animasi Entrance Slide Up */}
+                        <h2
+                            className={`relative z-10 mt-28 md:mt-36 text-xl md:text-2xl lg:text-3xl font-medium ${primaryTextColor} leading-relaxed md:leading-snug tracking-wide transition-all duration-700 animate-[slide-up_0.8s_ease-out]`}
+                            style={textShadowStyle}
+                        >
+                            Setiap langkah hari ini adalah cahaya masa <br className="hidden md:inline" />
+                            depan yang sedang Allah siapkan.
+                        </h2>
+
+                        {/* Tombol CTA dengan Animasi Entrance Fade & Pop Up */}
+                        <button className="relative z-10 mt-12 md:mt-14 flex items-center gap-2.5 px-9 py-4 bg-amber-400 hover:bg-amber-500 text-[#0F1E56] font-semibold text-sm md:text-base rounded-full shadow-[0_8px_16px_rgba(15,30,86,0.15)] hover:shadow-[0_12px_20px_rgba(15,30,86,0.25)] transition-all duration-300 ease-out hover:-translate-y-1 active:scale-95 group focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 animate-[zoom-in_1s_ease-out]">
+                            Mari tumbuh bersama Attaufiq
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className={`w-4 h-4 md:w-5 md:h-5 ${primaryTextColor} group-hover:animate-bounce-short`}
+                            >
+                                <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            {/* 5. KEUNGGULAN ATQ SECTION */}
+            <section ref={containerRef} className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-20">
+      
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/30 blur-[100px] rounded-full pointer-events-none" />
+
+      <div className="relative z-30 text-center max-w-5xl px-6 mb-4 md:mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm"
+        >
+          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+          <p className="text-amber-700 font-bold tracking-wider text-xs md:text-sm uppercase">
+            KEUNGGULAN ATTAUFIQ
+          </p>
+        </motion.div>
+        
+        <h2 className="text-2xl md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight">
+          Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
+        </h2>
+      </div>
+
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-10 md:pt-14">
+        
+        <motion.div
+          animate={{ x: [0, 25, 0] }}
+          transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+          className="absolute top-12 left-[8%] opacity-40 pointer-events-none z-10"
+        >
+          <svg className="w-24 h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
+            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+          </svg>
+        </motion.div>
+
+        <motion.div
+          animate={{ x: [0, -20, 0] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+          className="absolute top-20 right-[10%] opacity-30 pointer-events-none z-10"
+        >
+          <svg className="w-28 h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
+            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+          </svg>
+        </motion.div>
+
+        <div className="absolute top-32 left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none">✦</div>
+        <div className="absolute top-16 right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none">✦</div>
+
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
+          <img
+            src="images/home/garisMatahari.png"
+            alt="Garis Lintasan Matahari"
+            className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
+          />
         </div>
 
-    </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`gedung-${currentItem.id}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className={`absolute bottom-0 h-[85vh] w-1/2 md:w-5/12 pointer-events-none z-0 ${
+              currentItem.position === "left"
+                ? "right-0"
+                : "left-0 transform -scale-x-100"
+            }`}
+          >
+            <img
+              src="images/home/gedung-right.png"
+              alt="Gedung Latar"
+              className="w-full h-full object-cover object-bottom opacity-25"
+            />
+          </motion.div>
+        </AnimatePresence>
 
-</section>
+        <motion.div
+          style={{ left: sunX, top: sunY }}
+          className="absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        >
+          <div className="relative flex items-center justify-center">
+            <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
+            <img
+              src="images/home/matahari.png"
+              alt="Matahari"
+              className="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
+            />
+          </div>
+        </motion.div>
+
+        <div className="relative z-10 w-full max-w-4xl px-6 md:px-8 h-full flex flex-col items-center justify-center pt-12 md:pt-16">
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentItem.id}
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -25 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className={`absolute inset-x-6 md:inset-x-8 flex items-center justify-center gap-6 md:gap-12 
+                ${currentItem.position === 'right' ? 'flex-row-reverse' : 'flex-row'}
+              `}
+            >
+              <div className="w-1/2 flex justify-center relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
+
+                {/* Perbaikan: Menurunkan posisi wadah gambar dan menguranginya ukurannya */}
+                <div className="relative w-full max-w-[240px] md:max-w-[260px] h-56 md:h-[300px] mt-8 rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-2xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-4">
+                  <span className="text-white/90 font-medium text-xs md:text-sm drop-shadow-md relative z-10">
+                    Foto — {currentItem.title}
+                  </span>
+                  <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
+                </div>
+              </div>
+
+              <div className={`w-1/2 flex flex-col items-start text-left 
+                ${currentItem.position === 'right' ? 'pt-24 md:pt-32 ml-10' : 'pt-0'}
+              `}>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl font-black text-amber-500/80 tracking-tight">
+                    0{currentItem.id}
+                  </span>
+                  <div className="h-[2px] w-8 bg-amber-400/60 rounded-full" />
+                </div>
+
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-3 shadow-md border border-amber-300/60">
+                  {currentItem.icon}
+                </div>
+                <h3 className="text-xl md:text-3xl font-bold text-indigo-950 mb-2 leading-tight">
+                  {currentItem.title}
+                </h3>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed max-w-md">
+                  {currentItem.desc}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="absolute bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
+            {dataKeunggulan.map((item, idx) => (
+              <div
+                key={item.id}
+                className={`transition-all duration-300 rounded-full ${
+                  activeIndex === idx
+                    ? "w-6 h-2 bg-amber-500"
+                    : "w-2 h-2 bg-amber-300/80"
+                }`}
+              />
+            ))}
+          </div>
+
+        </div>
+
+      </div>
+    </section>
         
+
+
+
+
 
         </AppLayout>
     );
