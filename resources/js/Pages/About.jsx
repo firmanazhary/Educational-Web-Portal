@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import { Head } from '@inertiajs/react';
-
+import HeroSection from '@/Layouts/HeroSection';
 // Custom Hook Animasi Scroll Reveal
 function useInView(options = { threshold: 0.15 }) {
     const ref = useRef(null);
@@ -28,11 +28,7 @@ function useInView(options = { threshold: 0.15 }) {
 }
 
 export default function About({
-    title = "Program Pendidikan",
-    subtitle = "Setiap jenjang, satu perjalanan. Bersama membangun generasi beradab.",
-    tagline = "SEKOLAH ISLAM ATTAUFIQ",
-    patternImage = "/images/hero/frame-left.png",
-    mosqueImage = "/images/hero/building-attaufiq.png"
+  
 }) {
     const [activeTab, setActiveTab] = useState('PG-TK');
     const [openFaq, setOpenFaq] = useState(0);
@@ -104,57 +100,12 @@ export default function About({
             {/* ==========================================
                 1. HERO SECTION (FADE IN SANTAI)
             ========================================== */}
-            <section ref={heroRef} className="relative w-full overflow-hidden bg-[#07327F] text-white min-h-[480px] md:min-h-[560px] flex items-center justify-center">
-                <div className="absolute top-0 right-0 w-full md:w-3/4 h-full z-0">
-                    <img
-                        src={mosqueImage}
-                        alt="Mosque Background"
-                        className="w-full h-full object-cover object-right md:object-center opacity-80"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#07327F] via-[#07327F]/80 to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#07327F] via-transparent to-[#07327F]/30"></div>
-                </div>
-
-                <div className="absolute top-0 left-0 h-full w-full md:w-7/12 z-10 pointer-events-none overflow-hidden">
-                    <img
-                        src={patternImage}
-                        alt="Islamic Arch Frame"
-                        className="h-full w-full object-cover object-left [mask-image:linear-gradient(to_right,black_70%,transparent_100%)]"
-                    />
-                </div>
-
-                <div className={`relative z-20 container mx-auto px-6 py-16 text-center flex flex-col items-center justify-center transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <div className="flex items-center space-x-2 mb-3">
-                        <span className="text-[#D4AF37] text-xs">◆</span>
-                        <p className="text-[#F3E5AB] font-bold text-xs md:text-sm tracking-[0.25em] uppercase drop-shadow">
-                            {tagline}
-                        </p>
-                        <span className="text-[#D4AF37] text-xs">◆</span>
-                    </div>
-
-                    <div className="text-[#D4AF37] text-lg md:text-xl my-1 animate-pulse">✦</div>
-
-                    <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal text-white tracking-tight leading-tight my-2 max-w-3xl drop-shadow-md">
-                        {title}
-                    </h1>
-
-                    <div className="text-[#D4AF37] text-lg md:text-xl my-1 animate-pulse">✦</div>
-
-                    <div className="w-16 h-[1px] bg-[#D4AF37]/50 my-3"></div>
-
-                    <p className="text-blue-100 text-sm md:text-base font-light max-w-lg leading-relaxed mt-1 drop-shadow">
-                        {subtitle}
-                    </p>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none translate-y-1">
-                    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block" preserveAspectRatio="none">
-                        <path d="M0 60 C 360 120, 1080 0, 1440 60 L 1440 120 L 0 120 Z" fill="#D4AF37" opacity="0.8" />
-                        <path d="M0 75 C 360 135, 1080 15, 1440 75 L 1440 120 L 0 120 Z" fill="#FAF8F5" />
-                    </svg>
-                </div>
-            </section>
-
+          <HeroSection 
+                         title="Program Pendidikan"
+                         subtitle="Mulai perjalanan pendidikan Islami terbaik untuk Ananda bersama SIT At-Taufiq Jambi."
+                         tagline="PENDAFTARAN ATTAUFIQ"
+                         mosqueImage="/images/hero/building-attaufiq.png"
+                     />
             {/* ==========================================
                 2. VISI & MISI SECTION (ANIMATED STAGGERED)
             ========================================== */}

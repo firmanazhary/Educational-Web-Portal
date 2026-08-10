@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import { Head, Link } from '@inertiajs/react';
+import HeroSection from '@/Layouts/HeroSection';
 import {
     Calendar,
-    Check,
     ChevronRight,
-    ChevronLeft,
     FileText,
     UploadCloud,
     Users,
@@ -17,7 +16,6 @@ import {
     HeartHandshake,
     PhoneCall,
     Plus,
-    Minus,
     HelpCircle,
     MessageCircle,
     GraduationCap,
@@ -25,7 +23,14 @@ import {
     Building2,
     FileCheck,
     Info,
-    ArrowRight
+    ArrowRight,
+    Sparkles,
+    Lightbulb,
+    Gift,
+    Shirt,
+    Award,
+    UserCheck,
+    FileCode
 } from 'lucide-react';
 
 /* ==========================================
@@ -59,17 +64,13 @@ export default function AdmissionIndex({
 }) {
     const [heroRef, heroInView] = useInView();
 
-    // STATE UNTUK ALUR PENDAFTARAN (STEPPER)
+    // STATE MANAGEMENT
     const [activeStep, setActiveStep] = useState(1);
-
-    // STATE UNTUK JENJANG PERSYARATAN
     const [activeLevel, setActiveLevel] = useState('SMP');
-
-    // STATE UNTUK ACCORDION FAQ
     const [openFaq, setOpenFaq] = useState(0);
 
     /* ==========================================
-       DATA DUMMY ADMISSION
+       DATA STRUCTURES
        ========================================== */
     const periods = [
         {
@@ -79,12 +80,12 @@ export default function AdmissionIndex({
             date: "1 Januari – 31 Maret 2026",
             desc: "Kesempatan istimewa untuk bergabung lebih awal dan mendapatkan berbagai keuntungan terbaik.",
             benefits: [
-                "Potongan biaya pendaftaran 25%",
-                "Free seragam sekolah",
-                "Prioritas kelas pilihan",
-                "Free konsultasi tumbuh kembang"
+                { text: "Potongan biaya pendaftaran 25%", icon: Gift },
+                { text: "Free seragam sekolah", icon: Shirt },
+                { text: "Prioritas kelas pilihan", icon: Award },
+                { text: "Free konsultasi tumbuh kembang", icon: UserCheck }
             ],
-            status: "open", // 'open' | 'upcoming' | 'closed'
+            status: "open",
             statusText: "SEDANG DIBUKA"
         },
         {
@@ -94,10 +95,10 @@ export default function AdmissionIndex({
             date: "1 April – 30 Juni 2026",
             desc: "Periode reguler dengan kuota terbatas. Pastikan Ananda tidak kehabisan kesempatan.",
             benefits: [
-                "Potongan biaya pendaftaran 15%",
-                "Free seragam sekolah",
-                "Prioritas kelas (sesuai kuota)",
-                "Free konsultasi tumbuh kembang"
+                { text: "Potongan biaya pendaftaran 15%", icon: Gift },
+                { text: "Free seragam sekolah", icon: Shirt },
+                { text: "Prioritas kelas (sesuai kuota)", icon: Award },
+                { text: "Free konsultasi tumbuh kembang", icon: UserCheck }
             ],
             status: "open",
             statusText: "SEDANG DIBUKA"
@@ -109,10 +110,10 @@ export default function AdmissionIndex({
             date: "1 Juli – 31 Agustus 2026",
             desc: "Periode terakhir dengan kuota sangat terbatas sebelum tahun ajaran baru dimulai.",
             benefits: [
-                "Potongan biaya pendaftaran 10%",
-                "Free seragam sekolah",
-                "Kelas menyesuaikan ketersediaan",
-                "Free konsultasi tumbuh kembang"
+                { text: "Potongan biaya pendaftaran 10%", icon: Gift },
+                { text: "Free seragam sekolah", icon: Shirt },
+                { text: "Kelas menyesuaikan ketersediaan", icon: Award },
+                { text: "Free konsultasi tumbuh kembang", icon: UserCheck }
             ],
             status: "upcoming",
             statusText: "AKAN DIBUKA"
@@ -198,6 +199,19 @@ export default function AdmissionIndex({
     ];
 
     const levelRequirements = {
+        'PG-TK': [
+            { label: "Fotokopi Akta Kelahiran", sub: "1 lembar" },
+            { label: "Fotokopi Kartu Keluarga (KK)", sub: "1 lembar" },
+            { label: "Fotokopi KTP Orang Tua", sub: "Ayah & Ibu masing-masing 1 lembar" },
+            { label: "Pas Foto Terbaru", sub: "Berwarna ukuran 3x4 (2 lembar)" },
+        ],
+        'SD': [
+            { label: "Fotokopi Akta Kelahiran", sub: "1 lembar" },
+            { label: "Fotokopi Kartu Keluarga (KK)", sub: "1 lembar" },
+            { label: "Fotokopi KTP Orang Tua", sub: "Ayah & Ibu masing-masing 1 lembar" },
+            { label: "Pas Foto Terbaru", sub: "Berwarna ukuran 3x4 (2 lembar)" },
+            { label: "Ijazah TK / Surat Keterangan TK", sub: "1 lembar (jika ada)" }
+        ],
         'SMP': [
             { label: "Fotokopi Akta Kelahiran", sub: "1 lembar" },
             { label: "Fotokopi Kartu Keluarga (KK)", sub: "1 lembar" },
@@ -206,7 +220,21 @@ export default function AdmissionIndex({
             { label: "Fotokopi Rapor Semester Terakhir", sub: "Kelas 5 SD (legalisir)" },
             { label: "Surat Keterangan Lulus", sub: "Asli dari sekolah asal" },
             { label: "Surat Keterangan Sehat", sub: "Dari dokter/klinik" },
-            { label: "Surat Keterangan Bebas Narkoba", sub: "Jika diperlukan" },
+            { label: "Surat Keterangan Bebas Narkoba", sub: "Jika diperlukan" }
+        ],
+        'SMA': [
+            { label: "Fotokopi Akta Kelahiran", sub: "1 lembar" },
+            { label: "Fotokopi Kartu Keluarga (KK)", sub: "1 lembar" },
+            { label: "Fotokopi KTP Orang Tua", sub: "Ayah & Ibu masing-masing 1 lembar" },
+            { label: "Pas Foto Terbaru", sub: "Berwarna ukuran 3x4 (2 lembar)" },
+            { label: "Fotokopi Rapor Semester Terakhir", sub: "Kelas 8 SMP (legalisir)" },
+            { label: "Surat Keterangan Lulus SMP", sub: "Asli dari sekolah asal" }
+        ],
+        'PKBM': [
+            { label: "Fotokopi Akta Kelahiran", sub: "1 lembar" },
+            { label: "Fotokopi Kartu Keluarga (KK)", sub: "1 lembar" },
+            { label: "Fotokopi KTP / KTP Orang Tua", sub: "1 lembar" },
+            { label: "Ijazah Terakhir", sub: "Legalisir (2 lembar)" }
         ]
     };
 
@@ -242,163 +270,137 @@ export default function AdmissionIndex({
             <Head title="Admission & Pendaftaran PMB | SIT At-Taufiq Jambi" />
 
             {/* ==========================================
-                1. HERO SECTION (PERSIS DENGAN HERO EVENT)
+                1. HERO SECTION (SESUAI HERO BANNER PRESISI)
             ========================================== */}
-            <section ref={heroRef} className="relative w-full overflow-hidden bg-[#07327F] text-white min-h-[480px] md:min-h-[560px] flex items-center justify-center">
-                <div className="absolute top-0 right-0 w-full md:w-3/4 h-full z-0">
-                    <img
-                        src={mosqueImage}
-                        alt="Mosque Background"
-                        className="w-full h-full object-cover object-right md:object-center opacity-80"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#07327F] via-[#07327F]/80 to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#07327F] via-transparent to-[#07327F]/30"></div>
-                </div>
-
-                <div className="absolute top-0 left-0 h-full w-full md:w-7/12 z-10 pointer-events-none overflow-hidden">
-                    <img
-                        src={patternImage}
-                        alt="Islamic Arch Frame"
-                        className="h-full w-full object-cover object-left [mask-image:linear-gradient(to_right,black_70%,transparent_100%)]"
-                    />
-                </div>
-
-                <div className={`relative z-20 container mx-auto px-6 py-16 text-center flex flex-col items-center justify-center transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <div className="flex items-center space-x-2 mb-3">
-                        <span className="text-[#D4AF37] text-xs">◆</span>
-                        <p className="text-[#F3E5AB] font-bold text-xs md:text-sm tracking-[0.25em] uppercase drop-shadow">
-                            {tagline}
-                        </p>
-                        <span className="text-[#D4AF37] text-xs">◆</span>
-                    </div>
-
-                    <div className="text-[#D4AF37] text-lg md:text-xl my-1 animate-pulse">✦</div>
-
-                    <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal text-white tracking-tight leading-tight my-2 max-w-3xl drop-shadow-md">
-                        {title}
-                    </h1>
-
-                    <div className="text-[#D4AF37] text-lg md:text-xl my-1 animate-pulse">✦</div>
-
-                    <div className="w-16 h-[1px] bg-[#D4AF37]/50 my-3"></div>
-
-                    <p className="text-blue-100 text-sm md:text-base font-light max-w-lg leading-relaxed mt-1 drop-shadow">
-                        {subtitle}
-                    </p>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none translate-y-1">
-                    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block" preserveAspectRatio="none">
-                        <path d="M0 60 C 360 120, 1080 0, 1440 60 L 1440 120 L 0 120 Z" fill="#D4AF37" opacity="0.8" />
-                        <path d="M0 75 C 360 135, 1080 15, 1440 75 L 1440 120 L 0 120 Z" fill="#FAF4EB" />
-                    </svg>
-                </div>
-            </section>
+            <HeroSection 
+                title="Penerimaan Murid Baru"
+                subtitle="Mulai perjalanan pendidikan Islami terbaik untuk Ananda bersama SIT At-Taufiq Jambi."
+                tagline="PENDAFTARAN ATTAUFIQ"
+                mosqueImage="/images/hero/building-attaufiq.png"
+            />
 
 
-            {/* CANVAS UTAMA */}
-            <div className="bg-[#FAF4EB] min-h-screen py-16 px-4 sm:px-6 lg:px-8 text-[#051736] relative overflow-hidden space-y-24">
+            {/* CANVAS UTAMA - Warm Sand Background */}
+            <div className="bg-[#FAF4EB] min-h-screen py-16 px-4 sm:px-6 lg:px-8 text-[#051736] relative overflow-hidden space-y-28">
                 
-                {/* Background Pattern Ornament */}
+                {/* Background Pattern Ornament Dots */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
                 {/* ==========================================
                     2. PERIODE PENDAFTARAN (GELOMBANG CARD)
                 ========================================== */}
-                <section className="max-w-7xl mx-auto space-y-10 relative z-10">
+                <section className="max-w-7xl mx-auto space-y-12 relative z-10">
                     <div className="text-center space-y-2 max-w-2xl mx-auto">
                         <div className="flex items-center justify-center space-x-2 text-[#D4AF37] text-xs uppercase font-extrabold tracking-[0.2em]">
                             <span>◆</span>
-                            <span>Periode Pendaftaran</span>
+                            <span>PERIODE PENDAFTARAN</span>
                             <span>◆</span>
                         </div>
                         <h2 className="font-serif text-3xl md:text-5xl font-normal text-[#051736]">
                             Pilih Periode Pendaftaran
                         </h2>
-                        <p className="text-slate-600 text-xs md:text-sm font-light">
+                        <p className="text-slate-600 text-xs md:text-sm font-light leading-relaxed">
                             Setiap langkah besar dimulai dari keputusan hari ini.<br className="hidden sm:inline" />
                             Pilih periode terbaik untuk memulai perjalanan Ananda di Attaufiq.
                         </p>
                     </div>
 
-                    {/* Podium & Stand Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-6">
-                        {periods.map((item) => (
-                            <div key={item.id} className="relative group flex flex-col justify-between bg-[#FAF8F3] border border-[#E8DFC8] rounded-[36px] p-6 shadow-lg hover:shadow-2xl transition duration-500">
-                                
-                                {/* Binding Ring Ring Top Decorative */}
-                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-                                    {[...Array(6)].map((_, i) => (
-                                        <div key={i} className="w-2.5 h-5 rounded-full bg-gradient-to-b from-[#D4AF37] to-[#8B6B13] border border-amber-200 shadow-sm"></div>
-                                    ))}
-                                </div>
-
-                                <div className="pt-4 space-y-5 text-center flex-1">
-                                    {/* Wave Title */}
-                                    <div className="space-y-1">
-                                        <span className="text-[10px] font-extrabold tracking-widest text-[#8B6B13] uppercase">
-                                            {item.wave}
-                                        </span>
-                                        <h3 className="font-serif text-2xl font-bold text-[#051736]">
-                                            {item.title}
-                                        </h3>
-                                    </div>
-
-                                    {/* Date Badge */}
-                                    <div className="inline-flex items-center space-x-2 bg-[#F3EBDD] border border-[#E8DFC8] px-4 py-1.5 rounded-full text-xs text-[#051736] font-medium">
-                                        <Calendar size={13} className="text-[#8B6B13]" />
-                                        <span>{item.date}</span>
-                                    </div>
-
-                                    <p className="text-xs text-slate-500 font-light leading-relaxed px-2">
-                                        {item.desc}
-                                    </p>
-
-                                    {/* Benefits List */}
-                                    <div className="pt-4 border-t border-[#E8DFC8]/60 text-left space-y-2.5 text-xs text-slate-700">
-                                        {item.benefits.map((b, idx) => (
-                                            <div key={idx} className="flex items-start space-x-2.5">
-                                                <span className="text-[#8B6B13] pt-0.5">✦</span>
-                                                <span className="font-light">{b}</span>
-                                            </div>
+                    {/* Podium Stand Cards Grid */}
+                    <div className="relative pt-6 pb-4">
+                        {/* 3D Stand Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch relative z-10">
+                            {periods.map((item) => (
+                                <div key={item.id} className="relative group flex flex-col justify-between bg-[#FAF8F3] border border-[#E8DFC8] rounded-[36px] p-6 md:p-8 shadow-xl hover:shadow-2xl transition duration-500">
+                                    
+                                    {/* Golden Binding Rings (Top Decor) */}
+                                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 flex space-x-2.5 z-20">
+                                        {[...Array(7)].map((_, i) => (
+                                            <div key={i} className="w-2.5 h-6 rounded-full bg-gradient-to-b from-[#F3E5AB] via-[#D4AF37] to-[#8B6B13] border border-amber-200 shadow-md"></div>
                                         ))}
                                     </div>
-                                </div>
 
-                                {/* Status & Action Button */}
-                                <div className="pt-6 space-y-3">
-                                    <div className="flex justify-center">
-                                        <span className={`inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-bold ${
-                                            item.status === 'open' 
-                                                ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' 
-                                                : 'bg-slate-200 text-slate-600 border border-slate-300'
-                                        }`}>
-                                            <span className={`w-1.5 h-1.5 rounded-full ${item.status === 'open' ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'}`}></span>
-                                            <span>{item.statusText}</span>
-                                        </span>
+                                    <div className="pt-5 space-y-6 text-center flex-1">
+                                        {/* Sun Star Decor & Title */}
+                                        <div className="space-y-1">
+                                            <div className="text-[#D4AF37] text-xs">☀️</div>
+                                            <span className="text-[10px] font-black tracking-[0.2em] text-[#8B6B13] uppercase">
+                                                {item.wave}
+                                            </span>
+                                            <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#051736]">
+                                                {item.title}
+                                            </h3>
+                                        </div>
+
+                                        {/* Date Badge */}
+                                        <div className="inline-flex items-center space-x-2 bg-[#F3EBDD] border border-[#E8DFC8] px-4 py-1.5 rounded-full text-xs text-[#051736] font-medium shadow-sm">
+                                            <Calendar size={13} className="text-[#8B6B13]" />
+                                            <span>{item.date}</span>
+                                        </div>
+
+                                        <p className="text-xs text-slate-500 font-light leading-relaxed px-2">
+                                            {item.desc}
+                                        </p>
+
+                                        {/* Benefits List */}
+                                        <div className="pt-5 border-t border-[#E8DFC8]/70 text-left space-y-3 text-xs text-slate-700">
+                                            {item.benefits.map((b, idx) => {
+                                                const IconComp = b.icon || CheckCircle;
+                                                return (
+                                                    <div key={idx} className="flex items-center space-x-3">
+                                                        <div className="p-1.5 rounded-lg bg-[#F3EBDD] text-[#8B6B13] flex-shrink-0">
+                                                            <IconComp size={14} />
+                                                        </div>
+                                                        <span className="font-light">{b.text}</span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
 
-                                    {item.status === 'open' ? (
-                                        <Link
-                                            href="#alur-pendaftaran"
-                                            className="w-full flex items-center justify-center space-x-2 bg-[#051736] hover:bg-[#07327F] text-white py-3 rounded-full text-xs font-bold transition shadow-md group-hover:scale-[1.02]"
-                                        >
-                                            <span>Daftar Sekarang</span>
-                                            <ChevronRight size={14} />
-                                        </Link>
-                                    ) : (
-                                        <button
-                                            disabled
-                                            className="w-full flex items-center justify-center space-x-2 bg-[#E8DFC8] text-slate-600 py-3 rounded-full text-xs font-bold cursor-not-allowed"
-                                        >
-                                            <span>Nantikan Informasi</span>
-                                            <ChevronRight size={14} />
-                                        </button>
-                                    )}
-                                </div>
+                                    {/* Action & Status */}
+                                    <div className="pt-8 space-y-3">
+                                        <div className="flex justify-center">
+                                            <span className={`inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wide ${
+                                                item.status === 'open' 
+                                                    ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' 
+                                                    : 'bg-slate-200 text-slate-600 border border-slate-300'
+                                            }`}>
+                                                <span className={`w-2 h-2 rounded-full ${item.status === 'open' ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'}`}></span>
+                                                <span>{item.statusText}</span>
+                                            </span>
+                                        </div>
 
-                            </div>
-                        ))}
+                                        {item.status === 'open' ? (
+                                            <Link
+                                                href="#alur-pendaftaran"
+                                                className="w-full flex items-center justify-center space-x-2 bg-[#051736] hover:bg-[#07327F] text-white py-3.5 rounded-full text-xs font-bold transition shadow-md group-hover:scale-[1.02]"
+                                            >
+                                                <span>Daftar Sekarang</span>
+                                                <ChevronRight size={14} />
+                                            </Link>
+                                        ) : (
+                                            <button
+                                                disabled
+                                                className="w-full flex items-center justify-center space-x-2 bg-[#E8DFC8] text-slate-600 py-3.5 rounded-full text-xs font-bold cursor-not-allowed"
+                                            >
+                                                <span>Nantikan Informasi</span>
+                                                <ChevronRight size={14} />
+                                            </button>
+                                        )}
+                                    </div>
+
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* White Marble Podium Bottom Bar Decor */}
+                        <div className="mt-8 rounded-3xl bg-gradient-to-r from-[#FAF8F3] via-white to-[#FAF8F3] border border-[#E8DFC8] p-4 shadow-md text-center flex justify-center items-center">
+                            <span className="text-[#D4AF37] text-xs mr-2">☀️</span>
+                            <span className="text-[11px] font-bold text-[#8B6B13] tracking-widest uppercase">
+                                Pilihan Terbaik Untuk Masa Depan Ananda
+                            </span>
+                            <span className="text-[#D4AF37] text-xs ml-2">☀️</span>
+                        </div>
                     </div>
 
                     {/* Bottom Info Banner */}
@@ -429,7 +431,7 @@ export default function AdmissionIndex({
                 {/* ==========================================
                     3. ALUR PENDAFTARAN (ROYAL BLUE CONTAINER)
                 ========================================== */}
-                <section id="alur-pendaftaran" className="max-w-7xl mx-auto rounded-[36px] bg-[#051736] text-white p-8 md:p-14 relative overflow-hidden space-y-10 shadow-2xl">
+                <section id="alur-pendaftaran" className="max-w-7xl mx-auto rounded-[36px] bg-[#051736] text-white p-8 md:p-14 relative overflow-hidden space-y-12 shadow-2xl">
                     
                     {/* Pattern Overlay */}
                     <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:20px_20px]"></div>
@@ -437,7 +439,7 @@ export default function AdmissionIndex({
                     <div className="text-center space-y-2 max-w-2xl mx-auto relative z-10">
                         <div className="flex items-center justify-center space-x-2 text-[#D4AF37] text-xs uppercase font-extrabold tracking-[0.2em]">
                             <span>◆</span>
-                            <span>Alur Pendaftaran</span>
+                            <span>ALUR PENDAFTARAN</span>
                             <span>◆</span>
                         </div>
                         <h2 className="font-serif text-3xl md:text-5xl font-normal text-white">
@@ -448,10 +450,10 @@ export default function AdmissionIndex({
                         </p>
                     </div>
 
-                    {/* Stepper Node Indicators */}
+                    {/* Stepper Interactive Nodes */}
                     <div className="relative z-10 flex items-center justify-between max-w-3xl mx-auto py-4">
-                        {/* Connecting Line */}
-                        <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-[#D4AF37]/30 -translate-y-1/2 z-0"></div>
+                        {/* Horizontal Connecting Glow Line */}
+                        <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37] to-[#D4AF37]/20 -translate-y-1/2 z-0"></div>
 
                         {steps.map((s) => {
                             const IconComp = s.icon;
@@ -462,14 +464,19 @@ export default function AdmissionIndex({
                                     onClick={() => setActiveStep(s.id)}
                                     className="relative z-10 flex flex-col items-center group focus:outline-none"
                                 >
-                                    <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                                    <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-300 relative ${
                                         isActive 
-                                            ? 'bg-gradient-to-b from-[#F3E5AB] to-[#D4AF37] text-[#051736] ring-4 ring-[#D4AF37]/30 scale-110 shadow-lg' 
+                                            ? 'bg-gradient-to-b from-[#F3E5AB] to-[#D4AF37] text-[#051736] ring-4 ring-[#D4AF37]/40 scale-110 shadow-lg' 
                                             : 'bg-[#07327F] text-blue-200 border border-[#D4AF37]/40 hover:border-[#D4AF37]'
                                     }`}>
-                                        <IconComp size={20} />
+                                        <span className={`absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center ${
+                                            isActive ? 'bg-[#051736] text-[#D4AF37]' : 'bg-[#D4AF37] text-[#051736]'
+                                        }`}>
+                                            {s.id}
+                                        </span>
+                                        <IconComp size={22} />
                                     </div>
-                                    <span className={`text-[11px] font-bold mt-2 transition ${isActive ? 'text-[#F3E5AB]' : 'text-blue-200/60'}`}>
+                                    <span className={`text-[11px] font-bold mt-2.5 transition ${isActive ? 'text-[#F3E5AB]' : 'text-blue-200/60'}`}>
                                         {s.title}
                                     </span>
                                 </button>
@@ -481,52 +488,75 @@ export default function AdmissionIndex({
                     {(() => {
                         const current = steps.find(s => s.id === activeStep) || steps[0];
                         return (
-                            <div className="bg-[#FAF8F3] text-[#051736] rounded-[28px] p-6 md:p-8 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center shadow-lg">
+                            <div className="bg-[#FAF8F3] text-[#051736] rounded-[28px] p-6 md:p-10 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center shadow-2xl">
                                 
-                                {/* Step Tag */}
-                                <div className="absolute top-0 left-6 bg-[#D4AF37] text-[#051736] text-[10px] font-black uppercase px-4 py-1.5 rounded-b-xl tracking-wider">
-                                    Langkah 0{current.id}
+                                {/* Step Badge */}
+                                <div className="absolute top-0 left-8 bg-[#D4AF37] text-[#051736] text-[10px] font-black uppercase px-5 py-1.5 rounded-b-xl tracking-wider shadow-sm">
+                                    LANGKAH 0{current.id}
                                 </div>
 
-                                {/* Illustration Area */}
+                                {/* Illustration Area (3D Clipboard Placeholder / Fallback Icon) */}
                                 <div className="md:col-span-4 flex justify-center pt-6 md:pt-0">
-                                    <div className="w-40 h-40 md:w-48 md:h-48 rounded-2xl bg-[#F3EBDD] border border-[#E8DFC8] flex items-center justify-center text-[#8B6B13] shadow-inner">
-                                        <current.icon size={64} strokeWidth={1.5} />
+                                    <div className="w-44 h-44 md:w-52 md:h-52 rounded-3xl bg-gradient-to-b from-[#FAF8F3] to-[#F3EBDD] border border-[#E8DFC8] flex flex-col items-center justify-center text-[#8B6B13] shadow-inner relative overflow-hidden group">
+                                        {/* Tempat Gambar Ilustrasi 3D: /images/admission/clipboard-3d.png */}
+                                        <img 
+                                            src="/images/admission/clipboard-3d.png" 
+                                            alt="Ilustrasi Langkah" 
+                                            className="w-36 h-36 object-contain group-hover:scale-110 transition duration-500"
+                                            onError={(e) => {
+                                                // Fallback ke Lucide Icon jika foto belum diunggah
+                                                e.target.style.display = 'none';
+                                                e.target.nextSibling.style.display = 'flex';
+                                            }}
+                                        />
+                                        <div className="hidden flex-col items-center justify-center space-y-2">
+                                            <current.icon size={64} strokeWidth={1.5} className="text-[#8B6B13]" />
+                                            <span className="text-[10px] text-slate-400 font-mono">/images/admission/clipboard-3d.png</span>
+                                        </div>
                                     </div>
                                 </div>
 
                                 {/* Content Details */}
-                                <div className="md:col-span-8 space-y-4 pt-2">
-                                    <h3 className="font-serif text-2xl font-bold text-[#051736]">
+                                <div className="md:col-span-8 space-y-5 pt-2">
+                                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#051736]">
                                         {current.detailTitle}
                                     </h3>
-                                    <p className="text-xs text-slate-600 font-light leading-relaxed">
+                                    <p className="text-xs md:text-sm text-slate-600 font-light leading-relaxed">
                                         {current.detailDesc}
                                     </p>
 
                                     {/* Checklist Prep */}
-                                    <div className="bg-[#F3EBDD]/60 border border-[#E8DFC8] rounded-xl p-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                                        {current.prepList.map((item, i) => (
-                                            <div key={i} className="flex items-center space-x-2">
-                                                <CheckCircle size={14} className="text-[#8B6B13] flex-shrink-0" />
-                                                <span className="font-light text-slate-700">{item}</span>
-                                            </div>
-                                        ))}
+                                    <div className="bg-[#F3EBDD]/60 border border-[#E8DFC8] rounded-2xl p-5 space-y-3">
+                                        <p className="text-xs font-bold text-[#051736] flex items-center space-x-1.5">
+                                            <FileCode size={14} className="text-[#8B6B13]" />
+                                            <span>Yang Perlu Disiapkan:</span>
+                                        </p>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                                            {current.prepList.map((item, i) => (
+                                                <div key={i} className="flex items-center space-x-2">
+                                                    <CheckCircle size={14} className="text-[#8B6B13] flex-shrink-0" />
+                                                    <span className="font-light text-slate-700">{item}</span>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
 
-                                    {/* Action & Note */}
+                                    {/* Note & CTA */}
                                     <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                                        <div className="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-900 flex items-center space-x-2 max-w-sm">
-                                            <Info size={16} className="text-blue-600 flex-shrink-0" />
-                                            <span className="font-light">{current.note}</span>
+                                        <div className="p-3.5 bg-blue-50/80 border border-blue-100 rounded-xl text-xs text-blue-900 flex items-center space-x-3 max-w-md">
+                                            <Lightbulb size={18} className="text-amber-500 flex-shrink-0" />
+                                            <div>
+                                                <p className="font-bold text-[11px]">Catatan:</p>
+                                                <p className="font-light text-[11px]">{current.note}</p>
+                                            </div>
                                         </div>
 
                                         <Link
                                             href="#"
-                                            className="inline-flex items-center space-x-2 bg-[#051736] hover:bg-[#07327F] text-white px-6 py-3 rounded-xl text-xs font-bold transition shadow-md flex-shrink-0"
+                                            className="inline-flex items-center space-x-2 bg-[#051736] hover:bg-[#07327F] text-white px-6 py-3.5 rounded-xl text-xs font-bold transition shadow-md flex-shrink-0"
                                         >
-                                            <span>Mulai Langkah Ini</span>
-                                            <ArrowRight size={14} />
+                                            <span>Isi Formulir Sekarang</span>
+                                            <ChevronRight size={14} />
                                         </Link>
                                     </div>
                                 </div>
@@ -573,11 +603,11 @@ export default function AdmissionIndex({
                 {/* ==========================================
                     4. PERSYARATAN PENDAFTARAN (JENJANG TAB)
                 ========================================== */}
-                <section className="max-w-7xl mx-auto space-y-10 relative z-10">
+                <section className="max-w-7xl mx-auto space-y-12 relative z-10">
                     <div className="text-center space-y-2 max-w-2xl mx-auto">
                         <div className="flex items-center justify-center space-x-2 text-[#D4AF37] text-xs uppercase font-extrabold tracking-[0.2em]">
                             <span>◆</span>
-                            <span>Persyaratan Pendaftaran</span>
+                            <span>PERSYARATAN PENDAFTARAN</span>
                             <span>◆</span>
                         </div>
                         <h2 className="font-serif text-3xl md:text-5xl font-normal text-[#051736]">
@@ -589,7 +619,7 @@ export default function AdmissionIndex({
                         </p>
                     </div>
 
-                    {/* Level Selector Tabs */}
+                    {/* Arch Level Selector Tabs */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                         {levels.map((lvl) => {
                             const isSel = activeLevel === lvl.id;
@@ -597,14 +627,14 @@ export default function AdmissionIndex({
                                 <button
                                     key={lvl.id}
                                     onClick={() => setActiveLevel(lvl.id)}
-                                    className={`p-5 rounded-[28px] border text-center flex flex-col items-center justify-between space-y-3 transition duration-300 ${
+                                    className={`p-6 rounded-t-[50px] rounded-b-2xl border text-center flex flex-col items-center justify-between space-y-3 transition duration-300 relative overflow-hidden ${
                                         isSel 
                                             ? 'bg-[#051736] text-white border-[#D4AF37] shadow-xl ring-2 ring-[#D4AF37]/50 -translate-y-1' 
                                             : 'bg-[#FAF8F3] text-[#051736] border-[#E8DFC8] hover:border-[#D4AF37]'
                                     }`}
                                 >
-                                    <div className={`p-3 rounded-full ${isSel ? 'bg-[#07327F] text-[#D4AF37]' : 'bg-[#F3EBDD] text-[#8B6B13]'}`}>
-                                        <lvl.icon size={24} />
+                                    <div className={`p-3.5 rounded-full ${isSel ? 'bg-[#07327F] text-[#D4AF37]' : 'bg-[#F3EBDD] text-[#8B6B13]'}`}>
+                                        <lvl.icon size={22} />
                                     </div>
                                     <div>
                                         <h3 className="font-serif text-xl font-bold">{lvl.title}</h3>
@@ -619,38 +649,42 @@ export default function AdmissionIndex({
                         })}
                     </div>
 
-                    {/* Requirement Display Panel */}
+                    {/* Requirement Panel Container */}
                     <div className="bg-[#FAF8F3] border border-[#E8DFC8] rounded-[32px] p-6 md:p-10 shadow-lg space-y-8">
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#E8DFC8] pb-6 gap-4">
-                            <div>
-                                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#8B6B13]">PERSYARATAN BERKAS</span>
-                                <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#051736]">
-                                    Persyaratan Pendaftaran {activeLevel}
-                                </h3>
+                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-[#E8DFC8] pb-6 gap-6">
+                            
+                            {/* Left Badge Info */}
+                            <div className="flex items-center space-x-4">
+                                <div className="w-20 h-24 rounded-t-[30px] bg-[#051736] text-[#D4AF37] flex flex-col items-center justify-center p-2 text-center shadow-md flex-shrink-0">
+                                    <Building2 size={24} />
+                                    <span className="font-bold text-xs mt-1">{activeLevel}</span>
+                                </div>
+                                <div className="space-y-1">
+                                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#051736]">
+                                        Persyaratan Pendaftaran {activeLevel}
+                                    </h3>
+                                    <p className="text-xs text-slate-500 italic">"Membina generasi berilmu, berakhlak, dan berprestasi untuk masa depan yang gemilang."</p>
+                                </div>
                             </div>
-                            <div className="flex gap-3">
-                                <Link
-                                    href="#"
-                                    className="bg-[#051736] hover:bg-[#07327F] text-white px-5 py-2.5 rounded-full text-xs font-bold transition shadow-md"
-                                >
-                                    Register Now
-                                </Link>
-                                <a
-                                    href="https://wa.me/628123456789"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="border border-[#051736] text-[#051736] hover:bg-[#051736] hover:text-white px-5 py-2.5 rounded-full text-xs font-bold transition"
-                                >
-                                    Chat Admin
-                                </a>
+
+                            {/* Right Catatan Important Card */}
+                            <div className="bg-[#F3EBDD]/60 border border-[#E8DFC8] p-4 rounded-2xl max-w-sm text-xs space-y-2">
+                                <p className="font-bold text-[#051736] flex items-center space-x-1">
+                                    <Sparkles size={14} className="text-[#8B6B13]" />
+                                    <span>Catatan Penting</span>
+                                </p>
+                                <ul className="text-[11px] text-slate-600 space-y-1 font-light">
+                                    <li>• Semua berkas wajib dalam format PDF/JPG (max 2MB per file).</li>
+                                    <li>• Berkas asli wajib dibawa saat verifikasi langsung di sekolah.</li>
+                                </ul>
                             </div>
                         </div>
 
                         {/* List Grid Requirements */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {(levelRequirements[activeLevel] || levelRequirements['SMP']).map((req, idx) => (
-                                <div key={idx} className="p-4 rounded-2xl bg-white border border-[#E8DFC8] flex items-start space-x-3 shadow-sm">
-                                    <div className="p-2 bg-[#F3EBDD] text-[#8B6B13] rounded-lg mt-0.5">
+                                <div key={idx} className="p-4 rounded-2xl bg-white border border-[#E8DFC8] flex items-start space-x-3.5 shadow-sm">
+                                    <div className="p-2.5 bg-[#F3EBDD] text-[#8B6B13] rounded-xl mt-0.5">
                                         <FileText size={16} />
                                     </div>
                                     <div>
@@ -661,13 +695,24 @@ export default function AdmissionIndex({
                             ))}
                         </div>
 
-                        {/* Important Note Box */}
-                        <div className="p-5 rounded-2xl bg-[#F3EBDD]/60 border border-[#D4AF37]/40 flex items-start space-x-3 text-xs text-slate-700">
-                            <Info size={18} className="text-[#8B6B13] flex-shrink-0 mt-0.5" />
-                            <div className="space-y-1">
-                                <p className="font-bold text-[#051736]">Catatan Penting:</p>
-                                <p className="font-light">Semua berkas diunggah dalam format PDF atau JPG dengan ukuran maksimal 2MB per file. Berkas fisik wajib dibawa saat verifikasi langsung di sekolah.</p>
-                            </div>
+                        {/* Bottom Action Bar */}
+                        <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+                            <Link
+                                href="#alur-pendaftaran"
+                                className="bg-[#051736] hover:bg-[#07327F] text-white px-8 py-3.5 rounded-full text-xs font-bold transition shadow-md flex items-center space-x-2"
+                            >
+                                <span>Register Now</span>
+                                <ChevronRight size={14} />
+                            </Link>
+                            <a
+                                href="https://wa.me/628123456789"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="border border-[#051736] text-[#051736] hover:bg-[#051736] hover:text-white px-8 py-3.5 rounded-full text-xs font-bold transition flex items-center space-x-2"
+                            >
+                                <PhoneCall size={14} />
+                                <span>Chat Admin</span>
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -676,7 +721,7 @@ export default function AdmissionIndex({
                 {/* ==========================================
                     5. FAQ ACCORDION SECTION
                 ========================================== */}
-                <section className="max-w-7xl mx-auto space-y-10 relative z-10">
+                <section className="max-w-7xl mx-auto space-y-12 relative z-10">
                     <div className="text-center space-y-2 max-w-2xl mx-auto">
                         <div className="flex items-center justify-center space-x-2 text-[#D4AF37] text-xs uppercase font-extrabold tracking-[0.2em]">
                             <span>◆</span>
@@ -696,7 +741,7 @@ export default function AdmissionIndex({
                         
                         {/* Side Help Card */}
                         <div className="lg:col-span-4 bg-[#FAF8F3] border border-[#E8DFC8] rounded-[32px] p-6 text-center space-y-6 shadow-md">
-                            <div className="w-16 h-16 rounded-full bg-[#F3EBDD] text-[#8B6B13] border border-[#E8DFC8] flex items-center justify-center mx-auto">
+                            <div className="w-16 h-16 rounded-full bg-[#F3EBDD] text-[#8B6B13] border border-[#E8DFC8] flex items-center justify-center mx-auto shadow-inner">
                                 <HelpCircle size={32} />
                             </div>
                             <div className="space-y-2">
@@ -711,7 +756,7 @@ export default function AdmissionIndex({
                                 href="https://wa.me/628123456789"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="w-full inline-flex items-center justify-center space-x-2 bg-[#051736] hover:bg-[#07327F] text-white py-3 rounded-full text-xs font-bold transition shadow-md"
+                                className="w-full inline-flex items-center justify-center space-x-2 bg-[#051736] hover:bg-[#07327F] text-white py-3.5 rounded-full text-xs font-bold transition shadow-md"
                             >
                                 <MessageCircle size={16} />
                                 <span>Hubungi Tim Kami</span>
@@ -734,7 +779,7 @@ export default function AdmissionIndex({
                                             <span className="font-bold text-xs md:text-sm text-[#051736]">
                                                 {faq.q}
                                             </span>
-                                            <div className={`p-1 rounded-full transition-transform duration-300 ${isOpen ? 'bg-[#051736] text-white rotate-180' : 'bg-[#F3EBDD] text-[#8B6B13]'}`}>
+                                            <div className={`p-1.5 rounded-full transition-transform duration-300 ${isOpen ? 'bg-[#051736] text-white rotate-180' : 'bg-[#F3EBDD] text-[#8B6B13]'}`}>
                                                 <Plus size={14} />
                                             </div>
                                         </button>
@@ -768,13 +813,13 @@ export default function AdmissionIndex({
                                 href="https://wa.me/628123456789"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="flex-1 sm:flex-none border border-[#051736] text-[#051736] hover:bg-[#051736] hover:text-white px-5 py-2.5 rounded-xl text-xs font-bold transition text-center"
+                                className="flex-1 sm:flex-none border border-[#051736] text-[#051736] hover:bg-[#051736] hover:text-white px-6 py-3 rounded-xl text-xs font-bold transition text-center"
                             >
                                 Chat Admin
                             </a>
                             <a
                                 href="tel:0821xxxx"
-                                className="flex-1 sm:flex-none bg-[#051736] hover:bg-[#07327F] text-white px-5 py-2.5 rounded-xl text-xs font-bold transition text-center"
+                                className="flex-1 sm:flex-none bg-[#051736] hover:bg-[#07327F] text-white px-6 py-3 rounded-xl text-xs font-bold transition text-center"
                             >
                                 Hubungi Kami
                             </a>
