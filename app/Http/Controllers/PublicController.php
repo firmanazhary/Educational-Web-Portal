@@ -78,31 +78,55 @@ class PublicController extends Controller
         return Inertia::render('Contact');
     }
 
-    // Tambahkan method ini:
+    // ==========================================
+    // 1. MODUL EVENTS (Kegiatan Tematik)
+    // ==========================================
     public function events()
     {
         $events = Event::where('is_active', true)
+            ->where('type', 'event') // Filter khusus Event
             ->latest()
             ->get();
 
         return Inertia::render('Event', [
             'events' => $events,
+            'pageType' => 'event',
         ]);
     }
 
-    // Method detail event (jika diperlukan)
+    // ==========================================
+    // 2. MODUL PROGRAMS (Program Unggulan Sekolah)
+    // ==========================================
+    public function programs()
+    {
+        $programs = Event::where('is_active', true)
+            ->where('type', 'program') // Filter khusus Program
+            ->latest()
+            ->get();
+
+        // Bisa mengarahkan ke file React 'Program' (atau pakai 'Event' dengan props dinamis)
+        return Inertia::render('Program', [
+            'events' => $programs,
+            'pageType' => 'program',
+        ]);
+    }
+
+    // ==========================================
+    // 3. DETAIL (Bisa Dipakai Bersama untuk Event & Program)
+    // ==========================================
     public function eventShow($slug)
     {
-        // Pastikan query ke model Event menggunakan slug
-        $event = Event::where('slug', $slug)->firstOrFail();
+        $event = Event::where('slug', $slug)->where('is_active', true)->firstOrFail();
 
+        // Ambil item terkait dengan tipe yang sama
         $relatedEvents = Event::where('id', '!=', $event->id)
+            ->where('type', $event->type)
             ->where('is_active', true)
             ->take(3)
             ->get();
 
         return Inertia::render('EventDetail', [
-            'event' => $event,
+            'event'         => $event,
             'relatedEvents' => $relatedEvents,
         ]);
     }

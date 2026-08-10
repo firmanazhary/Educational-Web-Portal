@@ -19,6 +19,8 @@ Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 Route::get('/blog/{slug}', [PublicController::class, 'show'])->name('blog.show');
 Route::get('/blog', [PublicController::class, 'blog'])->name('blog');
 Route::get('/events', [PublicController::class, 'events'])->name('events.index');
+// Public Programs (Khusus Program Unggulan)
+Route::get('/programs', [PublicController::class, 'programs'])->name('programs.index');
 Route::get('/events/{slug}', [PublicController::class, 'eventShow'])->name('events.show');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
