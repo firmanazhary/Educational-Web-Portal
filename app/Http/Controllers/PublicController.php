@@ -130,4 +130,8 @@ class PublicController extends Controller
             'relatedEvents' => $relatedEvents,
         ]);
     }
+    public function admission()
+{
+    return Inertia::render('Admission');
+}
 }

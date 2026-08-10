@@ -22,6 +22,8 @@ Route::get('/events', [PublicController::class, 'events'])->name('events.index')
 // Public Programs (Khusus Program Unggulan)
 Route::get('/programs', [PublicController::class, 'programs'])->name('programs.index');
 Route::get('/events/{slug}', [PublicController::class, 'eventShow'])->name('events.show');
+Route::get('/admission', [PublicController::class, 'admission'])->name('admission');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
