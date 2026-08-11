@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
-import HeroSection from '@/Layouts/HeroSection'; 
-import { Head, Link } from '@inertiajs/react';
+import HeroSection from '@/Layouts/HeroSection';
+import { Head,Link } from '@inertiajs/react';
 import {
     BookOpen,
     GraduationCap,
@@ -12,7 +12,13 @@ import {
     Sparkles,
     Sprout,
     Award,
-    ArrowRight
+    ArrowRight,
+    X,
+    ChevronLeft,
+    ChevronRight,
+    Maximize2,
+    Heart,
+    Users
 } from 'lucide-react';
 
 /* ==========================================
@@ -43,25 +49,63 @@ export default function EventsIndex({
     tagline = "AGENDA ATTAUFIQ",
     mosqueImage = "/images/hero/building-attaufiq.png"
 }) {
+    // STATE UNTUK POP-UP MODAL
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [activeImageIndex, setActiveImageIndex] = useState(0);
+
     // Data Dummy Default jika database masih kosong
     const defaultPrograms = [
         {
             id: 1,
-            title: "Tahfidz & Qur'an",
-            description: "Membina generasi penghafal Al-Qur'an yang cinta ilmu dan berakhlak mulia.",
+            title: "Tahfidz Day",
+            category: "TAHFIDZ & QUR'AN",
+            description: "Kegiatan istimewa untuk mengapresiasi perjuangan para siswa dalam menghafal Al-Qur'an serta menumbuhkan kecintaan terhadap kalamullah.",
             image: "/images/events/tahfidz.jpg",
-            slug: "tahfidz-quran"
+            gallery: [
+                "/images/events/tahfidz.jpg",
+                "/images/events/tahfidz-2.jpg",
+                "/images/events/tahfidz-3.jpg",
+                "/images/events/tahfidz-4.jpg"
+            ],
+            highlights: [
+                { title: "Tasmi' & Muroja'ah", desc: "Siswa menampilkan hafalan Al-Qur'an di hadapan para ustadz dan orang tua." },
+                { title: "Motivasi & Apresiasi", desc: "Pemberian apresiasi untuk memotivasi siswa agar terus semangat menghafal." },
+                { title: "Kebersamaan", desc: "Momen penuh berkah bersama teman, guru, dan orang tua." }
+            ]
         },
         {
             id: 2,
-            title: "Akademik",
-            description: "Pembelajaran berbasis karakter dan kompetensi unggul untuk masa depan.",
+            title: "Pekan Akademik & Sains",
+            category: "AKADEMIK",
+            description: "Ajang unjuk kebolehan siswa dalam bidang sains, matematika, dan teknologi berbasis karakter.",
             image: "/images/events/akademik.jpg",
-            slug: "akademik"
+            gallery: [
+                "/images/events/akademik.jpg",
+                "/images/events/akademik-2.jpg"
+            ],
+            highlights: [
+                { title: "Science Fair", desc: "Pameran karya eksperimen sains sederhana ciptaan siswa." },
+                { title: "Olimpiade Matematika", desc: "Asah logika dan ketangkasan berhitung cepat." }
+            ]
         }
     ];
 
     const displayPrograms = events && events.length > 0 ? events : defaultPrograms;
+
+    // Handler Buka Pop-up Detail
+    const handleOpenModal = (program) => {
+        setSelectedEvent(program);
+        setActiveImageIndex(0);
+    };
+
+    // Handler Navigasi "Next Event" di dalam Modal
+    const handleNextEvent = () => {
+        if (!selectedEvent) return;
+        const currentIndex = displayPrograms.findIndex(p => p.id === selectedEvent.id);
+        const nextIndex = (currentIndex + 1) % displayPrograms.length;
+        setSelectedEvent(displayPrograms[nextIndex]);
+        setActiveImageIndex(0);
+    };
 
     return (
         <AppLayout title={`${title} - SIT At-Taufiq`}>
@@ -84,7 +128,7 @@ export default function EventsIndex({
                     {/* HEADER SECTION */}
                     <div className="text-center space-y-2 max-w-2xl mx-auto">
                         <p className="text-xs md:text-sm font-medium text-slate-600 tracking-wide">
-                            Pilih item untuk melihat informasi selengkapnya
+                            Pilih kegiatan untuk melihat informasi selengkapnya
                         </p>
                         <div className="flex justify-center text-[#D4AF37] pt-1">
                             <span className="animate-bounce text-sm">∨</span>
@@ -109,19 +153,188 @@ export default function EventsIndex({
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-y-16 items-center justify-center">
                             {displayPrograms.map((program, index) => (
-                                <ProgramOrbCard key={program.id || index} program={program} index={index} />
+                                <ProgramOrbCard
+                                    key={program.id || index}
+                                    program={program}
+                                    index={index}
+                                    onClick={() => handleOpenModal(program)}
+                                />
                             ))}
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            {/* ==========================================
+                POP-UP MODAL DETAIL EVENT (100% PRESISI MOCKUP)
+            ========================================== */}
+            {selectedEvent && (
+                <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 md:p-10 bg-[#051736]/70 backdrop-blur-md transition-all duration-300">
+
+                    {/* Modal Box */}
+                    <div className="bg-[#FAF8F3] border border-[#E8DFC8] w-full max-w-5xl rounded-[36px] shadow-2xl overflow-hidden relative flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
+
+                        {/* Close Button */}
+                        <button
+                            onClick={() => setSelectedEvent(null)}
+                            className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-[#051736] border border-[#E8DFC8] flex items-center justify-center shadow-md transition z-30"
+                            title="Tutup"
+                        >
+                            <X size={18} />
+                        </button>
+
+                        {/* Modal Body Container */}
+                        <div className="p-6 md:p-10 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                            {/* LEFT SIDE: GALLERY SLIDER */}
+                            <div className="lg:col-span-7 space-y-4">
+
+                                {/* Main Image Display */}
+                                <div className="aspect-[16/10] w-full rounded-3xl overflow-hidden relative bg-slate-200 border border-[#E8DFC8] shadow-md group">
+                                    <img
+                                        src={
+                                            selectedEvent.gallery && selectedEvent.gallery[activeImageIndex]
+                                                ? selectedEvent.gallery[activeImageIndex]
+                                                : (selectedEvent.image || '/images/placeholder.jpg')
+                                        }
+                                        alt={selectedEvent.title}
+                                        className="w-full h-full object-cover transition duration-500"
+                                    />
+
+                                    {/* Expand Icon Top Right */}
+                                    <div className="absolute top-4 right-4 p-2 bg-black/40 text-white rounded-xl backdrop-blur-sm opacity-80">
+                                        <Maximize2 size={16} />
+                                    </div>
+
+                                    {/* Prev / Next Slider Buttons */}
+                                    {selectedEvent.gallery && selectedEvent.gallery.length > 1 && (
+                                        <>
+                                            <button
+                                                onClick={() => setActiveImageIndex((prev) => (prev === 0 ? selectedEvent.gallery.length - 1 : prev - 1))}
+                                                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#051736]/60 hover:bg-[#051736] text-white flex items-center justify-center transition"
+                                            >
+                                                <ChevronLeft size={18} />
+                                            </button>
+                                            <button
+                                                onClick={() => setActiveImageIndex((prev) => (prev + 1) % selectedEvent.gallery.length)}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#051736]/60 hover:bg-[#051736] text-white flex items-center justify-center transition"
+                                            >
+                                                <ChevronRight size={18} />
+                                            </button>
+                                        </>
+                                    )}
+
+                                    {/* Image Counter Badge */}
+                                    <div className="absolute bottom-4 right-4 px-3 py-1 bg-black/50 text-white text-[11px] font-mono rounded-full backdrop-blur-sm">
+                                        {activeImageIndex + 1} / {(selectedEvent.gallery && selectedEvent.gallery.length) || 1}
+                                    </div>
+                                </div>
+
+                                {/* Thumbnail Selector List */}
+                                {selectedEvent.gallery && selectedEvent.gallery.length > 1 && (
+                                    <div className="grid grid-cols-4 gap-3 pt-1">
+                                        {selectedEvent.gallery.map((img, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setActiveImageIndex(idx)}
+                                                className={`aspect-[4/3] rounded-2xl overflow-hidden border-2 transition ${activeImageIndex === idx ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/30 scale-105' : 'border-[#E8DFC8] opacity-70 hover:opacity-100'
+                                                    }`}
+                                            >
+                                                <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {/* Slider Indicator Dots */}
+                                <div className="flex justify-center space-x-1.5 pt-1">
+                                    {((selectedEvent.gallery) || [1]).map((_, i) => (
+                                        <div
+                                            key={i}
+                                            className={`h-2 rounded-full transition-all ${activeImageIndex === i ? 'w-6 bg-[#D4AF37]' : 'w-2 bg-[#E8DFC8]'
+                                                }`}
+                                        />
+                                    ))}
+                                </div>
+
+                            </div>
+
+                            {/* RIGHT SIDE: EVENT DETAILS */}
+                            <div className="lg:col-span-5 space-y-6 pt-2">
+
+                                {/* Badge Category */}
+                                <div className="flex items-center space-x-3">
+                                    <div className="p-2 bg-[#F3EBDD] text-[#8B6B13] rounded-xl border border-[#E8DFC8]">
+                                        <BookOpen size={18} />
+                                    </div>
+                                    <span className="text-[10px] font-black tracking-widest text-[#8B6B13] uppercase bg-[#F3EBDD] border border-[#D4AF37]/40 px-3.5 py-1 rounded-full">
+                                        {selectedEvent.category || "PROGRAM UNGGULAN"}
+                                    </span>
+                                </div>
+
+                                {/* Event Title */}
+                                <div className="space-y-2">
+                                    <h2 className="font-serif text-3xl font-bold text-[#051736]">
+                                        {selectedEvent.title}
+                                    </h2>
+                                    <div className="w-12 h-[2px] bg-[#D4AF37]"></div>
+                                </div>
+
+                                {/* Description */}
+                                <p className="text-xs text-slate-600 font-light leading-relaxed">
+                                    {selectedEvent.description}
+                                </p>
+
+                                {/* Highlight Points List */}
+                                <div className="space-y-3 pt-2">
+                                    {(selectedEvent.highlights || [
+                                        { title: "Pembentukan Karakter", desc: "Menanamkan nilai-nilai keislaman dan adab luhur." },
+                                        { title: "Kebersamaan", desc: "Momen penuh kehangatan bersama teman dan guru." }
+                                    ]).map((item, idx) => (
+                                        <div key={idx} className="p-3.5 rounded-2xl bg-white border border-[#E8DFC8] flex items-start space-x-3 shadow-sm">
+                                            <div className="p-2 bg-[#F3EBDD] text-[#8B6B13] rounded-xl flex-shrink-0 mt-0.5">
+                                                <Sparkles size={14} />
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-xs text-[#051736]">{item.title}</h4>
+                                                <p className="text-[11px] text-slate-500 font-light mt-0.5">{item.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Next Event Action Button */}
+                                <div className="pt-4 flex items-center gap-3 ">
+                                   <Link
+        href={route('events.show', selectedEvent?.slug || 'tahfidz-day')}
+        className="flex-1 border border-[#051736] text-[#051736] hover:bg-[#051736] hover:text-white py-3 rounded-full text-xs font-bold transition text-center"
+    >
+        Halaman Penuh
+    </Link>
+                                    <button
+                                        onClick={handleNextEvent}
+                                        className="w-full bg-[#051736] hover:bg-[#07327F] text-white py-3.5 rounded-full text-xs font-bold transition shadow-md flex items-center justify-center space-x-2 group"
+                                    >
+                                        <span>Next Events</span>
+                                        <ChevronRight size={16} className="group-hover:translate-x-1 transition" />
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            )}
+
         </AppLayout>
     );
 }
 
-// Komponen Kartu Program Berbentuk Orb
-function ProgramOrbCard({ program, index }) {
+// Komponen Kartu Orb
+function ProgramOrbCard({ program, index, onClick }) {
     const IconComponent = getProgramIcon(program.title);
     const isEven = index % 2 === 0;
 
@@ -131,46 +344,48 @@ function ProgramOrbCard({ program, index }) {
             : `/storage/${program.image}`)
         : '/images/placeholder.jpg';
 
-    const detailUrl = route('events.show', program.slug);
-
     return (
-        <div className={`flex flex-col items-center transition-all duration-500 transform hover:-translate-y-2 ${isEven ? 'lg:-translate-y-6' : 'lg:translate-y-6'}`}>
+        <div
+            onClick={onClick}
+            className={`flex flex-col items-center transition-all duration-500 transform hover:-translate-y-2 cursor-pointer ${isEven ? 'lg:-translate-y-6' : 'lg:translate-y-6'
+                }`}
+        >
             <div className="w-[260px] h-[340px] rounded-[130px] bg-[#FAF8F3] border border-[#E8DFC8] shadow-lg hover:shadow-2xl transition-all duration-500 p-3 flex flex-col justify-between items-center relative group overflow-hidden">
 
                 {/* 1. HALF-CIRCLE IMAGE BANNER */}
-                <Link href={detailUrl} className="w-full h-[145px] rounded-t-[120px] rounded-b-2xl overflow-hidden relative bg-slate-200 block">
+                <div className="w-full h-[145px] rounded-t-[120px] rounded-b-2xl overflow-hidden relative bg-slate-200 block">
                     <img
                         src={imageUrl}
                         alt={program.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                     />
 
+                    {/* Floating Badge Icon */}
                     <div className="absolute -bottom-1 left-4 w-9 h-9 rounded-full bg-[#FAF8F3] border border-[#E8DFC8] shadow-md flex items-center justify-center text-[#8B6B13] z-10">
                         <IconComponent size={16} />
                     </div>
-                </Link>
+                </div>
 
                 {/* 2. CARD CONTENT DETAILS */}
                 <div className="px-3 pt-3 pb-2 text-center flex-1 flex flex-col justify-between items-center w-full">
                     <div className="space-y-1.5">
-                        <Link href={detailUrl} className="block">
-                            <h3 className="font-serif text-base font-bold text-[#051736] group-hover:text-[#D4AF37] transition leading-snug">
-                                {program.title}
-                            </h3>
-                        </Link>
+                        <h3 className="font-serif text-base font-bold text-[#051736] group-hover:text-[#D4AF37] transition leading-snug">
+                            {program.title}
+                        </h3>
 
                         <p className="text-[11px] text-slate-500 font-light leading-relaxed line-clamp-3 px-1">
                             {program.description}
                         </p>
                     </div>
 
-                    <Link
-                        href={detailUrl}
+                    {/* 3. BUTTON DETAIL POP-UP */}
+                    <button
+                        onClick={onClick}
                         className="w-8 h-8 rounded-full bg-[#C29D38] hover:bg-[#051736] text-white flex items-center justify-center transition-all duration-300 shadow-md group-hover:scale-110 mt-2"
-                        title="Lihat Informasi Selengkapnya"
+                        title="Lihat Detail Pop-up"
                     >
                         <ArrowRight size={14} />
-                    </Link>
+                    </button>
                 </div>
 
             </div>
