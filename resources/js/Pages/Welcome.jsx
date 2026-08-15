@@ -502,6 +502,19 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     // Warna bayangan teks untuk menciptakan kontras di atas area terang
     const textShadowStyle = { textShadow: '0 2px 4px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 1)' };
 
+    // Menggunakan state khusus untuk section jalanan
+  const [isMobileJalanan, setIsMobileJalanan] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileJalanan(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
     // UNTUK KEUNGGULAN
     const containerRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -544,6 +557,19 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
     const currentItem = dataKeunggulan[activeIndex];
 
+    // Menggunakan nama variabel unik agar tidak bentrok (Cannot redeclare block-scoped variable)
+  const [isMobileKeunggulan, setIsMobileKeunggulan] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileKeunggulan(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
     // UNTUK PRESTASI
     const achievementRef = useRef(null);
 
@@ -557,6 +583,19 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     const nodeOpacity = useTransform(achievementScroll, [0.3, 0.55], [0, 1]);
     const cardOpacity = useTransform(achievementScroll, [0.6, 0.85], [0, 1]);
     const cardScale = useTransform(achievementScroll, [0.6, 0.85], [0.8, 1]);
+
+    // Hook untuk mendeteksi layar mobile/tablet secara real-time
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024); // Breakpoint 'lg' Tailwind (1024px)
+    };
+
+    handleResize(); // Check awal saat load
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 
     // UNTUK CTA SECTION
@@ -848,187 +887,201 @@ const blogCardVariants = {
             {/* --- 3. PERJALANAN TUMBUH BERSAMA ATTAUFIQ --- */}
             <section className="relative w-full min-h-[85vh] bg-[#FAF6F0] flex flex-col justify-between overflow-hidden font-sans py-12 md:py-16">
 
-                {/* 1. Ambient Glow Orbs (Efek Aesthetic Cahaya Warm) */}
-                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/25 rounded-full blur-[140px] pointer-events-none z-0" />
-                <div className="absolute bottom-10 left-10 w-[300px] h-[300px] bg-amber-100/40 rounded-full blur-[100px] pointer-events-none z-0" />
+    {/* 1. Ambient Glow Orbs (Efek Aesthetic Cahaya Warm) */}
+    <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/25 rounded-full blur-[140px] pointer-events-none z-0" />
+    <div className="absolute bottom-10 left-10 w-[300px] h-[300px] bg-amber-100/40 rounded-full blur-[100px] pointer-events-none z-0" />
 
-                {/* 2. Background Image */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    whileInView={{ opacity: 0.9, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
-                    style={{
-                        backgroundImage: `url('images/home/bgPerjalanan.png')`
-                    }}
-                />
+    {/* 2. Background Image */}
+    <motion.div
+        initial={{ opacity: 0, scale: 1.05 }}
+        whileInView={{ opacity: 0.9, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{
+            backgroundImage: `url('images/home/bgPerjalanan.png')`
+        }}
+    />
 
-                {/* Subtle Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/40 via-transparent to-[#F5EFE6]/90 pointer-events-none" />
+    {/* Subtle Overlay Gradient */}
+    <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/40 via-transparent to-[#F5EFE6]/90 pointer-events-none" />
 
-                {/* 3. Content Top (Judul Utama & Deskripsi) */}
-                <div className="relative z-10 max-w-4xl mx-auto text-center px-6 pt-6 flex flex-col items-center">
+    {/* 3. Content Top (Judul Utama & Deskripsi) */}
+    <div className="relative z-10 max-w-4xl mx-auto text-center px-6 pt-6 flex flex-col items-center">
 
-                    {/* Badge Kecil Aesthetic */}
-                    <motion.span
-                        custom={0}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                        className="inline-block px-4 py-1.5 mb-3 text-xs font-semibold tracking-wider text-[#0F1E56] bg-amber-100/60 backdrop-blur-md rounded-full border border-amber-200/50 uppercase"
-                    >
-                        Pendidikan Berkarakter
-                    </motion.span>
+        {/* Badge Kecil Aesthetic */}
+        <motion.span
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="inline-block px-4 py-1.5 mb-3 text-xs font-semibold tracking-wider text-[#0F1E56] bg-amber-100/60 backdrop-blur-md rounded-full border border-amber-200/50 uppercase"
+        >
+            Pendidikan Berkarakter
+        </motion.span>
 
-                    <motion.h2
-                        custom={0.1}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                        className="text-3xl sm:text-4xl md:text-[2.85rem] font-extrabold text-[#0F1E56] leading-tight tracking-tight drop-shadow-sm"
-                    >
-                        Perjalanan Tumbuh Bersama <br className="hidden sm:inline" /> Attaufiq
-                    </motion.h2>
+        <motion.h2
+            custom={0.1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-3xl sm:text-4xl md:text-[2.85rem] font-extrabold text-[#0F1E56] leading-tight tracking-tight drop-shadow-sm"
+        >
+            Perjalanan Tumbuh Bersama <br className="hidden sm:inline" /> Attaufiq
+        </motion.h2>
 
-                    <motion.p
-                        custom={0.25}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                        className="mt-5 text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl font-normal"
-                    >
-                        Setiap langkah adalah awal dari masa depan. Kami mendampingi Ananda tumbuh dalam ilmu, akhlak, dan cinta kepada Allah hingga siap menjadi generasi beradab dan bermanfaat.
-                    </motion.p>
-                </div>
+        <motion.p
+            custom={0.25}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="mt-5 text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl font-normal"
+        >
+            Setiap langkah adalah awal dari masa depan. Kami mendampingi Ananda tumbuh dalam ilmu, akhlak, dan cinta kepada Allah hingga siap menjadi generasi beradab dan bermanfaat.
+        </motion.p>
+    </div>
 
-                {/* 4. Content Bottom (Card Kiri & Foto Gedung Kanan) */}
-                <div className="relative z-10 w-full max-w-[90rem] mx-auto px-4 sm:px-8 md:px-12 pt-8 flex flex-col md:flex-row items-end justify-between gap-0">
+    {/* 4. Content Bottom (Gambar Gedung Atas & Card Kanan di HP via flex-col-reverse) */}
+    <div className="relative z-10 w-full max-w-[90rem] mx-auto px-4 sm:px-8 md:px-12 pt-8 flex flex-col-reverse md:flex-row items-center md:items-end justify-between gap-0">
 
-                    {/* Card Putih Kiri Aesthetic */}
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInLeft}
-                        className="bg-white/90 backdrop-blur-md p-8 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(15,30,86,0.06)] w-full md:max-w-xl lg:max-w-2xl border border-white/80 mb-6 z-20 md:-mr-12 lg:-mr-20 transition-transform duration-300 hover:-translate-y-1"
-                    >
-                        <div className="flex items-center gap-2 mb-2">
-                            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                            <span className="text-xs font-semibold uppercase tracking-widest text-amber-600">Visi Kami</span>
-                        </div>
+        {/* Card Putih Aesthetic */}
+        <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInLeft}
+            className="bg-white/90 backdrop-blur-md p-8 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(15,30,86,0.06)] w-full md:max-w-xl lg:max-w-2xl border border-white/80 mb-6 z-20 md:-mr-12 lg:-mr-20 transition-transform duration-300 hover:-translate-y-1"
+        >
+            <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                <span className="text-xs font-semibold uppercase tracking-widest text-amber-600">Visi Kami</span>
+            </div>
 
-                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#0F1E56] leading-snug">
-                            Satu Perjalanan, Seumur Hidup
-                        </h3>
-                        <p className="mt-4 text-xs sm:text-sm lg:text-base text-[#64748B] leading-relaxed">
-                            Dari usia dini hingga remaja, Attaufiq menjadi rumah kedua yang mengantarkan Ananda menapaki tangga ilmu dan keberkahan menuju cahaya masa depan.
-                        </p>
-                    </motion.div>
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#0F1E56] leading-snug">
+                Satu Perjalanan, Seumur Hidup
+            </h3>
+            <p className="mt-4 text-xs sm:text-sm lg:text-base text-[#64748B] leading-relaxed">
+                Dari usia dini hingga remaja, Attaufiq menjadi rumah kedua yang mengantarkan Ananda menapaki tangga ilmu dan keberkahan menuju cahaya masa depan.
+            </p>
+        </motion.div>
 
-                    {/* Gambar Gedung Kanan */}
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInRight}
-                        className="w-full md:flex-1 flex justify-end items-end -mb-16 -mr-4 md:-mr-10 z-10"
-                    >
-                        <img
-                            src="images/home/gedung-right.png"
-                            alt="Gedung Attaufiq"
-                            className="w-[60%] max-w-md md:max-w-xl lg:max-w-3xl h-auto object-contain hover:opacity-100 transition-all duration-500 drop-shadow-xl"
-                        />
-                    </motion.div>
+        {/* Gambar Gedung (Muncul di Atas Card pada Layar HP) */}
+        <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInRight}
+            className="w-full md:flex-1 flex justify-center md:justify-end items-end -mb-4 md:-mb-16 -mr-0 md:-mr-10 z-10"
+        >
+            <img
+                src="images/home/gedung-right.png"
+                alt="Gedung Attaufiq"
+                className="w-[75%] sm:w-[60%] max-w-md md:max-w-xl lg:max-w-3xl h-auto object-contain hover:opacity-100 transition-all duration-500 drop-shadow-xl"
+            />
+        </motion.div>
 
-                </div>
+    </div>
 
-            </section>
+</section>
+          
 
             {/* SECTION JALANAN BERKELOK DENGAN ORNAMEN BACKGROUND */}
-            <section
-                ref={roadSectionRef}
-                //   {/* Hapus overflow-hidden dari section utama agar sticky tidak terkunci */}
-                className="relative w-full bg-[#FAF6EE] min-h-[250vh] font-sans"
+           <section
+      ref={roadSectionRef}
+      className={`relative w-full bg-[#FAF6EE] font-sans ${
+        isMobileJalanan ? 'min-h-[180vh]' : 'min-h-[250vh]'
+      }`}
+      style={{
+        background:
+          'radial-gradient(circle at 50% 50%, #FAF6EE 0%, #F4ECE0 100%)',
+      }}
+    >
+      {/* ======================================================== */}
+      {/* LAYER ORNAMEN BACKGROUND */}
+      {/* ======================================================== */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+        {BACKGROUND_ORNAMENTS.map(
+          ({ id, Icon, size, color, top, left, right, depth }) => {
+            const yVal = useTransform(
+              smoothProgress,
+              [0, 1],
+              [0, depth * (isMobileJalanan ? 200 : 400)]
+            );
+
+            return (
+              <motion.div
+                key={id}
+                className="absolute"
                 style={{
-                    background: 'radial-gradient(circle at 50% 50%, #FAF6EE 0%, #F4ECE0 100%)',
+                  top,
+                  left: left || 'auto',
+                  right: right || 'auto',
+                  y: yVal,
                 }}
-            >
-                {/* ======================================================== */}
-                {/* LAYER ORNAMEN BACKGROUND */}
-                {/* ======================================================== */}
-                <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-                    {BACKGROUND_ORNAMENTS.map(({ id, Icon, size, color, top, left, right, depth }) => {
-                        const yVal = useTransform(smoothProgress, [0, 1], [0, depth * 400]);
+              >
+                <Icon
+                  className={`${color} animate-pulse`}
+                  size={isMobileJalanan ? size * 0.7 : size}
+                />
+              </motion.div>
+            );
+          }
+        )}
+      </div>
 
-                        return (
-                            <motion.div
-                                key={id}
-                                className="absolute"
-                                style={{
-                                    top,
-                                    left: left || 'auto',
-                                    right: right || 'auto',
-                                    y: yVal,
-                                }}
-                            >
-                                <Icon className={`${color} animate-pulse`} size={size} />
-                            </motion.div>
-                        );
-                    })}
-                </div>
+      {/* ======================================================== */}
+      {/* CHARACTER FLOATING (DENGAN VARIABLE ISMOBILEJALANAN) */}
+      {/* ======================================================== */}
+      <div className="sticky top-0 h-screen w-full pointer-events-none z-50 flex items-center justify-center overflow-hidden">
+        <motion.div
+          className="absolute"
+          style={{
+            left: rawX,
+            top: isMobileJalanan ? '40%' : '35%',
+            opacity: opacityPeople,
+          }}
+        >
+          <img
+            src={PEOPLE_IMAGE}
+            alt="People Character"
+            className="w-12 sm:w-16 md:w-24 h-auto object-contain drop-shadow-2xl -translate-x-1/2 -translate-y-1/2"
+          />
+        </motion.div>
+      </div>
 
-                {/* ======================================================== */}
-                {/* CHARACTER FLOATING (DIBERSIHKAN & DIPERTINGGI Z-INDEX) */}
-                {/* ======================================================== */}
-                {/* Container sticky ini harus sejajar langsung dengan konten jalan & card */}
-                <div className="sticky top-0 h-screen w-full pointer-events-none z-50 flex items-center justify-center">
-                    <motion.div
-                        className="absolute"
-                        style={{
-                            left: rawX,
-                            top: '35%', // Menggunakan nilai dari permintaan sebelumnya
-                            opacity: opacityPeople // <--- TAMBAHKAN INI
-                        }}
-                    >
-                        <img
-                            src={PEOPLE_IMAGE}
-                            alt="People Character"
-                            // Tambahkan drop-shadow agar lebih estetis
-                            className="w-16 sm:w-20 md:w-24 h-auto object-contain drop-shadow-3xl -translate-x-1/2 -translate-y-1/2"
-                        />
-                    </motion.div>
-                </div>
+      {/* ======================================================== */}
+      {/* ROAD & CARDS */}
+      {/* ======================================================== */}
+      <div
+        className={`relative -mt-[100vh] z-10 w-full ${
+          isMobileJalanan ? 'min-h-[180vh] py-10' : 'min-h-[250vh] py-16'
+        } flex flex-col justify-between pointer-events-none`}
+      >
+        {/* GAMBAR JALAN MURNI */}
+        <div className="absolute inset-0 w-full h-full flex justify-center items-center px-2 md:px-0">
+          <img
+            src={ROAD_IMAGE}
+            alt="Jalan Path"
+            className="w-full max-w-xs sm:max-w-md md:max-w-3xl h-full object-fill opacity-95"
+          />
+        </div>
 
-                {/* ======================================================== */}
-                {/* ROAD & CARDS (Gunakan margin negatif agar sejajar dengan sticky) */}
-                {/* ======================================================== */}
-                <div className="relative -mt-[100vh] z-10 w-full min-h-[250vh] flex flex-col justify-between py-16 pointer-events-none">
-
-                    {/* GAMBAR JALAN MURNI */}
-                    <div className="absolute inset-0 w-full h-full flex justify-center items-center">
-                        <img
-                            src={ROAD_IMAGE}
-                            alt="Jalan Path"
-                            className="w-full max-w-3xl h-full object-fill opacity-95"
-                        />
-                    </div>
-
-                    {/* LIST CARD JENJANG */}
-                    <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col justify-between h-full">
-                        {JENJANG_DATA.map((step) => (
-                            <StepCard
-                                key={step.id}
-                                step={step}
-                                smoothProgress={smoothProgress}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </section>
+        {/* LIST CARD JENJANG */}
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 flex flex-col justify-between h-full gap-8 md:gap-0">
+          {JENJANG_DATA.map((step) => (
+            <StepCard
+              key={step.id}
+              step={step}
+              smoothProgress={smoothProgress}
+              isMobile={isMobileJalanan}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
 
             {/* 4. CAHAYA MASA DEPAN SECTION */}
             <section className="relative w-full min-h-[450px] lg:min-h-[550px] flex items-center justify-center overflow-hidden font-sans">
@@ -1161,275 +1214,349 @@ const blogCardVariants = {
 
 
             {/* 5. KEUNGGULAN ATQ SECTION */}
-            <section ref={containerRef} className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-20">
-
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/30 blur-[100px] rounded-full pointer-events-none" />
-
-                <div className="relative z-30 text-center max-w-5xl px-6 mb-4 md:mb-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm"
-                    >
-                        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                        <p className="text-amber-700 font-bold tracking-wider text-xs md:text-sm uppercase">
-                            KEUNGGULAN ATTAUFIQ
-                        </p>
-                    </motion.div>
-
-                    <h2 className="text-2xl md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight">
-                        Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
-                    </h2>
-                </div>
-
-                <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-10 md:pt-14">
-
-                    <motion.div
-                        animate={{ x: [0, 25, 0] }}
-                        transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
-                        className="absolute top-12 left-[8%] opacity-40 pointer-events-none z-10"
-                    >
-                        <svg className="w-24 h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
-                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-                        </svg>
-                    </motion.div>
-
-                    <motion.div
-                        animate={{ x: [0, -20, 0] }}
-                        transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
-                        className="absolute top-20 right-[10%] opacity-30 pointer-events-none z-10"
-                    >
-                        <svg className="w-28 h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
-                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-                        </svg>
-                    </motion.div>
-
-                    <div className="absolute top-32 left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none">✦</div>
-                    <div className="absolute top-16 right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none">✦</div>
-
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
-                        <img
-                            src="images/home/garisMatahari.png"
-                            alt="Garis Lintasan Matahari"
-                            className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
-                        />
-                    </div>
-
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={`gedung-${currentItem.id}`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.5 }}
-                            className={`absolute bottom-0 h-[85vh] w-1/2 md:w-5/12 pointer-events-none z-0 ${currentItem.position === "left"
-                                ? "right-0"
-                                : "left-0 transform -scale-x-100"
-                                }`}
-                        >
-                            <img
-                                src="images/home/gedung-right.png"
-                                alt="Gedung Latar"
-                                className="w-full h-full object-cover object-bottom opacity-25"
-                            />
-                        </motion.div>
-                    </AnimatePresence>
-
-                    <motion.div
-                        style={{ left: sunX, top: sunY }}
-                        className="absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                    >
-                        <div className="relative flex items-center justify-center">
-                            <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
-                            <img
-                                src="images/home/matahari.png"
-                                alt="Matahari"
-                                className="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
-                            />
-                        </div>
-                    </motion.div>
-
-                    <div className="relative z-10 w-full max-w-4xl px-6 md:px-8 h-full flex flex-col items-center justify-center pt-12 md:pt-16">
-
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={currentItem.id}
-                                initial={{ opacity: 0, y: 25 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -25 }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                className={`absolute inset-x-6 md:inset-x-8 flex items-center justify-center gap-6 md:gap-12
-                ${currentItem.position === 'right' ? 'flex-row-reverse' : 'flex-row'}
-              `}
-                            >
-                                <div className="w-1/2 flex justify-center relative">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
-
-                                    {/* Perbaikan: Menurunkan posisi wadah gambar dan menguranginya ukurannya */}
-                                    <div className="relative w-full max-w-[240px] md:max-w-[260px] h-56 md:h-[300px] mt-8 rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-2xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-4">
-                                        <span className="text-white/90 font-medium text-xs md:text-sm drop-shadow-md relative z-10">
-                                            Foto — {currentItem.title}
-                                        </span>
-                                        <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
-                                    </div>
-                                </div>
-
-                                <div className={`w-1/2 flex flex-col items-start text-left
-                ${currentItem.position === 'right' ? 'pt-24 md:pt-32 ml-10' : 'pt-0'}
-              `}>
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <span className="text-2xl font-black text-amber-500/80 tracking-tight">
-                                            0{currentItem.id}
-                                        </span>
-                                        <div className="h-[2px] w-8 bg-amber-400/60 rounded-full" />
-                                    </div>
-
-                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-3 shadow-md border border-amber-300/60">
-                                        {currentItem.icon}
-                                    </div>
-                                    <h3 className="text-xl md:text-3xl font-bold text-indigo-950 mb-2 leading-tight">
-                                        {currentItem.title}
-                                    </h3>
-                                    <p className="text-gray-600 text-xs md:text-sm leading-relaxed max-w-md">
-                                        {currentItem.desc}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        <div className="absolute bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
-                            {dataKeunggulan.map((item, idx) => (
-                                <div
-                                    key={item.id}
-                                    className={`transition-all duration-300 rounded-full ${activeIndex === idx
-                                        ? "w-6 h-2 bg-amber-500"
-                                        : "w-2 h-2 bg-amber-300/80"
-                                        }`}
-                                />
-                            ))}
-                        </div>
-
-                    </div>
-
-                </div>
-            </section>
-
-
-            {/* 6. PRESTASI SISWA ATQ SECTION */}
             <section
-    id="achievements"
-    ref={achievementRef}
-    className="relative h-[300vh] bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] w-full"
+  ref={containerRef}
+  className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-8 md:pt-20"
 >
-    {/* HEADER SECTION (JUDUL & DESKRIPSI) - RATA TENGAH HORIZONTAL */}
-    <div className="absolute top-8 md:top-12 left-1/2 -translate-x-1/2 z-30 text-center max-w-3xl px-4 pointer-events-none w-full">
-      <span className="text-xs font-bold tracking-widest text-amber-500 uppercase mb-2 block">
-        PRESTASI SISWA
-      </span>
-      <h2 className="text-xl md:text-3xl font-extrabold text-slate-900 leading-tight">
-        Mendukung setiap siswa untuk berkembang, berprestasi, dan tumbuh menjadi generasi yang cerdas, mandiri, serta berlandaskan nilai–nilai Islami.
-      </h2>
+  {/* Glow Ornamen Belakang */}
+  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-amber-200/30 blur-[60px] md:blur-[100px] rounded-full pointer-events-none" />
+
+  {/* HEADER SECTION */}
+  <div className="relative z-30 text-center max-w-5xl px-4 md:px-6 mb-4 md:mb-8">
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm mb-2"
+    >
+      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+      <p className="text-amber-700 font-bold tracking-wider text-[10px] md:text-sm uppercase">
+        KEUNGGULAN ATTAUFIQ
+      </p>
+    </motion.div>
+
+    <h2 className="text-lg md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight">
+      Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
+    </h2>
+  </div>
+
+  {/* Container Sticky untuk Scroll Animation */}
+  <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-6 md:pt-14">
+
+    {/* Ornamen Awan & Bintang */}
+    <motion.div
+      animate={{ x: [0, 25, 0] }}
+      transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+      className="absolute top-8 md:top-12 left-[4%] md:left-[8%] opacity-40 pointer-events-none z-10"
+    >
+      <svg className="w-16 h-8 md:w-24 md:h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+      </svg>
+    </motion.div>
+
+    <motion.div
+      animate={{ x: [0, -20, 0] }}
+      transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+      className="absolute top-16 md:top-20 right-[4%] md:right-[10%] opacity-30 pointer-events-none z-10"
+    >
+      <svg className="w-20 h-10 md:w-28 md:h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+      </svg>
+    </motion.div>
+
+    <div className="absolute top-24 md:top-32 left-[12%] md:left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none text-xs md:text-base">✦</div>
+    <div className="absolute top-12 md:top-16 right-[14%] md:right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none text-xs md:text-base">✦</div>
+
+    {/* Gambar Garis Lintasan Matahari */}
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
+      <img
+        src="images/home/garisMatahari.png"
+        alt="Garis Lintasan Matahari"
+        className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
+      />
     </div>
 
-    {/* Container Sticky */}
-    <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+    {/* Gedung Latar Belakang */}
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={`gedung-${currentItem.id}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`absolute bottom-0 h-[50vh] md:h-[85vh] w-3/4 md:w-5/12 pointer-events-none z-0 ${
+          currentItem.position === "left"
+            ? "right-0"
+            : "left-0 transform -scale-x-100"
+        }`}
+      >
+        <img
+          src="images/home/gedung-right.png"
+          alt="Gedung Latar"
+          className="w-full h-full object-cover object-bottom opacity-20 md:opacity-25"
+        />
+      </motion.div>
+    </AnimatePresence>
+
+    {/* MATAHARI BERJALAN (Hanya Aktif di Laptop via hidden md:block) */}
+    <motion.div
+      style={{ left: sunX, top: sunY }}
+      className="hidden md:block absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+    >
+      <div className="relative flex items-center justify-center">
+        <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
+        <img
+          src="images/home/matahari.png"
+          alt="Matahari"
+          className="w-28 h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
+        />
+      </div>
+    </motion.div>
+
+    {/* KONTEN UTAMA (KARTU FOTO & TEKS) */}
+    {/* Penyesuaian Mobile: pt-44 untuk menurunkan konten di bawah lengkungan garis */}
+    <div className="relative z-10 w-full max-w-4xl px-4 md:px-8 h-full flex flex-col items-center justify-start md:justify-center pt-44 md:pt-16">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentItem.id}
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -25 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className={`relative md:absolute md:inset-x-8 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10 ${
+            currentItem.position === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'
+          }`}
+        >
+          {/* FOTO */}
+          <div className="w-full md:w-1/2 flex justify-center relative">
+            <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
+
+            <div className="relative w-[160px] md:w-[260px] h-36 md:h-[280px] rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-3 md:p-4">
+              <span className="text-white/90 font-medium text-[11px] md:text-sm drop-shadow-md relative z-10">
+                Foto — {currentItem.title}
+              </span>
+              <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
+            </div>
+          </div>
+
+          {/* TEKS DESKRIPSI */}
+          <div
+            className={`w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left ${
+              currentItem.position === 'right' ? 'md:pt-32 md:ml-10' : 'pt-0'
+            }`}
+          >
+            <div className="flex items-center gap-2 mb-1 md:mb-2">
+              <span className="text-lg md:text-2xl font-black text-amber-500/80 tracking-tight">
+                0{currentItem.id}
+              </span>
+              <div className="h-[2px] w-6 md:w-8 bg-amber-400/60 rounded-full" />
+            </div>
+
+            <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-1.5 md:mb-3 shadow-md border border-amber-300/60">
+              {currentItem.icon}
+            </div>
+
+            <h3 className="text-base md:text-3xl font-bold text-indigo-950 mb-1 md:mb-2 leading-tight">
+              {currentItem.title}
+            </h3>
+
+            <p className="text-gray-600 text-[11px] md:text-sm leading-relaxed max-w-xs md:max-w-md">
+              {currentItem.desc}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* INDICATOR DOTS */}
+      <div className="absolute bottom-6 md:bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
+        {dataKeunggulan.map((item, idx) => (
+          <div
+            key={item.id}
+            className={`transition-all duration-300 rounded-full ${
+              activeIndex === idx
+                ? "w-5 md:w-6 h-1.5 md:h-2 bg-amber-500"
+                : "w-1.5 md:w-2 h-1.5 md:h-2 bg-amber-300/80"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+            
+       
+            {/* 6. PRESTASI SISWA ATQ SECTION */}
+            <section
+      id="achievements"
+      ref={achievementRef}
+      className={`relative ${
+        isMobile ? 'min-h-screen py-24' : 'h-[300vh]'
+      } bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] w-full`}
+    >
+      {/* HEADER SECTION (JUDUL & DESKRIPSI) */}
+      <div className="relative lg:absolute top-0 lg:top-12 left-1/2 -translate-x-1/2 z-30 text-center max-w-3xl px-6 pointer-events-none w-full mb-8 lg:mb-0">
+        <span className="text-xs font-bold tracking-widest text-amber-500 uppercase mb-2 block">
+          PRESTASI SISWA
+        </span>
+        <h2 className="text-xl md:text-3xl font-extrabold text-slate-900 leading-tight">
+          Mendukung setiap siswa untuk berkembang, berprestasi, dan tumbuh menjadi generasi yang cerdas, mandiri, serta berlandaskan nilai–nilai Islami.
+        </h2>
+      </div>
+
+      {/* Container Sticky (Desktop) / Normal Container (Mobile) */}
+      <div className={`${isMobile ? 'relative py-6' : 'sticky top-0 h-screen'} w-full flex items-center justify-center overflow-hidden`}>
 
         {/* 1. ORNAMEN BACKGROUND */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-            <div className="w-[600px] h-[600px] bg-amber-200/30 rounded-full blur-[120px] animate-pulse" />
-            <div className="w-[350px] h-[350px] bg-orange-300/20 rounded-full blur-[80px]" />
+          <div className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-amber-200/30 rounded-full blur-[100px] md:blur-[120px] animate-pulse" />
+          <div className="w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-orange-300/20 rounded-full blur-[60px] md:blur-[80px]" />
         </div>
 
         {/* 2. ORNAMEN BINTANG KECIL MELAYANG */}
         <div className="absolute inset-0 pointer-events-none z-0">
-            {[
-                { top: '15%', left: '20%', size: 'w-2 h-2', delay: '0s' },
-                { top: '25%', right: '18%', size: 'w-3 h-3', delay: '1s' },
-                { bottom: '20%', left: '15%', size: 'w-2.5 h-2.5', delay: '2s' },
-                { bottom: '15%', right: '22%', size: 'w-2 h-2', delay: '0.5s' },
-            ].map((sparkle, idx) => (
-                <div
-                    key={idx}
-                    className={`absolute ${sparkle.size} bg-amber-400 rounded-full blur-[1px] opacity-60 animate-ping`}
-                    style={{ top: sparkle.top, left: sparkle.left, right: sparkle.right, bottom: sparkle.bottom, animationDelay: sparkle.delay, animationDuration: '3s' }}
-                />
-            ))}
+          {[
+            { top: '15%', left: '10%', size: 'w-2 h-2', delay: '0s' },
+            { top: '25%', right: '12%', size: 'w-3 h-3', delay: '1s' },
+            { bottom: '20%', left: '15%', size: 'w-2.5 h-2.5', delay: '2s' },
+            { bottom: '15%', right: '15%', size: 'w-2 h-2', delay: '0.5s' },
+          ].map((sparkle, idx) => (
+            <div
+              key={idx}
+              className={`absolute ${sparkle.size} bg-amber-400 rounded-full blur-[1px] opacity-60 animate-ping`}
+              style={{
+                top: sparkle.top,
+                left: sparkle.left,
+                right: sparkle.right,
+                bottom: sparkle.bottom,
+                animationDelay: sparkle.delay,
+                animationDuration: '3s',
+              }}
+            />
+          ))}
         </div>
 
-        {/* 3. SVG CONNECTOR & DOTS */}
-        <svg
-            className="absolute inset-0 w-full h-full pointer-events-none z-0"
-            viewBox="-500 -500 1000 1000"
-            preserveAspectRatio="xMidYMid meet"
-        >
-            <defs>
+        {/* ================= MODE MOBILE: LAYOUT TIMELINE VERTIKAL ================= */}
+        {isMobile ? (
+          <div className="flex flex-col items-center w-full px-4 relative z-20 space-y-8">
+            {/* Matahari di Atas Timeline Mobile */}
+            <div className="relative z-10 flex items-center justify-center my-4">
+              <div className="absolute w-28 h-28 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
+              <div className="absolute w-36 h-36 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
+              <div className="absolute w-20 h-20 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
+
+              <img
+                src="/images/home/matahari.png"
+                alt="Matahari Attaufiq"
+                className="w-20 h-20 object-contain relative z-10 drop-shadow-[0_0_20px_rgba(251,191,36,0.9)] pointer-events-none"
+              />
+            </div>
+
+            {/* Grid List Kartu di Mobile */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
+              {achievements.map((item) => (
+                <div
+                  key={item.id}
+                  className="w-full p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-md border border-amber-100/80 hover:border-amber-300 transition-all duration-300"
+                >
+                  <a href={item.link || `/prestasi/${item.id}`} className="block cursor-pointer">
+                    <div className="w-full h-28 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden">
+                      <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
+                    </div>
+                    <div className="px-1">
+                      <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
+                        {item.level}
+                      </div>
+                      <h4 className="text-xs font-bold text-slate-800 leading-snug line-clamp-2">
+                        {item.title}
+                      </h4>
+                      <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
+                        <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
+                        <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          /* ================= MODE DESKTOP: LAYOUT ORBITAL KOORDINAT ================= */
+          <>
+            {/* 3. SVG CONNECTOR & DOTS */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none z-0"
+              viewBox="-500 -500 1000 1000"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
                 <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                    <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                    </feMerge>
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
                 </filter>
-            </defs>
+              </defs>
 
-            <g>
+              <g>
                 {achievements.map((item) => {
-                    const rad = (item.angle * Math.PI) / 180;
-                    const lineDistance = item.distance * 1.1;
-                    const endX = Math.cos(rad) * lineDistance;
-                    const endY = Math.sin(rad) * lineDistance;
-                    const midX = endX * 0.5;
-                    const midY = endY * 0.5;
+                  const rad = (item.angle * Math.PI) / 180;
+                  const lineDistance = item.distance * 1.1;
+                  const endX = Math.cos(rad) * lineDistance;
+                  const endY = Math.sin(rad) * lineDistance;
+                  const midX = endX * 0.5;
+                  const midY = endY * 0.5;
 
-                    return (
-                        <g key={item.id}>
-                            <motion.line
-                                x1="0"
-                                y1="0"
-                                x2={endX}
-                                y2={endY}
-                                stroke="#FCD34D"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                style={{ pathLength: lineScale }}
-                            />
-                            <motion.circle
-                                cx={midX}
-                                cy={midY}
-                                r="5"
-                                fill="#FBBF24"
-                                style={{ opacity: nodeOpacity }}
-                            />
-                            <motion.circle
-                                cx={endX}
-                                cy={endY}
-                                r="6.5"
-                                fill="#F59E0B"
-                                filter="url(#glow)"
-                                style={{ opacity: nodeOpacity }}
-                            />
-                        </g>
-                    );
+                  return (
+                    <g key={item.id}>
+                      <motion.line
+                        x1="0"
+                        y1="0"
+                        x2={endX}
+                        y2={endY}
+                        stroke="#FCD34D"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        style={{ pathLength: lineScale }}
+                      />
+                      <motion.circle
+                        cx={midX}
+                        cy={midY}
+                        r="5"
+                        fill="#FBBF24"
+                        style={{ opacity: nodeOpacity }}
+                      />
+                      <motion.circle
+                        cx={endX}
+                        cy={endY}
+                        r="6.5"
+                        fill="#F59E0B"
+                        filter="url(#glow)"
+                        style={{ opacity: nodeOpacity }}
+                      />
+                    </g>
+                  );
                 })}
-            </g>
-        </svg>
+              </g>
+            </svg>
 
-        {/* 4. MATAHARI UTAMA */}
-        <div className="relative z-10 flex items-center justify-center">
-            <div className="absolute w-36 h-36 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
-            <div className="absolute w-44 h-44 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
-            <div className="absolute w-28 h-28 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
+            {/* 4. MATAHARI UTAMA */}
+            <div className="relative z-10 flex items-center justify-center">
+              <div className="absolute w-36 h-36 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
+              <div className="absolute w-44 h-44 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
+              <div className="absolute w-28 h-28 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
 
-            <img
+              <img
                 src="/images/home/matahari.png"
                 alt="Matahari Attaufiq"
                 className="w-24 h-24 min-w-[96px] min-h-[96px] object-contain relative z-10 drop-shadow-[0_0_30px_rgba(251,191,36,0.9)] pointer-events-none transition-transform duration-500 hover:scale-110"
-            />
-        </div>
+              />
+            </div>
 
-        {/* 5. LAYER CARD PRESTASI */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center z-20">
-            {achievements.map((item) => {
+            {/* 5. LAYER CARD PRESTASI */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center z-20">
+              {achievements.map((item) => {
                 const rad = (item.angle * Math.PI) / 180;
                 const isVertical = item.angle === -90 || item.angle === 90;
                 const isHorizontal = item.angle === 0 || item.angle === 180;
@@ -1443,47 +1570,49 @@ const blogCardVariants = {
                 const y = Math.sin(rad) * radiusY;
 
                 return (
-                    <motion.div
-                        key={item.id}
-                        className="absolute w-52 p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(217,119,6,0.1)] border border-amber-100/80 hover:border-amber-300 pointer-events-auto transition-all duration-300 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.25)] hover:-translate-y-1"
-                        style={{
-                            x,
-                            y,
-                            opacity: cardOpacity,
-                            scale: cardScale,
-                        }}
+                  <motion.div
+                    key={item.id}
+                    className="absolute w-52 p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(217,119,6,0.1)] border border-amber-100/80 hover:border-amber-300 pointer-events-auto transition-all duration-300 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.25)] hover:-translate-y-1"
+                    style={{
+                      x,
+                      y,
+                      opacity: cardOpacity,
+                      scale: cardScale,
+                    }}
+                  >
+                    <a
+                      href={item.link || `/prestasi/${item.id}`}
+                      className="group block cursor-pointer relative overflow-hidden rounded-xl"
                     >
-                        <a
-                            href={item.link || `/prestasi/${item.id}`}
-                            className="group block cursor-pointer relative overflow-hidden rounded-xl"
-                        >
-                            <div className="w-full h-24 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-300">
-                                <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                            </div>
+                      <div className="w-full h-24 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-300">
+                        <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                      </div>
 
-                            <div className="px-0.5">
-                                <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
-                                    {item.level}
-                                </div>
+                      <div className="px-0.5">
+                        <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
+                          {item.level}
+                        </div>
 
-                                <h4 className="text-xs font-bold text-slate-800 leading-snug transition-colors duration-200 group-hover:text-amber-600 line-clamp-2">
-                                    {item.title}
-                                </h4>
+                        <h4 className="text-xs font-bold text-slate-800 leading-snug transition-colors duration-200 group-hover:text-amber-600 line-clamp-2">
+                          {item.title}
+                        </h4>
 
-                                <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
-                                    <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
-                                    <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
-                                </div>
-                            </div>
-                        </a>
-                    </motion.div>
+                        <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
+                          <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
+                          <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
+                        </div>
+                      </div>
+                    </a>
+                  </motion.div>
                 );
-            })}
-        </div>
-
-    </div>
-</section>
+              })}
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+            
 
             {/* 7. CTA ATQ SECTION */}
             <section className="relative w-full min-h-screen bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] flex items-center justify-center py-20 px-6 md:px-12 overflow-hidden">
@@ -1509,8 +1638,8 @@ const blogCardVariants = {
         viewport={{ once: true, amount: 0.3 }}
       >
         
-        {/* KONTEN KIRI (TEKS & TOMBOL) */}
-        <motion.div className="flex flex-col items-start justify-center space-y-6 max-w-xl w-full" variants={itemVariants}>
+        {/* KONTEN KIRI (TEKS & TOMBOL) - Urutan ke-2 di Mobile, ke-1 di Desktop */}
+        <motion.div className="flex flex-col items-start justify-center space-y-6 max-w-xl w-full order-2 lg:order-1" variants={itemVariants}>
           
           {/* Sub-heading Glassmorphism */}
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 backdrop-blur-md text-amber-600 font-bold text-xs tracking-wider uppercase shadow-sm">
@@ -1557,8 +1686,8 @@ const blogCardVariants = {
           </div>
         </motion.div>
 
-        {/* KONTEN KANAN (VISUAL KARTU & ORNAMEN) */}
-        <motion.div className="relative flex items-center justify-center w-full" variants={itemVariants}>
+        {/* KONTEN KANAN (VISUAL KARTU & ORNAMEN) - Urutan ke-1 di Mobile (di atas), ke-2 di Desktop (di kanan) */}
+        <motion.div className="relative flex items-center justify-center w-full order-1 lg:order-2" variants={itemVariants}>
           
           {/* Layer Glow Belakang Kartu */}
           <div className="absolute w-[280px] h-[360px] md:w-[360px] md:h-[460px] bg-amber-400/20 rounded-[50px] blur-2xl" />
@@ -1588,6 +1717,7 @@ const blogCardVariants = {
 
       </motion.div>
     </section>
+            
 
             {/* 8. EVENT & PROGRAM SECTION */}
             <section className="relative w-full bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] py-24 px-6 md:px-12 overflow-hidden">
