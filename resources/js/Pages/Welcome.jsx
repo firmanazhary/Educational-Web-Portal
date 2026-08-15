@@ -18,7 +18,7 @@ import {
     UserPlus,
     Calendar,
     ArrowRight,
-    ArrowUpRight
+    ArrowUpRight,
 } from 'lucide-react';
 
 // ==========================================
@@ -268,6 +268,32 @@ const achievements = [
       id: 2,
       title: '[ISI: Nama Program 2, mis. Interest & Talent Culture]',
       desc: '[ISI: ringkasan singkat program 2]',
+      link: '#',
+    },
+  ];
+
+//   DATA BLOG
+// Data Artikel Blog (Bisa disesuaikan / dipasang props `posts`)
+  const articles = [
+    {
+      id: 1,
+      title: '[ISI: Judul artikel contoh]',
+      summary: '[ISI: ringkasan singkat artikel]',
+      date: '10 Ags 2026',
+      link: '#',
+    },
+    {
+      id: 2,
+      title: '[ISI: Judul artikel contoh 2]',
+      summary: '[ISI: ringkasan singkat artikel 2]',
+      date: '05 Ags 2026',
+      link: '#',
+    },
+    {
+      id: 3,
+      title: '[ISI: Judul artikel contoh 3]',
+      summary: '[ISI: ringkasan singkat artikel 3]',
+      date: '01 Ags 2026',
       link: '#',
     },
   ];
@@ -569,8 +595,21 @@ const sectionContainerVariants = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
+//   UNTUK BLOG
+// Motion Variants (Menggunakan nama unik agar tidak bentrok)
+const blogSectionVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, staggerChildren: 0.15 },
+  },
+};
 
-
+const blogCardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 
     return (
@@ -1699,6 +1738,103 @@ const sectionContainerVariants = {
             <span>Lihat Semua Program</span>
             <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" />
           </motion.a>
+        </motion.div>
+      </div>
+    </section>
+
+              {/* 9. BLOG SECTION */}
+              <section className="relative w-full bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] py-24 px-6 md:px-12 overflow-hidden">
+      
+      {/* ================= BACKGROUND ORNAMEN (BALANCED) ================= */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Glow Halus Ambient */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-amber-200/20 rounded-full blur-[140px]" />
+
+        {/* Floating Sparkles Pasif (Aesthetic & Tidak Ramai) */}
+        <Sparkles className="absolute top-12 left-10 w-4 h-4 text-amber-300 opacity-60 animate-pulse" />
+        <Sparkles className="absolute bottom-16 right-16 w-5 h-5 text-sky-300 opacity-50 animate-pulse" />
+      </div>
+
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <motion.div
+          className="flex flex-col space-y-10"
+          variants={blogSectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {/* ================= HEADER SECTION ================= */}
+          <div className="flex items-end justify-between border-b border-amber-200/60 pb-5">
+            <div>
+              <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 font-bold text-xs tracking-wider uppercase mb-2">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>INFORMASI & EDUKASI</span>
+              </span>
+              <h3 className="text-3xl md:text-4xl font-extrabold text-[#1B2B65]">
+                Blog Attaufiq
+              </h3>
+            </div>
+            
+            <a
+              href="#semua-artikel"
+              className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
+            >
+              Lihat semua artikel
+              <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </div>
+
+          {/* ================= GRID ARTIKEL BLOG ================= */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {articles.map((article) => (
+              <motion.a
+                key={article.id}
+                href={article.link}
+                variants={blogCardVariants}
+                whileHover={{ y: -6 }}
+                className="group relative flex flex-col rounded-[28px] bg-white/80 backdrop-blur-md border border-amber-100/90 shadow-[0_4px_25px_-4px_rgba(217,119,6,0.06)] hover:shadow-[0_16px_35px_-6px_rgba(245,158,11,0.18)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
+              >
+                {/* Thumbnail Gambar Banner Gradien */}
+                <div className="relative w-full h-48 md:h-52 bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
+                  
+                  {/* Category Badge di Atas Gambar */}
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-white/50 text-slate-800 text-[11px] font-bold shadow-sm">
+                      {article.category}
+                    </span>
+                  </div>
+
+                  <div className="w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out" />
+                </div>
+
+                {/* Konten Teks & Deskripsi */}
+                <div className="p-6 flex flex-col justify-between flex-1 relative">
+                  <div>
+                    <span className="block text-[11px] font-medium text-amber-600 mb-2">
+                      {article.date}
+                    </span>
+                    <h4 className="text-base md:text-lg font-bold text-[#1B2B65] group-hover:text-amber-600 transition-colors duration-200 leading-snug line-clamp-2">
+                      {article.title}
+                    </h4>
+                    <p className="text-xs md:text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">
+                      {article.summary}
+                    </p>
+                  </div>
+
+                  {/* Icon Panah & Border Pembatas Lembut */}
+                  <div className="mt-5 pt-4 flex items-center justify-between border-t border-slate-100/80">
+                    <span className="text-xs font-semibold text-slate-400 group-hover:text-amber-600 transition-colors">
+                      Baca Selengkapnya
+                    </span>
+                    <div className="text-slate-300 group-hover:text-amber-500 transition-colors">
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
