@@ -172,58 +172,67 @@ const JENJANG_DATA = [
 
 // Data konten keunggulan
 const dataKeunggulan = [
-  {
-    id: 1,
-    title: "Pendidikan Islam Berkualitas",
-    desc: "Mengintegrasikan ilmu dunia dan nilai-nilai Islam dalam setiap kegiatan, membentuk pribadi berakhlak, berilmu, dan bertakwa.",
-    position: "left", // Frame foto di kiri, Teks di kanan, Gedung di kanan
-    sunPos: { x: "88%", y: "70%" }, // Posisi relatif matahari pada lintasan
-    icon: (
-      <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
-    )
-  },
-  {
-    id: 2,
-    title: "Akademik Berkualitas",
-    desc: "Proses pembelajaran aktif dan bermakna yang menumbuhkan kemampuan berpikir, kreativitas, dan kemandirian.",
-    position: "right", // Frame foto di kanan, Teks di kiri, Gedung di kiri
-    sunPos: { x: "62%", y: "22%" },
-    icon: (
-      <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-      </svg>
-    )
-  },
-  {
-    id: 3,
-    title: "Prestasi Nyata, Membanggakan",
-    desc: "Mendorong siswa untuk berprestasi di berbagai bidang, baik akademik, tahfiz, olahraga, seni, maupun kepemimpinan.",
-    position: "left", // Frame foto di kiri, Teks di kanan, Gedung di kanan
-    sunPos: { x: "32%", y: "10%" },
-    icon: (
-      <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-      </svg>
-    )
-  },
-  {
-    id: 4,
-    title: "Guru & Pendamping yang Berdedikasi",
-    desc: "Dibimbing oleh guru dan pendamping yang amanah, berpengalaman, dan tulus mendampingi tumbuh kembang ananda setiap hari.",
-    position: "right", // Frame foto di kanan, Teks di kiri, Gedung di kiri
-    sunPos: { x: "12%", y: "45%" },
-    icon: (
-      <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-    )
-  }
+    {
+        id: 1,
+        title: "Pendidikan Islam Berkualitas",
+        desc: "Mengintegrasikan ilmu dunia dan nilai-nilai Islam dalam setiap kegiatan, membentuk pribadi berakhlak, berilmu, dan bertakwa.",
+        position: "left", // Frame foto di kiri, Teks di kanan, Gedung di kanan
+        sunPos: { x: "88%", y: "70%" }, // Posisi relatif matahari pada lintasan
+        icon: (
+            <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+        )
+    },
+    {
+        id: 2,
+        title: "Akademik Berkualitas",
+        desc: "Proses pembelajaran aktif dan bermakna yang menumbuhkan kemampuan berpikir, kreativitas, dan kemandirian.",
+        position: "right", // Frame foto di kanan, Teks di kiri, Gedung di kiri
+        sunPos: { x: "62%", y: "22%" },
+        icon: (
+            <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+            </svg>
+        )
+    },
+    {
+        id: 3,
+        title: "Prestasi Nyata, Membanggakan",
+        desc: "Mendorong siswa untuk berprestasi di berbagai bidang, baik akademik, tahfiz, olahraga, seni, maupun kepemimpinan.",
+        position: "left", // Frame foto di kiri, Teks di kanan, Gedung di kanan
+        sunPos: { x: "32%", y: "10%" },
+        icon: (
+            <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+        )
+    },
+    {
+        id: 4,
+        title: "Guru & Pendamping yang Berdedikasi",
+        desc: "Dibimbing oleh guru dan pendamping yang amanah, berpengalaman, dan tulus mendampingi tumbuh kembang ananda setiap hari.",
+        position: "right", // Frame foto di kanan, Teks di kiri, Gedung di kiri
+        sunPos: { x: "12%", y: "45%" },
+        icon: (
+            <svg className="w-6 h-6 text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+        )
+    }
 ];
 
-// Data Kategori Keunggulan
+const achievements = [
+    { id: 1, title: 'Juara 1 Olimpiade Matematika', level: 'Tingkat Kota', unit: 'SD Attaufiq · 2026', angle: -90, distance: 220 },
+    { id: 2, title: 'Juara Tahfiz 5 Juz', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: -45, distance: 260 },
+    { id: 3, title: 'Juara 2 Lomba Cerdas Cermat', level: 'Tingkat Kota', unit: 'SMP Attaufiq · 2026', angle: 0, distance: 280 },
+    { id: 4, title: 'Juara 1 Futsal Putra', level: 'Tingkat Kota', unit: 'SMA Attaufiq · 2026', angle: 45, distance: 260 },
+    { id: 5, title: 'Juara 1 Olimpiade IPA', level: 'Tingkat Kota', unit: 'SD Attaufiq · 2026', angle: 90, distance: 220 },
+    { id: 6, title: 'Juara 1 Lomba MTQ', level: 'Tingkat Kota', unit: 'SMA Attaufiq · 2026', angle: 135, distance: 260 },
+    { id: 7, title: 'Juara 1 Karya Ilmiah Remaja', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: 180, distance: 280 },
+    { id: 8, title: 'Juara Harapan 1 Lomba Kaligrafi', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: -135, distance: 260 },
+];
 
 
 // Hook Animasi Scroll Reveal
@@ -430,48 +439,63 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     const textShadowStyle = { textShadow: '0 2px 4px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 1)' };
 
     // UNTUK KEUNGGULAN
-   const containerRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+    const containerRef = useRef(null);
+    const [activeIndex, setActiveIndex] = useState(0);
 
-  const { scrollYProgress: sectionScrollProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  // Listener untuk menentukan item aktif secara pasti dari posisi scroll
-  useEffect(() => {
-    const unsubscribe = sectionScrollProgress.on("change", (latest) => {
-      if (latest < 0.25) {
-        setActiveIndex(0);
-      } else if (latest >= 0.25 && latest < 0.50) {
-        setActiveIndex(1);
-      } else if (latest >= 0.50 && latest < 0.75) {
-        setActiveIndex(2);
-      } else {
-        setActiveIndex(3);
-      }
+    const { scrollYProgress: sectionScrollProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
     });
 
-    return () => unsubscribe();
-  }, [sectionScrollProgress]);
+    // Listener untuk menentukan item aktif secara pasti dari posisi scroll
+    useEffect(() => {
+        const unsubscribe = sectionScrollProgress.on("change", (latest) => {
+            if (latest < 0.25) {
+                setActiveIndex(0);
+            } else if (latest >= 0.25 && latest < 0.50) {
+                setActiveIndex(1);
+            } else if (latest >= 0.50 && latest < 0.75) {
+                setActiveIndex(2);
+            } else {
+                setActiveIndex(3);
+            }
+        });
 
-  // Pergerakan Horizontal Matahari
-  const sunX = useTransform(
-    sectionScrollProgress, 
-    [0,     0.25,   0.50,   0.75,   1], 
-    ["85%", "65%",  "46%",  "27%",  "13%"]
-  );
+        return () => unsubscribe();
+    }, [sectionScrollProgress]);
 
-  // Pergerakan Vertikal Matahari
-  const sunY = useTransform(
-    sectionScrollProgress, 
-    [0,     0.25,   0.50,   0.75,   1], 
-    ["58%", "21%",  "11%",  "23%",  "69%"]
-  );
+    // Pergerakan Horizontal Matahari
+    const sunX = useTransform(
+        sectionScrollProgress,
+        [0, 0.25, 0.50, 0.75, 1],
+        ["85%", "65%", "46%", "27%", "13%"]
+    );
 
-  const currentItem = dataKeunggulan[activeIndex];
-   
-  
+    // Pergerakan Vertikal Matahari
+    const sunY = useTransform(
+        sectionScrollProgress,
+        [0, 0.25, 0.50, 0.75, 1],
+        ["58%", "21%", "11%", "23%", "69%"]
+    );
+
+    const currentItem = dataKeunggulan[activeIndex];
+
+    // UNTUK PRESTASI
+    const achievementRef = useRef(null);
+
+    const { scrollYProgress: achievementScroll } = useScroll({
+        target: achievementRef,
+        offset: ["start start", "end end"]
+    });
+
+    // Timeline Animasi
+    const lineScale = useTransform(achievementScroll, [0.1, 0.5], [0, 1]);
+    const nodeOpacity = useTransform(achievementScroll, [0.3, 0.55], [0, 1]);
+    const cardOpacity = useTransform(achievementScroll, [0.6, 0.85], [0, 1]);
+    const cardScale = useTransform(achievementScroll, [0.6, 0.85], [0.8, 1]);
+
+
+
 
 
     return (
@@ -1024,160 +1048,324 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
             {/* 5. KEUNGGULAN ATQ SECTION */}
             <section ref={containerRef} className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-20">
-      
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/30 blur-[100px] rounded-full pointer-events-none" />
 
-      <div className="relative z-30 text-center max-w-5xl px-6 mb-4 md:mb-8">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm"
-        >
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <p className="text-amber-700 font-bold tracking-wider text-xs md:text-sm uppercase">
-            KEUNGGULAN ATTAUFIQ
-          </p>
-        </motion.div>
-        
-        <h2 className="text-2xl md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight">
-          Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
-        </h2>
-      </div>
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/30 blur-[100px] rounded-full pointer-events-none" />
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-10 md:pt-14">
-        
-        <motion.div
-          animate={{ x: [0, 25, 0] }}
-          transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
-          className="absolute top-12 left-[8%] opacity-40 pointer-events-none z-10"
-        >
-          <svg className="w-24 h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
-            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
-          </svg>
-        </motion.div>
+                <div className="relative z-30 text-center max-w-5xl px-6 mb-4 md:mb-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm"
+                    >
+                        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                        <p className="text-amber-700 font-bold tracking-wider text-xs md:text-sm uppercase">
+                            KEUNGGULAN ATTAUFIQ
+                        </p>
+                    </motion.div>
 
-        <motion.div
-          animate={{ x: [0, -20, 0] }}
-          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
-          className="absolute top-20 right-[10%] opacity-30 pointer-events-none z-10"
-        >
-          <svg className="w-28 h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
-            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
-          </svg>
-        </motion.div>
+                    <h2 className="text-2xl md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight">
+                        Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
+                    </h2>
+                </div>
 
-        <div className="absolute top-32 left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none">✦</div>
-        <div className="absolute top-16 right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none">✦</div>
+                <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-10 md:pt-14">
 
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
-          <img
-            src="images/home/garisMatahari.png"
-            alt="Garis Lintasan Matahari"
-            className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
-          />
-        </div>
+                    <motion.div
+                        animate={{ x: [0, 25, 0] }}
+                        transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+                        className="absolute top-12 left-[8%] opacity-40 pointer-events-none z-10"
+                    >
+                        <svg className="w-24 h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                        </svg>
+                    </motion.div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`gedung-${currentItem.id}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className={`absolute bottom-0 h-[85vh] w-1/2 md:w-5/12 pointer-events-none z-0 ${
-              currentItem.position === "left"
-                ? "right-0"
-                : "left-0 transform -scale-x-100"
-            }`}
-          >
-            <img
-              src="images/home/gedung-right.png"
-              alt="Gedung Latar"
-              className="w-full h-full object-cover object-bottom opacity-25"
-            />
-          </motion.div>
-        </AnimatePresence>
+                    <motion.div
+                        animate={{ x: [0, -20, 0] }}
+                        transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+                        className="absolute top-20 right-[10%] opacity-30 pointer-events-none z-10"
+                    >
+                        <svg className="w-28 h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                        </svg>
+                    </motion.div>
 
-        <motion.div
-          style={{ left: sunX, top: sunY }}
-          className="absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-        >
-          <div className="relative flex items-center justify-center">
-            <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
-            <img
-              src="images/home/matahari.png"
-              alt="Matahari"
-              className="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
-            />
-          </div>
-        </motion.div>
+                    <div className="absolute top-32 left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none">✦</div>
+                    <div className="absolute top-16 right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none">✦</div>
 
-        <div className="relative z-10 w-full max-w-4xl px-6 md:px-8 h-full flex flex-col items-center justify-center pt-12 md:pt-16">
-          
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentItem.id}
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -25 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className={`absolute inset-x-6 md:inset-x-8 flex items-center justify-center gap-6 md:gap-12 
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
+                        <img
+                            src="images/home/garisMatahari.png"
+                            alt="Garis Lintasan Matahari"
+                            className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
+                        />
+                    </div>
+
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={`gedung-${currentItem.id}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className={`absolute bottom-0 h-[85vh] w-1/2 md:w-5/12 pointer-events-none z-0 ${currentItem.position === "left"
+                                ? "right-0"
+                                : "left-0 transform -scale-x-100"
+                                }`}
+                        >
+                            <img
+                                src="images/home/gedung-right.png"
+                                alt="Gedung Latar"
+                                className="w-full h-full object-cover object-bottom opacity-25"
+                            />
+                        </motion.div>
+                    </AnimatePresence>
+
+                    <motion.div
+                        style={{ left: sunX, top: sunY }}
+                        className="absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                    >
+                        <div className="relative flex items-center justify-center">
+                            <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
+                            <img
+                                src="images/home/matahari.png"
+                                alt="Matahari"
+                                className="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
+                            />
+                        </div>
+                    </motion.div>
+
+                    <div className="relative z-10 w-full max-w-4xl px-6 md:px-8 h-full flex flex-col items-center justify-center pt-12 md:pt-16">
+
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={currentItem.id}
+                                initial={{ opacity: 0, y: 25 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -25 }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                className={`absolute inset-x-6 md:inset-x-8 flex items-center justify-center gap-6 md:gap-12
                 ${currentItem.position === 'right' ? 'flex-row-reverse' : 'flex-row'}
               `}
-            >
-              <div className="w-1/2 flex justify-center relative">
-                <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
+                            >
+                                <div className="w-1/2 flex justify-center relative">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
 
-                {/* Perbaikan: Menurunkan posisi wadah gambar dan menguranginya ukurannya */}
-                <div className="relative w-full max-w-[240px] md:max-w-[260px] h-56 md:h-[300px] mt-8 rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-2xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-4">
-                  <span className="text-white/90 font-medium text-xs md:text-sm drop-shadow-md relative z-10">
-                    Foto — {currentItem.title}
-                  </span>
-                  <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
-                </div>
-              </div>
+                                    {/* Perbaikan: Menurunkan posisi wadah gambar dan menguranginya ukurannya */}
+                                    <div className="relative w-full max-w-[240px] md:max-w-[260px] h-56 md:h-[300px] mt-8 rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-2xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-4">
+                                        <span className="text-white/90 font-medium text-xs md:text-sm drop-shadow-md relative z-10">
+                                            Foto — {currentItem.title}
+                                        </span>
+                                        <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
+                                    </div>
+                                </div>
 
-              <div className={`w-1/2 flex flex-col items-start text-left 
+                                <div className={`w-1/2 flex flex-col items-start text-left
                 ${currentItem.position === 'right' ? 'pt-24 md:pt-32 ml-10' : 'pt-0'}
               `}>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-2xl font-black text-amber-500/80 tracking-tight">
-                    0{currentItem.id}
-                  </span>
-                  <div className="h-[2px] w-8 bg-amber-400/60 rounded-full" />
-                </div>
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="text-2xl font-black text-amber-500/80 tracking-tight">
+                                            0{currentItem.id}
+                                        </span>
+                                        <div className="h-[2px] w-8 bg-amber-400/60 rounded-full" />
+                                    </div>
 
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-3 shadow-md border border-amber-300/60">
-                  {currentItem.icon}
-                </div>
-                <h3 className="text-xl md:text-3xl font-bold text-indigo-950 mb-2 leading-tight">
-                  {currentItem.title}
-                </h3>
-                <p className="text-gray-600 text-xs md:text-sm leading-relaxed max-w-md">
-                  {currentItem.desc}
-                </p>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-3 shadow-md border border-amber-300/60">
+                                        {currentItem.icon}
+                                    </div>
+                                    <h3 className="text-xl md:text-3xl font-bold text-indigo-950 mb-2 leading-tight">
+                                        {currentItem.title}
+                                    </h3>
+                                    <p className="text-gray-600 text-xs md:text-sm leading-relaxed max-w-md">
+                                        {currentItem.desc}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
 
-          <div className="absolute bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
-            {dataKeunggulan.map((item, idx) => (
-              <div
-                key={item.id}
-                className={`transition-all duration-300 rounded-full ${
-                  activeIndex === idx
-                    ? "w-6 h-2 bg-amber-500"
-                    : "w-2 h-2 bg-amber-300/80"
-                }`}
+                        <div className="absolute bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
+                            {dataKeunggulan.map((item, idx) => (
+                                <div
+                                    key={item.id}
+                                    className={`transition-all duration-300 rounded-full ${activeIndex === idx
+                                        ? "w-6 h-2 bg-amber-500"
+                                        : "w-2 h-2 bg-amber-300/80"
+                                        }`}
+                                />
+                            ))}
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            {/* 6. PRESTASI SISWA ATQ SECTION */}
+            <section
+  id="achievements"
+  ref={achievementRef}
+  className="relative h-[300vh] bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] w-full"
+>
+  {/* Container Sticky */}
+  <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+
+    {/* 1. ORNAMEN BACKGROUND */}
+    <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
+      <div className="w-[600px] h-[600px] bg-amber-200/30 rounded-full blur-[120px] animate-pulse" />
+      <div className="w-[350px] h-[350px] bg-orange-300/20 rounded-full blur-[80px]" />
+    </div>
+
+    {/* 2. ORNAMEN BINTANG KECIL MELAYANG */}
+    <div className="absolute inset-0 pointer-events-none z-0">
+      {[
+        { top: '15%', left: '20%', size: 'w-2 h-2', delay: '0s' },
+        { top: '25%', right: '18%', size: 'w-3 h-3', delay: '1s' },
+        { bottom: '20%', left: '15%', size: 'w-2.5 h-2.5', delay: '2s' },
+        { bottom: '15%', right: '22%', size: 'w-2 h-2', delay: '0.5s' },
+      ].map((sparkle, idx) => (
+        <div
+          key={idx}
+          className={`absolute ${sparkle.size} bg-amber-400 rounded-full blur-[1px] opacity-60 animate-ping`}
+          style={{ top: sparkle.top, left: sparkle.left, right: sparkle.right, bottom: sparkle.bottom, animationDelay: sparkle.delay, animationDuration: '3s' }}
+        />
+      ))}
+    </div>
+
+    {/* 3. SVG CONNECTOR & DOTS (FIXED: GARIS KEMBALI MUNCUL SEMUA) */}
+    <svg 
+      className="absolute inset-0 w-full h-full pointer-events-none z-0"
+      viewBox="-500 -500 1000 1000"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <defs>
+        {/* Filter Glow Ujung Node */}
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <g>
+        {achievements.map((item) => {
+          const rad = (item.angle * Math.PI) / 180;
+          const lineDistance = item.distance * 1.1; 
+          const endX = Math.cos(rad) * lineDistance;
+          const endY = Math.sin(rad) * lineDistance;
+          const midX = endX * 0.5;
+          const midY = endY * 0.5;
+
+          return (
+            <g key={item.id}>
+              {/* Stroke diganti ke Solid Amber agar tidak terputus/hilang akibat masalah koordinat gradien SVG */}
+              <motion.line
+                x1="0"
+                y1="0"
+                x2={endX}
+                y2={endY}
+                stroke="#FCD34D"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                style={{ pathLength: lineScale }}
               />
-            ))}
-          </div>
+              {/* Node Tengah */}
+              <motion.circle
+                cx={midX}
+                cy={midY}
+                r="5"
+                fill="#FBBF24"
+                style={{ opacity: nodeOpacity }}
+              />
+              {/* Node Ujung Berpendar */}
+              <motion.circle
+                cx={endX}
+                cy={endY}
+                r="6.5"
+                fill="#F59E0B"
+                filter="url(#glow)"
+                style={{ opacity: nodeOpacity }}
+              />
+            </g>
+          );
+        })}
+      </g>
+    </svg>
 
-        </div>
+    {/* 4. MATAHARI UTAMA */}
+    <div className="relative z-10 flex items-center justify-center">
+      <div className="absolute w-36 h-36 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
+      <div className="absolute w-44 h-44 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
+      <div className="absolute w-28 h-28 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
 
-      </div>
-    </section>
+      <img
+        src="/images/home/matahari.png"
+        alt="Matahari Attaufiq"
+        className="w-24 h-24 min-w-[96px] min-h-[96px] object-contain relative z-10 drop-shadow-[0_0_30px_rgba(251,191,36,0.9)] pointer-events-none transition-transform duration-500 hover:scale-110"
+      />
+    </div>
+
+    {/* 5. LAYER CARD PRESTASI */}
+    <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center z-20">
+      {achievements.map((item) => {
+        const rad = (item.angle * Math.PI) / 180;
+        const isVertical = item.angle === -90 || item.angle === 90;
+        const isHorizontal = item.angle === 0 || item.angle === 180;
         
+        let radiusX = 390;
+        let radiusY = 230;
+        if (isVertical) radiusY = 240;
+        if (isHorizontal) radiusX = 430;
+
+        const x = Math.cos(rad) * radiusX;
+        const y = Math.sin(rad) * radiusY;
+
+        return (
+          <motion.div
+            key={item.id}
+            className="absolute w-52 p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(217,119,6,0.1)] border border-amber-100/80 hover:border-amber-300 pointer-events-auto transition-all duration-300 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.25)] hover:-translate-y-1"
+            style={{
+              x,
+              y,
+              opacity: cardOpacity,
+              scale: cardScale,
+            }}
+          >
+            <a 
+              href={item.link || `/prestasi/${item.id}`} 
+              className="group block cursor-pointer relative overflow-hidden rounded-xl"
+            >
+              <div className="w-full h-24 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-300">
+                <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              </div>
+              
+              <div className="px-0.5">
+                <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
+                  {item.level}
+                </div>
+
+                <h4 className="text-xs font-bold text-slate-800 leading-snug transition-colors duration-200 group-hover:text-amber-600 line-clamp-2">
+                  {item.title}
+                </h4>
+                
+                <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
+                  <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
+                  <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
+                </div>
+              </div>
+            </a>
+          </motion.div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+            
+            
 
 
 
