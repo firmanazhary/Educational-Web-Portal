@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import HeroSection from '@/Layouts/HeroSection';
-import { Head,Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import {
     BookOpen,
     GraduationCap,
@@ -16,9 +16,7 @@ import {
     X,
     ChevronLeft,
     ChevronRight,
-    Maximize2,
-    Heart,
-    Users
+    Maximize2
 } from 'lucide-react';
 
 /* ==========================================
@@ -37,9 +35,38 @@ const PROGRAM_ICONS = {
     'wisuda & pelepasan': Award,
 };
 
-function getProgramIcon(title = '') {
-    const key = title.toLowerCase();
+function getProgramIcon(iconType = '', title = '') {
+    const key = (iconType || title).toLowerCase();
     return PROGRAM_ICONS[key] || Sparkles;
+}
+
+function resolveImageUrl(path) {
+    if (!path) return '/images/placeholder.jpg';
+    if (path.startsWith('http') || path.startsWith('/images') || path.startsWith('/storage')) {
+        return path;
+    }
+    return `/storage/${path}`;
+}
+
+function getEventGallery(item) {
+    const images = [];
+
+    // 1. Cover Utama
+    if (item.image) {
+        images.push(resolveImageUrl(item.image));
+    }
+
+    // 2. Kumpulan Galeri Foto
+    if (Array.isArray(item.gallery) && item.gallery.length > 0) {
+        item.gallery.forEach((img) => {
+            const url = resolveImageUrl(img);
+            if (!images.includes(url)) {
+                images.push(url);
+            }
+        });
+    }
+
+    return images.length > 0 ? images : ['/images/placeholder.jpg'];
 }
 
 export default function EventsIndex({
@@ -49,16 +76,16 @@ export default function EventsIndex({
     tagline = "AGENDA ATTAUFIQ",
     mosqueImage = "/images/hero/building-attaufiq.png"
 }) {
-    // STATE UNTUK POP-UP MODAL
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-    // Data Dummy Default jika database masih kosong
     const defaultPrograms = [
         {
             id: 1,
             title: "Tahfidz Day",
-            category: "TAHFIDZ & QUR'AN",
+            slug: "tahfidz-day",
+            type: "program",
+            icon_type: "tahfidz & qur'an",
             description: "Kegiatan istimewa untuk mengapresiasi perjuangan para siswa dalam menghafal Al-Qur'an serta menumbuhkan kecintaan terhadap kalamullah.",
             image: "/images/events/tahfidz.jpg",
             gallery: [
@@ -76,8 +103,10 @@ export default function EventsIndex({
         {
             id: 2,
             title: "Pekan Akademik & Sains",
-            category: "AKADEMIK",
-            description: "Ajang unjuk kebolehan siswa dalam bidang sains, matematika, dan teknologi berbasis karakter.",
+            slug: "pekan-akademik",
+            type: "event",
+            icon_type: "akademik",
+            description: "Ajang unjuk kebolehan siswa dalam bidang sains, matematika, dan teknologi berbasis karakter Islami.",
             image: "/images/events/akademik.jpg",
             gallery: [
                 "/images/events/akademik.jpg",
@@ -92,20 +121,20 @@ export default function EventsIndex({
 
     const displayPrograms = events && events.length > 0 ? events : defaultPrograms;
 
-    // Handler Buka Pop-up Detail
     const handleOpenModal = (program) => {
         setSelectedEvent(program);
         setActiveImageIndex(0);
     };
 
-    // Handler Navigasi "Next Event" di dalam Modal
     const handleNextEvent = () => {
         if (!selectedEvent) return;
-        const currentIndex = displayPrograms.findIndex(p => p.id === selectedEvent.id);
+        const currentIndex = displayPrograms.findIndex((p) => p.id === selectedEvent.id);
         const nextIndex = (currentIndex + 1) % displayPrograms.length;
         setSelectedEvent(displayPrograms[nextIndex]);
         setActiveImageIndex(0);
     };
+
+    const activeGallery = selectedEvent ? getEventGallery(selectedEvent) : [];
 
     return (
         <AppLayout title={`${title} - SIT At-Taufiq`}>
@@ -119,7 +148,7 @@ export default function EventsIndex({
                 mosqueImage={mosqueImage}
             />
 
-            {/* Canvas Utama - Warm Sand/Beige */}
+            {/* Canvas Utama */}
             <div className="bg-[#FAF4EB] min-h-screen py-12 px-4 sm:px-6 lg:px-8 text-[#051736] relative overflow-hidden">
                 <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
@@ -167,7 +196,7 @@ export default function EventsIndex({
             </div>
 
             {/* ==========================================
-                POP-UP MODAL DETAIL EVENT (100% PRESISI MOCKUP)
+                POP-UP MODAL DETAIL EVENT
             ========================================== */}
             {selectedEvent && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 md:p-10 bg-[#051736]/70 backdrop-blur-md transition-all duration-300">
@@ -193,31 +222,27 @@ export default function EventsIndex({
                                 {/* Main Image Display */}
                                 <div className="aspect-[16/10] w-full rounded-3xl overflow-hidden relative bg-slate-200 border border-[#E8DFC8] shadow-md group">
                                     <img
-                                        src={
-                                            selectedEvent.gallery && selectedEvent.gallery[activeImageIndex]
-                                                ? selectedEvent.gallery[activeImageIndex]
-                                                : (selectedEvent.image || '/images/placeholder.jpg')
-                                        }
+                                        src={activeGallery[activeImageIndex] || '/images/placeholder.jpg'}
                                         alt={selectedEvent.title}
                                         className="w-full h-full object-cover transition duration-500"
                                     />
 
-                                    {/* Expand Icon Top Right */}
+                                    {/* Expand Icon */}
                                     <div className="absolute top-4 right-4 p-2 bg-black/40 text-white rounded-xl backdrop-blur-sm opacity-80">
                                         <Maximize2 size={16} />
                                     </div>
 
-                                    {/* Prev / Next Slider Buttons */}
-                                    {selectedEvent.gallery && selectedEvent.gallery.length > 1 && (
+                                    {/* Prev / Next Buttons */}
+                                    {activeGallery.length > 1 && (
                                         <>
                                             <button
-                                                onClick={() => setActiveImageIndex((prev) => (prev === 0 ? selectedEvent.gallery.length - 1 : prev - 1))}
+                                                onClick={() => setActiveImageIndex((prev) => (prev === 0 ? activeGallery.length - 1 : prev - 1))}
                                                 className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#051736]/60 hover:bg-[#051736] text-white flex items-center justify-center transition"
                                             >
                                                 <ChevronLeft size={18} />
                                             </button>
                                             <button
-                                                onClick={() => setActiveImageIndex((prev) => (prev + 1) % selectedEvent.gallery.length)}
+                                                onClick={() => setActiveImageIndex((prev) => (prev + 1) % activeGallery.length)}
                                                 className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#051736]/60 hover:bg-[#051736] text-white flex items-center justify-center transition"
                                             >
                                                 <ChevronRight size={18} />
@@ -225,23 +250,26 @@ export default function EventsIndex({
                                         </>
                                     )}
 
-                                    {/* Image Counter Badge */}
+                                    {/* Counter Badge */}
                                     <div className="absolute bottom-4 right-4 px-3 py-1 bg-black/50 text-white text-[11px] font-mono rounded-full backdrop-blur-sm">
-                                        {activeImageIndex + 1} / {(selectedEvent.gallery && selectedEvent.gallery.length) || 1}
+                                        {activeImageIndex + 1} / {activeGallery.length}
                                     </div>
                                 </div>
 
-                                {/* Thumbnail Selector List */}
-                                {selectedEvent.gallery && selectedEvent.gallery.length > 1 && (
+                                {/* Thumbnail Selector */}
+                                {activeGallery.length > 1 && (
                                     <div className="grid grid-cols-4 gap-3 pt-1">
-                                        {selectedEvent.gallery.map((img, idx) => (
+                                        {activeGallery.map((imgUrl, idx) => (
                                             <button
                                                 key={idx}
                                                 onClick={() => setActiveImageIndex(idx)}
-                                                className={`aspect-[4/3] rounded-2xl overflow-hidden border-2 transition ${activeImageIndex === idx ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/30 scale-105' : 'border-[#E8DFC8] opacity-70 hover:opacity-100'
-                                                    }`}
+                                                className={`aspect-[4/3] rounded-2xl overflow-hidden border-2 transition ${
+                                                    activeImageIndex === idx 
+                                                        ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/30 scale-105' 
+                                                        : 'border-[#E8DFC8] opacity-70 hover:opacity-100'
+                                                }`}
                                             >
-                                                <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
+                                                <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-cover" />
                                             </button>
                                         ))}
                                     </div>
@@ -249,11 +277,12 @@ export default function EventsIndex({
 
                                 {/* Slider Indicator Dots */}
                                 <div className="flex justify-center space-x-1.5 pt-1">
-                                    {((selectedEvent.gallery) || [1]).map((_, i) => (
+                                    {activeGallery.map((_, i) => (
                                         <div
                                             key={i}
-                                            className={`h-2 rounded-full transition-all ${activeImageIndex === i ? 'w-6 bg-[#D4AF37]' : 'w-2 bg-[#E8DFC8]'
-                                                }`}
+                                            className={`h-2 rounded-full transition-all ${
+                                                activeImageIndex === i ? 'w-6 bg-[#D4AF37]' : 'w-2 bg-[#E8DFC8]'
+                                            }`}
                                         />
                                     ))}
                                 </div>
@@ -269,7 +298,7 @@ export default function EventsIndex({
                                         <BookOpen size={18} />
                                     </div>
                                     <span className="text-[10px] font-black tracking-widest text-[#8B6B13] uppercase bg-[#F3EBDD] border border-[#D4AF37]/40 px-3.5 py-1 rounded-full">
-                                        {selectedEvent.category || "PROGRAM UNGGULAN"}
+                                        {selectedEvent.icon_type || selectedEvent.type || "PROGRAM UNGGULAN"}
                                     </span>
                                 </div>
 
@@ -286,7 +315,7 @@ export default function EventsIndex({
                                     {selectedEvent.description}
                                 </p>
 
-                                {/* Highlight Points List */}
+                                {/* Highlight Points */}
                                 <div className="space-y-3 pt-2">
                                     {(selectedEvent.highlights || [
                                         { title: "Pembentukan Karakter", desc: "Menanamkan nilai-nilai keislaman dan adab luhur." },
@@ -304,20 +333,20 @@ export default function EventsIndex({
                                     ))}
                                 </div>
 
-                                {/* Next Event Action Button */}
-                                <div className="pt-4 flex items-center gap-3 ">
-                                   <Link
-        href={route('events.show', selectedEvent?.slug || 'tahfidz-day')}
-        className="flex-1 border border-[#051736] text-[#051736] hover:bg-[#051736] hover:text-white py-3 rounded-full text-xs font-bold transition text-center"
-    >
-        Halaman Penuh
-    </Link>
+                                {/* Action Buttons */}
+                                <div className="pt-4 flex items-center gap-3">
+                                    <Link
+                                        href={route('events.show', selectedEvent?.slug || 'detail')}
+                                        className="flex-1 border border-[#051736] text-[#051736] hover:bg-[#051736] hover:text-white py-3 rounded-full text-xs font-bold transition text-center"
+                                    >
+                                        Halaman Penuh
+                                    </Link>
                                     <button
                                         onClick={handleNextEvent}
-                                        className="w-full bg-[#051736] hover:bg-[#07327F] text-white py-3.5 rounded-full text-xs font-bold transition shadow-md flex items-center justify-center space-x-2 group"
+                                        className="flex-1 bg-[#051736] hover:bg-[#07327F] text-white py-3 rounded-full text-xs font-bold transition shadow-md flex items-center justify-center space-x-1.5 group"
                                     >
                                         <span>Next Events</span>
-                                        <ChevronRight size={16} className="group-hover:translate-x-1 transition" />
+                                        <ChevronRight size={15} className="group-hover:translate-x-1 transition" />
                                     </button>
                                 </div>
 
@@ -335,32 +364,27 @@ export default function EventsIndex({
 
 // Komponen Kartu Orb
 function ProgramOrbCard({ program, index, onClick }) {
-    const IconComponent = getProgramIcon(program.title);
+    const IconComponent = getProgramIcon(program.icon_type, program.title);
     const isEven = index % 2 === 0;
-
-    const imageUrl = program.image
-        ? (program.image.startsWith('http') || program.image.startsWith('/images')
-            ? program.image
-            : `/storage/${program.image}`)
-        : '/images/placeholder.jpg';
+    const coverUrl = resolveImageUrl(program.image);
 
     return (
         <div
             onClick={onClick}
-            className={`flex flex-col items-center transition-all duration-500 transform hover:-translate-y-2 cursor-pointer ${isEven ? 'lg:-translate-y-6' : 'lg:translate-y-6'
-                }`}
+            className={`flex flex-col items-center transition-all duration-500 transform hover:-translate-y-2 cursor-pointer ${
+                isEven ? 'lg:-translate-y-6' : 'lg:translate-y-6'
+            }`}
         >
             <div className="w-[260px] h-[340px] rounded-[130px] bg-[#FAF8F3] border border-[#E8DFC8] shadow-lg hover:shadow-2xl transition-all duration-500 p-3 flex flex-col justify-between items-center relative group overflow-hidden">
 
                 {/* 1. HALF-CIRCLE IMAGE BANNER */}
                 <div className="w-full h-[145px] rounded-t-[120px] rounded-b-2xl overflow-hidden relative bg-slate-200 block">
                     <img
-                        src={imageUrl}
+                        src={coverUrl}
                         alt={program.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                     />
 
-                    {/* Floating Badge Icon */}
                     <div className="absolute -bottom-1 left-4 w-9 h-9 rounded-full bg-[#FAF8F3] border border-[#E8DFC8] shadow-md flex items-center justify-center text-[#8B6B13] z-10">
                         <IconComponent size={16} />
                     </div>
