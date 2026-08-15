@@ -277,7 +277,7 @@ export default function Sd({
     title = "TK Page",
     subtitle = "Setiap jenjang, satu perjalanan. Bersama membangun generasi beradab.",
     tagline = "SEKOLAH ISLAM ATTAUFIQ",
-    patternImage = "/images/jenjang/heroTk.jpg",
+    patternImage = "/images/jenjang/heroSd.JPG",
     bgpilar = "/images/jenjang/bgpilar.png",
     bgpilarYellow = "/images/jenjang/bgpilaryellow.png",
     bgsection = "/images/jenjang/bgsection.png",
@@ -391,18 +391,18 @@ export default function Sd({
                             <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#D4AF37] via-amber-200 to-transparent shadow-[0_0_12px_#D4AF37]" />
 
                             <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white leading-tight tracking-wide">
-                                TK (Playgroup)
+                                SD (Sekolah Dasar)
                             </h1>
 
                             {/* Subtitle dengan Text-Gradient Emas */}
                             <h2 className="mt-6 text-3xl font-serif leading-snug bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent drop-shadow-sm">
-                                Pijakan Kokoh Menuju
+                                Membangun Karakter Unggul dan
                                 <br />
-                                Masa Depan Cemerlang.
+                                Pondasi Akademik yang Kuat.
                             </h2>
 
                             <p className="mt-8 text-lg leading-8 text-gray-200 font-light">
-                              Wadah tumbuh kembang anak yang menyenangkan untuk mengasah rasa ingin tahu, sosialisasi, dan pembiasaan akhlak terpuji sebelum melangkah ke jenjang sekolah dasar.
+                              Ruang belajar yang inspiratif untuk mengasah nalar kritis, mengembangkan potensi diri, serta menanamkan nilai-nilai Al-Qur'an dan kepemimpinan sejak dini.
                             </p>
                         </div>
 

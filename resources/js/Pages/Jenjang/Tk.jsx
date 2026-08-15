@@ -391,7 +391,7 @@ export default function Tk({
                             <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#D4AF37] via-amber-200 to-transparent shadow-[0_0_12px_#D4AF37]" />
 
                             <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white leading-tight tracking-wide">
-                                TK (Playgroup)
+                                TK (Taman Kanak)
                             </h1>
 
                             {/* Subtitle dengan Text-Gradient Emas */}
