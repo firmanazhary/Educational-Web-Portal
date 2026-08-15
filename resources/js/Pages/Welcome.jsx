@@ -17,6 +17,8 @@ import {
     Compass,
     UserPlus,
     Calendar,
+    ArrowRight,
+    ArrowUpRight
 } from 'lucide-react';
 
 // ==========================================
@@ -225,6 +227,7 @@ const dataKeunggulan = [
     }
 ];
 
+// PRESTASI
 const achievements = [
     { id: 1, title: 'Juara 1 Olimpiade Matematika', level: 'Tingkat Kota', unit: 'SD Attaufiq · 2026', angle: -90, distance: 220 },
     { id: 2, title: 'Juara Tahfiz 5 Juz', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: -45, distance: 260 },
@@ -235,6 +238,39 @@ const achievements = [
     { id: 7, title: 'Juara 1 Karya Ilmiah Remaja', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: 180, distance: 280 },
     { id: 8, title: 'Juara Harapan 1 Lomba Kaligrafi', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: -135, distance: 260 },
 ];
+
+// EVENT & PROGRAM
+// Data Event Terbaru
+  const events = [
+    {
+      id: 1,
+      title: '[ISI: Nama Event 1, mis. Tasmi Day]',
+      desc: '[ISI: ringkasan singkat event 1]',
+      link: '#',
+    },
+    {
+      id: 2,
+      title: '[ISI: Nama Event 2, mis. Business Day]',
+      desc: '[ISI: ringkasan singkat event 2]',
+      link: '#',
+    },
+  ];
+
+  // Data Program Unggulan
+  const programs = [
+    {
+      id: 1,
+      title: "[ISI: Nama Program 1, mis. Tahfizh Al-Qur'an]",
+      desc: '[ISI: ringkasan singkat program 1]',
+      link: '#',
+    },
+    {
+      id: 2,
+      title: '[ISI: Nama Program 2, mis. Interest & Talent Culture]',
+      desc: '[ISI: ringkasan singkat program 2]',
+      link: '#',
+    },
+  ];
 
 
 // Hook Animasi Scroll Reveal
@@ -516,6 +552,21 @@ export default function Home({ auth, posts = [], galleries = [] }) {
       y: 0,
       transition: { duration: 0.8, ease: [0.21, 1.11, 0.81, 0.99] },
     },
+  };
+
+//   UNTUK EVENT PROGRAM
+const sectionContainerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, staggerChildren: 0.15 },
+    },
+  };
+
+  const cardItemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
 
@@ -1498,6 +1549,160 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
       </motion.div>
     </section>
+
+            {/* 8. EVENT & PROGRAM SECTION */}
+            <section className="relative w-full bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] py-24 px-6 md:px-12 overflow-hidden">
+      
+      {/* Background Ornamen Soft Ambient */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-amber-200/25 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-sky-200/20 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14"
+          variants={sectionContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {/* ================= KOLOM KIRI: EVENT TERBARU ================= */}
+          <div className="flex flex-col space-y-6">
+            <div className="flex items-end justify-between border-b border-amber-200/60 pb-4">
+              <div>
+                <span className="text-xs font-bold tracking-widest text-amber-500 uppercase flex items-center gap-1.5 mb-1">
+                  <Calendar className="w-3.5 h-3.5" /> Agenda Sekolah
+                </span>
+                <h3 className="text-2xl md:text-3xl font-extrabold text-[#1B2B65]">
+                  Event Terbaru
+                </h3>
+              </div>
+              <a
+                href="#all-events"
+                className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
+              >
+                Lihat semua 
+                <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+            </div>
+
+            <div className="flex flex-col space-y-4">
+              {events.map((event) => (
+                <motion.a
+                  key={event.id}
+                  href={event.link}
+                  variants={cardItemVariants}
+                  whileHover={{ y: -4 }}
+                  className="group relative flex items-center p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-amber-100/80 shadow-[0_4px_20px_-2px_rgba(217,119,6,0.06)] hover:shadow-[0_12px_30px_-5px_rgba(245,158,11,0.15)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
+                >
+                  {/* Thumbnail Image dengan Efek Hover Zoom */}
+                  <div className="relative w-24 h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-tr from-[#6FA8DC] via-[#9DC6E8] to-[#FCEEAA] flex-shrink-0 overflow-hidden shadow-inner">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
+                    <div className="w-full h-full group-hover:scale-110 transition-transform duration-500 ease-out" />
+                  </div>
+
+                  {/* Teks Konten */}
+                  <div className="ml-4 md:ml-5 flex-1 pr-6">
+                    <span className="inline-block text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/50 mb-1.5">
+                      {event.date}
+                    </span>
+                    <h4 className="text-sm md:text-base font-bold text-slate-800 leading-snug group-hover:text-amber-600 transition-colors duration-200 line-clamp-1">
+                      {event.title}
+                    </h4>
+                    <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      {event.desc}
+                    </p>
+                  </div>
+
+                  {/* Icon Action Arrow */}
+                  <div className="absolute top-4 right-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+
+          {/* ================= KOLOM KANAN: PROGRAM UNGGULAN ================= */}
+          <div className="flex flex-col space-y-6">
+            <div className="flex items-end justify-between border-b border-amber-200/60 pb-4">
+              <div>
+                <span className="text-xs font-bold tracking-widest text-amber-500 uppercase flex items-center gap-1.5 mb-1">
+                  <Sparkles className="w-3.5 h-3.5" /> Pembentukan Karakter
+                </span>
+                <h3 className="text-2xl md:text-3xl font-extrabold text-[#1B2B65]">
+                  Program Unggulan
+                </h3>
+              </div>
+              <a
+                href="#all-programs"
+                className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
+              >
+                Lihat semua 
+                <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+            </div>
+
+            <div className="flex flex-col space-y-4">
+              {programs.map((program) => (
+                <motion.a
+                  key={program.id}
+                  href={program.link}
+                  variants={cardItemVariants}
+                  whileHover={{ y: -4 }}
+                  className="group relative flex items-center p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-amber-100/80 shadow-[0_4px_20px_-2px_rgba(217,119,6,0.06)] hover:shadow-[0_12px_30px_-5px_rgba(245,158,11,0.15)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
+                >
+                  {/* Thumbnail Image dengan Efek Hover Zoom */}
+                  <div className="relative w-24 h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] flex-shrink-0 overflow-hidden shadow-inner">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
+                    <div className="w-full h-full group-hover:scale-110 transition-transform duration-500 ease-out" />
+                  </div>
+
+                  {/* Teks Konten */}
+                  <div className="ml-4 md:ml-5 flex-1 pr-6">
+                    <span className="inline-block text-[10px] font-bold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-200/50 mb-1.5">
+                      {program.tag}
+                    </span>
+                    <h4 className="text-sm md:text-base font-bold text-slate-800 leading-snug group-hover:text-amber-600 transition-colors duration-200 line-clamp-1">
+                      {program.title}
+                    </h4>
+                    <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      {program.desc}
+                    </p>
+                  </div>
+
+                  {/* Icon Action Arrow */}
+                  <div className="absolute top-4 right-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ================= TOMBOL CTA UTAMA ================= */}
+        <motion.div
+          className="mt-14 flex justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
+          <motion.a
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            href="#lihat-semua-program"
+            className="group inline-flex items-center justify-center px-8 py-4 bg-[#1B2B65] hover:bg-[#142150] text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-950/15 transition-all duration-300"
+          >
+            <span>Lihat Semua Program</span>
+            <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" />
+          </motion.a>
+        </motion.div>
+      </div>
+    </section>
+            
 
 
 
