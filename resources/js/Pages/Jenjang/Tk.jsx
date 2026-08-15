@@ -277,7 +277,7 @@ export default function Tk({
     title = "TK Page",
     subtitle = "Setiap jenjang, satu perjalanan. Bersama membangun generasi beradab.",
     tagline = "SEKOLAH ISLAM ATTAUFIQ",
-    patternImage = "/images/jenjang/heroTk.jpg",
+    patternImage = "/images/jenjang/heroTk.png",
     bgpilar = "/images/jenjang/bgpilar.png",
     bgpilarYellow = "/images/jenjang/bgpilaryellow.png",
     bgsection = "/images/jenjang/bgsection.png",
