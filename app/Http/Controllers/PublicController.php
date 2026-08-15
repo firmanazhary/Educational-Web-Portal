@@ -54,4 +54,9 @@ class PublicController extends Controller
     {
         return Inertia::render('Jenjang/Pg');
     }
+
+    public function tk()
+    {
+        return Inertia::render('Jenjang/Tk');
+    }
 }
