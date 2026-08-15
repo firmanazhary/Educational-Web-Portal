@@ -14,7 +14,9 @@ import {
     Sun,
     Star,
     Smile,
-    Compass
+    Compass,
+    UserPlus,
+    Calendar,
 } from 'lucide-react';
 
 // ==========================================
@@ -493,6 +495,28 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     const nodeOpacity = useTransform(achievementScroll, [0.3, 0.55], [0, 1]);
     const cardOpacity = useTransform(achievementScroll, [0.6, 0.85], [0, 1]);
     const cardScale = useTransform(achievementScroll, [0.6, 0.85], [0.8, 1]);
+
+
+    // UNTUK CTA SECTION
+    const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.21, 1.11, 0.81, 0.99] },
+    },
+  };
 
 
 
@@ -1372,7 +1396,108 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 </section>
 
             {/* 7. CTA ATQ SECTION */}
+            <section className="relative w-full min-h-screen bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] flex items-center justify-center py-20 px-6 md:px-12 overflow-hidden">
+      
+      {/* ================= ORNAMEN BACKGROUND ================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Glow Soft Ambient */}
+        <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-sky-200/30 rounded-full blur-[120px]" />
 
+        {/* Ornamen Bintang Melayang (Floating Sparkles) */}
+        <div className="absolute top-16 left-1/4 w-3 h-3 bg-amber-400 rounded-full blur-[1px] opacity-70 animate-pulse" />
+        <div className="absolute bottom-24 left-1/3 w-2 h-2 bg-orange-400 rounded-full opacity-60 animate-ping" />
+        <div className="absolute top-1/3 right-1/4 w-2.5 h-2.5 bg-amber-300 rounded-full blur-[1px] opacity-80 animate-bounce" />
+      </div>
+
+      {/* ================= KONTEN UTAMA ================= */}
+      <motion.div
+        className="container mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center justify-items-center relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        
+        {/* KONTEN KIRI (TEKS & TOMBOL) */}
+        <motion.div className="flex flex-col items-start justify-center space-y-6 max-w-xl w-full" variants={itemVariants}>
+          
+          {/* Sub-heading Glassmorphism */}
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 backdrop-blur-md text-amber-600 font-bold text-xs tracking-wider uppercase shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-spin" style={{ animationDuration: '6s' }} />
+            <span>PERJALANAN HEBAT DIMULAI DI SINI</span>
+          </div>
+
+          {/* Heading Utama */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.12]">
+            Saatnya Memulai Perjalanan{' '}
+            <span className="bg-gradient-to-r from-amber-500 to-orange-400 bg-clip-text text-transparent">
+              Ananda
+            </span>
+          </h1>
+
+          {/* Deskripsi */}
+          <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
+            Bersama Attaufiq, tumbuh dalam ilmu, akhlak, dan prestasi untuk masa depan yang gemilang.
+          </p>
+
+          {/* Group Tombol Aksi */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full pt-3">
+            {/* Tombol Utama */}
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              href="#daftar"
+              className="inline-flex items-center justify-center px-7 py-4 bg-[#1B2B65] hover:bg-[#142150] text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-950/20 transition-colors duration-300"
+            >
+              <UserPlus className="w-4 h-4 mr-2.5 text-amber-300" />
+              <span>Daftarkan Ananda — Mulai Perjalanan Hebatnya</span>
+            </motion.a>
+
+            {/* Tombol Sekunder */}
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              href="#kunjungan"
+              className="inline-flex items-center justify-center px-7 py-4 bg-white/80 hover:bg-white text-slate-800 text-sm font-semibold rounded-full border border-slate-200/80 shadow-sm backdrop-blur-sm transition-all duration-300"
+            >
+              <Calendar className="w-4 h-4 mr-2.5 text-amber-600" />
+              <span>Jadwalkan Kunjungan</span>
+            </motion.a>
+          </div>
+        </motion.div>
+
+        {/* KONTEN KANAN (VISUAL KARTU & ORNAMEN) */}
+        <motion.div className="relative flex items-center justify-center w-full" variants={itemVariants}>
+          
+          {/* Layer Glow Belakang Kartu */}
+          <div className="absolute w-[280px] h-[360px] md:w-[360px] md:h-[460px] bg-amber-400/20 rounded-[50px] blur-2xl" />
+
+          {/* Ornamen 1: Ring Statis */}
+          <div className="absolute w-[310px] h-[390px] md:w-[390px] md:h-[490px] border border-amber-300/60 rounded-[44px] -rotate-6 pointer-events-none shadow-sm" />
+          
+          {/* Ornamen 2: Ring Berputar Hapus Putus (Dashed Rotating Border) */}
+          <div className="absolute w-[330px] h-[410px] md:w-[410px] md:h-[510px] border border-dashed border-amber-400/50 rounded-[48px] animate-[spin_25s_linear_infinite] pointer-events-none" />
+
+          {/* Kartu Utama Gradien */}
+          <motion.div 
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.3 }}
+            className="relative z-10 w-[300px] h-[380px] md:w-[380px] md:h-[480px] rounded-[36px] bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] shadow-2xl shadow-amber-900/10 border border-white/40 overflow-hidden flex flex-col justify-between p-6 text-center text-white/90"
+          >
+            {/* Tag Badge Atas Kartu */}
+            <div className="self-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[11px] font-medium tracking-wide drop-shadow-sm">
+              Foto keluarga — berjalan menuju matahari
+            </div>
+
+            {/* Ilustrasi Ornamen Sunburst Kecil di Dalam Kartu */}
+            <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-amber-300/30 rounded-full blur-xl pointer-events-none" />
+          </motion.div>
+
+        </motion.div>
+
+      </motion.div>
+    </section>
 
 
 
