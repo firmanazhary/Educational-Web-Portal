@@ -1203,169 +1203,177 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
             {/* 6. PRESTASI SISWA ATQ SECTION */}
             <section
-  id="achievements"
-  ref={achievementRef}
-  className="relative h-[300vh] bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] w-full"
+    id="achievements"
+    ref={achievementRef}
+    className="relative h-[300vh] bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] w-full"
 >
-  {/* Container Sticky */}
-  <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-
-    {/* 1. ORNAMEN BACKGROUND */}
-    <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-      <div className="w-[600px] h-[600px] bg-amber-200/30 rounded-full blur-[120px] animate-pulse" />
-      <div className="w-[350px] h-[350px] bg-orange-300/20 rounded-full blur-[80px]" />
+    {/* HEADER SECTION (JUDUL & DESKRIPSI) - RATA TENGAH HORIZONTAL */}
+    <div className="absolute top-8 md:top-12 left-1/2 -translate-x-1/2 z-30 text-center max-w-3xl px-4 pointer-events-none w-full">
+      <span className="text-xs font-bold tracking-widest text-amber-500 uppercase mb-2 block">
+        PRESTASI SISWA
+      </span>
+      <h2 className="text-xl md:text-3xl font-extrabold text-slate-900 leading-tight">
+        Mendukung setiap siswa untuk berkembang, berprestasi, dan tumbuh menjadi generasi yang cerdas, mandiri, serta berlandaskan nilai–nilai Islami.
+      </h2>
     </div>
 
-    {/* 2. ORNAMEN BINTANG KECIL MELAYANG */}
-    <div className="absolute inset-0 pointer-events-none z-0">
-      {[
-        { top: '15%', left: '20%', size: 'w-2 h-2', delay: '0s' },
-        { top: '25%', right: '18%', size: 'w-3 h-3', delay: '1s' },
-        { bottom: '20%', left: '15%', size: 'w-2.5 h-2.5', delay: '2s' },
-        { bottom: '15%', right: '22%', size: 'w-2 h-2', delay: '0.5s' },
-      ].map((sparkle, idx) => (
-        <div
-          key={idx}
-          className={`absolute ${sparkle.size} bg-amber-400 rounded-full blur-[1px] opacity-60 animate-ping`}
-          style={{ top: sparkle.top, left: sparkle.left, right: sparkle.right, bottom: sparkle.bottom, animationDelay: sparkle.delay, animationDuration: '3s' }}
-        />
-      ))}
-    </div>
+    {/* Container Sticky */}
+    <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
 
-    {/* 3. SVG CONNECTOR & DOTS (FIXED: GARIS KEMBALI MUNCUL SEMUA) */}
-    <svg 
-      className="absolute inset-0 w-full h-full pointer-events-none z-0"
-      viewBox="-500 -500 1000 1000"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <defs>
-        {/* Filter Glow Ujung Node */}
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-          <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
+        {/* 1. ORNAMEN BACKGROUND */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
+            <div className="w-[600px] h-[600px] bg-amber-200/30 rounded-full blur-[120px] animate-pulse" />
+            <div className="w-[350px] h-[350px] bg-orange-300/20 rounded-full blur-[80px]" />
+        </div>
 
-      <g>
-        {achievements.map((item) => {
-          const rad = (item.angle * Math.PI) / 180;
-          const lineDistance = item.distance * 1.1; 
-          const endX = Math.cos(rad) * lineDistance;
-          const endY = Math.sin(rad) * lineDistance;
-          const midX = endX * 0.5;
-          const midY = endY * 0.5;
+        {/* 2. ORNAMEN BINTANG KECIL MELAYANG */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+            {[
+                { top: '15%', left: '20%', size: 'w-2 h-2', delay: '0s' },
+                { top: '25%', right: '18%', size: 'w-3 h-3', delay: '1s' },
+                { bottom: '20%', left: '15%', size: 'w-2.5 h-2.5', delay: '2s' },
+                { bottom: '15%', right: '22%', size: 'w-2 h-2', delay: '0.5s' },
+            ].map((sparkle, idx) => (
+                <div
+                    key={idx}
+                    className={`absolute ${sparkle.size} bg-amber-400 rounded-full blur-[1px] opacity-60 animate-ping`}
+                    style={{ top: sparkle.top, left: sparkle.left, right: sparkle.right, bottom: sparkle.bottom, animationDelay: sparkle.delay, animationDuration: '3s' }}
+                />
+            ))}
+        </div>
 
-          return (
-            <g key={item.id}>
-              {/* Stroke diganti ke Solid Amber agar tidak terputus/hilang akibat masalah koordinat gradien SVG */}
-              <motion.line
-                x1="0"
-                y1="0"
-                x2={endX}
-                y2={endY}
-                stroke="#FCD34D"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                style={{ pathLength: lineScale }}
-              />
-              {/* Node Tengah */}
-              <motion.circle
-                cx={midX}
-                cy={midY}
-                r="5"
-                fill="#FBBF24"
-                style={{ opacity: nodeOpacity }}
-              />
-              {/* Node Ujung Berpendar */}
-              <motion.circle
-                cx={endX}
-                cy={endY}
-                r="6.5"
-                fill="#F59E0B"
-                filter="url(#glow)"
-                style={{ opacity: nodeOpacity }}
-              />
+        {/* 3. SVG CONNECTOR & DOTS */}
+        <svg
+            className="absolute inset-0 w-full h-full pointer-events-none z-0"
+            viewBox="-500 -500 1000 1000"
+            preserveAspectRatio="xMidYMid meet"
+        >
+            <defs>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+
+            <g>
+                {achievements.map((item) => {
+                    const rad = (item.angle * Math.PI) / 180;
+                    const lineDistance = item.distance * 1.1;
+                    const endX = Math.cos(rad) * lineDistance;
+                    const endY = Math.sin(rad) * lineDistance;
+                    const midX = endX * 0.5;
+                    const midY = endY * 0.5;
+
+                    return (
+                        <g key={item.id}>
+                            <motion.line
+                                x1="0"
+                                y1="0"
+                                x2={endX}
+                                y2={endY}
+                                stroke="#FCD34D"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                style={{ pathLength: lineScale }}
+                            />
+                            <motion.circle
+                                cx={midX}
+                                cy={midY}
+                                r="5"
+                                fill="#FBBF24"
+                                style={{ opacity: nodeOpacity }}
+                            />
+                            <motion.circle
+                                cx={endX}
+                                cy={endY}
+                                r="6.5"
+                                fill="#F59E0B"
+                                filter="url(#glow)"
+                                style={{ opacity: nodeOpacity }}
+                            />
+                        </g>
+                    );
+                })}
             </g>
-          );
-        })}
-      </g>
-    </svg>
+        </svg>
 
-    {/* 4. MATAHARI UTAMA */}
-    <div className="relative z-10 flex items-center justify-center">
-      <div className="absolute w-36 h-36 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
-      <div className="absolute w-44 h-44 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
-      <div className="absolute w-28 h-28 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
+        {/* 4. MATAHARI UTAMA */}
+        <div className="relative z-10 flex items-center justify-center">
+            <div className="absolute w-36 h-36 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
+            <div className="absolute w-44 h-44 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
+            <div className="absolute w-28 h-28 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
 
-      <img
-        src="/images/home/matahari.png"
-        alt="Matahari Attaufiq"
-        className="w-24 h-24 min-w-[96px] min-h-[96px] object-contain relative z-10 drop-shadow-[0_0_30px_rgba(251,191,36,0.9)] pointer-events-none transition-transform duration-500 hover:scale-110"
-      />
+            <img
+                src="/images/home/matahari.png"
+                alt="Matahari Attaufiq"
+                className="w-24 h-24 min-w-[96px] min-h-[96px] object-contain relative z-10 drop-shadow-[0_0_30px_rgba(251,191,36,0.9)] pointer-events-none transition-transform duration-500 hover:scale-110"
+            />
+        </div>
+
+        {/* 5. LAYER CARD PRESTASI */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center z-20">
+            {achievements.map((item) => {
+                const rad = (item.angle * Math.PI) / 180;
+                const isVertical = item.angle === -90 || item.angle === 90;
+                const isHorizontal = item.angle === 0 || item.angle === 180;
+
+                let radiusX = 390;
+                let radiusY = 230;
+                if (isVertical) radiusY = 240;
+                if (isHorizontal) radiusX = 430;
+
+                const x = Math.cos(rad) * radiusX;
+                const y = Math.sin(rad) * radiusY;
+
+                return (
+                    <motion.div
+                        key={item.id}
+                        className="absolute w-52 p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(217,119,6,0.1)] border border-amber-100/80 hover:border-amber-300 pointer-events-auto transition-all duration-300 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.25)] hover:-translate-y-1"
+                        style={{
+                            x,
+                            y,
+                            opacity: cardOpacity,
+                            scale: cardScale,
+                        }}
+                    >
+                        <a
+                            href={item.link || `/prestasi/${item.id}`}
+                            className="group block cursor-pointer relative overflow-hidden rounded-xl"
+                        >
+                            <div className="w-full h-24 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-300">
+                                <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                            </div>
+
+                            <div className="px-0.5">
+                                <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
+                                    {item.level}
+                                </div>
+
+                                <h4 className="text-xs font-bold text-slate-800 leading-snug transition-colors duration-200 group-hover:text-amber-600 line-clamp-2">
+                                    {item.title}
+                                </h4>
+
+                                <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
+                                    <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
+                                    <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </motion.div>
+                );
+            })}
+        </div>
+
     </div>
-
-    {/* 5. LAYER CARD PRESTASI */}
-    <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center z-20">
-      {achievements.map((item) => {
-        const rad = (item.angle * Math.PI) / 180;
-        const isVertical = item.angle === -90 || item.angle === 90;
-        const isHorizontal = item.angle === 0 || item.angle === 180;
-        
-        let radiusX = 390;
-        let radiusY = 230;
-        if (isVertical) radiusY = 240;
-        if (isHorizontal) radiusX = 430;
-
-        const x = Math.cos(rad) * radiusX;
-        const y = Math.sin(rad) * radiusY;
-
-        return (
-          <motion.div
-            key={item.id}
-            className="absolute w-52 p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(217,119,6,0.1)] border border-amber-100/80 hover:border-amber-300 pointer-events-auto transition-all duration-300 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.25)] hover:-translate-y-1"
-            style={{
-              x,
-              y,
-              opacity: cardOpacity,
-              scale: cardScale,
-            }}
-          >
-            <a 
-              href={item.link || `/prestasi/${item.id}`} 
-              className="group block cursor-pointer relative overflow-hidden rounded-xl"
-            >
-              <div className="w-full h-24 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-300">
-                <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              </div>
-              
-              <div className="px-0.5">
-                <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
-                  {item.level}
-                </div>
-
-                <h4 className="text-xs font-bold text-slate-800 leading-snug transition-colors duration-200 group-hover:text-amber-600 line-clamp-2">
-                  {item.title}
-                </h4>
-                
-                <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
-                  <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
-                  <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
-                </div>
-              </div>
-            </a>
-          </motion.div>
-        );
-      })}
-    </div>
-
-  </div>
 </section>
-            
-            
+
+            {/* 7. CTA ATQ SECTION */}
+
+
 
 
 
