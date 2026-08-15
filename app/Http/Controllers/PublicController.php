@@ -69,4 +69,9 @@ class PublicController extends Controller
     {
         return Inertia::render('Jenjang/Smp');
     }
+
+    public function sma()
+    {
+        return Inertia::render('Jenjang/Sma');
+    }
 }

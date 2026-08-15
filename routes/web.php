@@ -15,6 +15,7 @@ Route::get('/pg', [PublicController::class, 'pg'])->name('pg');
 Route::get('/tk', [PublicController::class, 'tk'])->name('tk');
 Route::get('/sd', [PublicController::class, 'sd'])->name('sd');
 Route::get('/smp', [PublicController::class, 'smp'])->name('smp');
+Route::get('/sma', [PublicController::class, 'sma'])->name('sma');
 Route::get('/sejarah', [PublicController::class, 'sejarah'])->name('sejarah');
 Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
