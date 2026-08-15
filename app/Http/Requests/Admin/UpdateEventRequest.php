@@ -23,14 +23,23 @@ class UpdateEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => 'required|string|max:255',
-            'slug'        => ['required', 'string', 'max:255', Rule::unique('events', 'slug')->ignore($this->event)],
-            'type'        => 'required|in:event,program',
-            'description' => 'nullable|string|max:500',
-            'content'     => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'icon_type'   => 'nullable|string|max:100',
-            'is_active'   => 'boolean',
+            'title' => ['required', 'string', 'max:255'],
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('events', 'slug')->ignore($eventId),
+            ],
+            'type' => ['required', 'in:event,program'],
+            'description' => ['nullable', 'string', 'max:500'],
+            'content' => ['nullable', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'icon_type' => ['nullable', 'string', 'max:100'],
+            'is_active' => ['boolean'],
+
+            // Aturan untuk Multi-Upload Slider Gallery
+            'gallery' => ['nullable', 'array'],
+            'gallery.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ];
     }
 }

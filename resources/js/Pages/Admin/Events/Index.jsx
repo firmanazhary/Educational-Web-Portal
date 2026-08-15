@@ -1,131 +1,182 @@
 import React from 'react';
-import AppLayout from '@/Layouts/AppLayout';
-import { Head, Link, router } from '@inertiajs/react';
-import { Plus, Edit, Trash2, CheckCircle, XCircle, Calendar, Sparkles } from 'lucide-react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head, Link, router, usePage } from '@inertiajs/react';
+import { Plus, Edit, Trash2, Images, Eye, EyeOff } from 'lucide-react';
 
-export default function EventIndex({ events }) {
-    const handleDelete = (id, title) => {
-        if (confirm(`Apakah Anda yakin ingin menghapus "${title}"?`)) {
-            router.delete(route('admin.events.destroy', id));
+export default function EventIndex({ auth, events }) {
+    const { flash } = usePage().props;
+
+    const handleDelete = (event) => {
+        if (confirm(`Yakin ingin menghapus kegiatan "${event.title}"?`)) {
+            router.delete(route('admin.events.destroy', event.id));
         }
     };
 
+    const resolveImageUrl = (path) => {
+        if (!path) return '/images/placeholder.jpg';
+        if (path.startsWith('http') || path.startsWith('/images') || path.startsWith('/storage')) {
+            return path;
+        }
+        return `/storage/${path}`;
+    };
+
     return (
-        <AppLayout title="Kelola Events & Program">
-            <Head title="Kelola Events & Program | Admin" />
+        <AuthenticatedLayout
+            user={auth.user}
+            header={<h2 className="font-semibold text-xl text-[#07327F] leading-tight font-serif">Kelola Program & Events</h2>}
+        >
+            <Head title="Admin - Program & Events" />
 
-            <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
-                
-                {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <div>
-                        <h1 className="text-2xl font-bold text-slate-800 font-serif">Kelola Events & Program</h1>
-                        <p className="text-sm text-slate-500">Tambah, ubah, atau hapus kegiatan & program sekolah.</p>
-                    </div>
+            <div className="py-12 bg-[#FAF8F5] min-h-screen">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
-                    <Link
-                        href={route('admin.events.create')}
-                        className="inline-flex items-center space-x-2 bg-[#051736] hover:bg-[#0a2554] text-white px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-md"
-                    >
-                        <Plus size={16} />
-                        <span>Tambah Program Baru</span>
-                    </Link>
-                </div>
+                    {/* Flash Message */}
+                    {flash?.message && (
+                        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl shadow-sm flex items-center space-x-2 text-sm font-medium">
+                            <span>✅</span>
+                            <span>{flash.message}</span>
+                        </div>
+                    )}
 
-                {/* Table Data */}
-                <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left text-xs text-slate-600">
-                            <thead className="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 uppercase tracking-wider text-[10px]">
-                                <tr>
-                                    <th className="px-6 py-4">Gambar</th>
-                                    <th className="px-6 py-4">Judul & Slug</th>
-                                    <th className="px-6 py-4">Tipe</th>
-                                    <th className="px-6 py-4">Status</th>
-                                    <th className="px-6 py-4 text-right">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-100">
-                                {events.data.length > 0 ? (
-                                    events.data.map((item) => (
-                                        <tr key={item.id} className="hover:bg-slate-50/80 transition">
-                                            {/* Gambar */}
-                                            <td className="px-6 py-4">
-                                                <div className="w-14 h-14 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0">
-                                                    <img
-                                                        src={item.image ? `/storage/${item.image}` : '/images/placeholder.jpg'}
-                                                        alt={item.title}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                </div>
-                                            </td>
+                    {/* Tabel Card Container */}
+                    <div className="bg-white rounded-3xl border border-[#E8DFC8] shadow-sm overflow-hidden p-6">
+                        
+                        {/* Header Section */}
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-100 pb-4">
+                            <div>
+                                <h3 className="text-lg font-bold font-serif text-[#07327F]">Daftar Program & Kegiatan</h3>
+                                <p className="text-xs text-slate-500 font-light mt-0.5">Kelola seluruh kegiatan tematik dan program unggulan sekolah.</p>
+                            </div>
+                            <Link
+                                href={route('admin.events.create')}
+                                className="inline-flex items-center space-x-2 bg-[#07327F] hover:bg-[#051C42] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition shadow-md self-start sm:self-auto"
+                            >
+                                <Plus size={16} />
+                                <span>Tambah Baru</span>
+                            </Link>
+                        </div>
 
-                                            {/* Title & Slug */}
-                                            <td className="px-6 py-4">
-                                                <p className="font-bold text-slate-800 text-sm">{item.title}</p>
-                                                <p className="text-slate-400 text-[11px] font-mono">/events/{item.slug}</p>
-                                            </td>
+                        {/* Table */}
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left text-sm text-slate-600 border-collapse">
+                                <thead>
+                                    <tr className="bg-slate-50/80 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                                        <th className="p-4 rounded-l-xl">Cover & Judul</th>
+                                        <th className="p-4">Tipe</th>
+                                        <th className="p-4">Galeri Slider</th>
+                                        <th className="p-4">Status</th>
+                                        <th className="p-4 text-right rounded-r-xl">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-100">
+                                    {events.data && events.data.length > 0 ? (
+                                        events.data.map((item) => {
+                                            const galleryCount = Array.isArray(item.gallery) ? item.gallery.length : 0;
+                                            return (
+                                                <tr key={item.id} className="hover:bg-slate-50/80 transition duration-150">
+                                                    
+                                                    {/* Cover & Title */}
+                                                    <td className="p-4">
+                                                        <div className="flex items-center space-x-3.5">
+                                                            <div className="w-12 h-12 rounded-2xl overflow-hidden bg-slate-100 border border-[#E8DFC8] flex-shrink-0 shadow-sm">
+                                                                <img
+                                                                    src={resolveImageUrl(item.image)}
+                                                                    alt={item.title}
+                                                                    className="w-full h-full object-cover"
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <p className="font-bold text-[#07327F] text-sm">{item.title}</p>
+                                                                <p className="text-[11px] text-slate-400 font-mono mt-0.5">/{item.slug}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
 
-                                            {/* Tipe */}
-                                            <td className="px-6 py-4">
-                                                <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                                                    item.type === 'program' 
-                                                        ? 'bg-amber-100 text-amber-800 border border-amber-200' 
-                                                        : 'bg-blue-100 text-blue-800 border border-blue-200'
-                                                }`}>
-                                                    {item.type}
-                                                </span>
-                                            </td>
+                                                    {/* Type */}
+                                                    <td className="p-4">
+                                                        <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                                                            item.type === 'program'
+                                                                ? 'bg-amber-50 text-[#8B6B13] border border-amber-200/60'
+                                                                : 'bg-blue-50 text-[#07327F] border border-blue-200/60'
+                                                        }`}>
+                                                            {item.type === 'program' ? 'Program' : 'Event'}
+                                                        </span>
+                                                    </td>
 
-                                            {/* Status */}
-                                            <td className="px-6 py-4">
-                                                {item.is_active ? (
-                                                    <span className="inline-flex items-center space-x-1 text-emerald-600 font-semibold">
-                                                        <CheckCircle size={14} />
-                                                        <span>Aktif</span>
-                                                    </span>
-                                                ) : (
-                                                    <span className="inline-flex items-center space-x-1 text-slate-400 font-semibold">
-                                                        <XCircle size={14} />
-                                                        <span>Draft</span>
-                                                    </span>
-                                                )}
-                                            </td>
+                                                    {/* Gallery Count */}
+                                                    <td className="p-4">
+                                                        <div className="flex items-center space-x-1.5 text-slate-600 text-xs font-semibold">
+                                                            <Images size={15} className="text-[#8B6B13]" />
+                                                            <span>{galleryCount} Foto</span>
+                                                        </div>
+                                                    </td>
 
-                                            {/* Actions */}
-                                            <td className="px-6 py-4 text-right">
-                                                <div className="flex items-center justify-end space-x-2">
-                                                    <Link
-                                                        href={route('admin.events.edit', item.id)}
-                                                        className="p-2 text-slate-600 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 rounded-lg transition"
-                                                        title="Edit"
-                                                    >
-                                                        <Edit size={14} />
-                                                    </Link>
-                                                    <button
-                                                        onClick={() => handleDelete(item.id, item.title)}
-                                                        className="p-2 text-slate-600 hover:text-rose-600 bg-slate-100 hover:bg-rose-50 rounded-lg transition"
-                                                        title="Hapus"
-                                                    >
-                                                        <Trash2 size={14} />
-                                                    </button>
-                                                </div>
+                                                    {/* Status */}
+                                                    <td className="p-4">
+                                                        {item.is_active ? (
+                                                            <span className="inline-flex items-center space-x-1 text-emerald-600 font-bold text-xs">
+                                                                <Eye size={14} />
+                                                                <span>Aktif</span>
+                                                            </span>
+                                                        ) : (
+                                                            <span className="inline-flex items-center space-x-1 text-slate-400 font-medium text-xs">
+                                                                <EyeOff size={14} />
+                                                                <span>Draft</span>
+                                                            </span>
+                                                        )}
+                                                    </td>
+
+                                                    {/* Actions */}
+                                                    <td className="p-4 text-right space-x-3 whitespace-nowrap">
+                                                        <Link
+                                                            href={route('admin.events.edit', item.id)}
+                                                            className="text-amber-600 hover:text-amber-800 font-bold text-xs uppercase tracking-wider transition"
+                                                        >
+                                                            Edit
+                                                        </Link>
+                                                        <button
+                                                            onClick={() => handleDelete(item)}
+                                                            className="text-rose-500 hover:text-rose-700 font-bold text-xs uppercase tracking-wider transition"
+                                                        >
+                                                            Hapus
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+                                            );
+                                        })
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="5" className="p-8 text-center text-slate-400 text-sm italic">
+                                                Belum ada data program atau kegiatan. Silakan tambahkan data baru.
                                             </td>
                                         </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan="5" className="px-6 py-8 text-center text-slate-400">
-                                            Belum ada data events/program.
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
 
+                        {/* Pagination Links */}
+                        {events.links && events.links.length > 3 && (
+                            <div className="pt-6 border-t border-slate-100 flex justify-center space-x-1">
+                                {events.links.map((link, i) => (
+                                    <Link
+                                        key={i}
+                                        href={link.url || '#'}
+                                        dangerouslySetInnerHTML={{ __html: link.label }}
+                                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold ${
+                                            link.active
+                                                ? 'bg-[#07327F] text-white shadow-sm'
+                                                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                        } ${!link.url && 'opacity-40 cursor-not-allowed'}`}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                </div>
             </div>
-        </AppLayout>
+        </AuthenticatedLayout>
     );
 }

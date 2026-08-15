@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    
+
     use HasFactory;
     protected $fillable = [
         'title',
@@ -18,5 +18,9 @@ class Event extends Model
         'image',
         'icon_type',
         'is_active',
+        'gallery',
+    ];
+    protected $casts = [
+        'gallery' => 'array',
     ];
 }
