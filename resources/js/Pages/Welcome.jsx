@@ -19,6 +19,7 @@ import {
     Calendar,
     ArrowRight,
     ArrowUpRight,
+    BookOpenText, Lightbulb, Target, Handshake,
 } from 'lucide-react';
 
 // ==========================================
@@ -241,62 +242,62 @@ const achievements = [
 
 // EVENT & PROGRAM
 // Data Event Terbaru
-  const events = [
+const events = [
     {
-      id: 1,
-      title: '[ISI: Nama Event 1, mis. Tasmi Day]',
-      desc: '[ISI: ringkasan singkat event 1]',
-      link: '#',
+        id: 1,
+        title: '[ISI: Nama Event 1, mis. Tasmi Day]',
+        desc: '[ISI: ringkasan singkat event 1]',
+        link: '#',
     },
     {
-      id: 2,
-      title: '[ISI: Nama Event 2, mis. Business Day]',
-      desc: '[ISI: ringkasan singkat event 2]',
-      link: '#',
+        id: 2,
+        title: '[ISI: Nama Event 2, mis. Business Day]',
+        desc: '[ISI: ringkasan singkat event 2]',
+        link: '#',
     },
-  ];
+];
 
-  // Data Program Unggulan
-  const programs = [
+// Data Program Unggulan
+const programs = [
     {
-      id: 1,
-      title: "[ISI: Nama Program 1, mis. Tahfizh Al-Qur'an]",
-      desc: '[ISI: ringkasan singkat program 1]',
-      link: '#',
+        id: 1,
+        title: "[ISI: Nama Program 1, mis. Tahfizh Al-Qur'an]",
+        desc: '[ISI: ringkasan singkat program 1]',
+        link: '#',
     },
     {
-      id: 2,
-      title: '[ISI: Nama Program 2, mis. Interest & Talent Culture]',
-      desc: '[ISI: ringkasan singkat program 2]',
-      link: '#',
+        id: 2,
+        title: '[ISI: Nama Program 2, mis. Interest & Talent Culture]',
+        desc: '[ISI: ringkasan singkat program 2]',
+        link: '#',
     },
-  ];
+];
 
 //   DATA BLOG
 // Data Artikel Blog (Bisa disesuaikan / dipasang props `posts`)
-  const articles = [
+const articles = [
     {
-      id: 1,
-      title: '[ISI: Judul artikel contoh]',
-      summary: '[ISI: ringkasan singkat artikel]',
-      date: '10 Ags 2026',
-      link: '#',
+        id: 1,
+        title: '[ISI: Judul artikel contoh]',
+        summary: '[ISI: ringkasan singkat artikel]',
+        date: '10 Ags 2026',
+        link: '#',
     },
     {
-      id: 2,
-      title: '[ISI: Judul artikel contoh 2]',
-      summary: '[ISI: ringkasan singkat artikel 2]',
-      date: '05 Ags 2026',
-      link: '#',
+        id: 2,
+        title: '[ISI: Judul artikel contoh 2]',
+        summary: '[ISI: ringkasan singkat artikel 2]',
+        date: '05 Ags 2026',
+        link: '#',
     },
     {
-      id: 3,
-      title: '[ISI: Judul artikel contoh 3]',
-      summary: '[ISI: ringkasan singkat artikel 3]',
-      date: '01 Ags 2026',
-      link: '#',
+        id: 3,
+        title: '[ISI: Judul artikel contoh 3]',
+        summary: '[ISI: ringkasan singkat artikel 3]',
+        date: '01 Ags 2026',
+        link: '#',
     },
-  ];
+];
 
 
 // Hook Animasi Scroll Reveal
@@ -381,45 +382,29 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     // Data 4 Card Aktivitas
     const activities = [
         {
-            title: "Tasmi Day",
-            desc: "Kegiatan penyimakan hafalan Al-Qur'an siswa untuk melatih hafalan dan kepercayaan diri.",
-            image: "/images/hero/tasmi-day.jpg",
-            icon: (
-                <svg className="w-5 h-5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-            )
+            icon: <BookOpenText className="w-6 h-6 text-[#1A2D6C]" />, // Sesuaikan warna ikon di sini
+            title: 'Tahfizh Day',
+            desc: 'Event puncak dari perjalanan ananda mencintai Al-Qur\'an — lewat teatrikal, visualisasi, dan tilawah.',
+            image: 'images/home/tahfidzhDay.JPG' // Ganti dengan path gambar asli
         },
         {
-            title: "Business Day",
-            desc: "Kegiatan siswa belajar berjualan dan mengelola produk sederhana untuk melatih kreativitas dan jiwa wirausaha.",
-            image: "/images/hero/business-day.jpg",
-            icon: (
-                <svg className="w-5 h-5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-            )
+            icon: <Lightbulb className="w-6 h-6 text-[#1A2D6C]" />,
+            title: 'Fun & Creative Learning',
+            desc: 'Belajar tak harus duduk diam. Ananda diajak aktif, bereksplorasi, dan menemukan cara belajarnya sendiri.',
+            image: 'images/jenjang/heroPg.png'
         },
         {
-            title: "Interest & Talent Culture",
-            desc: "Program pengembangan minat dan bakat siswa melalui aktivitas seni, budaya, dan keterampilan.",
-            image: "/images/hero/talent-day.jpg",
-            icon: (
-                <svg className="w-5 h-5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                </svg>
-            )
+            icon: <Target className="w-6 h-6 text-[#1A2D6C]" />,
+            title: 'ITC',
+            desc: 'Ruang bagi ananda menemukan dan mengembangkan potensinya, dari robotik hingga olahraga, setiap anak punya kesempatan.',
+            image: 'images/home/itc.JPG'
         },
         {
-            title: "Outing Class",
-            desc: "Kegiatan belajar di luar kelas untuk pengalaman nyata, kebersamaan, dan eksplorasi.",
-            image: "/images/hero/outing-class.jpg",
-            icon: (
-                <svg className="w-5 h-5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-            )
-        }
+            icon: <Handshake className="w-6 h-6 text-[#1A2D6C]" />,
+            title: 'Ilal Liqo\'',
+            desc: 'Bukan sekadar perpisahan, tapi momen ananda menunjukkan kesiapannya memberi arti bagi sesama.',
+            image: 'images/home/ilalLiqo.JPG'
+        },
     ];
 
     // Variabel konfigurasi animasi halus
@@ -503,17 +488,17 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     const textShadowStyle = { textShadow: '0 2px 4px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 1)' };
 
     // Menggunakan state khusus untuk section jalanan
-  const [isMobileJalanan, setIsMobileJalanan] = useState(false);
+    const [isMobileJalanan, setIsMobileJalanan] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileJalanan(window.innerWidth < 768);
-    };
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileJalanan(window.innerWidth < 768);
+        };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // UNTUK KEUNGGULAN
     const containerRef = useRef(null);
@@ -558,17 +543,17 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     const currentItem = dataKeunggulan[activeIndex];
 
     // Menggunakan nama variabel unik agar tidak bentrok (Cannot redeclare block-scoped variable)
-  const [isMobileKeunggulan, setIsMobileKeunggulan] = useState(false);
+    const [isMobileKeunggulan, setIsMobileKeunggulan] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileKeunggulan(window.innerWidth < 768);
-    };
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileKeunggulan(window.innerWidth < 768);
+        };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // UNTUK PRESTASI
     const achievementRef = useRef(null);
@@ -585,70 +570,70 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     const cardScale = useTransform(achievementScroll, [0.6, 0.85], [0.8, 1]);
 
     // Hook untuk mendeteksi layar mobile/tablet secara real-time
-  const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024); // Breakpoint 'lg' Tailwind (1024px)
-    };
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024); // Breakpoint 'lg' Tailwind (1024px)
+        };
 
-    handleResize(); // Check awal saat load
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+        handleResize(); // Check awal saat load
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
 
     // UNTUK CTA SECTION
     const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1,
+            },
+        },
+    };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.21, 1.11, 0.81, 0.99] },
-    },
-  };
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.8, ease: [0.21, 1.11, 0.81, 0.99] },
+        },
+    };
 
-//   UNTUK EVENT PROGRAM
-const sectionContainerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, staggerChildren: 0.15 },
-    },
-  };
+    //   UNTUK EVENT PROGRAM
+    const sectionContainerVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.7, staggerChildren: 0.15 },
+        },
+    };
 
-  const cardItemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
+    const cardItemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
 
-//   UNTUK BLOG
-// Motion Variants (Menggunakan nama unik agar tidak bentrok)
-const blogSectionVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, staggerChildren: 0.15 },
-  },
-};
+    //   UNTUK BLOG
+    // Motion Variants (Menggunakan nama unik agar tidak bentrok)
+    const blogSectionVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, staggerChildren: 0.15 },
+        },
+    };
 
-const blogCardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+    const blogCardVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
 
 
     return (
@@ -765,323 +750,404 @@ const blogCardVariants = {
                     </div>
                 </div>
             </section> */}
-            <section ref={sectionRef} className="py-24 bg-[#FAF8F5] relative overflow-hidden text-slate-800">
 
-                {/* --- 1. DEKORASI ORNAMEN SAMPING KIRI & KANAN --- */}
+            {/* ========================================================= */}
+            {/* HERO SECTION - LEBIH LEBAR & LEGA */}
+            {/* ========================================================= */}
+            <section
+                ref={sectionRef}
+                className="w-full bg-[#FAF7F0] relative overflow-hidden text-slate-800 py-10 sm:py-16 md:py-24"
+            >
+                {/* AMBIENT LIGHT GLOW */}
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[400px] md:w-[500px] h-[280px] sm:h-[400px] md:h-[500px] bg-[#FFC700]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
-                {/* Curved Swoosh Kuning (Atas Kiri) */}
-                <div className="absolute top-0 left-0 w-64 md:w-80 h-80 pointer-events-none z-10 opacity-90">
-                    <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                        <path d="M -50 -50 C 150 -20, 250 150, 180 320" stroke="#FFC72C" strokeWidth="28" strokeLinecap="round" />
-                    </svg>
+                {/* 1. DEKORASI BACKGROUND POT (Hanya di Laptop) */}
+                <div className="hidden sm:block absolute left-0 bottom-0 top-0 w-36 md:w-48 pointer-events-none z-0 opacity-20 transition-opacity duration-500 hover:opacity-30">
+                    <img
+                        src="/images/hero/bgPot-left.png"
+                        alt="Pot Decorative Left"
+                        className="h-full w-full object-cover object-left filter drop-shadow-sm"
+                    />
                 </div>
 
-                {/* Curved Swoosh Navy (Kanan Bawah) */}
-                <div className="absolute top-12 right-0 w-64 md:w-80 h-96 pointer-events-none z-10 opacity-90">
-                    <svg viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                        <path d="M 350 0 C 120 100, 150 300, 250 400" stroke="#07327F" strokeWidth="24" strokeLinecap="round" />
-                    </svg>
+                <div className="hidden sm:block absolute right-0 bottom-0 top-0 w-36 md:w-48 pointer-events-none z-0 opacity-20 transition-opacity duration-500 hover:opacity-30">
+                    <img
+                        src="/images/hero/bgPot-right.png"
+                        alt="Pot Decorative Right"
+                        className="h-full w-full object-cover object-right filter drop-shadow-sm"
+                    />
                 </div>
 
-                {/* Pilar & Lentera Islami di Ujung Kiri-Kanan (Hidden on Mobile) */}
-                <div className="hidden xl:block absolute left-0 top-0 bottom-0 w-48 pointer-events-none opacity-20 z-0">
-                    <img src="/images/home/frame-home-1.png" alt="Arch Pillar Left" className="h-full w-full object-cover object-left" />
+                {/* 2. ORNAMEN LOGO FLOATING KIRI ATAS (Hanya di Laptop) */}
+                <div className="hidden sm:block absolute top-2 left-4 w-36 md:w-44 pointer-events-none z-10 animate-float-slow drop-shadow-md">
+                    <img
+                        src="/images/hero/ornamenLogo-1.png"
+                        alt="Ornamen Kuning Left"
+                        className="w-full h-auto object-contain"
+                    />
                 </div>
-                <div className="hidden xl:block absolute right-0 top-0 bottom-0 w-48 pointer-events-none opacity-20 z-0 scale-x-[-1]">
-                    <img src="/images/hero/frame-left.png" alt="Arch Pillar Right" className="h-full w-full object-cover object-left" />
-                </div>
 
+                {/* 3. KONTEN UTAMA HERO */}
+                <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-20">
 
-                {/* --- 2. KONTEN UTAMA --- */}
-                <div className="container mx-auto px-6 max-w-7xl relative z-20">
+                    {/* WRAPPER KARTU: 
+        - Layar HP: bg-transparent, tanpa shadow, tanpa border, tanpa bg-white
+        - Layar Laptop: bg-white/80 utuh dengan shadow & rounded card */}
+                    <div className="bg-transparent border-0 shadow-none sm:bg-[#f3ede4] sm:backdrop-blur-md sm:rounded-3xl sm:shadow-xl sm:border sm:border-amber-100/50 p-0 sm:p-10 max-w-4xl mx-auto">
 
-                    {/* HEADLINE TOP BLOCK */}
-                    <div className={`text-center max-w-3xl mx-auto space-y-4 transition-all duration-1000 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                        {/* HEADLINE TOP BLOCK */}
+                        <div className={`text-center space-y-5 sm:space-y-6 md:space-y-7 transition-all duration-1000 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
 
-                        {/* Bintang Emas Top */}
-                        <div className="flex justify-center">
-                            <span className="text-[#D4AF37] text-2xl animate-pulse">☀️</span>
+                            {/* Logo Tengah */}
+                            <div className="flex justify-center mb-1">
+                                <img
+                                    src="/images/hero/logo.png"
+                                    alt="Logo Attaufiq"
+                                    className="h-28 sm:h-36 md:h-60 w-auto object-contain drop-shadow-md hover:scale-[1.02] transition-transform duration-500"
+                                />
+                            </div>
+
+                            {/* Line Divider (Sembunyi di HP, tampil di Laptop) */}
+                            <div className="hidden sm:flex items-center justify-center gap-3 opacity-60 my-2">
+                                <span className="w-12 sm:w-16 h-[1.5px] bg-gradient-to-r from-transparent to-[#0B2545]"></span>
+                                <span className="text-[#FFC700] text-xs rotate-45 transform inline-block">◆</span>
+                                <span className="w-12 sm:w-16 h-[1.5px] bg-gradient-to-l from-transparent to-[#0B2545]"></span>
+                            </div>
+
+                            {/* === TEKS DESKRIPSI === */}
+                            <div className="w-full max-w-[320px] sm:max-w-2xl mx-auto px-2 sm:px-8">
+
+                                {/* TAMPILAN MOBILE: Persis Gambar 2 (Polos Tanpa Badge, Teks Mengalir Warm Navy) */}
+                                <p className="block sm:hidden text-[#1E3A8A]/80 font-normal text-xs xs:text-[13px] leading-relaxed text-center tracking-normal">
+                                    Di Attaufiq, setiap proses belajar dirancang agar ananda: paham, bukan sekadar hafal; berkembang, bukan sekadar ikut; punya arah, bukan sekadar jalan. Karena bagi kami, pendidikan harus memberi arti.
+                                </p>
+
+                                {/* TAMPILAN LAPTOP: Tetap Versi Original Ber-Badge */}
+                                <p className="hidden sm:block text-[#0B2545]/90 font-normal text-lg md:text-[19px] leading-relaxed md:leading-[1.85] tracking-wide text-center">
+                                    Di Attaufiq, setiap proses belajar dirancang agar ananda:{' '}
+                                    <span className="font-semibold text-[#0B2545] bg-[#FFC700]/20 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">
+                                        paham
+                                    </span>
+                                    , bukan sekadar hafal;{' '}
+                                    <span className="font-semibold text-[#0B2545] bg-[#FFC700]/20 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">
+                                        berkembang
+                                    </span>
+                                    , bukan sekadar ikut;{' '}
+                                    <span className="font-semibold text-[#0B2545] bg-[#FFC700]/20 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">
+                                        punya arah
+                                    </span>
+                                    , bukan sekadar jalan. Karena bagi kami, pendidikan harus memberi arti.
+                                </p>
+
+                            </div>
+
+                            {/* Button Scroll Down */}
+                            <div className="pt-2 sm:pt-3 flex justify-center">
+                                <a
+                                    href="#about-section"
+                                    className="group relative inline-flex items-center gap-2 bg-[#FFC700] hover:bg-[#f5be00] text-[#0B2545] px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 ring-4 ring-[#FFC700]/20"
+                                >
+                                    <span>Kenali Lebih Dekat</span>
+                                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#0B2545]/10 flex items-center justify-center group-hover:bg-[#0B2545]/20 transition-colors">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0B2545] transform group-hover:translate-y-0.5 transition-transform duration-300"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            strokeWidth={2.5}
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {/* WRAPPER SECTION CARD & SUB-HEADER */}
+                    <div className="relative mt-14 sm:mt-20 md:mt-24">
+
+                        {/* Ornamen Biru Melayang di Kanan */}
+                        <div className="hidden sm:block absolute -top-14 right-4 md:right-8 w-32 md:w-40 pointer-events-none z-30 animate-float-delayed drop-shadow-lg">
+                            <img
+                                src="/images/hero/ornamenLogo-2.png"
+                                alt="Ornamen Biru Right"
+                                className="w-full h-auto object-contain"
+                            />
                         </div>
 
-                        <h2 className="font-serif text-3xl md:text-5xl font-normal text-[#07327F] leading-tight">
-                            Membangun Generasi Islami Berkarakter
-                        </h2>
+                        {/* SUB-HEADER */}
+                        <div className={`text-center mb-8 sm:mb-12 space-y-2 transition-all duration-700 delay-200 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <h3 className="font-sans text-lg sm:text-2xl md:text-4xl text-[#0B2545] font-extrabold tracking-tight px-4 leading-snug">
+                                Belajar yang Tak Berhenti di Kelas
+                            </h3>
+                            <p className="text-slate-500 font-normal text-xs md:text-sm max-w-[300px] sm:max-w-xl mx-auto leading-relaxed px-2">
+                                Setiap kegiatan dirancang untuk membentuk karakter, cara berpikir, dan rasa percaya diri ananda, bukan hanya nilai di atas kertas.
+                            </p>
+                        </div>
 
-                        <p className="text-slate-600 font-light text-sm md:text-base leading-relaxed px-4">
-                            Di sekolah Islam Attaufiq, pembinaan generasi muda dilakukan dalam lingkungan yang serasa rumah kedua Ananda. Pendekatan pendidikan Attaufiq menggabungkan nilai-nilai Islam yang dalam dengan teknik pembelajaran kontemporer.
-                        </p>
+                        {/* GRID 4 CARD AKTIVITAS */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch relative z-20">
+                            {activities.map((act, index) => (
+                                <div
+                                    key={index}
+                                    className={`group relative rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-md hover:shadow-2xl border border-[#E8DFC8]/50 bg-[#0B2265] text-white flex flex-col justify-end h-[320px] sm:h-[340px] md:h-[380px] transition-all duration-500 ease-out transform hover:-translate-y-2 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                                        }`}
+                                    style={{ transitionDelay: `${300 + index * 100}ms` }}
+                                >
+                                    {/* Background Image Card */}
+                                    <img
+                                        src={act.image}
+                                        alt={act.title}
+                                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out"
+                                    />
 
-                        {/* Button Explore More */}
-                        <div className="pt-2">
+                                    {/* Overlay Gradient Navy Blue */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B2265] via-[#0B2265]/80 to-transparent opacity-90 group-hover:opacity-85 transition duration-300"></div>
+
+                                    {/* Content Card */}
+                                    <div className="relative z-10 p-5 sm:p-6 flex items-start gap-3.5">
+                                        <div className="flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-md text-[#0B2265] mt-0.5 group-hover:scale-110 group-hover:bg-[#FFC700] transition duration-300">
+                                            {act.icon}
+                                        </div>
+                                        <div className="space-y-1">
+                                            <h4 className="font-bold text-base md:text-lg text-white leading-snug group-hover:text-[#FFC700] transition-colors duration-300">
+                                                {act.title}
+                                            </h4>
+                                            <p className="text-slate-200/90 font-light text-xs leading-relaxed">
+                                                {act.desc}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* BUTTON ACTION */}
+                        <div className={`flex flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10 relative z-20 transition-all duration-700 delay-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
                             <a
-                                href="/about"
-                                className="inline-flex items-center space-x-2 bg-[#FFC72C] hover:bg-[#D4AF37] text-[#07327F] px-8 py-3 rounded-full font-bold text-xs uppercase tracking-wider transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                href="/events"
+                                className="inline-flex items-center justify-center bg-[#0B2265] hover:bg-[#081848] text-white font-semibold text-xs md:text-sm px-5 sm:px-7 py-3 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex-1 sm:flex-none max-w-[150px] sm:max-w-none text-center"
                             >
-                                <span>Explore More</span>
-                                <span className="text-sm">→</span>
+                                More Events
+                            </a>
+
+                            <a
+                                href="/programs"
+                                className="inline-flex items-center justify-center bg-[#0B2265] hover:bg-[#081848] text-white font-semibold text-xs md:text-sm px-5 sm:px-7 py-3 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex-1 sm:flex-none max-w-[150px] sm:max-w-none text-center"
+                            >
+                                More Programs
                             </a>
                         </div>
 
                     </div>
 
-
-                    {/* SUB-HEADER: AKTIVITAS & KEGIATAN SISWA */}
-                    <div className={`text-center mt-20 mb-12 transition-all duration-700 delay-200 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                        <div className="flex items-center justify-center space-x-3">
-                            <span className="text-[#D4AF37] text-xs">✦</span>
-                            <h3 className="font-serif text-2xl md:text-3xl text-[#07327F] font-normal">
-                                Aktivitas & Kegiatan Siswa
-                            </h3>
-                            <span className="text-[#D4AF37] text-xs">✦</span>
-                        </div>
-                    </div>
-
-
-                    {/* GRID 4 CARD AKTIVITAS */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-                        {activities.map((act, index) => (
-                            <div
-                                key={index}
-                                className={`group relative rounded-[28px] overflow-hidden shadow-lg border border-[#E8DFC8] bg-[#051736] text-white flex flex-col justify-end h-[340px] md:h-[380px] transition-all duration-700 transform hover:-translate-y-2 hover:shadow-2xl ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                                    }`}
-                                style={{ transitionDelay: `${300 + index * 100}ms` }}
-                            >
-                                {/* Background Image dengan Zoom Hover */}
-                                <img
-                                    src={act.image}
-                                    alt={act.title}
-                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out"
-                                />
-
-                                {/* Dark Navy Overlay (Gradient dari Bawah Pelepah Transparan ke Atas) */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#031026] via-[#051736]/80 to-transparent opacity-90 group-hover:opacity-95 transition duration-300"></div>
-
-                                {/* Content Text & Icon Badge */}
-                                <div className="relative z-10 p-6 space-y-3">
-
-                                    {/* Badge Icon Lingkaran */}
-                                    <div className="w-11 h-11 rounded-full bg-[#07327F]/80 border border-[#D4AF37] flex items-center justify-center shadow-md group-hover:bg-[#D4AF37] group-hover:text-[#07327F] transition duration-300">
-                                        {act.icon}
-                                    </div>
-
-                                    {/* Judul Aktivitas */}
-                                    <h4 className="font-serif text-xl font-bold text-white group-hover:text-[#F3E5AB] transition">
-                                        {act.title}
-                                    </h4>
-
-                                    {/* Deskripsi Singkat */}
-                                    <p className="text-blue-100/80 font-light text-xs leading-relaxed line-clamp-3">
-                                        {act.desc}
-                                    </p>
-
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
                 </div>
 
-
             </section>
+
+
+
 
             {/* --- 3. PERJALANAN TUMBUH BERSAMA ATTAUFIQ --- */}
             <section className="relative w-full min-h-[85vh] bg-[#FAF6F0] flex flex-col justify-between overflow-hidden font-sans py-12 md:py-16">
 
-    {/* 1. Ambient Glow Orbs (Efek Aesthetic Cahaya Warm) */}
-    <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/25 rounded-full blur-[140px] pointer-events-none z-0" />
-    <div className="absolute bottom-10 left-10 w-[300px] h-[300px] bg-amber-100/40 rounded-full blur-[100px] pointer-events-none z-0" />
+                {/* 1. Ambient Glow Orbs (Efek Aesthetic Cahaya Warm) */}
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/25 rounded-full blur-[140px] pointer-events-none z-0" />
+                <div className="absolute bottom-10 left-10 w-[300px] h-[300px] bg-amber-100/40 rounded-full blur-[100px] pointer-events-none z-0" />
 
-    {/* 2. Background Image */}
-    <motion.div
-        initial={{ opacity: 0, scale: 1.05 }}
-        whileInView={{ opacity: 0.9, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
-        style={{
-            backgroundImage: `url('images/home/bgPerjalanan.png')`
-        }}
-    />
+                {/* 2. Background Image */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    whileInView={{ opacity: 0.9, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+                    style={{
+                        backgroundImage: `url('images/home/bgPerjalanan.png')`
+                    }}
+                />
 
-    {/* Subtle Overlay Gradient */}
-    <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/40 via-transparent to-[#F5EFE6]/90 pointer-events-none" />
+                {/* Subtle Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/40 via-transparent to-[#F5EFE6]/90 pointer-events-none" />
 
-    {/* 3. Content Top (Judul Utama & Deskripsi) */}
-    <div className="relative z-10 max-w-4xl mx-auto text-center px-6 pt-6 flex flex-col items-center">
+                {/* 3. Content Top (Judul Utama & Deskripsi) */}
+                <div className="relative z-10 max-w-4xl mx-auto text-center px-6 pt-6 flex flex-col items-center">
 
-        {/* Badge Kecil Aesthetic */}
-        <motion.span
-            custom={0}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="inline-block px-4 py-1.5 mb-3 text-xs font-semibold tracking-wider text-[#0F1E56] bg-amber-100/60 backdrop-blur-md rounded-full border border-amber-200/50 uppercase"
-        >
-            Pendidikan Berkarakter
-        </motion.span>
+                    {/* Badge Kecil Aesthetic */}
+                    <motion.span
+                        custom={0}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="inline-block px-4 py-1.5 mb-3 text-xs font-semibold tracking-wider text-[#0F1E56] bg-amber-100/60 backdrop-blur-md rounded-full border border-amber-200/50 uppercase"
+                    >
+                        Pendidikan Berkarakter
+                    </motion.span>
 
-        <motion.h2
-            custom={0.1}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-3xl sm:text-4xl md:text-[2.85rem] font-extrabold text-[#0F1E56] leading-tight tracking-tight drop-shadow-sm"
-        >
-            Perjalanan Tumbuh Bersama <br className="hidden sm:inline" /> Attaufiq
-        </motion.h2>
+                    <motion.h2
+                        custom={0.1}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="text-3xl sm:text-4xl md:text-[2.85rem] font-extrabold text-[#0F1E56] leading-tight tracking-tight drop-shadow-sm"
+                    >
+                        Perjalanan Tumbuh Bersama <br className="hidden sm:inline" /> Attaufiq
+                    </motion.h2>
 
-        <motion.p
-            custom={0.25}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="mt-5 text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl font-normal"
-        >
-            Setiap langkah adalah awal dari masa depan. Kami mendampingi Ananda tumbuh dalam ilmu, akhlak, dan cinta kepada Allah hingga siap menjadi generasi beradab dan bermanfaat.
-        </motion.p>
-    </div>
+                    <motion.p
+                        custom={0.25}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="mt-5 text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl font-normal"
+                    >
+                        Setiap langkah adalah awal dari masa depan. Kami mendampingi Ananda tumbuh dalam ilmu, akhlak, dan cinta kepada Allah hingga siap menjadi generasi beradab dan bermanfaat.
+                    </motion.p>
+                </div>
 
-    {/* 4. Content Bottom (Gambar Gedung Atas & Card Kanan di HP via flex-col-reverse) */}
-    <div className="relative z-10 w-full max-w-[90rem] mx-auto px-4 sm:px-8 md:px-12 pt-8 flex flex-col-reverse md:flex-row items-center md:items-end justify-between gap-0">
+                {/* 4. Content Bottom (Gambar Gedung Atas & Card Kanan di HP via flex-col-reverse) */}
+                <div className="relative z-10 w-full max-w-[90rem] mx-auto px-4 sm:px-8 md:px-12 pt-8 flex flex-col-reverse md:flex-row items-center md:items-end justify-between gap-0">
 
-        {/* Card Putih Aesthetic */}
-        <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInLeft}
-            className="bg-white/90 backdrop-blur-md p-8 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(15,30,86,0.06)] w-full md:max-w-xl lg:max-w-2xl border border-white/80 mb-6 z-20 md:-mr-12 lg:-mr-20 transition-transform duration-300 hover:-translate-y-1"
-        >
-            <div className="flex items-center gap-2 mb-2">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-amber-600">Visi Kami</span>
-            </div>
+                    {/* Card Putih Aesthetic */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInLeft}
+                        className="bg-white/90 backdrop-blur-md p-8 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(15,30,86,0.06)] w-full md:max-w-xl lg:max-w-2xl border border-white/80 mb-6 z-20 md:-mr-12 lg:-mr-20 transition-transform duration-300 hover:-translate-y-1"
+                    >
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                            <span className="text-xs font-semibold uppercase tracking-widest text-amber-600">Visi Kami</span>
+                        </div>
 
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#0F1E56] leading-snug">
-                Satu Perjalanan, Seumur Hidup
-            </h3>
-            <p className="mt-4 text-xs sm:text-sm lg:text-base text-[#64748B] leading-relaxed">
-                Dari usia dini hingga remaja, Attaufiq menjadi rumah kedua yang mengantarkan Ananda menapaki tangga ilmu dan keberkahan menuju cahaya masa depan.
-            </p>
-        </motion.div>
+                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#0F1E56] leading-snug">
+                            Satu Perjalanan, Seumur Hidup
+                        </h3>
+                        <p className="mt-4 text-xs sm:text-sm lg:text-base text-[#64748B] leading-relaxed">
+                            Dari usia dini hingga remaja, Attaufiq menjadi rumah kedua yang mengantarkan Ananda menapaki tangga ilmu dan keberkahan menuju cahaya masa depan.
+                        </p>
+                    </motion.div>
 
-        {/* Gambar Gedung (Muncul di Atas Card pada Layar HP) */}
-        <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInRight}
-            className="w-full md:flex-1 flex justify-center md:justify-end items-end -mb-4 md:-mb-16 -mr-0 md:-mr-10 z-10"
-        >
-            <img
-                src="images/home/gedung-right.png"
-                alt="Gedung Attaufiq"
-                className="w-[75%] sm:w-[60%] max-w-md md:max-w-xl lg:max-w-3xl h-auto object-contain hover:opacity-100 transition-all duration-500 drop-shadow-xl"
-            />
-        </motion.div>
+                    {/* Gambar Gedung (Muncul di Atas Card pada Layar HP) */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInRight}
+                        className="w-full md:flex-1 flex justify-center md:justify-end items-end -mb-4 md:-mb-16 -mr-0 md:-mr-10 z-10"
+                    >
+                        <img
+                            src="images/home/gedung-right.png"
+                            alt="Gedung Attaufiq"
+                            className="w-[75%] sm:w-[60%] max-w-md md:max-w-xl lg:max-w-3xl h-auto object-contain hover:opacity-100 transition-all duration-500 drop-shadow-xl"
+                        />
+                    </motion.div>
 
-    </div>
+                </div>
 
-</section>
-          
+            </section>
+
 
             {/* SECTION JALANAN BERKELOK DENGAN ORNAMEN BACKGROUND */}
-           <section
-      ref={roadSectionRef}
-      className={`relative w-full bg-[#FAF6EE] font-sans ${
-        isMobileJalanan ? 'min-h-[180vh]' : 'min-h-[250vh]'
-      }`}
-      style={{
-        background:
-          'radial-gradient(circle at 50% 50%, #FAF6EE 0%, #F4ECE0 100%)',
-      }}
-    >
-      {/* ======================================================== */}
-      {/* LAYER ORNAMEN BACKGROUND */}
-      {/* ======================================================== */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        {BACKGROUND_ORNAMENTS.map(
-          ({ id, Icon, size, color, top, left, right, depth }) => {
-            const yVal = useTransform(
-              smoothProgress,
-              [0, 1],
-              [0, depth * (isMobileJalanan ? 200 : 400)]
-            );
-
-            return (
-              <motion.div
-                key={id}
-                className="absolute"
+            <section
+                ref={roadSectionRef}
+                className={`relative w-full bg-[#FAF6EE] font-sans ${isMobileJalanan ? 'min-h-[180vh]' : 'min-h-[250vh]'
+                    }`}
                 style={{
-                  top,
-                  left: left || 'auto',
-                  right: right || 'auto',
-                  y: yVal,
+                    background:
+                        'radial-gradient(circle at 50% 50%, #FAF6EE 0%, #F4ECE0 100%)',
                 }}
-              >
-                <Icon
-                  className={`${color} animate-pulse`}
-                  size={isMobileJalanan ? size * 0.7 : size}
-                />
-              </motion.div>
-            );
-          }
-        )}
-      </div>
+            >
+                {/* ======================================================== */}
+                {/* LAYER ORNAMEN BACKGROUND */}
+                {/* ======================================================== */}
+                <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+                    {BACKGROUND_ORNAMENTS.map(
+                        ({ id, Icon, size, color, top, left, right, depth }) => {
+                            const yVal = useTransform(
+                                smoothProgress,
+                                [0, 1],
+                                [0, depth * (isMobileJalanan ? 200 : 400)]
+                            );
 
-      {/* ======================================================== */}
-      {/* CHARACTER FLOATING (DENGAN VARIABLE ISMOBILEJALANAN) */}
-      {/* ======================================================== */}
-      <div className="sticky top-0 h-screen w-full pointer-events-none z-50 flex items-center justify-center overflow-hidden">
-        <motion.div
-          className="absolute"
-          style={{
-            left: rawX,
-            top: isMobileJalanan ? '40%' : '35%',
-            opacity: opacityPeople,
-          }}
-        >
-          <img
-            src={PEOPLE_IMAGE}
-            alt="People Character"
-            className="w-12 sm:w-16 md:w-24 h-auto object-contain drop-shadow-2xl -translate-x-1/2 -translate-y-1/2"
-          />
-        </motion.div>
-      </div>
+                            return (
+                                <motion.div
+                                    key={id}
+                                    className="absolute"
+                                    style={{
+                                        top,
+                                        left: left || 'auto',
+                                        right: right || 'auto',
+                                        y: yVal,
+                                    }}
+                                >
+                                    <Icon
+                                        className={`${color} animate-pulse`}
+                                        size={isMobileJalanan ? size * 0.7 : size}
+                                    />
+                                </motion.div>
+                            );
+                        }
+                    )}
+                </div>
 
-      {/* ======================================================== */}
-      {/* ROAD & CARDS */}
-      {/* ======================================================== */}
-      <div
-        className={`relative -mt-[100vh] z-10 w-full ${
-          isMobileJalanan ? 'min-h-[180vh] py-10' : 'min-h-[250vh] py-16'
-        } flex flex-col justify-between pointer-events-none`}
-      >
-        {/* GAMBAR JALAN MURNI */}
-        <div className="absolute inset-0 w-full h-full flex justify-center items-center px-2 md:px-0">
-          <img
-            src={ROAD_IMAGE}
-            alt="Jalan Path"
-            className="w-full max-w-xs sm:max-w-md md:max-w-3xl h-full object-fill opacity-95"
-          />
-        </div>
+                {/* ======================================================== */}
+                {/* CHARACTER FLOATING (DENGAN VARIABLE ISMOBILEJALANAN) */}
+                {/* ======================================================== */}
+                <div className="sticky top-0 h-screen w-full pointer-events-none z-50 flex items-center justify-center overflow-hidden">
+                    <motion.div
+                        className="absolute"
+                        style={{
+                            left: rawX,
+                            top: isMobileJalanan ? '40%' : '35%',
+                            opacity: opacityPeople,
+                        }}
+                    >
+                        <img
+                            src={PEOPLE_IMAGE}
+                            alt="People Character"
+                            className="w-12 sm:w-16 md:w-24 h-auto object-contain drop-shadow-2xl -translate-x-1/2 -translate-y-1/2"
+                        />
+                    </motion.div>
+                </div>
 
-        {/* LIST CARD JENJANG */}
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 flex flex-col justify-between h-full gap-8 md:gap-0">
-          {JENJANG_DATA.map((step) => (
-            <StepCard
-              key={step.id}
-              step={step}
-              smoothProgress={smoothProgress}
-              isMobile={isMobileJalanan}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+                {/* ======================================================== */}
+                {/* ROAD & CARDS */}
+                {/* ======================================================== */}
+                <div
+                    className={`relative -mt-[100vh] z-10 w-full ${isMobileJalanan ? 'min-h-[180vh] py-10' : 'min-h-[250vh] py-16'
+                        } flex flex-col justify-between pointer-events-none`}
+                >
+                    {/* GAMBAR JALAN MURNI */}
+                    <div className="absolute inset-0 w-full h-full flex justify-center items-center px-2 md:px-0">
+                        <img
+                            src={ROAD_IMAGE}
+                            alt="Jalan Path"
+                            className="w-full max-w-xs sm:max-w-md md:max-w-3xl h-full object-fill opacity-95"
+                        />
+                    </div>
+
+                    {/* LIST CARD JENJANG */}
+                    <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 flex flex-col justify-between h-full gap-8 md:gap-0">
+                        {JENJANG_DATA.map((step) => (
+                            <StepCard
+                                key={step.id}
+                                step={step}
+                                smoothProgress={smoothProgress}
+                                isMobile={isMobileJalanan}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </section>
 
             {/* 4. CAHAYA MASA DEPAN SECTION */}
             <section className="relative w-full min-h-[450px] lg:min-h-[550px] flex items-center justify-center overflow-hidden font-sans">
@@ -1215,760 +1281,755 @@ const blogCardVariants = {
 
             {/* 5. KEUNGGULAN ATQ SECTION */}
             <section
-  ref={containerRef}
-  className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-8 md:pt-20"
->
-  {/* Glow Ornamen Belakang */}
-  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-amber-200/30 blur-[60px] md:blur-[100px] rounded-full pointer-events-none" />
+                ref={containerRef}
+                className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-8 md:pt-20"
+            >
+                {/* Glow Ornamen Belakang */}
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-amber-200/30 blur-[60px] md:blur-[100px] rounded-full pointer-events-none" />
 
-  {/* HEADER SECTION */}
-  <div className="relative z-30 text-center max-w-5xl px-4 md:px-6 mb-4 md:mb-8">
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm mb-2"
-    >
-      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-      <p className="text-amber-700 font-bold tracking-wider text-[10px] md:text-sm uppercase">
-        KEUNGGULAN ATTAUFIQ
-      </p>
-    </motion.div>
+                {/* HEADER SECTION */}
+                <div className="relative z-30 text-center max-w-5xl px-4 md:px-6 mb-4 md:mb-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm mb-2"
+                    >
+                        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                        <p className="text-amber-700 font-bold tracking-wider text-[10px] md:text-sm uppercase">
+                            KEUNGGULAN ATTAUFIQ
+                        </p>
+                    </motion.div>
 
-    <h2 className="text-lg md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight">
-      Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
-    </h2>
-  </div>
+                    <h2 className="text-lg md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight">
+                        Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
+                    </h2>
+                </div>
 
-  {/* Container Sticky untuk Scroll Animation */}
-  <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-6 md:pt-14">
+                {/* Container Sticky untuk Scroll Animation */}
+                <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-6 md:pt-14">
 
-    {/* Ornamen Awan & Bintang */}
-    <motion.div
-      animate={{ x: [0, 25, 0] }}
-      transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
-      className="absolute top-8 md:top-12 left-[4%] md:left-[8%] opacity-40 pointer-events-none z-10"
-    >
-      <svg className="w-16 h-8 md:w-24 md:h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
-        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-      </svg>
-    </motion.div>
+                    {/* Ornamen Awan & Bintang */}
+                    <motion.div
+                        animate={{ x: [0, 25, 0] }}
+                        transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+                        className="absolute top-8 md:top-12 left-[4%] md:left-[8%] opacity-40 pointer-events-none z-10"
+                    >
+                        <svg className="w-16 h-8 md:w-24 md:h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                        </svg>
+                    </motion.div>
 
-    <motion.div
-      animate={{ x: [0, -20, 0] }}
-      transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
-      className="absolute top-16 md:top-20 right-[4%] md:right-[10%] opacity-30 pointer-events-none z-10"
-    >
-      <svg className="w-20 h-10 md:w-28 md:h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
-        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-      </svg>
-    </motion.div>
+                    <motion.div
+                        animate={{ x: [0, -20, 0] }}
+                        transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+                        className="absolute top-16 md:top-20 right-[4%] md:right-[10%] opacity-30 pointer-events-none z-10"
+                    >
+                        <svg className="w-20 h-10 md:w-28 md:h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                        </svg>
+                    </motion.div>
 
-    <div className="absolute top-24 md:top-32 left-[12%] md:left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none text-xs md:text-base">✦</div>
-    <div className="absolute top-12 md:top-16 right-[14%] md:right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none text-xs md:text-base">✦</div>
+                    <div className="absolute top-24 md:top-32 left-[12%] md:left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none text-xs md:text-base">✦</div>
+                    <div className="absolute top-12 md:top-16 right-[14%] md:right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none text-xs md:text-base">✦</div>
 
-    {/* Gambar Garis Lintasan Matahari */}
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
-      <img
-        src="images/home/garisMatahari.png"
-        alt="Garis Lintasan Matahari"
-        className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
-      />
-    </div>
+                    {/* Gambar Garis Lintasan Matahari */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
+                        <img
+                            src="images/home/garisMatahari.png"
+                            alt="Garis Lintasan Matahari"
+                            className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
+                        />
+                    </div>
 
-    {/* Gedung Latar Belakang */}
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={`gedung-${currentItem.id}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`absolute bottom-0 h-[50vh] md:h-[85vh] w-3/4 md:w-5/12 pointer-events-none z-0 ${
-          currentItem.position === "left"
-            ? "right-0"
-            : "left-0 transform -scale-x-100"
-        }`}
-      >
-        <img
-          src="images/home/gedung-right.png"
-          alt="Gedung Latar"
-          className="w-full h-full object-cover object-bottom opacity-20 md:opacity-25"
-        />
-      </motion.div>
-    </AnimatePresence>
+                    {/* Gedung Latar Belakang */}
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={`gedung-${currentItem.id}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className={`absolute bottom-0 h-[50vh] md:h-[85vh] w-3/4 md:w-5/12 pointer-events-none z-0 ${currentItem.position === "left"
+                                    ? "right-0"
+                                    : "left-0 transform -scale-x-100"
+                                }`}
+                        >
+                            <img
+                                src="images/home/gedung-right.png"
+                                alt="Gedung Latar"
+                                className="w-full h-full object-cover object-bottom opacity-20 md:opacity-25"
+                            />
+                        </motion.div>
+                    </AnimatePresence>
 
-    {/* MATAHARI BERJALAN (Hanya Aktif di Laptop via hidden md:block) */}
-    <motion.div
-      style={{ left: sunX, top: sunY }}
-      className="hidden md:block absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-    >
-      <div className="relative flex items-center justify-center">
-        <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
-        <img
-          src="images/home/matahari.png"
-          alt="Matahari"
-          className="w-28 h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
-        />
-      </div>
-    </motion.div>
+                    {/* MATAHARI BERJALAN (Hanya Aktif di Laptop via hidden md:block) */}
+                    <motion.div
+                        style={{ left: sunX, top: sunY }}
+                        className="hidden md:block absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                    >
+                        <div className="relative flex items-center justify-center">
+                            <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
+                            <img
+                                src="images/home/matahari.png"
+                                alt="Matahari"
+                                className="w-28 h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
+                            />
+                        </div>
+                    </motion.div>
 
-    {/* KONTEN UTAMA (KARTU FOTO & TEKS) */}
-    {/* Penyesuaian Mobile: pt-44 untuk menurunkan konten di bawah lengkungan garis */}
-    <div className="relative z-10 w-full max-w-4xl px-4 md:px-8 h-full flex flex-col items-center justify-start md:justify-center pt-44 md:pt-16">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentItem.id}
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -25 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-          className={`relative md:absolute md:inset-x-8 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10 ${
-            currentItem.position === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'
-          }`}
-        >
-          {/* FOTO */}
-          <div className="w-full md:w-1/2 flex justify-center relative">
-            <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
+                    {/* KONTEN UTAMA (KARTU FOTO & TEKS) */}
+                    {/* Penyesuaian Mobile: pt-44 untuk menurunkan konten di bawah lengkungan garis */}
+                    <div className="relative z-10 w-full max-w-4xl px-4 md:px-8 h-full flex flex-col items-center justify-start md:justify-center pt-44 md:pt-16">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={currentItem.id}
+                                initial={{ opacity: 0, y: 25 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -25 }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                className={`relative md:absolute md:inset-x-8 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10 ${currentItem.position === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'
+                                    }`}
+                            >
+                                {/* FOTO */}
+                                <div className="w-full md:w-1/2 flex justify-center relative">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
 
-            <div className="relative w-[160px] md:w-[260px] h-36 md:h-[280px] rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-3 md:p-4">
-              <span className="text-white/90 font-medium text-[11px] md:text-sm drop-shadow-md relative z-10">
-                Foto — {currentItem.title}
-              </span>
-              <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
-            </div>
-          </div>
+                                    <div className="relative w-[160px] md:w-[260px] h-36 md:h-[280px] rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-3 md:p-4">
+                                        <span className="text-white/90 font-medium text-[11px] md:text-sm drop-shadow-md relative z-10">
+                                            Foto — {currentItem.title}
+                                        </span>
+                                        <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
+                                    </div>
+                                </div>
 
-          {/* TEKS DESKRIPSI */}
-          <div
-            className={`w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left ${
-              currentItem.position === 'right' ? 'md:pt-32 md:ml-10' : 'pt-0'
-            }`}
-          >
-            <div className="flex items-center gap-2 mb-1 md:mb-2">
-              <span className="text-lg md:text-2xl font-black text-amber-500/80 tracking-tight">
-                0{currentItem.id}
-              </span>
-              <div className="h-[2px] w-6 md:w-8 bg-amber-400/60 rounded-full" />
-            </div>
+                                {/* TEKS DESKRIPSI */}
+                                <div
+                                    className={`w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left ${currentItem.position === 'right' ? 'md:pt-32 md:ml-10' : 'pt-0'
+                                        }`}
+                                >
+                                    <div className="flex items-center gap-2 mb-1 md:mb-2">
+                                        <span className="text-lg md:text-2xl font-black text-amber-500/80 tracking-tight">
+                                            0{currentItem.id}
+                                        </span>
+                                        <div className="h-[2px] w-6 md:w-8 bg-amber-400/60 rounded-full" />
+                                    </div>
 
-            <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-1.5 md:mb-3 shadow-md border border-amber-300/60">
-              {currentItem.icon}
-            </div>
+                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-1.5 md:mb-3 shadow-md border border-amber-300/60">
+                                        {currentItem.icon}
+                                    </div>
 
-            <h3 className="text-base md:text-3xl font-bold text-indigo-950 mb-1 md:mb-2 leading-tight">
-              {currentItem.title}
-            </h3>
+                                    <h3 className="text-base md:text-3xl font-bold text-indigo-950 mb-1 md:mb-2 leading-tight">
+                                        {currentItem.title}
+                                    </h3>
 
-            <p className="text-gray-600 text-[11px] md:text-sm leading-relaxed max-w-xs md:max-w-md">
-              {currentItem.desc}
-            </p>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+                                    <p className="text-gray-600 text-[11px] md:text-sm leading-relaxed max-w-xs md:max-w-md">
+                                        {currentItem.desc}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
 
-      {/* INDICATOR DOTS */}
-      <div className="absolute bottom-6 md:bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
-        {dataKeunggulan.map((item, idx) => (
-          <div
-            key={item.id}
-            className={`transition-all duration-300 rounded-full ${
-              activeIndex === idx
-                ? "w-5 md:w-6 h-1.5 md:h-2 bg-amber-500"
-                : "w-1.5 md:w-2 h-1.5 md:h-2 bg-amber-300/80"
-            }`}
-          />
-        ))}
-      </div>
-    </div>
+                        {/* INDICATOR DOTS */}
+                        <div className="absolute bottom-6 md:bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
+                            {dataKeunggulan.map((item, idx) => (
+                                <div
+                                    key={item.id}
+                                    className={`transition-all duration-300 rounded-full ${activeIndex === idx
+                                            ? "w-5 md:w-6 h-1.5 md:h-2 bg-amber-500"
+                                            : "w-1.5 md:w-2 h-1.5 md:h-2 bg-amber-300/80"
+                                        }`}
+                                />
+                            ))}
+                        </div>
+                    </div>
 
-  </div>
-</section>
+                </div>
+            </section>
 
-            
-       
+
+
             {/* 6. PRESTASI SISWA ATQ SECTION */}
             <section
-      id="achievements"
-      ref={achievementRef}
-      className={`relative ${
-        isMobile ? 'min-h-screen py-24' : 'h-[300vh]'
-      } bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] w-full`}
-    >
-      {/* HEADER SECTION (JUDUL & DESKRIPSI) */}
-      <div className="relative lg:absolute top-0 lg:top-12 left-1/2 -translate-x-1/2 z-30 text-center max-w-3xl px-6 pointer-events-none w-full mb-8 lg:mb-0">
-        <span className="text-xs font-bold tracking-widest text-amber-500 uppercase mb-2 block">
-          PRESTASI SISWA
-        </span>
-        <h2 className="text-xl md:text-3xl font-extrabold text-slate-900 leading-tight">
-          Mendukung setiap siswa untuk berkembang, berprestasi, dan tumbuh menjadi generasi yang cerdas, mandiri, serta berlandaskan nilai–nilai Islami.
-        </h2>
-      </div>
-
-      {/* Container Sticky (Desktop) / Normal Container (Mobile) */}
-      <div className={`${isMobile ? 'relative py-6' : 'sticky top-0 h-screen'} w-full flex items-center justify-center overflow-hidden`}>
-
-        {/* 1. ORNAMEN BACKGROUND */}
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-          <div className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-amber-200/30 rounded-full blur-[100px] md:blur-[120px] animate-pulse" />
-          <div className="w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-orange-300/20 rounded-full blur-[60px] md:blur-[80px]" />
-        </div>
-
-        {/* 2. ORNAMEN BINTANG KECIL MELAYANG */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          {[
-            { top: '15%', left: '10%', size: 'w-2 h-2', delay: '0s' },
-            { top: '25%', right: '12%', size: 'w-3 h-3', delay: '1s' },
-            { bottom: '20%', left: '15%', size: 'w-2.5 h-2.5', delay: '2s' },
-            { bottom: '15%', right: '15%', size: 'w-2 h-2', delay: '0.5s' },
-          ].map((sparkle, idx) => (
-            <div
-              key={idx}
-              className={`absolute ${sparkle.size} bg-amber-400 rounded-full blur-[1px] opacity-60 animate-ping`}
-              style={{
-                top: sparkle.top,
-                left: sparkle.left,
-                right: sparkle.right,
-                bottom: sparkle.bottom,
-                animationDelay: sparkle.delay,
-                animationDuration: '3s',
-              }}
-            />
-          ))}
-        </div>
-
-        {/* ================= MODE MOBILE: LAYOUT TIMELINE VERTIKAL ================= */}
-        {isMobile ? (
-          <div className="flex flex-col items-center w-full px-4 relative z-20 space-y-8">
-            {/* Matahari di Atas Timeline Mobile */}
-            <div className="relative z-10 flex items-center justify-center my-4">
-              <div className="absolute w-28 h-28 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
-              <div className="absolute w-36 h-36 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
-              <div className="absolute w-20 h-20 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
-
-              <img
-                src="/images/home/matahari.png"
-                alt="Matahari Attaufiq"
-                className="w-20 h-20 object-contain relative z-10 drop-shadow-[0_0_20px_rgba(251,191,36,0.9)] pointer-events-none"
-              />
-            </div>
-
-            {/* Grid List Kartu di Mobile */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
-              {achievements.map((item) => (
-                <div
-                  key={item.id}
-                  className="w-full p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-md border border-amber-100/80 hover:border-amber-300 transition-all duration-300"
-                >
-                  <a href={item.link || `/prestasi/${item.id}`} className="block cursor-pointer">
-                    <div className="w-full h-28 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden">
-                      <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
-                    </div>
-                    <div className="px-1">
-                      <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
-                        {item.level}
-                      </div>
-                      <h4 className="text-xs font-bold text-slate-800 leading-snug line-clamp-2">
-                        {item.title}
-                      </h4>
-                      <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
-                        <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
-                        <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          /* ================= MODE DESKTOP: LAYOUT ORBITAL KOORDINAT ================= */
-          <>
-            {/* 3. SVG CONNECTOR & DOTS */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none z-0"
-              viewBox="-500 -500 1000 1000"
-              preserveAspectRatio="xMidYMid meet"
+                id="achievements"
+                ref={achievementRef}
+                className={`relative ${isMobile ? 'min-h-screen py-24' : 'h-[300vh]'
+                    } bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] w-full`}
             >
-              <defs>
-                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                  <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
+                {/* HEADER SECTION (JUDUL & DESKRIPSI) */}
+                <div className="relative lg:absolute top-0 lg:top-12 left-1/2 -translate-x-1/2 z-30 text-center max-w-3xl px-6 pointer-events-none w-full mb-8 lg:mb-0">
+                    <span className="text-xs font-bold tracking-widest text-amber-500 uppercase mb-2 block">
+                        PRESTASI SISWA
+                    </span>
+                    <h2 className="text-xl md:text-3xl font-extrabold text-slate-900 leading-tight">
+                        Mendukung setiap siswa untuk berkembang, berprestasi, dan tumbuh menjadi generasi yang cerdas, mandiri, serta berlandaskan nilai–nilai Islami.
+                    </h2>
+                </div>
 
-              <g>
-                {achievements.map((item) => {
-                  const rad = (item.angle * Math.PI) / 180;
-                  const lineDistance = item.distance * 1.1;
-                  const endX = Math.cos(rad) * lineDistance;
-                  const endY = Math.sin(rad) * lineDistance;
-                  const midX = endX * 0.5;
-                  const midY = endY * 0.5;
+                {/* Container Sticky (Desktop) / Normal Container (Mobile) */}
+                <div className={`${isMobile ? 'relative py-6' : 'sticky top-0 h-screen'} w-full flex items-center justify-center overflow-hidden`}>
 
-                  return (
-                    <g key={item.id}>
-                      <motion.line
-                        x1="0"
-                        y1="0"
-                        x2={endX}
-                        y2={endY}
-                        stroke="#FCD34D"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        style={{ pathLength: lineScale }}
-                      />
-                      <motion.circle
-                        cx={midX}
-                        cy={midY}
-                        r="5"
-                        fill="#FBBF24"
-                        style={{ opacity: nodeOpacity }}
-                      />
-                      <motion.circle
-                        cx={endX}
-                        cy={endY}
-                        r="6.5"
-                        fill="#F59E0B"
-                        filter="url(#glow)"
-                        style={{ opacity: nodeOpacity }}
-                      />
-                    </g>
-                  );
-                })}
-              </g>
-            </svg>
+                    {/* 1. ORNAMEN BACKGROUND */}
+                    <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
+                        <div className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-amber-200/30 rounded-full blur-[100px] md:blur-[120px] animate-pulse" />
+                        <div className="w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-orange-300/20 rounded-full blur-[60px] md:blur-[80px]" />
+                    </div>
 
-            {/* 4. MATAHARI UTAMA */}
-            <div className="relative z-10 flex items-center justify-center">
-              <div className="absolute w-36 h-36 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
-              <div className="absolute w-44 h-44 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
-              <div className="absolute w-28 h-28 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
+                    {/* 2. ORNAMEN BINTANG KECIL MELAYANG */}
+                    <div className="absolute inset-0 pointer-events-none z-0">
+                        {[
+                            { top: '15%', left: '10%', size: 'w-2 h-2', delay: '0s' },
+                            { top: '25%', right: '12%', size: 'w-3 h-3', delay: '1s' },
+                            { bottom: '20%', left: '15%', size: 'w-2.5 h-2.5', delay: '2s' },
+                            { bottom: '15%', right: '15%', size: 'w-2 h-2', delay: '0.5s' },
+                        ].map((sparkle, idx) => (
+                            <div
+                                key={idx}
+                                className={`absolute ${sparkle.size} bg-amber-400 rounded-full blur-[1px] opacity-60 animate-ping`}
+                                style={{
+                                    top: sparkle.top,
+                                    left: sparkle.left,
+                                    right: sparkle.right,
+                                    bottom: sparkle.bottom,
+                                    animationDelay: sparkle.delay,
+                                    animationDuration: '3s',
+                                }}
+                            />
+                        ))}
+                    </div>
 
-              <img
-                src="/images/home/matahari.png"
-                alt="Matahari Attaufiq"
-                className="w-24 h-24 min-w-[96px] min-h-[96px] object-contain relative z-10 drop-shadow-[0_0_30px_rgba(251,191,36,0.9)] pointer-events-none transition-transform duration-500 hover:scale-110"
-              />
-            </div>
+                    {/* ================= MODE MOBILE: LAYOUT TIMELINE VERTIKAL ================= */}
+                    {isMobile ? (
+                        <div className="flex flex-col items-center w-full px-4 relative z-20 space-y-8">
+                            {/* Matahari di Atas Timeline Mobile */}
+                            <div className="relative z-10 flex items-center justify-center my-4">
+                                <div className="absolute w-28 h-28 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
+                                <div className="absolute w-36 h-36 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
+                                <div className="absolute w-20 h-20 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
 
-            {/* 5. LAYER CARD PRESTASI */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center z-20">
-              {achievements.map((item) => {
-                const rad = (item.angle * Math.PI) / 180;
-                const isVertical = item.angle === -90 || item.angle === 90;
-                const isHorizontal = item.angle === 0 || item.angle === 180;
+                                <img
+                                    src="/images/home/matahari.png"
+                                    alt="Matahari Attaufiq"
+                                    className="w-20 h-20 object-contain relative z-10 drop-shadow-[0_0_20px_rgba(251,191,36,0.9)] pointer-events-none"
+                                />
+                            </div>
 
-                let radiusX = 390;
-                let radiusY = 230;
-                if (isVertical) radiusY = 240;
-                if (isHorizontal) radiusX = 430;
-
-                const x = Math.cos(rad) * radiusX;
-                const y = Math.sin(rad) * radiusY;
-
-                return (
-                  <motion.div
-                    key={item.id}
-                    className="absolute w-52 p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(217,119,6,0.1)] border border-amber-100/80 hover:border-amber-300 pointer-events-auto transition-all duration-300 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.25)] hover:-translate-y-1"
-                    style={{
-                      x,
-                      y,
-                      opacity: cardOpacity,
-                      scale: cardScale,
-                    }}
-                  >
-                    <a
-                      href={item.link || `/prestasi/${item.id}`}
-                      className="group block cursor-pointer relative overflow-hidden rounded-xl"
-                    >
-                      <div className="w-full h-24 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-300">
-                        <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                      </div>
-
-                      <div className="px-0.5">
-                        <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
-                          {item.level}
+                            {/* Grid List Kartu di Mobile */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
+                                {achievements.map((item) => (
+                                    <div
+                                        key={item.id}
+                                        className="w-full p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-md border border-amber-100/80 hover:border-amber-300 transition-all duration-300"
+                                    >
+                                        <a href={item.link || `/prestasi/${item.id}`} className="block cursor-pointer">
+                                            <div className="w-full h-28 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden">
+                                                <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
+                                            </div>
+                                            <div className="px-1">
+                                                <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
+                                                    {item.level}
+                                                </div>
+                                                <h4 className="text-xs font-bold text-slate-800 leading-snug line-clamp-2">
+                                                    {item.title}
+                                                </h4>
+                                                <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
+                                                    <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
+                                                    <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
+                    ) : (
+                        /* ================= MODE DESKTOP: LAYOUT ORBITAL KOORDINAT ================= */
+                        <>
+                            {/* 3. SVG CONNECTOR & DOTS */}
+                            <svg
+                                className="absolute inset-0 w-full h-full pointer-events-none z-0"
+                                viewBox="-500 -500 1000 1000"
+                                preserveAspectRatio="xMidYMid meet"
+                            >
+                                <defs>
+                                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                        <feMerge>
+                                            <feMergeNode in="coloredBlur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
+                                </defs>
 
-                        <h4 className="text-xs font-bold text-slate-800 leading-snug transition-colors duration-200 group-hover:text-amber-600 line-clamp-2">
-                          {item.title}
-                        </h4>
+                                <g>
+                                    {achievements.map((item) => {
+                                        const rad = (item.angle * Math.PI) / 180;
+                                        const lineDistance = item.distance * 1.1;
+                                        const endX = Math.cos(rad) * lineDistance;
+                                        const endY = Math.sin(rad) * lineDistance;
+                                        const midX = endX * 0.5;
+                                        const midY = endY * 0.5;
 
-                        <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
-                          <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
-                          <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
-                        </div>
-                      </div>
-                    </a>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </>
-        )}
-      </div>
-    </section>
-            
+                                        return (
+                                            <g key={item.id}>
+                                                <motion.line
+                                                    x1="0"
+                                                    y1="0"
+                                                    x2={endX}
+                                                    y2={endY}
+                                                    stroke="#FCD34D"
+                                                    strokeWidth="2.5"
+                                                    strokeLinecap="round"
+                                                    style={{ pathLength: lineScale }}
+                                                />
+                                                <motion.circle
+                                                    cx={midX}
+                                                    cy={midY}
+                                                    r="5"
+                                                    fill="#FBBF24"
+                                                    style={{ opacity: nodeOpacity }}
+                                                />
+                                                <motion.circle
+                                                    cx={endX}
+                                                    cy={endY}
+                                                    r="6.5"
+                                                    fill="#F59E0B"
+                                                    filter="url(#glow)"
+                                                    style={{ opacity: nodeOpacity }}
+                                                />
+                                            </g>
+                                        );
+                                    })}
+                                </g>
+                            </svg>
+
+                            {/* 4. MATAHARI UTAMA */}
+                            <div className="relative z-10 flex items-center justify-center">
+                                <div className="absolute w-36 h-36 rounded-full border border-amber-300/40 animate-[spin_12s_linear_infinite]" />
+                                <div className="absolute w-44 h-44 rounded-full border border-dashed border-amber-400/25 animate-[spin_20s_linear_infinite_reverse]" />
+                                <div className="absolute w-28 h-28 bg-amber-400/30 rounded-full blur-xl animate-pulse" />
+
+                                <img
+                                    src="/images/home/matahari.png"
+                                    alt="Matahari Attaufiq"
+                                    className="w-24 h-24 min-w-[96px] min-h-[96px] object-contain relative z-10 drop-shadow-[0_0_30px_rgba(251,191,36,0.9)] pointer-events-none transition-transform duration-500 hover:scale-110"
+                                />
+                            </div>
+
+                            {/* 5. LAYER CARD PRESTASI */}
+                            <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center z-20">
+                                {achievements.map((item) => {
+                                    const rad = (item.angle * Math.PI) / 180;
+                                    const isVertical = item.angle === -90 || item.angle === 90;
+                                    const isHorizontal = item.angle === 0 || item.angle === 180;
+
+                                    let radiusX = 390;
+                                    let radiusY = 230;
+                                    if (isVertical) radiusY = 240;
+                                    if (isHorizontal) radiusX = 430;
+
+                                    const x = Math.cos(rad) * radiusX;
+                                    const y = Math.sin(rad) * radiusY;
+
+                                    return (
+                                        <motion.div
+                                            key={item.id}
+                                            className="absolute w-52 p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(217,119,6,0.1)] border border-amber-100/80 hover:border-amber-300 pointer-events-auto transition-all duration-300 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.25)] hover:-translate-y-1"
+                                            style={{
+                                                x,
+                                                y,
+                                                opacity: cardOpacity,
+                                                scale: cardScale,
+                                            }}
+                                        >
+                                            <a
+                                                href={item.link || `/prestasi/${item.id}`}
+                                                className="group block cursor-pointer relative overflow-hidden rounded-xl"
+                                            >
+                                                <div className="w-full h-24 mb-2.5 rounded-xl bg-gradient-to-tr from-sky-400 via-teal-300 to-amber-200 flex items-center justify-center text-xs text-white font-semibold shadow-inner relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-300">
+                                                    <span className="drop-shadow-md z-10">Foto — {item.unit.split(' · ')[0]}</span>
+                                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                                                </div>
+
+                                                <div className="px-0.5">
+                                                    <div className="inline-block px-2 py-0.5 mb-1 text-[9px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-200/60">
+                                                        {item.level}
+                                                    </div>
+
+                                                    <h4 className="text-xs font-bold text-slate-800 leading-snug transition-colors duration-200 group-hover:text-amber-600 line-clamp-2">
+                                                        {item.title}
+                                                    </h4>
+
+                                                    <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
+                                                        <span className="text-slate-400 font-medium">SIT At-Taufiq</span>
+                                                        <span className="text-amber-600 font-bold">{item.unit.split(' · ')[0]}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    )}
+                </div>
+            </section>
+
 
             {/* 7. CTA ATQ SECTION */}
             <section className="relative w-full min-h-screen bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] flex items-center justify-center py-20 px-6 md:px-12 overflow-hidden">
-      
-      {/* ================= ORNAMEN BACKGROUND ================= */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Glow Soft Ambient */}
-        <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[140px]" />
-        <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-sky-200/30 rounded-full blur-[120px]" />
 
-        {/* Ornamen Bintang Melayang (Floating Sparkles) */}
-        <div className="absolute top-16 left-1/4 w-3 h-3 bg-amber-400 rounded-full blur-[1px] opacity-70 animate-pulse" />
-        <div className="absolute bottom-24 left-1/3 w-2 h-2 bg-orange-400 rounded-full opacity-60 animate-ping" />
-        <div className="absolute top-1/3 right-1/4 w-2.5 h-2.5 bg-amber-300 rounded-full blur-[1px] opacity-80 animate-bounce" />
-      </div>
+                {/* ================= ORNAMEN BACKGROUND ================= */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                    {/* Glow Soft Ambient */}
+                    <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[140px]" />
+                    <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-sky-200/30 rounded-full blur-[120px]" />
 
-      {/* ================= KONTEN UTAMA ================= */}
-      <motion.div
-        className="container mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center justify-items-center relative z-10"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        
-        {/* KONTEN KIRI (TEKS & TOMBOL) - Urutan ke-2 di Mobile, ke-1 di Desktop */}
-        <motion.div className="flex flex-col items-start justify-center space-y-6 max-w-xl w-full order-2 lg:order-1" variants={itemVariants}>
-          
-          {/* Sub-heading Glassmorphism */}
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 backdrop-blur-md text-amber-600 font-bold text-xs tracking-wider uppercase shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-spin" style={{ animationDuration: '6s' }} />
-            <span>PERJALANAN HEBAT DIMULAI DI SINI</span>
-          </div>
+                    {/* Ornamen Bintang Melayang (Floating Sparkles) */}
+                    <div className="absolute top-16 left-1/4 w-3 h-3 bg-amber-400 rounded-full blur-[1px] opacity-70 animate-pulse" />
+                    <div className="absolute bottom-24 left-1/3 w-2 h-2 bg-orange-400 rounded-full opacity-60 animate-ping" />
+                    <div className="absolute top-1/3 right-1/4 w-2.5 h-2.5 bg-amber-300 rounded-full blur-[1px] opacity-80 animate-bounce" />
+                </div>
 
-          {/* Heading Utama */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.12]">
-            Saatnya Memulai Perjalanan{' '}
-            <span className="bg-gradient-to-r from-amber-500 to-orange-400 bg-clip-text text-transparent">
-              Ananda
-            </span>
-          </h1>
+                {/* ================= KONTEN UTAMA ================= */}
+                <motion.div
+                    className="container mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center justify-items-center relative z-10"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                >
 
-          {/* Deskripsi */}
-          <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
-            Bersama Attaufiq, tumbuh dalam ilmu, akhlak, dan prestasi untuk masa depan yang gemilang.
-          </p>
+                    {/* KONTEN KIRI (TEKS & TOMBOL) - Urutan ke-2 di Mobile, ke-1 di Desktop */}
+                    <motion.div className="flex flex-col items-start justify-center space-y-6 max-w-xl w-full order-2 lg:order-1" variants={itemVariants}>
 
-          {/* Group Tombol Aksi */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full pt-3">
-            {/* Tombol Utama */}
-            <motion.a
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              href="#daftar"
-              className="inline-flex items-center justify-center px-7 py-4 bg-[#1B2B65] hover:bg-[#142150] text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-950/20 transition-colors duration-300"
-            >
-              <UserPlus className="w-4 h-4 mr-2.5 text-amber-300" />
-              <span>Daftarkan Ananda — Mulai Perjalanan Hebatnya</span>
-            </motion.a>
+                        {/* Sub-heading Glassmorphism */}
+                        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 backdrop-blur-md text-amber-600 font-bold text-xs tracking-wider uppercase shadow-sm">
+                            <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-spin" style={{ animationDuration: '6s' }} />
+                            <span>PERJALANAN HEBAT DIMULAI DI SINI</span>
+                        </div>
 
-            {/* Tombol Sekunder */}
-            <motion.a
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              href="#kunjungan"
-              className="inline-flex items-center justify-center px-7 py-4 bg-white/80 hover:bg-white text-slate-800 text-sm font-semibold rounded-full border border-slate-200/80 shadow-sm backdrop-blur-sm transition-all duration-300"
-            >
-              <Calendar className="w-4 h-4 mr-2.5 text-amber-600" />
-              <span>Jadwalkan Kunjungan</span>
-            </motion.a>
-          </div>
-        </motion.div>
+                        {/* Heading Utama */}
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.12]">
+                            Saatnya Memulai Perjalanan{' '}
+                            <span className="bg-gradient-to-r from-amber-500 to-orange-400 bg-clip-text text-transparent">
+                                Ananda
+                            </span>
+                        </h1>
 
-        {/* KONTEN KANAN (VISUAL KARTU & ORNAMEN) - Urutan ke-1 di Mobile (di atas), ke-2 di Desktop (di kanan) */}
-        <motion.div className="relative flex items-center justify-center w-full order-1 lg:order-2" variants={itemVariants}>
-          
-          {/* Layer Glow Belakang Kartu */}
-          <div className="absolute w-[280px] h-[360px] md:w-[360px] md:h-[460px] bg-amber-400/20 rounded-[50px] blur-2xl" />
+                        {/* Deskripsi */}
+                        <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
+                            Bersama Attaufiq, tumbuh dalam ilmu, akhlak, dan prestasi untuk masa depan yang gemilang.
+                        </p>
 
-          {/* Ornamen 1: Ring Statis */}
-          <div className="absolute w-[310px] h-[390px] md:w-[390px] md:h-[490px] border border-amber-300/60 rounded-[44px] -rotate-6 pointer-events-none shadow-sm" />
-          
-          {/* Ornamen 2: Ring Berputar Hapus Putus (Dashed Rotating Border) */}
-          <div className="absolute w-[330px] h-[410px] md:w-[410px] md:h-[510px] border border-dashed border-amber-400/50 rounded-[48px] animate-[spin_25s_linear_infinite] pointer-events-none" />
+                        {/* Group Tombol Aksi */}
+                        <div className="flex flex-col sm:flex-row gap-4 w-full pt-3">
+                            {/* Tombol Utama */}
+                            <motion.a
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
+                                href="#daftar"
+                                className="inline-flex items-center justify-center px-7 py-4 bg-[#1B2B65] hover:bg-[#142150] text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-950/20 transition-colors duration-300"
+                            >
+                                <UserPlus className="w-4 h-4 mr-2.5 text-amber-300" />
+                                <span>Daftarkan Ananda — Mulai Perjalanan Hebatnya</span>
+                            </motion.a>
 
-          {/* Kartu Utama Gradien */}
-          <motion.div 
-            whileHover={{ y: -6 }}
-            transition={{ duration: 0.3 }}
-            className="relative z-10 w-[300px] h-[380px] md:w-[380px] md:h-[480px] rounded-[36px] bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] shadow-2xl shadow-amber-900/10 border border-white/40 overflow-hidden flex flex-col justify-between p-6 text-center text-white/90"
-          >
-            {/* Tag Badge Atas Kartu */}
-            <div className="self-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[11px] font-medium tracking-wide drop-shadow-sm">
-              Foto keluarga — berjalan menuju matahari
-            </div>
+                            {/* Tombol Sekunder */}
+                            <motion.a
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
+                                href="#kunjungan"
+                                className="inline-flex items-center justify-center px-7 py-4 bg-white/80 hover:bg-white text-slate-800 text-sm font-semibold rounded-full border border-slate-200/80 shadow-sm backdrop-blur-sm transition-all duration-300"
+                            >
+                                <Calendar className="w-4 h-4 mr-2.5 text-amber-600" />
+                                <span>Jadwalkan Kunjungan</span>
+                            </motion.a>
+                        </div>
+                    </motion.div>
 
-            {/* Ilustrasi Ornamen Sunburst Kecil di Dalam Kartu */}
-            <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-amber-300/30 rounded-full blur-xl pointer-events-none" />
-          </motion.div>
+                    {/* KONTEN KANAN (VISUAL KARTU & ORNAMEN) - Urutan ke-1 di Mobile (di atas), ke-2 di Desktop (di kanan) */}
+                    <motion.div className="relative flex items-center justify-center w-full order-1 lg:order-2" variants={itemVariants}>
 
-        </motion.div>
+                        {/* Layer Glow Belakang Kartu */}
+                        <div className="absolute w-[280px] h-[360px] md:w-[360px] md:h-[460px] bg-amber-400/20 rounded-[50px] blur-2xl" />
 
-      </motion.div>
-    </section>
-            
+                        {/* Ornamen 1: Ring Statis */}
+                        <div className="absolute w-[310px] h-[390px] md:w-[390px] md:h-[490px] border border-amber-300/60 rounded-[44px] -rotate-6 pointer-events-none shadow-sm" />
+
+                        {/* Ornamen 2: Ring Berputar Hapus Putus (Dashed Rotating Border) */}
+                        <div className="absolute w-[330px] h-[410px] md:w-[410px] md:h-[510px] border border-dashed border-amber-400/50 rounded-[48px] animate-[spin_25s_linear_infinite] pointer-events-none" />
+
+                        {/* Kartu Utama Gradien */}
+                        <motion.div
+                            whileHover={{ y: -6 }}
+                            transition={{ duration: 0.3 }}
+                            className="relative z-10 w-[300px] h-[380px] md:w-[380px] md:h-[480px] rounded-[36px] bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] shadow-2xl shadow-amber-900/10 border border-white/40 overflow-hidden flex flex-col justify-between p-6 text-center text-white/90"
+                        >
+                            {/* Tag Badge Atas Kartu */}
+                            <div className="self-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[11px] font-medium tracking-wide drop-shadow-sm">
+                                Foto keluarga — berjalan menuju matahari
+                            </div>
+
+                            {/* Ilustrasi Ornamen Sunburst Kecil di Dalam Kartu */}
+                            <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-amber-300/30 rounded-full blur-xl pointer-events-none" />
+                        </motion.div>
+
+                    </motion.div>
+
+                </motion.div>
+            </section>
+
 
             {/* 8. EVENT & PROGRAM SECTION */}
             <section className="relative w-full bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] py-24 px-6 md:px-12 overflow-hidden">
-      
-      {/* Background Ornamen Soft Ambient */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-amber-200/25 rounded-full blur-[140px]" />
-        <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-sky-200/20 rounded-full blur-[100px]" />
-      </div>
 
-      <div className="container mx-auto max-w-6xl relative z-10">
-        <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14"
-          variants={sectionContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {/* ================= KOLOM KIRI: EVENT TERBARU ================= */}
-          <div className="flex flex-col space-y-6">
-            <div className="flex items-end justify-between border-b border-amber-200/60 pb-4">
-              <div>
-                <span className="text-xs font-bold tracking-widest text-amber-500 uppercase flex items-center gap-1.5 mb-1">
-                  <Calendar className="w-3.5 h-3.5" /> Agenda Sekolah
-                </span>
-                <h3 className="text-2xl md:text-3xl font-extrabold text-[#1B2B65]">
-                  Event Terbaru
-                </h3>
-              </div>
-              <a
-                href="#all-events"
-                className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
-              >
-                Lihat semua 
-                <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-            </div>
-
-            <div className="flex flex-col space-y-4">
-              {events.map((event) => (
-                <motion.a
-                  key={event.id}
-                  href={event.link}
-                  variants={cardItemVariants}
-                  whileHover={{ y: -4 }}
-                  className="group relative flex items-center p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-amber-100/80 shadow-[0_4px_20px_-2px_rgba(217,119,6,0.06)] hover:shadow-[0_12px_30px_-5px_rgba(245,158,11,0.15)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
-                >
-                  {/* Thumbnail Image dengan Efek Hover Zoom */}
-                  <div className="relative w-24 h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-tr from-[#6FA8DC] via-[#9DC6E8] to-[#FCEEAA] flex-shrink-0 overflow-hidden shadow-inner">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
-                    <div className="w-full h-full group-hover:scale-110 transition-transform duration-500 ease-out" />
-                  </div>
-
-                  {/* Teks Konten */}
-                  <div className="ml-4 md:ml-5 flex-1 pr-6">
-                    <span className="inline-block text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/50 mb-1.5">
-                      {event.date}
-                    </span>
-                    <h4 className="text-sm md:text-base font-bold text-slate-800 leading-snug group-hover:text-amber-600 transition-colors duration-200 line-clamp-1">
-                      {event.title}
-                    </h4>
-                    <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      {event.desc}
-                    </p>
-                  </div>
-
-                  {/* Icon Action Arrow */}
-                  <div className="absolute top-4 right-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          {/* ================= KOLOM KANAN: PROGRAM UNGGULAN ================= */}
-          <div className="flex flex-col space-y-6">
-            <div className="flex items-end justify-between border-b border-amber-200/60 pb-4">
-              <div>
-                <span className="text-xs font-bold tracking-widest text-amber-500 uppercase flex items-center gap-1.5 mb-1">
-                  <Sparkles className="w-3.5 h-3.5" /> Pembentukan Karakter
-                </span>
-                <h3 className="text-2xl md:text-3xl font-extrabold text-[#1B2B65]">
-                  Program Unggulan
-                </h3>
-              </div>
-              <a
-                href="#all-programs"
-                className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
-              >
-                Lihat semua 
-                <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-            </div>
-
-            <div className="flex flex-col space-y-4">
-              {programs.map((program) => (
-                <motion.a
-                  key={program.id}
-                  href={program.link}
-                  variants={cardItemVariants}
-                  whileHover={{ y: -4 }}
-                  className="group relative flex items-center p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-amber-100/80 shadow-[0_4px_20px_-2px_rgba(217,119,6,0.06)] hover:shadow-[0_12px_30px_-5px_rgba(245,158,11,0.15)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
-                >
-                  {/* Thumbnail Image dengan Efek Hover Zoom */}
-                  <div className="relative w-24 h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] flex-shrink-0 overflow-hidden shadow-inner">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
-                    <div className="w-full h-full group-hover:scale-110 transition-transform duration-500 ease-out" />
-                  </div>
-
-                  {/* Teks Konten */}
-                  <div className="ml-4 md:ml-5 flex-1 pr-6">
-                    <span className="inline-block text-[10px] font-bold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-200/50 mb-1.5">
-                      {program.tag}
-                    </span>
-                    <h4 className="text-sm md:text-base font-bold text-slate-800 leading-snug group-hover:text-amber-600 transition-colors duration-200 line-clamp-1">
-                      {program.title}
-                    </h4>
-                    <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      {program.desc}
-                    </p>
-                  </div>
-
-                  {/* Icon Action Arrow */}
-                  <div className="absolute top-4 right-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ================= TOMBOL CTA UTAMA ================= */}
-        <motion.div
-          className="mt-14 flex justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <motion.a
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            href="#lihat-semua-program"
-            className="group inline-flex items-center justify-center px-8 py-4 bg-[#1B2B65] hover:bg-[#142150] text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-950/15 transition-all duration-300"
-          >
-            <span>Lihat Semua Program</span>
-            <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </motion.a>
-        </motion.div>
-      </div>
-    </section>
-
-              {/* 9. BLOG SECTION */}
-              <section className="relative w-full bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] py-24 px-6 md:px-12 overflow-hidden">
-      
-      {/* ================= BACKGROUND ORNAMEN (BALANCED) ================= */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {/* Glow Halus Ambient */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-amber-200/20 rounded-full blur-[140px]" />
-
-        {/* Floating Sparkles Pasif (Aesthetic & Tidak Ramai) */}
-        <Sparkles className="absolute top-12 left-10 w-4 h-4 text-amber-300 opacity-60 animate-pulse" />
-        <Sparkles className="absolute bottom-16 right-16 w-5 h-5 text-sky-300 opacity-50 animate-pulse" />
-      </div>
-
-      <div className="container mx-auto max-w-6xl relative z-10">
-        <motion.div
-          className="flex flex-col space-y-10"
-          variants={blogSectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {/* ================= HEADER SECTION ================= */}
-          <div className="flex items-end justify-between border-b border-amber-200/60 pb-5">
-            <div>
-              <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 font-bold text-xs tracking-wider uppercase mb-2">
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>INFORMASI & EDUKASI</span>
-              </span>
-              <h3 className="text-3xl md:text-4xl font-extrabold text-[#1B2B65]">
-                Blog Attaufiq
-              </h3>
-            </div>
-            
-            <a
-              href="#semua-artikel"
-              className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
-            >
-              Lihat semua artikel
-              <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-          </div>
-
-          {/* ================= GRID ARTIKEL BLOG ================= */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
-              <motion.a
-                key={article.id}
-                href={article.link}
-                variants={blogCardVariants}
-                whileHover={{ y: -6 }}
-                className="group relative flex flex-col rounded-[28px] bg-white/80 backdrop-blur-md border border-amber-100/90 shadow-[0_4px_25px_-4px_rgba(217,119,6,0.06)] hover:shadow-[0_16px_35px_-6px_rgba(245,158,11,0.18)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
-              >
-                {/* Thumbnail Gambar Banner Gradien */}
-                <div className="relative w-full h-48 md:h-52 bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
-                  
-                  {/* Category Badge di Atas Gambar */}
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-white/50 text-slate-800 text-[11px] font-bold shadow-sm">
-                      {article.category}
-                    </span>
-                  </div>
-
-                  <div className="w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out" />
+                {/* Background Ornamen Soft Ambient */}
+                <div className="absolute inset-0 pointer-events-none z-0">
+                    <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-amber-200/25 rounded-full blur-[140px]" />
+                    <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-sky-200/20 rounded-full blur-[100px]" />
                 </div>
 
-                {/* Konten Teks & Deskripsi */}
-                <div className="p-6 flex flex-col justify-between flex-1 relative">
-                  <div>
-                    <span className="block text-[11px] font-medium text-amber-600 mb-2">
-                      {article.date}
-                    </span>
-                    <h4 className="text-base md:text-lg font-bold text-[#1B2B65] group-hover:text-amber-600 transition-colors duration-200 leading-snug line-clamp-2">
-                      {article.title}
-                    </h4>
-                    <p className="text-xs md:text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">
-                      {article.summary}
-                    </p>
-                  </div>
+                <div className="container mx-auto max-w-6xl relative z-10">
+                    <motion.div
+                        className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14"
+                        variants={sectionContainerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                    >
+                        {/* ================= KOLOM KIRI: EVENT TERBARU ================= */}
+                        <div className="flex flex-col space-y-6">
+                            <div className="flex items-end justify-between border-b border-amber-200/60 pb-4">
+                                <div>
+                                    <span className="text-xs font-bold tracking-widest text-amber-500 uppercase flex items-center gap-1.5 mb-1">
+                                        <Calendar className="w-3.5 h-3.5" /> Agenda Sekolah
+                                    </span>
+                                    <h3 className="text-2xl md:text-3xl font-extrabold text-[#1B2B65]">
+                                        Event Terbaru
+                                    </h3>
+                                </div>
+                                <a
+                                    href="#all-events"
+                                    className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
+                                >
+                                    Lihat semua
+                                    <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                                </a>
+                            </div>
 
-                  {/* Icon Panah & Border Pembatas Lembut */}
-                  <div className="mt-5 pt-4 flex items-center justify-between border-t border-slate-100/80">
-                    <span className="text-xs font-semibold text-slate-400 group-hover:text-amber-600 transition-colors">
-                      Baca Selengkapnya
-                    </span>
-                    <div className="text-slate-300 group-hover:text-amber-500 transition-colors">
-                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                    </div>
-                  </div>
+                            <div className="flex flex-col space-y-4">
+                                {events.map((event) => (
+                                    <motion.a
+                                        key={event.id}
+                                        href={event.link}
+                                        variants={cardItemVariants}
+                                        whileHover={{ y: -4 }}
+                                        className="group relative flex items-center p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-amber-100/80 shadow-[0_4px_20px_-2px_rgba(217,119,6,0.06)] hover:shadow-[0_12px_30px_-5px_rgba(245,158,11,0.15)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
+                                    >
+                                        {/* Thumbnail Image dengan Efek Hover Zoom */}
+                                        <div className="relative w-24 h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-tr from-[#6FA8DC] via-[#9DC6E8] to-[#FCEEAA] flex-shrink-0 overflow-hidden shadow-inner">
+                                            <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
+                                            <div className="w-full h-full group-hover:scale-110 transition-transform duration-500 ease-out" />
+                                        </div>
+
+                                        {/* Teks Konten */}
+                                        <div className="ml-4 md:ml-5 flex-1 pr-6">
+                                            <span className="inline-block text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/50 mb-1.5">
+                                                {event.date}
+                                            </span>
+                                            <h4 className="text-sm md:text-base font-bold text-slate-800 leading-snug group-hover:text-amber-600 transition-colors duration-200 line-clamp-1">
+                                                {event.title}
+                                            </h4>
+                                            <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                                                {event.desc}
+                                            </p>
+                                        </div>
+
+                                        {/* Icon Action Arrow */}
+                                        <div className="absolute top-4 right-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                                            <ArrowUpRight className="w-4 h-4" />
+                                        </div>
+                                    </motion.a>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* ================= KOLOM KANAN: PROGRAM UNGGULAN ================= */}
+                        <div className="flex flex-col space-y-6">
+                            <div className="flex items-end justify-between border-b border-amber-200/60 pb-4">
+                                <div>
+                                    <span className="text-xs font-bold tracking-widest text-amber-500 uppercase flex items-center gap-1.5 mb-1">
+                                        <Sparkles className="w-3.5 h-3.5" /> Pembentukan Karakter
+                                    </span>
+                                    <h3 className="text-2xl md:text-3xl font-extrabold text-[#1B2B65]">
+                                        Program Unggulan
+                                    </h3>
+                                </div>
+                                <a
+                                    href="#all-programs"
+                                    className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
+                                >
+                                    Lihat semua
+                                    <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                                </a>
+                            </div>
+
+                            <div className="flex flex-col space-y-4">
+                                {programs.map((program) => (
+                                    <motion.a
+                                        key={program.id}
+                                        href={program.link}
+                                        variants={cardItemVariants}
+                                        whileHover={{ y: -4 }}
+                                        className="group relative flex items-center p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-amber-100/80 shadow-[0_4px_20px_-2px_rgba(217,119,6,0.06)] hover:shadow-[0_12px_30px_-5px_rgba(245,158,11,0.15)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
+                                    >
+                                        {/* Thumbnail Image dengan Efek Hover Zoom */}
+                                        <div className="relative w-24 h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] flex-shrink-0 overflow-hidden shadow-inner">
+                                            <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
+                                            <div className="w-full h-full group-hover:scale-110 transition-transform duration-500 ease-out" />
+                                        </div>
+
+                                        {/* Teks Konten */}
+                                        <div className="ml-4 md:ml-5 flex-1 pr-6">
+                                            <span className="inline-block text-[10px] font-bold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-200/50 mb-1.5">
+                                                {program.tag}
+                                            </span>
+                                            <h4 className="text-sm md:text-base font-bold text-slate-800 leading-snug group-hover:text-amber-600 transition-colors duration-200 line-clamp-1">
+                                                {program.title}
+                                            </h4>
+                                            <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                                                {program.desc}
+                                            </p>
+                                        </div>
+
+                                        {/* Icon Action Arrow */}
+                                        <div className="absolute top-4 right-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                                            <ArrowUpRight className="w-4 h-4" />
+                                        </div>
+                                    </motion.a>
+                                ))}
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* ================= TOMBOL CTA UTAMA ================= */}
+                    <motion.div
+                        className="mt-14 flex justify-center"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                    >
+                        <motion.a
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            href="#lihat-semua-program"
+                            className="group inline-flex items-center justify-center px-8 py-4 bg-[#1B2B65] hover:bg-[#142150] text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-950/15 transition-all duration-300"
+                        >
+                            <span>Lihat Semua Program</span>
+                            <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" />
+                        </motion.a>
+                    </motion.div>
                 </div>
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-            
+            </section>
+
+            {/* 9. BLOG SECTION */}
+            <section className="relative w-full bg-gradient-to-b from-[#FFFDF7] via-[#FFFBEB] to-[#FFF9E6] py-24 px-6 md:px-12 overflow-hidden">
+
+                {/* ================= BACKGROUND ORNAMEN (BALANCED) ================= */}
+                <div className="absolute inset-0 pointer-events-none z-0">
+                    {/* Glow Halus Ambient */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-amber-200/20 rounded-full blur-[140px]" />
+
+                    {/* Floating Sparkles Pasif (Aesthetic & Tidak Ramai) */}
+                    <Sparkles className="absolute top-12 left-10 w-4 h-4 text-amber-300 opacity-60 animate-pulse" />
+                    <Sparkles className="absolute bottom-16 right-16 w-5 h-5 text-sky-300 opacity-50 animate-pulse" />
+                </div>
+
+                <div className="container mx-auto max-w-6xl relative z-10">
+                    <motion.div
+                        className="flex flex-col space-y-10"
+                        variants={blogSectionVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                    >
+                        {/* ================= HEADER SECTION ================= */}
+                        <div className="flex items-end justify-between border-b border-amber-200/60 pb-5">
+                            <div>
+                                <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 font-bold text-xs tracking-wider uppercase mb-2">
+                                    <BookOpen className="w-3.5 h-3.5" />
+                                    <span>INFORMASI & EDUKASI</span>
+                                </span>
+                                <h3 className="text-3xl md:text-4xl font-extrabold text-[#1B2B65]">
+                                    Blog Attaufiq
+                                </h3>
+                            </div>
+
+                            <a
+                                href="#semua-artikel"
+                                className="group inline-flex items-center text-xs md:text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors"
+                            >
+                                Lihat semua artikel
+                                <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" />
+                            </a>
+                        </div>
+
+                        {/* ================= GRID ARTIKEL BLOG ================= */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {articles.map((article) => (
+                                <motion.a
+                                    key={article.id}
+                                    href={article.link}
+                                    variants={blogCardVariants}
+                                    whileHover={{ y: -6 }}
+                                    className="group relative flex flex-col rounded-[28px] bg-white/80 backdrop-blur-md border border-amber-100/90 shadow-[0_4px_25px_-4px_rgba(217,119,6,0.06)] hover:shadow-[0_16px_35px_-6px_rgba(245,158,11,0.18)] hover:border-amber-300 transition-all duration-300 overflow-hidden"
+                                >
+                                    {/* Thumbnail Gambar Banner Gradien */}
+                                    <div className="relative w-full h-48 md:h-52 bg-gradient-to-tr from-[#3B5998] via-[#6FA8DC] to-[#FCEEAA] overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
+
+                                        {/* Category Badge di Atas Gambar */}
+                                        <div className="absolute top-4 left-4 z-20">
+                                            <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-white/50 text-slate-800 text-[11px] font-bold shadow-sm">
+                                                {article.category}
+                                            </span>
+                                        </div>
+
+                                        <div className="w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out" />
+                                    </div>
+
+                                    {/* Konten Teks & Deskripsi */}
+                                    <div className="p-6 flex flex-col justify-between flex-1 relative">
+                                        <div>
+                                            <span className="block text-[11px] font-medium text-amber-600 mb-2">
+                                                {article.date}
+                                            </span>
+                                            <h4 className="text-base md:text-lg font-bold text-[#1B2B65] group-hover:text-amber-600 transition-colors duration-200 leading-snug line-clamp-2">
+                                                {article.title}
+                                            </h4>
+                                            <p className="text-xs md:text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">
+                                                {article.summary}
+                                            </p>
+                                        </div>
+
+                                        {/* Icon Panah & Border Pembatas Lembut */}
+                                        <div className="mt-5 pt-4 flex items-center justify-between border-t border-slate-100/80">
+                                            <span className="text-xs font-semibold text-slate-400 group-hover:text-amber-600 transition-colors">
+                                                Baca Selengkapnya
+                                            </span>
+                                            <div className="text-slate-300 group-hover:text-amber-500 transition-colors">
+                                                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.a>
+                            ))}
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
 
 
 
