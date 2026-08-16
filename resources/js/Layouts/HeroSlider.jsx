@@ -1,145 +1,233 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
+import { ChevronLeft, ChevronRight, Play, Sun } from 'lucide-react';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 
 export default function HeroSlider() {
+    // Data Carousel (3 slide)
     const slides = [
         {
-            image: 'https://images.pexels.com/photos/8923027/pexels-photo-8923027.jpeg?auto=compress&cs=tinysrgb&w=1600',
-            titleStart: 'Pendidikan Bukan Sekadar Belajar, Tapi ',
-            titleHighlight: 'Menemukan Arti',
-            titleEnd: '.',
-            desc: 'Dari PG–TK, SD sampai SMP dan SMA, Attaufiq mendampingi setiap tahap tumbuh kembang ananda. Lewat bermain, tahfizh, dan pembelajaran yang adaptif dengan zaman, ananda bukan hanya belajar, tapi memahami untuk apa ia belajar.',
-            ctaText: 'Kenali Attaufiq',
-            ctaHref: '/about',
+            id: 1,
+            badge: "✦ SEKOLAH ISLAM ATTAUFIQ ✦",
+            titleMain: "Membentuk Generasi",
+            titleItalic: "Berarti",
+            titleEnd: "untuk Dunia.",
+            desc: "Islam + Future Ready — Attaufiq mendampingi setiap anak menemukan arti hidupnya melalui ilmu, akhlak, dan pengalaman belajar yang bermakna.",
+            btnPrimaryText: "Kenali Attaufiq →",
+            btnPrimaryLink: "#about",
+            btnSecondaryText: "Lihat Profil Sekolah",
+            btnSecondaryLink: "#profil",
+            image: "images/jenjang/heroSma.JPG"
         },
         {
-            image: 'https://images.pexels.com/photos/8923564/pexels-photo-8923564.jpeg?auto=compress&cs=tinysrgb&w=1600',
-            titleStart: 'Membangun Generasi Beradab & ',
-            titleHighlight: "Hafiz Qur'an",
-            titleEnd: '',
-            desc: "Menyiapkan generasi penerus yang berilmu, berakhlak mulia, serta memiliki hafalan Al-Qur'an yang kuat untuk bekal masa depan yang cemerlang di tengah tantangan zaman modern.",
-            ctaText: 'Pendaftaran PPDB',
-            ctaHref: '#ppdb',
+            id: 2,
+            badge: "✦ PENDIDIKAN BERKARAKTER ✦",
+            titleMain: "Menumbuhkan Potensi",
+            titleItalic: "Terbaik",
+            titleEnd: "Ananda.",
+            desc: "Dengan kurikulum terintegrasi, kami membangun pondasi karakter islami dan keterampilan abad 21 untuk masa depan yang gemilang.",
+            btnPrimaryText: "Daftar Sekarang →",
+            btnPrimaryLink: "#ppdb",
+            btnSecondaryText: "Kurikulum Kami",
+            btnSecondaryLink: "#kurikulum",
+            image: "images/hero/imgHero-1.JPG"
         },
+        {
+            id: 3,
+            badge: "✦ LINGKUNGAN BELAJAR ISLAMI ✦",
+            titleMain: "Suasana Belajar",
+            titleItalic: "Nyaman",
+            titleEnd: "dan Kolaboratif.",
+            desc: "Fasilitas modern dan tenaga pendidik berdedikasi menciptakan ruang tumbuh yang menyenangkan bagi setiap siswa.",
+            btnPrimaryText: "Jelajahi Fasilitas →",
+            btnPrimaryLink: "#fasilitas",
+            btnSecondaryText: "Galeri Kegiatan",
+            btnSecondaryLink: "#galeri",
+            image: "images/home/tahfidzhDay.JPG"
+        }
     ];
 
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    // Auto play carousel setiap 6 detik
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+        }, 6000);
+        return () => clearInterval(timer);
+    }, [slides.length]);
+
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    };
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    };
+
     return (
-        <section className="relative w-full h-[600px] md:h-[680px] lg:h-[720px] bg-[#001845] overflow-hidden group">
-
-            <Swiper
-                modules={[Autoplay, EffectFade, Navigation]}
-                effect="fade"
-                speed={1200}
-                autoplay={{ delay: 7000, disableOnInteraction: false }}
-                loop={true}
-                navigation={{
-                    nextEl: '.hero-next-btn',
-                    prevEl: '.hero-prev-btn',
-                }}
-                className="h-full w-full"
-            >
-                {slides.map((slide, index) => (
-                    <SwiperSlide key={index} className="relative w-full h-full overflow-hidden">
-
-                        {/* --- LAYER 0: GAMBAR SISWA & GRADASI --- */}
-                        <div className="absolute inset-0 z-0">
-                            <img
-                                src={slide.image}
-                                alt="Siswa Attaufiq"
-                                className="w-full h-full object-cover object-right md:object-center"
-                            />
-                            {/* Gradasi mulus: navy solid sampai ~45%, lalu memudar memperlihatkan foto */}
-                            <div className="absolute inset-0 z-10 bg-[linear-gradient(to_right,#001845_0%,#001845_45%,rgba(0,24,69,0.9)_55%,rgba(0,24,69,0.4)_75%,transparent_90%)]"></div>
-                        </div>
-
-                        {/* --- LAYER 1: FRAME KUBAH DEKORATIF DENGAN MASKING --- */}
-                        <div className="absolute top-0 left-[-70px] md:left-[-150px] lg:left-[-190px] h-full w-[80%] md:w-[48%] lg:w-[40%] z-10 pointer-events-none">
-                            <img
-                                src="/images/hero/frame-left.png"
-                                alt="Frame Kubah"
-                                /* MASKING: Bagian hitam (solid) di kiri sampai 70%, lalu pudar jadi transparan di ujung kanan 100% */
-                                className="w-full h-full object-cover object-right [mask-image:linear-gradient(to_right,black_70%,transparent_100%)]"
-                            />
-                        </div>
-
-                        {/* --- LAYER 2: KONTEN TEKS --- */}
-                        <div className="absolute inset-0 z-20 mx-auto flex max-w-7xl flex-col justify-center px-6 md:pl-28 lg:pl-36 pointer-events-none slide-anim-content">
-
-                            <div className="max-w-md md:pr-6 pointer-events-auto">
-
-                                <h1 className="text-3xl font-bold leading-[1.2] text-white sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem] drop-shadow-md">
-                                    <span>{slide.titleStart}</span>
-                                    <span className="underline decoration-[#FDD000] decoration-[4px] underline-offset-[5px]">
-                                        {slide.titleHighlight}
-                                    </span>
-                                    <span>{slide.titleEnd}</span>
-                                </h1>
-
-                                <p className="mt-5 max-w-md text-sm leading-relaxed text-white/90 md:text-base drop-shadow">
-                                    {slide.desc}
-                                </p>
-
-                                <div className="mt-10">
-                                    <a
-                                        href={slide.ctaHref}
-                                        className="inline-flex items-center space-x-3 bg-[#FFC72C] hover:bg-[#F3E5AB] text-[#051C42] px-8 py-3.5 rounded-full text-xs font-black uppercase tracking-widest transition duration-300 shadow-xl hover:scale-105"
-                                    >
-                                        <span>{slide.ctaText}</span>
-                                        <span className="text-lg leading-none">→</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-
-            {/* --- LAYER 3: DAUN (FOREGROUND) --- */}
-            <div className="absolute bottom-0 right-[10%] md:right-[30%] z-30 pointer-events-none w-48 md:w-72 opacity-90 translate-y-4">
-                <img
-                    src="/images/hero/front-leaves.png"
-                    alt="Leaves"
-                    className="w-full h-auto filter blur-[2px]"
-                />
+        <section className="relative w-full bg-[#102380] overflow-hidden min-h-[580px] lg:min-h-[640px] flex items-center">
+      
+      {/* ================= SLIDES CONTAINER ================= */}
+      <div className="relative w-full h-full min-h-[580px] lg:min-h-[640px] flex items-center">
+        {slides.map((slide, index) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+              index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+            }`}
+          >
+            {/* 1. GAMBAR BACKGROUND FULL */}
+            <div className="absolute inset-0 w-full h-full">
+              <img 
+                src={slide.image} 
+                alt="Hero Background" 
+                className="w-full h-full object-cover object-[88%_center] lg:object-[92%_center] transition-transform duration-700" 
+              />
             </div>
 
-            {/* --- LAYER 4: TOMBOL MATAHARI --- */}
-            <button className="hero-prev-btn absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 group flex items-center justify-center cursor-pointer outline-none hover:scale-110 transition-transform duration-300 drop-shadow-xl">
-                <svg className="absolute inset-0 w-full h-full text-[#FFC72C] group-hover:text-[#F3E5AB] transition-colors duration-300 animate-[spin_10s_linear_infinite]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L14.39 5.26L18.5 5.5L18.76 9.61L22 12L18.76 14.39L18.5 18.5L14.39 18.74L12 22L9.61 18.74L5.5 18.5L5.24 14.39L2 12L5.24 9.61L5.5 5.5L9.61 5.26L12 2Z" />
-                </svg>
-                <svg className="relative z-10 w-5 h-5 text-[#031B4E] pr-0.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
+            {/* 2. OVERLAY GRADIENT (#102380) */}
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#102380] via-[#102380]/95 via-45% to-transparent pointer-events-none z-10">
+              {/* Pattern Islami Transparan */}
+              <div 
+                className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay"
+                style={{
+                  backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.4) 1px, transparent 1px)`,
+                  backgroundSize: '22px 22px'
+                }}
+              />
+            </div>
 
-            <button className="hero-next-btn absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 group flex items-center justify-center cursor-pointer outline-none hover:scale-110 transition-transform duration-300 drop-shadow-xl">
-                <svg className="absolute inset-0 w-full h-full text-[#FFC72C] group-hover:text-[#F3E5AB] transition-colors duration-300 animate-[spin_10s_linear_infinite_reverse]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L14.39 5.26L18.5 5.5L18.76 9.61L22 12L18.76 14.39L18.5 18.5L14.39 18.74L12 22L9.61 18.74L5.5 18.5L5.24 14.39L2 12L5.24 9.61L5.5 5.5L9.61 5.26L12 2Z" />
-                </svg>
-                <svg className="relative z-10 w-5 h-5 text-[#031B4E] pl-0.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
+            {/* ================= ORNAMEN ESTETIK TAMBAHAN ================= */}
+            {/* Ambient Light Kuning/Emas */}
+            <div className="absolute top-0 left-0 w-[450px] h-[450px] bg-amber-400/15 rounded-full blur-3xl pointer-events-none z-15" />
 
-            <style jsx global>{`
-                .slide-anim-content {
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: all 1s ease-out;
-                    transition-delay: 0.3s;
-                }
-                .swiper-slide-active .slide-anim-content {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            `}</style>
-        </section>
+            {/* Sparkles / Bintang Emas */}
+            <div className="absolute top-12 left-[30%] text-[#FFC700]/40 text-xl animate-pulse pointer-events-none z-15">✦</div>
+            <div className="absolute top-28 left-[45%] text-[#FFC700]/30 text-xs animate-ping pointer-events-none z-15">✨</div>
+            <div className="absolute bottom-20 left-[25%] text-[#FFC700]/35 text-sm animate-pulse pointer-events-none z-15">✦</div>
+
+            {/* Silhouette Bulan Sabit Emas */}
+            <div className="absolute top-6 right-[42%] text-amber-300/10 text-8xl font-serif pointer-events-none select-none z-15">
+              🌙
+            </div>
+
+            {/* 3. KONTEN TEKS & LOGO */}
+            <div className="container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl h-full flex items-center relative z-20">
+              <div className="w-full lg:w-[55%] flex items-center gap-6 sm:gap-8 pl-2 sm:pl-8 lg:pl-12">
+                
+                {/* LOGO ATTAUFIQ */}
+                <div className="shrink-0 self-end mb-4 lg:mb-6 hidden sm:block">
+                  <img 
+                    src="images/hero/logoHero.png" 
+                    alt="Logo Attaufiq" 
+                    className="w-20 sm:w-24 lg:w-28 h-auto object-contain drop-shadow-2xl"
+                  />
+                </div>
+
+                {/* TEKS UTAMA */}
+                <div className="space-y-4 max-w-lg">
+                  {/* BADGE */}
+                  <div>
+                    <span className="text-[#FFC700] text-xs sm:text-sm tracking-widest font-bold uppercase drop-shadow">
+                      {slide.badge}
+                    </span>
+                  </div>
+
+                  {/* JUDUL */}
+                  <h1 className="text-2xl sm:text-4xl lg:text-[42px] font-serif leading-[1.2] font-medium text-white drop-shadow-md">
+                    {slide.titleMain}{' '}
+                    <span className="italic font-normal text-[#FFC700]">
+                      {slide.titleItalic}
+                    </span>{' '}
+                    {slide.titleEnd}
+                  </h1>
+
+                  {/* BINTANG DIVIDER */}
+                  <div className="flex items-center gap-3 opacity-70">
+                    <span className="w-12 h-[1px] bg-amber-100"></span>
+                    <span className="text-[#FFC700] text-[10px]">☀️</span>
+                    <span className="w-12 h-[1px] bg-amber-100"></span>
+                  </div>
+
+                  {/* DESKRIPSI */}
+                  <p className="text-slate-200/90 text-xs sm:text-sm leading-relaxed font-light">
+                    {slide.desc}
+                  </p>
+
+                  {/* TOMBOL ACTION */}
+                  <div className="flex flex-wrap items-center gap-4 pt-2">
+                    <a
+                      href={slide.btnPrimaryLink}
+                      className="bg-[#FFC700] hover:bg-[#ebd000] text-[#102380] px-6 py-2.5 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 shadow-lg hover:scale-105 active:scale-95"
+                    >
+                      {slide.btnPrimaryText}
+                    </a>
+
+                    <a
+                      href={slide.btnSecondaryLink}
+                      className="flex items-center gap-2 text-white hover:text-[#FFC700] text-xs sm:text-sm font-semibold transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-full border border-white/80 group-hover:border-[#FFC700] flex items-center justify-center transition-colors shadow">
+                        <Play className="w-3 h-3 fill-current ml-0.5" />
+                      </div>
+                      <span>{slide.btnSecondaryText}</span>
+                    </a>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ================= GANTUNGAN LAMPU KIRI ATAS ================= */}
+      <div className="absolute top-0 left-0 z-30 pointer-events-none w-[400px] sm:w-[520px] lg:w-[640px] h-full max-h-[680px]">
+        <img 
+          src="images/home/lightHero.png" 
+          alt="Lampu Hero Ornamen" 
+          className="w-full h-full object-contain object-left-top drop-shadow-[0_10px_20px_rgba(255,199,0,0.25)]"
+        />
+      </div>
+
+      {/* ================= TOMBOL NAVIGASI CAROUSEL (IKON MATAHARI LUCIDE) ================= */}
+      <button
+        onClick={prevSlide}
+        aria-label="Previous Slide"
+        className="absolute left-3 lg:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-[#102380]/40 hover:bg-[#FFC700] text-[#FFC700] hover:text-[#102380] backdrop-blur-md border border-[#FFC700]/40 hover:border-[#FFC700] flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.3)] hover:shadow-[0_0_20px_rgba(255,199,0,0.5)] hover:scale-110 active:scale-95 group"
+      >
+        <Sun className="w-6 h-6 stroke-[2] transition-transform duration-500 group-hover:rotate-45" />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        aria-label="Next Slide"
+        className="absolute right-3 lg:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-[#102380]/40 hover:bg-[#FFC700] text-[#FFC700] hover:text-[#102380] backdrop-blur-md border border-[#FFC700]/40 hover:border-[#FFC700] flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.3)] hover:shadow-[0_0_20px_rgba(255,199,0,0.5)] hover:scale-110 active:scale-95 group"
+      >
+        <Sun className="w-6 h-6 stroke-[2] transition-transform duration-500 group-hover:rotate-45" />
+      </button>
+
+      {/* ================= DOTS INDICATOR ================= */}
+      <div className="absolute bottom-5 right-8 sm:right-16 lg:right-20 z-30 flex items-center gap-2">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentSlide(idx)}
+            aria-label={`Go to slide ${idx + 1}`}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              idx === currentSlide ? 'w-8 bg-[#FFC700] shadow-[0_0_10px_rgba(255,199,0,0.6)]' : 'w-2 bg-white/40 hover:bg-white/70'
+            }`}
+          />
+        ))}
+      </div>
+
+    </section>
     );
 }
