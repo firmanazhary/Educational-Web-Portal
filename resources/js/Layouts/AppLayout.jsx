@@ -10,8 +10,7 @@ const ASSETS = {
 
 export default function AppLayout({ children, title }) {
     const { url } = usePage();
-    const [scrolled, setScrolled] = useState(false);
-    const [openDropdown, setOpenDropdown] = useState(null); // Fix 1: Menambahkan State openDropdown
+    const [scrolled, setScrolled] = useState(false);// Fix 1: Menambahkan State openDropdown
 
     // Deteksi scroll untuk efek glassmorphism navbar
     useEffect(() => {
@@ -36,11 +35,11 @@ export default function AppLayout({ children, title }) {
         {
             name: 'Jenjang', href: '/jenjang',
             children: [
-                { name: 'PG', href: '/pg'},
-                { name: 'TK', href: '/tk'},
-                { name: 'SD', href: '/sd'},
-                { name: 'SMP', href: '/smp'},
-                { name: 'SMA', href: '/sma'},
+                { name: 'PG', href: '/pg' },
+                { name: 'TK', href: '/tk' },
+                { name: 'SD', href: '/sd' },
+                { name: 'SMP', href: '/smp' },
+                { name: 'SMA', href: '/sma' },
             ]
         },
         { name: 'Admission', href: '/#admission' },
@@ -49,129 +48,223 @@ export default function AppLayout({ children, title }) {
         { name: 'Berita', href: '/#blog' },
     ];
 
+    // HAMBURGER MENU
+    const [openDropdown, setOpenDropdown] = useState(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [mobileDropdown, setMobileDropdown] = useState(null);
+
+    const toggleMobileSubmenu = (name) => {
+        setMobileDropdown(mobileDropdown === name ? null : name);
+    };
+
     return (
         <div className="min-h-screen bg-[#FAF8F5] font-sans text-slate-800 relative antialiased flex flex-col justify-between">
             <Head title={title ? `${title} - SIT At-Taufiq Jambi` : 'SIT At-Taufiq Jambi - Sekolah Islam Terpadu'} />
 
             {/* --- HEADER / NAVBAR --- */}
             <header
-                className={`sticky top-0 z-50 transition-all duration-300 border-b border-[#D4AF37]/20 ${scrolled
-                        ? 'bg-[#051C42]/95 backdrop-blur-md shadow-lg py-3'
-                        : 'bg-[#07327F] py-4'
+      className={`sticky top-0 z-50 transition-all duration-300 border-b border-[#D4AF37]/20 ${
+        scrolled
+          ? 'bg-[#051C42]/95 backdrop-blur-md shadow-lg py-3'
+          : 'bg-[#07327F] py-4'
+      }`}
+    >
+      <nav className="container mx-auto px-4 sm:px-6 flex justify-between items-center max-w-7xl">
+        
+        {/* Logo At-Taufiq */}
+        <Link href="/" className="flex items-center space-x-3 group">
+          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 shadow-md border border-[#D4AF37]">
+            <img
+              src={ASSETS?.LOGO}
+              alt="At-Taufiq Logo"
+              className="w-full h-full object-contain"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.style.display = 'none';
+              }}
+            />
+          </div>
+          <div className="font-serif font-black text-xl sm:text-2xl text-white tracking-wider uppercase group-hover:text-[#F3E5AB] transition">
+            AT-TAUFIQ<span className="text-[#D4AF37]">.</span>
+          </div>
+        </Link>
+
+        {/* Menu Navigasi Utama (Desktop) */}
+        <div className="hidden md:flex space-x-8 text-xs font-bold tracking-widest items-center">
+          {navLinks?.map((link) => {
+            const isActive = url === link.href || (link.href !== '/' && url?.startsWith(link.href));
+            const hasChildren = link.children && link.children.length > 0;
+
+            return (
+              <div
+                key={link.name}
+                className="relative group py-2"
+                onMouseEnter={() => hasChildren && setOpenDropdown(link.name)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <Link
+                  href={link.href}
+                  className={`flex items-center space-x-1 transition py-1 ${
+                    isActive
+                      ? 'text-white font-bold'
+                      : 'text-blue-100/80 hover:text-[#F3E5AB]'
+                  }`}
+                >
+                  <span>{link.name}</span>
+                  {hasChildren && (
+                    <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  )}
+
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-1 flex justify-center">
+                      <svg viewBox="0 0 40 6" fill="none" className="w-full h-auto text-[#D4AF37]">
+                        <path d="M1 3C10 0.5 30 5.5 39 3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                      </svg>
+                    </span>
+                  )}
+                </Link>
+
+                {/* SUBMENU BOX DESKTOP */}
+                {hasChildren && (
+                  <div
+                    className={`absolute left-0 top-full pt-2 w-64 transition-all duration-300 transform ${
+                      openDropdown === link.name
+                        ? 'opacity-100 visible translate-y-0'
+                        : 'opacity-0 invisible -translate-y-2 pointer-events-none'
                     }`}
+                  >
+                    <div className="bg-white rounded-2xl shadow-2xl border border-[#D4AF37]/30 p-2 overflow-hidden relative">
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#D4AF37]/10 to-transparent rounded-bl-full pointer-events-none"></div>
+                      <div className="divide-y divide-slate-100">
+                        {link.children.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            className="group/sub block p-3 rounded-xl hover:bg-[#FAF8F5] transition duration-200"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="text-slate-800 group-hover/sub:text-[#07327F] font-bold text-xs capitalize tracking-normal transition">
+                                {subItem.name}
+                              </span>
+                              <span className="text-[#D4AF37] opacity-0 group-hover/sub:opacity-100 group-hover/sub:translate-x-1 transition-all text-xs">
+                                →
+                              </span>
+                            </div>
+                            {subItem.desc && (
+                              <p className="text-[10px] text-slate-400 font-normal capitalize tracking-normal mt-0.5 leading-tight">
+                                {subItem.desc}
+                              </p>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Tombol Aksi Desktop & Hamburger Mobile */}
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          <a
+            href="#ppdb"
+            className="hidden sm:inline-block bg-[#D4AF37] hover:bg-[#F3E5AB] text-[#051C42] px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          >
+            PPDB Online
+          </a>
+
+          {/* TOMBOL HAMBURGER (Mobile Only) */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Mobile Menu"
+            className="md:hidden p-2 text-white hover:text-[#D4AF37] focus:outline-none transition"
+          >
+            {isMobileMenuOpen ? (
+              /* Ikon Close (X) */
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              /* Ikon Hamburger */
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* ================= PANEL MENU MOBILE ================= */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-[#051C42] border-b border-[#D4AF37]/30 px-6 pt-4 pb-6 space-y-3 transition-all">
+          {navLinks?.map((link) => {
+            const hasChildren = link.children && link.children.length > 0;
+            const isOpen = mobileDropdown === link.name;
+
+            return (
+              <div key={link.name} className="border-b border-white/5 pb-2">
+                <div className="flex justify-between items-center py-2">
+                  <Link
+                    href={link.href}
+                    onClick={() => !hasChildren && setIsMobileMenuOpen(false)}
+                    className="text-white text-sm font-bold tracking-wider hover:text-[#D4AF37]"
+                  >
+                    {link.name}
+                  </Link>
+                  {hasChildren && (
+                    <button
+                      onClick={() => toggleMobileSubmenu(link.name)}
+                      className="p-1 text-[#D4AF37]"
+                    >
+                      <svg
+                        className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+
+                {/* SUBMENU ACCORDION MOBILE */}
+                {hasChildren && isOpen && (
+                  <div className="pl-4 mt-2 space-y-2 bg-white/5 rounded-xl p-3">
+                    {link.children.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        href={subItem.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block text-xs text-slate-300 hover:text-[#D4AF37] py-1"
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+          {/* Tombol PPDB Mobile */}
+          <div className="pt-2">
+            <a
+              href="#ppdb"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block text-center w-full bg-[#D4AF37] hover:bg-[#F3E5AB] text-[#051C42] py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition shadow-md"
             >
-                <nav className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
-
-                    {/* Logo At-Taufiq */}
-                    <Link href="/" className="flex items-center space-x-3 group">
-                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 shadow-md border border-[#D4AF37]">
-                            <img
-                                src={ASSETS.LOGO}
-                                alt="At-Taufiq Logo"
-                                className="w-full h-full object-contain"
-                                onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.style.display = 'none';
-                                }}
-                            />
-                        </div>
-                        <div className="font-serif font-black text-2xl text-white tracking-wider uppercase group-hover:text-[#F3E5AB] transition">
-                            AT-TAUFIQ<span className="text-[#D4AF37]">.</span>
-                        </div>
-                    </Link>
-
-                    {/* Menu Navigasi Utama */}
-                    <div className="hidden md:flex space-x-8 text-xs font-bold  tracking-widest items-center">
-                        {navLinks.map((link) => {
-                            const isActive = url === link.href || (link.href !== '/' && url.startsWith(link.href));
-                            const hasChildren = link.children && link.children.length > 0;
-
-                            return (
-                                <div
-                                    key={link.name}
-                                    className="relative group py-2"
-                                    onMouseEnter={() => hasChildren && setOpenDropdown(link.name)}
-                                    onMouseLeave={() => setOpenDropdown(null)}
-                                >
-                                    <Link
-                                        href={link.href}
-                                        className={`flex items-center space-x-1 transition py-1 ${isActive
-                                                ? 'text-white font-bold'
-                                                : 'text-blue-100/80 hover:text-[#F3E5AB]'
-                                            }`}
-                                    >
-                                        <span>{link.name}</span>
-                                        {hasChildren && (
-                                            <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                                            </svg>
-                                        )}
-
-                                        {isActive && (
-                                            <span className="absolute -bottom-1 left-0 right-0 h-1 flex justify-center">
-                                                <svg viewBox="0 0 40 6" fill="none" className="w-full h-auto text-[#D4AF37]">
-                                                    <path d="M1 3C10 0.5 30 5.5 39 3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                                                </svg>
-                                            </span>
-                                        )}
-                                    </Link>
-
-                                    {/* --- SUBMENU BOX --- */}
-                                    {hasChildren && (
-                                        <div
-                                            className={`absolute left-0 top-full pt-2 w-64 transition-all duration-300 transform ${openDropdown === link.name
-                                                    ? 'opacity-100 visible translate-y-0'
-                                                    : 'opacity-0 invisible -translate-y-2 pointer-events-none'
-                                                }`}
-                                        >
-                                            <div className="bg-white rounded-2xl shadow-2xl border border-[#D4AF37]/30 p-2 overflow-hidden relative">
-                                                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#D4AF37]/10 to-transparent rounded-bl-full pointer-events-none"></div>
-
-                                                <div className="divide-y divide-slate-100">
-                                                    {/* Fix 2: Mengubah navLinks.children menjadi link.children */}
-                                                    {link.children.map((subItem) => (
-                                                        <Link
-                                                            key={subItem.name}
-                                                            href={subItem.href}
-                                                            className="group/sub block p-3 rounded-xl hover:bg-[#FAF8F5] transition duration-200"
-                                                        >
-                                                            <div className="flex items-center justify-between">
-                                                                <span className="text-slate-800 group-hover/sub:text-[#07327F] font-bold text-xs capitalize tracking-normal transition">
-                                                                    {subItem.name}
-                                                                </span>
-                                                                <span className="text-[#D4AF37] opacity-0 group-hover/sub:opacity-100 group-hover/sub:translate-x-1 transition-all text-xs">
-                                                                    →
-                                                                </span>
-                                                            </div>
-                                                            {subItem.desc && (
-                                                                <p className="text-[10px] text-slate-400 font-normal capitalize tracking-normal mt-0.5 leading-tight">
-                                                                    {subItem.desc}
-                                                                </p>
-                                                            )}
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    {/* Tombol Aksi */}
-                    <div className="flex items-center space-x-4">
-
-                        <a
-                            href="#ppdb"
-                            className="bg-[#D4AF37] hover:bg-[#F3E5AB] text-[#051C42] px-6 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                        >
-                            PPDB Online
-                        </a>
-                    </div>
-
-                </nav>
-            </header>
+              PPDB Online
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+           
 
             {/* --- MAIN CONTENT --- */}
             <main className="relative z-10 flex-grow">{children}</main>
