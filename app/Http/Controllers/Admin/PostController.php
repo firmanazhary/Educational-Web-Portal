@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Models\Category; // Import model Category
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
@@ -15,14 +15,14 @@ class PostController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Posts/Index', [
-            'posts' => Post::with('category')->latest()->get() // Load nama kategorinya
+            'posts' => Post::with('category')->latest()->get()
         ]);
     }
    
     public function create()
     {
         return Inertia::render('Admin/Posts/Create', [
-            'categories' => Category::select('id', 'name')->get() // Oper list kategori ke form create
+            'categories' => Category::select('id', 'name', 'icon')->get()
         ]);
     }
 
@@ -30,7 +30,7 @@ class PostController extends Controller
     {
         $request->validate([
             'title'       => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id', // Validasi ID kategori
+            'category_id' => 'required|exists:categories,id',
             'content'     => 'required',
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
@@ -43,9 +43,10 @@ class PostController extends Controller
         Post::create([
             'title'       => $request->input('title'),
             'slug'        => Str::slug($request->input('title')),
-            'category_id' => $request->input('category_id'), // Simpan category_id
+            'category_id' => $request->input('category_id'),
             'content'     => $request->input('content'),
             'image'       => $imagePath,
+            'type'        => 'blog',
             'is_featured' => $request->boolean('is_featured', false),
         ]);
 
@@ -55,8 +56,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         return Inertia::render('Admin/Posts/Edit', [
-            'post'       => $post,
-            'categories' => Category::select('id', 'name')->get() // Oper list kategori ke form edit
+            'post'       => $post->load('category'),
+            'categories' => Category::select('id', 'name', 'icon')->get()
         ]);
     }
 
@@ -75,7 +76,7 @@ class PostController extends Controller
         $post->content     = $request->input('content');
 
         if ($request->hasFile('image')) {
-            if ($post->image) {
+            if ($post->image && Storage::disk('public')->exists($post->image)) {
                 Storage::disk('public')->delete($post->image);
             }
             $post->image = $request->file('image')->store('posts', 'public');
@@ -88,7 +89,7 @@ class PostController extends Controller
        
     public function destroy(Post $post)
     {
-        if ($post->image) {
+        if ($post->image && Storage::disk('public')->exists($post->image)) {
             Storage::disk('public')->delete($post->image);
         }
 

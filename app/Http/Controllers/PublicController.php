@@ -17,7 +17,7 @@ class PublicController extends Controller
         return Inertia::render('Welcome', [
             'posts' => Post::with('category')->latest()->take(6)->get(),
             'galleries' => Gallery::latest()->take(6)->get(),
-            'categories' => Category::all(),
+            'categories' => Category::all(), // Mengirim semua kolom termasuk icon
         ]);
     }
 
@@ -47,18 +47,18 @@ class PublicController extends Controller
             'nextPost' => $nextPost,
         ]);
     }
-    public function blog()
+   public function blog()
     {
-
         return Inertia::render('Blog', [
-            // Ambil data postingan beserta relasi kategorinya
+            // Ambil data postingan beserta relasi kategorinya (termasuk category.icon)
             'posts' => Post::with('category')->latest()->get(),
 
-            // Ambil semua kategori dari hasil CRUD database
-            'categories' => Category::select('id', 'name', 'slug')->get(),
+            // Sertakan kolom 'icon' dan hitung jumlah post per kategori
+            'categories' => Category::select('id', 'name', 'slug', 'icon')
+                ->withCount('posts')
+                ->get(),
         ]);
     }
-
     // --- HALAMAN HALAMAN STATIS (Persiapan Dynamic CMS) ---
 
     public function about()

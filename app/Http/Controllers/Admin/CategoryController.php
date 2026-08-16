@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Categories/Index', [
-            'categories' => Category::withCount('posts')->latest()->get() // Bonus: hitung jumlah post per kategori
+            'categories' => Category::withCount('posts')->latest()->get()
         ]);
     }
 
@@ -21,11 +21,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
+            'icon' => 'nullable|string|max:100',
         ]);
 
         Category::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'icon' => $request->icon ?? 'Tag',
         ]);
 
         return redirect()->back()->with('message', 'Kategori berhasil ditambahkan!');
@@ -35,11 +37,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+            'icon' => 'nullable|string|max:100',
         ]);
 
         $category->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'icon' => $request->icon ?? 'Tag',
         ]);
 
         return redirect()->back()->with('message', 'Kategori berhasil diperbarui!');
