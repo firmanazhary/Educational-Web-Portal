@@ -2,76 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Gallery; // Import model Gallery
+use App\Models\Gallery;
+use App\Models\Category;
+use App\Models\Event;
 use Inertia\Inertia;
 
 class PublicController extends Controller
 {
+    // --- HALAMAN DINAMIS ---
+
     public function index()
     {
-        return Inertia::render('Welcome', [
-            // HAPUS ->where('type', 'blog') KARENA SUDAH GAK ADA KOLOMNYA
-            'posts' => Post::latest()->get(),
-            'galleries' => Gallery::latest()->take(6)->get() // Ambil dari tabel Gallery
-        ]);
+      return Inertia::render('Welcome', [
+        // HAPUS ->where('type', 'blog') KARENA SUDAH GAK ADA KOLOMNYA
+        'posts' => Post::latest()->get(), 
+        'galleries' => Gallery::latest()->take(6)->get() // Ambil dari tabel Gallery
+    ]);
     }
 
     public function show($slug)
     {
-        // Cari post berdasarkan slug yang tipenya blog
-        $post = Post::where('slug', $slug)->firstOrFail();
+        // Cari artikel berdasarkan slug beserta kategorinya
+        $post = Post::with('category')->where('slug', $slug)->firstOrFail();
+
+        // Ambil 3 artikel terkait dari kategori yang sama
+        $relatedPosts = Post::with('category')
+            ->where('id', '!=', $post->id)
+            ->when($post->category_id, function ($query) use ($post) {
+                return $query->where('category_id', $post->category_id);
+            })
+            ->latest()
+            ->take(3)
+            ->get();
+
+        // (Opsional) Ambil artikel sebelum & sesudahnya
+        $prevPost = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
+        $nextPost = Post::where('id', '>', $post->id)->orderBy('id', 'asc')->first();
 
         return Inertia::render('BlogDetail', [
-            'post' => $post
+            'post' => $post,
+            'relatedPosts' => $relatedPosts,
+            'prevPost' => $prevPost,
+            'nextPost' => $nextPost,
         ]);
     }
+   public function blog()
+    {
+        return Inertia::render('Blog', [
+            // Ambil data postingan beserta relasi kategorinya (termasuk category.icon)
+            'posts' => Post::with('category')->latest()->get(),
 
-    public function about()
-    {
-        return Inertia::render('About');
+            // Sertakan kolom 'icon' dan hitung jumlah post per kategori
+            'categories' => Category::select('id', 'name', 'slug', 'icon')
+                ->withCount('posts')
+                ->get(),
+        ]);
     }
-    public function sejarah()
-    {
-        return Inertia::render('Sejarah');
-    }
-    public function faq()
-    {
-        return Inertia::render('Faq');
-    }
-    public function contact()
-    {
-        return Inertia::render('Contact');
-    }
+    // --- HALAMAN HALAMAN STATIS (Persiapan Dynamic CMS) ---
 
-    public function jenjang()
-    {
-        return Inertia::render('Jenjang/Jenjang');
-    }
-
-    public function pg()
-    {
-        return Inertia::render('Jenjang/Pg');
-    }
-
-    public function tk()
-    {
-        return Inertia::render('Jenjang/Tk');
-    }
-
-    public function sd()
-    {
-        return Inertia::render('Jenjang/Sd');
-    }
-
-    public function smp()
-    {
-        return Inertia::render('Jenjang/Smp');
-    }
-
-    public function sma()
-    {
-        return Inertia::render('Jenjang/Sma');
-    }
+            public function about()
+        {
+            return Inertia::render('About');
+        }
+             public function sejarah()
+        {
+            return Inertia::render('Sejarah');
+        }
+               public function faq()
+        {
+            return Inertia::render('Faq');
+        }
+                 public function contact()
+        {
+            return Inertia::render('Contact');
+        }
 }
