@@ -1,298 +1,249 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import AppLayout from '@/Layouts/AppLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
+import HeroSection from '@/Layouts/HeroSection';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles, BookOpen, GraduationCap, Heart, Sun, Award } from 'lucide-react';
 
-// Custom Hook Animasi Scroll Reveal
-function useInView(options = { threshold: 0.15 }) {
-    const ref = useRef(null);
-    const [isInView, setIsInView] = useState(false);
+// Varian animasi stagger untuk grid card
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.12,
+            delayChildren: 0.1,
+        },
+    },
+};
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                setIsInView(true);
-                observer.unobserve(entry.target); // Animasi cuma jalan sekali pas pertama keliatan
-            }
-        }, options);
+const cardVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    },
+};
 
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
-
-        return () => {
-            if (ref.current) observer.unobserve(ref.current);
-        };
-    }, []);
-
-    return [ref, isInView];
-}
-
-export default function Jenjang({
-    title = "Program\nPendidikan",
-    subtitle = "Setiap jenjang, satu perjalanan. Bersama membangun generasi beradab.",
-    tagline = "SEKOLAH ISLAM ATTAUFIQ",
-    patternImage = "/images/hero/frame-left.png",
-    mosqueImage = "/images/hero/jenjang-hero-left.png"
-}) {
-    const [activeTab, setActiveTab] = useState('PG-TK');
-
-
-    // Ref untuk Masing-masing Section Animasi
-    const [heroRef, heroInView] = useInView();
-    const [sejarahRef, sejarahInView] = useInView();
-    const [todayRef, todayInView] = useInView();
-    const [quoteRef, quoteInView] = useInView();
-
-
+export default function Jenjang() {
     const jenjangList = [
         {
-            title: "PG",
-            subtitle: "Playgroup",
+            code: "PG",
+            title: "Playgroup",
+            age: "Usia 2 - 4 Tahun",
+            desc: "Fondasi kasih sayang, adab, dan pengenalan Al-Qur'an sejak usia dini.",
             href: "/pg",
             icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M5 6h14v12H5z" />
-                    <path d="M9 10h6M9 14h6" />
+                <svg className="w-8 h-8 sm:w-9 sm:h-9 text-[#FFC72C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <circle cx="12" cy="10" r="3" />
                 </svg>
             ),
         },
         {
-            title: "TK",
-            subtitle: "Taman Kanak-Kanak",
+            code: "TK",
+            title: "Taman Kanak-Kanak",
+            age: "Usia 4 - 6 Tahun",
+            desc: "Bermain sambil belajar, pembiasaan ibadah harian, dan kemandirian.",
             href: "/tk",
             icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M3 21h18" />
-                    <path d="M5 21V8l7-5 7 5v13" />
+                <svg className="w-8 h-8 sm:w-9 sm:h-9 text-[#FFC72C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5" />
                 </svg>
             ),
         },
         {
-            title: "SD",
-            subtitle: "Sekolah Dasar",
+            code: "SD IT",
+            title: "Sekolah Dasar",
+            age: "Usia 6 - 12 Tahun",
+            desc: "Fondasi akademik, pemahaman Al-Qur'an, dan pembentukan karakter adab.",
             href: "/sd",
             icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M4 5h16v14H4z" />
-                    <path d="M12 5v14" />
+                <svg className="w-8 h-8 sm:w-9 sm:h-9 text-[#FFC72C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
+                    <path d="M6 6h10M6 10h10" />
                 </svg>
             ),
         },
         {
-            title: "SMP",
-            subtitle: "Sekolah Menengah Pertama",
+            code: "SMP IT",
+            title: "Sekolah Menengah Pertama",
+            age: "Usia 12 - 15 Tahun",
+            desc: "Penguatan kepemimpinan, berpikir kritis, serta penambahan hafalan.",
             href: "/smp",
             icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M4 19h16" />
-                    <path d="M7 19V9l5-5 5 5v10" />
+                <svg className="w-8 h-8 sm:w-9 sm:h-9 text-[#FFC72C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4a3 3 0 0 1 6 0v4" />
+                    <line x1="12" y1="3" x2="12" y2="7" />
                 </svg>
             ),
         },
         {
-            title: "SMA",
-            subtitle: "Sekolah Menengah Atas",
+            code: "SMA IT",
+            title: "Sekolah Menengah Atas",
+            age: "Usia 15 - 18 Tahun",
+            desc: "Kesiapan ke perguruan tinggi terbaik, kepemimpinan, dan kontribusi pada masyarakat.",
             href: "/sma",
             icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M3 8l9-5 9 5-9 5-9-5z" />
-                    <path d="M6 10v4c0 2 3 4 6 4s6-2 6-4v-4" />
+                <svg className="w-8 h-8 sm:w-9 sm:h-9 text-[#FFC72C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20" />
                 </svg>
             ),
         },
     ];
 
-
     return (
-        <AppLayout title="About At-Taufiq">
-            <Head title="About At-Taufiq Jambi | Mencetak Generasi Robbani" />
+        <AppLayout title="Program Pendidikan - SIT At-Taufiq">
+            <Head title="Program Pendidikan | SIT At-Taufiq Jambi" />
 
             {/* ==========================================
-                1. HERO SECTION (FADE IN SANTAI)
+                1. HERO SECTION (MENGGUNAKAN KOMPONEN HEROSECTION)
             ========================================== */}
-            <section ref={heroRef} className="relative w-full overflow-hidden bg-[#07327F] text-white min-h-[480px] md:min-h-[560px] flex items-center justify-center">
-                <div className="absolute top-0 right-0 w-full md:w-3/4 h-full z-0">
-                    <img
-                        src={mosqueImage}
-                        alt="Mosque Background"
-                        className="w-full h-full object-cover object-[90%_center]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#07327F] from-[38%] via-[#07327F]/20 via-[55%] to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#07327F] via-transparent to-[#07327F]/30"></div>
-                </div>
+            <HeroSection
+                title={"Program\nPendidikan"}
+                subtitle="Setiap jenjang, satu perjalanan berkelanjutan. Bersama membangun generasi beradab, berilmu, dan bertakwa."
+                tagline="SEKOLAH ISLAM ATTAUFIQ"
+                mosqueImage="/images/hero/jenjang-hero-left.png"
+            />
 
-                <div className="absolute top-0 left-0 h-full w-full md:w-7/12 z-10 pointer-events-none overflow-hidden">
-                    <img
-                        src={patternImage}
-                        alt="Islamic Arch Frame"
-                        className="h-full w-full object-cover object-left [mask-image:linear-gradient(to_right,black_70%,transparent_100%)]"
-                    />
-                </div>
+            {/* ==========================================
+                2. PILIH JENJANG PENDIDIKAN SECTION
+            ========================================== */}
+            <section className="relative py-24 bg-[#FAF4EB] overflow-hidden">
+                {/* Background Pattern Subtle */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-                <div className={`relative z-20 container mx-auto flex flex-col items-center justify-center text-center px-6 py-20 max-w-5xl transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <div className="flex items-center space-x-2 mb-3">
-                        <span className="text-[#D4AF37] text-xs">◆</span>
-                        <p className="text-[#F3E5AB] font-bold text-xs md:text-sm tracking-[0.25em] uppercase drop-shadow">
-                            {tagline}
-                        </p>
-                        <span className="text-[#D4AF37] text-xs">◆</span>
-                    </div>
-
-                    <div className="text-[#D4AF37] text-lg md:text-xl my-1 animate-pulse">✦</div>
-
-                    <h1
-                        className="font-serif text-5xl md:text-7xl lg:text-[72px]
-    leading-[1.15]
-    whitespace-pre-line
-    font-semibold
-    max-w-2xl
-    mx-auto
-    text-white"
+                <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+                    
+                    {/* Header Section */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="text-center mb-16 space-y-3"
                     >
-                        {title}
-                    </h1>
+                        <div className="flex items-center justify-center space-x-2 text-[#C9972E]">
+                            <span className="text-xs">◆</span>
+                            <span className="font-bold text-xs uppercase tracking-[0.3em]">JENJANG PENDIDIKAN</span>
+                            <span className="text-xs">◆</span>
+                        </div>
 
-                    <div className="text-[#D4AF37] text-lg md:text-xl my-1 animate-pulse">✦</div>
-
-                    <div className="w-16 h-[1px] bg-[#D4AF37]/50 my-3"></div>
-
-                    <p className="text-blue-100 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed mt-1 drop-shadow">
-                        {subtitle}
-                    </p>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none translate-y-1">
-                    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block" preserveAspectRatio="none">
-                        <path d="M0 60 C 360 120, 1080 0, 1440 60 L 1440 120 L 0 120 Z" fill="#D4AF37" opacity="0.8" />
-                        <path d="M0 75 C 360 135, 1080 15, 1440 75 L 1440 120 L 0 120 Z" fill="#FAF8F5" />
-                    </svg>
-                </div>
-            </section>
-
-
-            {/* ==========================================
-                2. JENJANG PENDIDIKAN  SECTION
-            ========================================== */}
-            <section class="relative py-24 bg-[#FAF8F5] overflow-hidden flex flex-col items-center">
-
-                {/* <!-- Background Pattern --> */}
-                <div class="absolute inset-0 opacity-10 bg-[url('/images/pattern/islamic-pattern.svg')] bg-cover bg-center"></div>
-
-                <div class="relative max-w-7xl mx-auto px-6">
-
-                    {/* <!-- Heading --> */}
-                    <div class="text-center mb-16">
-
-                        <h2 class="text-[#0D2D6C] text-4xl font-serif font-semibold">
+                        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#051736] drop-shadow-xs">
                             Pilih Jenjang Pendidikan
                         </h2>
 
-                        <div class="flex justify-center items-center gap-4 mt-5">
-                            <div class="w-20 h-[2px] bg-[#D4AF37]"></div>
-
-                            <span class="text-[#D4AF37] text-lg">
-                                ✦
-                            </span>
-
-                            <div class="w-20 h-[2px] bg-[#D4AF37]"></div>
+                        <div className="flex items-center justify-center space-x-3 my-3">
+                            <div className="w-12 h-[1.5px] bg-[#C9972E]"></div>
+                            <span className="text-[#C9972E] text-xs">☀️</span>
+                            <div className="w-12 h-[1.5px] bg-[#C9972E]"></div>
                         </div>
 
-                    </div>
+                        <p className="text-slate-600 font-light text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+                            Setiap fase tumbuh kembang disesuaikan dengan kurikulum integratif dan pembiasaan adab harian.
+                        </p>
+                    </motion.div>
 
-                    {/* <!-- Cards --> */}
-                    <div className="flex justify-center w-full">
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-5xl">
-
-                            {jenjangList.map((item) => (
-                                <a
-                                    key={item.title}
+                    {/* Grid Cards Jenjang Berkubah Islami */}
+                    <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-60px" }}
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-6 lg:gap-5 justify-center items-stretch"
+                    >
+                        {jenjangList.map((item, index) => (
+                            <motion.div key={item.code} variants={cardVariants} className="flex">
+                                <Link
                                     href={item.href}
-                                    className="group bg-white rounded-[90px_90px_20px_20px]
-                border border-[#E7D9C7]
-                shadow-sm hover:shadow-xl
-                hover:-translate-y-2
-                transition-all duration-300
-                pt-10 pb-5 px-6
-                text-center"
+                                    className="group relative w-full bg-[#FFFDF9] rounded-t-[70px] sm:rounded-t-[85px] rounded-b-[28px] border-2 border-[#E8DFC8] hover:border-[#D4AF37] p-6 sm:p-7 flex flex-col justify-between items-center text-center shadow-xs hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 overflow-hidden"
                                 >
-                                    <div
-                                        className="w-20 h-20 rounded-full
-                    bg-[#082E72]
-                    mx-auto
-                    flex items-center justify-center
-                    shadow-lg
-                    group-hover:scale-110
-                    transition"
-                                    >
-                                        {item.icon}
+                                    {/* Ornamen Top Inner Mihrab Arch Line */}
+                                    <div className="absolute top-2 inset-x-2 h-20 rounded-t-[60px] border-t border-x border-[#E8DFC8]/50 pointer-events-none group-hover:border-[#D4AF37]/50 transition duration-500"></div>
+
+                                    <div className="relative z-10 flex flex-col items-center w-full pt-2">
+                                        
+                                        {/* Aksen Bintang Kecil Atas */}
+                                        <span className="text-[#C9972E] text-[10px] mb-3 group-hover:scale-125 transition duration-300">✦</span>
+
+                                        {/* Badge Lingkaran Ikon Navy */}
+                                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#051736] border-2 border-[#D4AF37] flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#07327F] transition duration-500 flex-shrink-0">
+                                            {item.icon}
+                                        </div>
+
+                                        {/* Judul Kode Jenjang (PG, TK, SD IT, dll) */}
+                                        <h3 className="font-serif text-3xl sm:text-4xl font-extrabold text-[#051736] mt-5 group-hover:text-[#07327F] transition">
+                                            {item.code}
+                                        </h3>
+
+                                        {/* Subtitle Nama Jenjang */}
+                                        <p className="text-xs font-bold text-[#C9972E] uppercase tracking-wider mt-1">
+                                            {item.title}
+                                        </p>
+
+                                        {/* Age Badge */}
+                                        <span className="inline-block bg-[#FAF4EB] text-slate-500 text-[10px] font-medium px-3 py-1 rounded-full mt-2.5 border border-[#E8DFC8]">
+                                            {item.age}
+                                        </span>
+
+                                        {/* Deskripsi Singkat */}
+                                        <p className="text-slate-600 font-light text-xs leading-relaxed mt-3.5 px-1 line-clamp-3">
+                                            {item.desc}
+                                        </p>
                                     </div>
 
-                                    <h3 className="mt-7 text-4xl font-serif text-[#0D2D6C]">
-                                        {item.title}
-                                    </h3>
-
-                                    <p className="mt-2 text-sm text-gray-600">
-                                        {item.subtitle}
-                                    </p>
-
-                                    <div className="mt-8 text-xl text-[#0D2D6C] group-hover:translate-x-1 transition">
-                                        →
+                                    {/* Tombol Panah Bawah */}
+                                    <div className="relative z-10 mt-6 pt-4 border-t border-slate-100 w-full flex items-center justify-center space-x-2 text-[#051736] font-serif text-xs font-bold group-hover:text-[#C9972E] transition">
+                                        <span>Selengkapnya</span>
+                                        <ArrowRight size={14} className="transform group-hover:translate-x-1.5 transition duration-300" />
                                     </div>
-                                </a>
-                            ))}
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </motion.div>
 
-                        </div>
-                    </div>
-
-
-                    {/* <!-- Bottom Ornament --> */}
-                    <div class="flex justify-center items-center gap-4 mt-16">
-
-                        <div class="w-20 h-[2px] bg-[#D4AF37]"></div>
-
-                        <span class="text-[#D4AF37]">
-                            ✦
-                        </span>
-
-                        <div class="w-20 h-[2px] bg-[#D4AF37]"></div>
-
+                    {/* Bottom Ornament Divider */}
+                    <div className="flex justify-center items-center gap-4 mt-16 text-[#C9972E]">
+                        <div className="w-16 sm:w-24 h-[1px] bg-[#C9972E]/60"></div>
+                        <span className="text-xs">☀️</span>
+                        <div className="w-16 sm:w-24 h-[1px] bg-[#C9972E]/60"></div>
                     </div>
 
                 </div>
-
             </section>
 
+            {/* ==========================================
+                3. HIGHLIGHT BANNER PERJALANAN PENDIDIKAN
+            ========================================== */}
+            <section className="py-20 bg-[#051736] text-white relative overflow-hidden">
+                <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
+                    <div className="bg-[#07327F]/70 border-2 border-[#D4AF37]/40 rounded-[36px] p-8 sm:p-12 shadow-2xl backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="space-y-3 text-center md:text-left">
+                            <div className="flex items-center justify-center md:justify-start space-x-2 text-[#FFC72C]">
+                                <Sparkles size={16} />
+                                <span className="text-xs font-bold uppercase tracking-widest">Satu Perjalanan Berkelanjutan</span>
+                            </div>
+                            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white leading-snug">
+                                Siap Mendampingi Ananda Menuju Masa Depan Terbaik?
+                            </h3>
+                            <p className="text-blue-100/90 font-light text-xs sm:text-sm max-w-xl">
+                                Pendaftaran murid baru kini dibuka untuk seluruh jenjang dari Playgroup hingga SMA IT At-Taufiq.
+                            </p>
+                        </div>
 
+                        <Link
+                            href="/admission"
+                            className="bg-[#FFC72C] hover:bg-[#ffd34d] text-[#051736] px-8 py-4 rounded-2xl font-serif text-xs font-bold uppercase tracking-wider transition shadow-lg flex items-center space-x-2 whitespace-nowrap flex-shrink-0"
+                        >
+                            <span>Informasi Pendaftaran</span>
+                            <ArrowRight size={16} />
+                        </Link>
+                    </div>
+                </div>
+            </section>
         </AppLayout>
     );
 }
