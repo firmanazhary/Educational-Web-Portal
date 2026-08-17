@@ -41,16 +41,6 @@ export default function AppLayout({ children, title }) {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Kunci scroll body saat menu mobile terbuka
-    useEffect(() => {
-        if (mobileMenuOpen) {
-            document.body.classList.add('overflow-hidden');
-        } else {
-            document.body.classList.remove('overflow-hidden');
-        }
-        return () => document.body.classList.remove('overflow-hidden');
-    }, [mobileMenuOpen]);
-
     const toggleMobileSubmenu = (name) => {
         setMobileDropdown(mobileDropdown === name ? null : name);
     };
@@ -84,7 +74,8 @@ export default function AppLayout({ children, title }) {
     ];
 
     return (
-        <div className="min-h-screen bg-[#FAF4EB] font-sans text-slate-800 relative antialiased flex flex-col justify-between overflow-x-hidden">
+        /* KUNCI: overflow-x-clip menjaga animasi sticky & scroll tetap berfungsi normal */
+        <div className="min-h-screen bg-[#FAF4EB] font-sans text-slate-800 relative antialiased flex flex-col justify-between overflow-x-clip">
             <Head title={title ? `${title} - SIT At-Taufiq Jambi` : 'SIT At-Taufiq Jambi - Sekolah Islam Terpadu'} />
 
             {/* ==========================================================================
@@ -222,17 +213,14 @@ export default function AppLayout({ children, title }) {
                 ========================================================================== */}
             {mobileMenuOpen && (
                 <div className="fixed inset-0 z-50 lg:hidden flex justify-end">
-                    {/* Backdrop Blur */}
                     <div 
                         className="fixed inset-0 bg-[#051736]/75 backdrop-blur-sm transition-opacity"
                         onClick={() => setMobileMenuOpen(false)}
                     />
 
-                    {/* Drawer Content */}
                     <div className="relative w-4/5 max-w-xs h-full bg-[#051736] border-l border-[#D4AF37]/30 shadow-2xl p-6 overflow-y-auto flex flex-col justify-between z-10">
                         <div className="space-y-6">
                             
-                            {/* Header Drawer */}
                             <div className="flex items-center justify-between border-b border-white/10 pb-4">
                                 <div className="flex items-center space-x-2">
                                     <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center p-1 border border-[#D4AF37]">
@@ -248,7 +236,6 @@ export default function AppLayout({ children, title }) {
                                 </button>
                             </div>
 
-                            {/* Navigation Items */}
                             <div className="space-y-1.5">
                                 {navLinks.map((link) => {
                                     const isActive = url === link.href || (link.href !== '/' && url.startsWith(link.href));
@@ -305,7 +292,6 @@ export default function AppLayout({ children, title }) {
                             </div>
                         </div>
 
-                        {/* Drawer Bottom CTA */}
                         <div className="pt-6 border-t border-white/10">
                             <Link 
                                 href="/admission" 
@@ -326,7 +312,7 @@ export default function AppLayout({ children, title }) {
             <main className="relative z-10 flex-grow">{children}</main>
 
             {/* ==========================================================================
-                4. FLOATING DIAMOND BUTTONS (RESPONSIF MOBILE & DESKTOP)
+                4. FLOATING DIAMOND BUTTONS
                 ========================================================================== */}
             <div className="fixed right-3 sm:right-6 bottom-4 sm:bottom-8 z-30 group flex items-center justify-center pointer-events-auto">
                 <div className="grid grid-cols-2 gap-1 rotate-45 transform scale-75 sm:scale-90 hover:scale-95 sm:hover:scale-100 transition duration-500 ease-out cursor-pointer shadow-2xl rounded-2xl p-1 bg-[#051736]/70 backdrop-blur-md border border-[#D4AF37]/50">
@@ -381,13 +367,12 @@ export default function AppLayout({ children, title }) {
             </div>
 
             {/* ==========================================================================
-                5. FOOTER SECTION (ISLAMIC DOME)
+                5. FOOTER SECTION
                 ========================================================================== */}
             <footer id="footer-location" className="relative bg-[#FAF4EB] text-white pt-10 overflow-hidden font-sans">
                 <div className="container mx-auto px-4 max-w-7xl relative z-10">
                     <div className="relative bg-[#003B99] rounded-t-[40px] sm:rounded-t-[60px] md:rounded-t-[80px] border-t-2 border-x-2 border-[#D4AF37] p-6 sm:p-8 md:p-12 overflow-hidden shadow-2xl">
                         
-                        {/* Background Siluet Masjid */}
                         <div className="absolute inset-0 z-0 opacity-15 pointer-events-none">
                             <img 
                                 src={ASSETS.MOSQUE_FOOTER} 
@@ -397,14 +382,12 @@ export default function AppLayout({ children, title }) {
                             <div className="absolute inset-0 bg-gradient-to-r from-[#003B99] via-[#003B99]/90 to-[#003B99]"></div>
                         </div>
 
-                        {/* Top Decorative Sparkle */}
                         <div className="absolute top-4 left-1/2 -translate-x-1/2 text-[#FFC72C] z-10">
                             <Sparkles size={18} />
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 relative z-10 items-start pt-6">
                             
-                            {/* COL 1: Logo & Tagline */}
                             <div className="lg:col-span-4 space-y-4 pr-0 lg:pr-4 border-b lg:border-b-0 lg:border-r border-blue-400/30 pb-6 lg:pb-0">
                                 <div className="p-5 rounded-[28px] border border-[#D4AF37]/50 bg-white/5 backdrop-blur-sm space-y-3 relative overflow-hidden">
                                     <div className="flex items-center space-x-3">
@@ -432,7 +415,6 @@ export default function AppLayout({ children, title }) {
                                 </div>
                             </div>
 
-                            {/* COL 2: Lokasi Kampus */}
                             <div className="lg:col-span-3 space-y-5 lg:border-r border-blue-400/30 pr-0 lg:pr-4 border-b lg:border-b-0 pb-6 lg:pb-0">
                                 <div className="space-y-1.5">
                                     <div className="flex items-center space-x-2 text-white">
@@ -457,7 +439,6 @@ export default function AppLayout({ children, title }) {
                                 </div>
                             </div>
 
-                            {/* COL 3: Kontak Kami */}
                             <div className="lg:col-span-3 space-y-3 lg:border-r border-blue-400/30 pr-0 lg:pr-4 border-b lg:border-b-0 pb-6 lg:pb-0">
                                 <div className="flex items-center space-x-2 text-white mb-1">
                                     <Phone size={16} className="text-[#FFC72C]" />
@@ -486,7 +467,6 @@ export default function AppLayout({ children, title }) {
                                 </a>
                             </div>
 
-                            {/* COL 4: Social Media */}
                             <div className="lg:col-span-2 space-y-3">
                                 <h4 className="font-bold text-xs md:text-sm text-white">Follow Us</h4>
                                 <div className="w-full h-[1px] bg-gradient-to-r from-[#D4AF37] to-transparent mb-4"></div>
