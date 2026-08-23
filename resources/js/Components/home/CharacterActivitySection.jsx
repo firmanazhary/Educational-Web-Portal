@@ -1,6 +1,6 @@
 import { LinkButton } from "@/Components/ui/Button"; // Sesuaikan huruf kapital folder Components
-import ActivityCardGrid from "./ActivityCardGrid";
-import FloatingElement from "./FloatingElement";
+import ActivityCardGrid from "@/Components/home/ActivityCardGrid";
+import FloatingElement from "@/Components/home/FloatingElement";
 import Reveal from "./Reveal";
 
 // Blok "Karakter" (dulu Tagline) dan blok "Aktivitas" berbagi satu canvas

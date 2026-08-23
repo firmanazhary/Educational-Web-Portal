@@ -266,7 +266,7 @@ function px(value) {
 function IconCircle({ children, size = 55, iconSize = 24 }) {
   return (
     <span
-      className="flex items-center justify-center rounded-full border border-gold text-gold shrink-0"
+      className="flex items-center justify-center rounded-full border border-[#FDD000] text-[#FDD000] shrink-0"
       style={{ width: px(size), height: px(size) }}
     >
       <span style={{ width: px(iconSize), height: px(iconSize) }}>{children}</span>
@@ -360,7 +360,7 @@ function DividerSun({ style }) {
       viewBox="0 0 24 24"
       fill="currentColor"
       style={{ width: px(20), height: px(20), ...style }}
-      className="text-gold shrink-0"
+      className="text-[#FDD000] shrink-0"
     >
       <path d="M12 2l1.6 5.1L18 4l-2.6 4.7L21 10l-5 1.6L21 14l-5.6 1.3L18 20l-4.4-3.1L12 22l-1.6-5.1L6 20l2.6-4.7L3 14l5-1.6L3 10l5.6-1.3L6 4l4.4 3.1z" />
     </svg>
@@ -537,7 +537,7 @@ export default function Footer() {
           style={{ left: px(234), top: px(164), width: px(409) }}
         />
 
-        <p className="absolute font-bold text-gold" style={{ left: px(185), top: px(360), width: px(450), fontSize: px(26) }}>
+        <p className="absolute font-bold text-[#FDD000] md:text-[#FDD000]" style={{ left: px(185), top: px(360), width: px(450), fontSize: px(26) }}>
           Memberi Arti itu ATTAUFIQ
         </p>
 
@@ -555,14 +555,14 @@ export default function Footer() {
         </p>
 
         <div className="absolute flex items-center" style={{ left: px(200), top: px(550), width: px(460), gap: px(9) }}>
-          <span className="bg-gold" style={{ width: px(180), height: px(2.5) }} />
+          <span className="bg-[#FDD000]" style={{ width: px(180), height: px(2.5) }} />
           <DividerSun />
-          <span className="flex-1 border-t border-dashed border-gold/50" />
+          <span className="flex-1 border-t border-dashed border-[#FDD000]/50" />
         </div>
 
         {/* Vertical dotted divider between the logo/description column and "Alamat". */}
         <div
-          className="absolute border-l border-dashed border-gold/40"
+          className="absolute border-l border-dashed border-[#FDD000]/40"
           style={{ left: px(660), top: px(188), height: px(365) }}
         />
 
@@ -570,11 +570,11 @@ export default function Footer() {
           {ALAMAT_BLOCKS.map((block, i) => (
             <div key={block.heading} style={{ marginTop: i === 0 ? 0 : px(30) }}>
               <div className="flex items-center" style={{ gap: px(10) }}>
-                <MapPin style={{ width: px(20), height: px(20) }} className="text-gold shrink-0" />
+                <MapPin style={{ width: px(20), height: px(20) }} className="text-[#FDD000] shrink-0" />
                 <span className="font-bold" style={{ fontSize: px(20) }}>{block.heading}</span>
               </div>
               <div className="flex items-center" style={{ marginTop: px(10), gap: px(9) }}>
-                <span className="flex-1 border-t border-gold/50" />
+                <span className="flex-1 border-t border-[#FDD000]/50" />
               </div>
               <div style={{ marginTop: px(10) }}>
                 {block.lines.map((line) => (
@@ -589,7 +589,7 @@ export default function Footer() {
 
         {/* Vertical dotted divider between "Alamat" and "Kontak Kami". */}
         <div
-          className="absolute border-l border-dashed border-gold/40"
+          className="absolute border-l border-dashed border-[#FDD000]/40"
           style={{ left: px(1060), top: px(188), height: px(365) }}
         />
 
@@ -599,24 +599,24 @@ export default function Footer() {
         >
           <div className="flex items-center" style={{ gap: px(12) }}>
             <IconCircle size={35} iconSize={20}>
-              <PhoneCall className="h-full w-full text-gold" />
+              <PhoneCall className="h-full w-full text-[#FDD000]" />
             </IconCircle>
             <span className="font-bold" style={{ fontSize: px(24) }}>Kontak Kami</span>
           </div>
           <div className="flex items-center" style={{ marginTop: px(14), gap: px(9) }}>
-            <span className="bg-gold" style={{ width: px(90), height: px(2.5) }} />
+            <span className="bg-[#FDD000]" style={{ width: px(90), height: px(2.5) }} />
             <DividerSun />
-            <span className="flex-1 border-t border-dashed border-gold/50" />
+            <span className="flex-1 border-t border-dashed border-[#FDD000]/50" />
           </div>
           <div style={{ marginTop: px(20) }}>
             {KONTAK_ROWS.map((row, i) => (
               <a
                 key={i}
                 href={row.href}
-                className="flex items-center border-b border-dotted border-gold/40 hover:text-gold transition-colors"
+                className="flex items-center border-b border-dotted border-[#FDD000]/40 hover:text-#FDD000 transition-colors"
                 style={{ gap: px(16), paddingBottom: px(9), marginTop: i === 0 ? 0 : px(18) }}
               >
-                <row.Icon style={{ width: px(row.size), height: px(row.size) }} className="shrink-0 text-gold" />
+                <row.Icon style={{ width: px(row.size), height: px(row.size) }} className="shrink-0 text-[#FDD000]" />
                 <span style={{ fontSize: px(15) }}>{row.text}</span>
               </a>
             ))}
@@ -625,7 +625,7 @@ export default function Footer() {
 
         {/* Vertical dotted divider between the two columns. */}
         <div
-          className="absolute border-l border-dashed border-gold/40"
+          className="absolute border-l border-dashed border-[#FDD000]/40"
           style={{ left: px(1545), top: px(188), height: px(365) }}
         />
 
@@ -635,12 +635,12 @@ export default function Footer() {
         >
           <span className="font-bold" style={{ fontSize: px(24) }}>Follow Us</span>
           <div className="flex items-center" style={{ marginTop: px(14), gap: px(9) }}>
-            <span className="bg-gold" style={{ width: px(45), height: px(2.5) }} />
+            <span className="bg-[#FDD000]" style={{ width: px(45), height: px(2.5) }} />
             <DividerSun />
             {/* Mockup's Follow Us divider also continues past the sun, same
                 as Kontak Kami's — just a plain (non-dashed) thin line rather
                 than dotted. Missed entirely in the first pass. */}
-            <span className="flex-1 border-t border-gold/30" />
+            <span className="flex-1 border-t border-[#FDD000]/30" />
           </div>
           <div className="flex" style={{ marginTop: px(20), gap: px(10) }}>
             {SOCIAL_ICONS.map(({ Icon, label }) => (
@@ -656,4 +656,3 @@ export default function Footer() {
     </footer>
   );
 }
- 
