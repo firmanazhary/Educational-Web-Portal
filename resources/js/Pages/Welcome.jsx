@@ -643,118 +643,10 @@ export default function Home({ auth, posts = [], galleries = [] }) {
             {/* --- HERO SECTION --- */}
             <HeroSlider />
 
-            {/* --- STATS SECTION --- */}
-            {/* <section className="py-20 bg-white relative z-20">
-                <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
-                    {[
-                        { val: '15+', label: 'Tahun Berdiri' },
-                        { val: '500+', label: 'Santri Aktif' },
-                        { val: '100%', label: 'Kurikulum SIT' },
-                        { val: '30+', label: 'Ekstrakurikuler' }
-                    ].map((stat, i) => (
-                        <div key={i} className="group p-10 bg-slate-50 rounded-[40px] hover:bg-[#002147] transition duration-500 text-center border border-slate-100">
-                            <h2 className="text-5xl font-black text-[#002147] group-hover:text-[#FF6600] transition tracking-tighter">
-                                {stat.val}
-                            </h2>
-                            <p className="text-slate-500 group-hover:text-white uppercase tracking-[0.2em] text-[10px] mt-4 font-black">
-                                {stat.label}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </section> */}
-
-            {/* --- SECTION BLOG (Life at At-Taufiq) --- */}
-            {/* <section id="blog" className="py-24 px-6 bg-slate-50">
-                <div className="container mx-auto">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                        <div className="max-w-2xl">
-                            <h3 className="text-[#FF6600] font-black uppercase tracking-widest text-xs mb-3">Update Berita</h3>
-                            <h2 className="text-5xl font-extrabold text-[#002147] tracking-tighter uppercase">Life at At-Taufiq</h2>
-                        </div>
-                        <Link href="/blog" className="text-[#002147] font-black text-xs uppercase tracking-widest border-b-2 border-[#FF6600] pb-1 hover:text-[#FF6600] transition">
-                            Lihat Semua Berita →
-                        </Link>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-10">
-                        {posts.length > 0 ? posts.map((post) => (
-                            <Link
-                                key={post.id}
-                                href={route('blog.show', post.slug)}
-                                className="bg-white rounded-[32px] shadow-xl shadow-slate-200/50 overflow-hidden group hover:-translate-y-3 transition duration-500 flex flex-col border border-slate-50 cursor-pointer"
-                            >
-                                <div className="h-64 overflow-hidden relative bg-slate-200">
-                                    <img
-                                        src={`/storage/${post.image}`}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                                        alt={post.title}
-                                        onError={(e) => e.target.src = "https://placehold.co/600x400?text=At-Taufiq+News"}
-                                    />
-                                    <div className="absolute top-4 left-4 bg-[#FF6600] text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
-                                        News
-                                    </div>
-                                </div>
-
-                                <div className="p-8 flex-grow">
-                                    <h3 className="font-bold text-2xl text-[#002147] mb-4 leading-tight group-hover:text-[#FF6600] transition-colors duration-300 line-clamp-2">
-                                        {post.title}
-                                    </h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 font-light">
-                                        {post.content}
-                                    </p>
-                                </div>
-
-                                <div className="p-8 pt-0 mt-auto flex items-center text-[#FF6600] font-black uppercase text-[10px] tracking-[0.2em]">
-                                    Baca Artikel <span className="ml-3 text-lg group-hover:ml-5 transition-all">→</span>
-                                </div>
-                            </Link>
-                        )) : (
-                            <div className="col-span-3 text-center py-10 text-slate-400 italic font-light uppercase tracking-widest text-xs">
-                                Belum ada berita yang diterbitkan.
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </section> */}
-
-            {/* --- GALLERY SECTION --- */}
-            {/* <section id="gallery" className="py-24 px-6 bg-white">
-                <div className="container mx-auto">
-                    <div className="text-center mb-16">
-                        <h3 className="text-[#FF6600] font-black uppercase tracking-widest text-[10px] mb-3">Moments</h3>
-                        <h2 className="text-5xl font-extrabold text-[#002147] tracking-tighter uppercase">Gallery Santri</h2>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {galleries.length > 0 ? galleries.map((item) => (
-                            <div key={item.id} className="relative aspect-square overflow-hidden rounded-[24px] group shadow-lg bg-slate-100">
-                                <img
-                                    src={`/storage/${item.image}`}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                                    alt={item.title}
-                                    onError={(e) => e.target.src = "https://placehold.co/400x400?text=Gallery"}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#002147]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-6">
-                                    <div className="translate-y-4 group-hover:translate-y-0 transition duration-500">
-                                        <p className="text-[#FF6600] text-[8px] font-black uppercase tracking-[0.2em] mb-1">{item.category}</p>
-                                        <p className="text-white text-sm font-bold tracking-tight">{item.title}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        )) : (
-                            <div className="col-span-4 text-center py-10 text-slate-300 text-xs font-black uppercase tracking-widest">
-                                Galeri masih kosong.
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </section> */}
-
             {/* ========================================================= */}
             {/* ATQ SECTION - LEBIH LEBAR & LEGA */}
             {/* ========================================================= */}
-          <section 
+          <section
   ref={sectionRef} 
   className="w-full bg-[#FAF7F0] relative overflow-hidden text-slate-800 py-12 sm:py-16 md:py-24"
 >
@@ -763,27 +655,27 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
   {/* 1. DEKORASI BACKGROUND POT */}
   <div className="absolute left-0 bottom-0 top-0 w-16 sm:w-36 md:w-48 pointer-events-none z-0 opacity-15 sm:opacity-20 transition-opacity duration-500 hover:opacity-30">
-    <img 
-      src="/images/hero/bgPot-left.png" 
-      alt="Pot Decorative Left" 
-      className="h-full w-full object-cover object-left filter drop-shadow-sm" 
+    <img
+      src="/images/hero/bgPot-left.png"
+      alt="Pot Decorative Left"
+      className="h-full w-full object-cover object-left filter drop-shadow-sm"
     />
   </div>
 
   <div className="absolute right-0 bottom-0 top-0 w-16 sm:w-36 md:w-48 pointer-events-none z-0 opacity-15 sm:opacity-20 transition-opacity duration-500 hover:opacity-30">
-    <img 
-      src="/images/hero/bgPot-right.png" 
-      alt="Pot Decorative Right" 
-      className="h-full w-full object-cover object-right filter drop-shadow-sm" 
+    <img
+      src="/images/hero/bgPot-right.png"
+      alt="Pot Decorative Right"
+      className="h-full w-full object-cover object-right filter drop-shadow-sm"
     />
   </div>
 
   {/* 2. ORNAMEN LOGO FLOATING KIRI ATAS (Hanya tampil di tablet ke atas) */}
   <div className="hidden sm:block absolute top-2 left-4 w-36 md:w-44 pointer-events-none z-10 animate-float-slow drop-shadow-md">
-    <img 
-      src="/images/hero/ornamenLogo-1.png" 
-      alt="Ornamen Kuning Left" 
-      className="w-full h-auto object-contain" 
+    <img
+      src="/images/hero/ornamenLogo-1.png"
+      alt="Ornamen Kuning Left"
+      className="w-full h-auto object-contain"
     />
   </div>
 
@@ -795,10 +687,10 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
       {/* Logo Tengah */}
       <div className="flex justify-center mb-1">
-        <img 
-          src="/images/hero/logo.png" 
-          alt="Logo Attaufiq" 
-          className="h-24 sm:h-36 md:h-60 w-auto object-contain drop-shadow-md hover:scale-[1.02] transition-transform duration-500" 
+        <img
+          src="/images/hero/logo.png"
+          alt="Logo Attaufiq"
+          className="h-24 sm:h-36 md:h-60 w-auto object-contain drop-shadow-md hover:scale-[1.02] transition-transform duration-500"
         />
       </div>
 
@@ -811,7 +703,7 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
       {/* === TEKS DESKRIPSI (Layout Rapi di HP & Desktop) === */}
       <div className="max-w-[320px] sm:max-w-2xl mx-auto px-2 sm:px-8">
-        
+
         {/* TAMPILAN MOBILE: Rapi Vertikal / Stack */}
         <div className="block sm:hidden text-center space-y-2 text-[#0B2545]/90 text-xs leading-relaxed">
           <p>Di Attaufiq, setiap proses belajar dirancang agar ananda:</p>
@@ -864,12 +756,12 @@ export default function Home({ auth, posts = [], galleries = [] }) {
         >
           <span>Kenali Lebih Dekat</span>
           <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#0B2545]/10 flex items-center justify-center group-hover:bg-[#0B2545]/20 transition-colors">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0B2545] transform group-hover:translate-y-0.5 transition-transform duration-300" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor" 
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0B2545] transform group-hover:translate-y-0.5 transition-transform duration-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
               strokeWidth={2.5}
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -885,10 +777,10 @@ export default function Home({ auth, posts = [], galleries = [] }) {
 
       {/* Ornamen Biru Melayang di Kanan (Hanya tampil di tablet ke atas) */}
       <div className="hidden sm:block absolute -top-14 right-4 md:right-8 w-32 md:w-40 pointer-events-none z-30 animate-float-delayed drop-shadow-lg">
-        <img 
-          src="/images/hero/ornamenLogo-2.png" 
-          alt="Ornamen Biru Right" 
-          className="w-full h-auto object-contain" 
+        <img
+          src="/images/hero/ornamenLogo-2.png"
+          alt="Ornamen Biru Right"
+          className="w-full h-auto object-contain"
         />
       </div>
 

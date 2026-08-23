@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Info, UserPlus, MessageCircleQuestion, MapPin } from 'lucide-react';
+import Footer from "@/Components/Footer";
 
 // Menyiapkan konstanta path gambar agar lebih rapi dan mudah di-maintain
 const ASSETS = {
@@ -70,7 +71,7 @@ export default function AppLayout({ children, title }) {
       }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 flex justify-between items-center max-w-7xl">
-        
+
         {/* Logo At-Taufiq */}
         <Link href="/" className="flex items-center space-x-3 group">
           <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 shadow-md border border-[#D4AF37]">
@@ -264,7 +265,7 @@ export default function AppLayout({ children, title }) {
         </div>
       )}
     </header>
-           
+
 
             {/* --- MAIN CONTENT --- */}
             <main className="relative z-10 flex-grow">{children}</main>
@@ -315,7 +316,7 @@ export default function AppLayout({ children, title }) {
             </div>
 
             {/* --- FOOTER --- */}
-            <footer className="relative bg-[#FAF8F5] text-white pt-10 overflow-hidden font-sans">
+            {/* <footer className="relative bg-[#FAF8F5] text-white pt-10 overflow-hidden font-sans">
                 <div className="container mx-auto px-4 max-w-7xl relative z-10">
                     <div className="relative bg-[#0047BA] rounded-t-[50px] md:rounded-t-[80px] border-t-2 border-x-2 border-[#D4AF37] p-8 md:p-14 overflow-hidden shadow-2xl">
                         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
@@ -441,7 +442,8 @@ export default function AppLayout({ children, title }) {
                         <span className="text-[#D4AF37] text-xs">◆ ───</span>
                     </div>
                 </div>
-            </footer>
+            </footer> */}
+            <Footer />
         </div>
     );
 }
