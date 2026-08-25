@@ -43,10 +43,10 @@ export default function AppLayout({ children, title }) {
                 { name: 'SMA', href: '/sma' },
             ]
         },
-        { name: 'Admission', href: '/#admission' },
-        { name: 'Events', href: '/#events' },
-        { name: 'Programs', href: '/#events' },
-        { name: 'Berita', href: '/#blog' },
+        { name: 'Admission', href: '/admission' },
+        { name: 'Events', href: '/events' },
+        { name: 'Programs', href: '/programs' },
+        { name: 'Berita', href: '/blog' },
     ];
 
     // HAMBURGER MENU
