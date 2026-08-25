@@ -5,6 +5,9 @@ import AppLayout from '@/Layouts/AppLayout';
 import { Link, Head } from '@inertiajs/react';
 import HeroSlider from '@/Layouts/HeroSlider';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import CharacterActivitySection from "@/Components/home/CharacterActivitySection";
+import JourneySection from "@/Components/home/journey/JourneySection";
+
 import {
     Sparkles,
     BookOpen,
@@ -648,6 +651,15 @@ export default function Home({ auth, posts = [], galleries = [] }) {
                     </div>
                 </div>
             </section>
+            
+            {/* ========================================================= */}
+            {/* Character ATQ SECTION - LEBIH LEBAR & LEGA */}
+            {/* ========================================================= */}
+            <CharacterActivitySection />
+
+            {/* --- 3. Journey Section --- */}
+            <JourneySection />
+
 
             {/* --- 5. CAHAYA MASA DEPAN SECTION --- */}
             <section className="relative w-full min-h-[450px] lg:min-h-[550px] flex items-center justify-center overflow-hidden font-sans">
