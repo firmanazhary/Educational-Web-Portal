@@ -8,7 +8,6 @@ const BG_SRC = "/images/achievements/prestasi-bg-sky.png";
 const STAR_SRC = "/images/achievements/prestasi-star.png";
 const SUN_SRC = "/images/home/matahari.png";
 
-// Pusat pancaran garis (ditengah-tengah halaman)
 const CENTER = { x: 50, y: 50 };
 
 function clamp(v, min, max) {
@@ -21,7 +20,6 @@ function lerp(a, b, t) {
 const DEPART_SOURCE = { x: CENTER.x / 100, y: CENTER.y / 100 };
 const HANDOFF_TO_CLOSING_WINDOW = 700;
 
-// Posisi kartu disesuaikan agar memberi ruang di area pinggir (padding)
 const CARD_POSITIONS = [
   { x: 16, y: 28 },
   { x: 25, y: 44 },
@@ -34,7 +32,6 @@ const CARD_POSITIONS = [
   { x: 86, y: 63 },
 ];
 
-// Menghitung path kurva melengkung (Bezier)
 function getCurveData(from, to, index) {
   const dx = to.x - from.x;
   const dy = to.y - from.y;
@@ -53,7 +50,6 @@ function handDrawnPath(from, to, index) {
   return `M ${from.x},${from.y} Q ${midX},${midY} ${endX},${endY}`;
 }
 
-// Menghitung posisi koordinat sepanjang kurva Bezier Kuadratik
 function getQuadraticBezierPoint(from, mid, to, t) {
   const oneMinusT = 1 - t;
   const x = oneMinusT * oneMinusT * from.x + 2 * oneMinusT * t * mid.x + t * t * to.x;
@@ -125,7 +121,6 @@ export default function AchievementsSection() {
       const localT = cardLocalT(bp, i);
       const eased = backEaseOut(localT);
 
-      // Bintang persis mengikuti jalur ujung garis (Bezier Curve)
       const starEl = starRefs.current[i];
       if (starEl) {
         const point = getQuadraticBezierPoint(CENTER, pos.mid, pos.end, localT);
@@ -164,11 +159,12 @@ export default function AchievementsSection() {
     const stickyTop = stickyRect.top;
 
     if (stickyTop >= 0) {
-      sun.style.position = "fixed";
-      sun.style.left = `${stickyRect.left + (CENTER.x / 100) * stickyRect.width}px`;
-      sun.style.top = `${stickyRect.top + (CENTER.y / 100) * stickyRect.height}px`;
+      sun.style.position = "absolute";
+      sun.style.left = `${CENTER.x}%`;
+      sun.style.top = `${CENTER.y}%`;
       sun.style.transform = "translate(-50%, -50%)";
       sun.style.opacity = "1";
+      sun.style.zIndex = "50";
       return;
     }
 
@@ -187,11 +183,17 @@ export default function AchievementsSection() {
     const targetX = closingRect.left;
     const targetY = closingRect.top;
 
-    sun.style.position = "fixed";
-    sun.style.left = `${lerp(sourceX, targetX, t)}px`;
-    sun.style.top = `${lerp(sourceY, targetY, t)}px`;
-    sun.style.transform = "translate(-50%, -50%)";
-    sun.style.opacity = t < 0.6 ? "1" : String(Math.max(0, 1 - (t - 0.6) / 0.4));
+    // Di dalam fungsi positionSun():
+sun.style.position = "fixed";
+sun.style.left = `${lerp(sourceX, targetX, t)}px`;
+sun.style.top = `${lerp(sourceY, targetY, t)}px`;
+sun.style.transform = "translate(-50%, -50%)";
+sun.style.opacity = t < 0.8 ? "1" : String(Math.max(0, 1 - (t - 0.8) / 0.2));
+
+// 🚀 UBAH Z-INDEX MATAHARI KE 10
+sun.style.zIndex = "10";
+
+
   };
 
   useEffect(() => {
@@ -317,12 +319,11 @@ export default function AchievementsSection() {
   }, [reduceMotion]);
 
   return (
-    <section ref={containerRef} className="relative w-full h-[200vh]">
-      {/* Penambahan padding kiri-kanan (px-6 md:px-16 lg:px-24) */}
-      <div
-        id="achievements-sticky-container"
-        className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-between px-6 md:px-16 lg:px-24"
-      >
+    <section ref={containerRef} className="relative w-full h-[200vh] z-30">
+    <div
+  id="achievements-sticky-container"
+  className="sticky top-0 w-full h-screen flex flex-col justify-between px-6 md:px-16 lg:px-24"
+>
         {/* Sky Background Image */}
         <div className="absolute inset-0 z-0">
           <img
@@ -366,19 +367,19 @@ export default function AchievementsSection() {
           </Reveal>
         </div>
 
-        {/* Gambar Matahari Pusat */}
+        {/* Gambar Matahari Utama (z-50 agar selalu aman di atas background) */}
         <img
           id="prestasi-sun-handoff"
           src={SUN_SRC}
           alt="Matahari Attaufiq"
-          className="absolute z-20 w-36 h-36 md:w-48 md:h-48 -translate-x-1/2 -translate-y-1/2 object-contain filter drop-shadow-[0_0_45px_rgba(251,191,36,0.9)] pointer-events-none"
+          className="absolute z-50 w-36 h-36 md:w-48 md:h-48 -translate-x-1/2 -translate-y-1/2 object-contain filter drop-shadow-[0_0_45px_rgba(251,191,36,0.9)] pointer-events-none"
           style={{
             left: `${CENTER.x}%`,
             top: `${CENTER.y}%`,
           }}
         />
 
-        {/* SVG Rays Connecting Sun Center to Cards */}
+        {/* SVG Rays */}
         <svg
           className="absolute inset-0 w-full h-full pointer-events-none z-10"
           viewBox="0 0 100 100"
@@ -410,7 +411,7 @@ export default function AchievementsSection() {
           })}
         </svg>
 
-        {/* Bintang Tepat Menyambung di Ujung Garis Melengkung */}
+        {/* Bintang-bintang Ujung */}
         <div className="absolute inset-0 pointer-events-none z-20">
           {POSITIONS.map((_, idx) => (
             <img
@@ -487,7 +488,7 @@ export default function AchievementsSection() {
           })}
         </div>
 
-        {/* Bottom Indicator / Scroll Hint */}
+        {/* Scroll Hint */}
         <div className="relative z-10 pb-6 text-center pointer-events-none">
           <div className="inline-flex items-center gap-2 text-xs text-amber-200/90 bg-[#131b40]/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-amber-400/30 shadow-sm">
             <span>Scroll untuk mengeksplorasi</span>
