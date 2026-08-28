@@ -899,7 +899,7 @@ useEffect(() => {
             <TestimonialSection/>
 
             {/* 9. BLOG SECTION */}
-            <BlogPreview/>
+            <BlogPreview posts={posts}/>
 
 
 

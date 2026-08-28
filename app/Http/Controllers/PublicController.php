@@ -14,14 +14,15 @@ class PublicController extends Controller
     // 1. HALAMAN DINAMIS & BLOG
     // ==========================================
 
-    public function index()
-    {
-        return Inertia::render('Welcome', [
-            'posts'      => Post::with('category')->latest()->take(6)->get(),
-            'galleries'  => Gallery::latest()->take(6)->get(),
-            'categories' => Category::all(),
-        ]);
-    }
+   public function index()
+{
+    return Inertia::render('Welcome', [
+        // Tambahkan withDefault pada relasi atau panggil query langsung
+        'posts'      => Post::with('category')->latest()->take(6)->get(),
+        'galleries'  => Gallery::latest()->take(6)->get(),
+        'categories' => Category::all(),
+    ]);
+}
 
     public function show($slug)
     {
