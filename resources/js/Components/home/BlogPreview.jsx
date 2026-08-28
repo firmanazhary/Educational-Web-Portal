@@ -8,9 +8,9 @@ import {
   Sparkle,
   SquarePen,
 } from "lucide-react";
-import { LinkButton } from "@/components/ui/Button";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
-import Reveal from "@/components/home/Reveal";
+import { LinkButton } from "@/Components/ui/Button";
+import ImagePlaceholder from "@/Components/ui/ImagePlaceholder";
+import Reveal from "@/Components/home/Reveal";
 import { blogPosts } from "@/data/blog";
 
 const BG_SRC = "/images/blog/blog-preview-bg.png";

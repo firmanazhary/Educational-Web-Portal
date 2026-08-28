@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Play, Sparkle, Star, UsersRound } from "lucide-react";
-import Reveal from "@/components/home/Reveal";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
+import Reveal from "@/Components/home/Reveal";
+import ImagePlaceholder from "@/Components/ui/ImagePlaceholder";
 import { testimonials } from "@/data/testimonials";
 
 const BG_SRC = "/images/testimonials/testimonial-bg.png";

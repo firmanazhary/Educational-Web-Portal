@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Building2, Calendar, ChevronDown } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
-import Reveal from "@/components/home/Reveal";
+import Reveal from "@/Components/home/Reveal";
 import { achievements } from "@/data/achievements";
 
 const BG_SRC = "/images/achievements/prestasi-bg-sky.png";
