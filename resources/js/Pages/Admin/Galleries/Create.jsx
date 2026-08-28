@@ -34,13 +34,13 @@ export default function Create({ auth }) {
 
                 <div className="bg-white p-12 rounded-[40px] shadow-sm border border-slate-100">
                     <form onSubmit={submit} className="grid md:grid-cols-2 gap-10">
-                        
+
                         {/* Kolom Kiri: Input Data */}
                         <div className="space-y-6">
                             <div>
                                 <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4 mb-2 block">Judul Dokumentasi</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     placeholder="Contoh: Lomba Mewarnai TK"
                                     className="w-full border-none bg-slate-50 rounded-2xl p-4 focus:ring-2 focus:ring-[#FF6600] transition"
                                     value={data.title}
@@ -51,21 +51,22 @@ export default function Create({ auth }) {
 
                             <div>
                                 <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4 mb-2 block">Kategori Unit</label>
-                                <select 
+                                <select
                                     className="w-full border-none bg-slate-50 rounded-2xl p-4 focus:ring-2 focus:ring-[#FF6600] transition appearance-none"
                                     value={data.category}
                                     onChange={e => setData('category', e.target.value)}
                                 >
-                                    <option value="Umum">Umum / Semua</option>
+                                    <option value="PG">PG Robbani</option>
                                     <option value="TK">TK Robbani</option>
                                     <option value="SD">SD IT At-Taufiq</option>
                                     <option value="SMP">SMP IT At-Taufiq</option>
+                                    <option value="SMA">SMA IT At-Taufiq</option>
                                 </select>
                                 {errors.category && <p className="text-red-500 text-[10px] mt-2 ml-4 font-bold uppercase">{errors.category}</p>}
                             </div>
 
                             <div className="pt-6">
-                                <button 
+                                <button
                                     disabled={processing}
                                     className="w-full bg-[#003366] text-white py-5 rounded-2xl text-xs font-black uppercase tracking-[0.2em] hover:bg-[#FF6600] transition shadow-xl shadow-blue-900/10 disabled:opacity-50"
                                 >
@@ -79,8 +80,8 @@ export default function Create({ auth }) {
                             <label className="cursor-pointer text-center">
                                 <div className="mb-4 text-4xl group-hover:scale-110 transition">🖼️</div>
                                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-4">Pilih Foto (Max 2MB)</span>
-                                <input 
-                                    type="file" 
+                                <input
+                                    type="file"
                                     className="hidden"
                                     onChange={e => setData('image', e.target.files[0])}
                                 />

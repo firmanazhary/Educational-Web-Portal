@@ -14,15 +14,14 @@ class PublicController extends Controller
     // 1. HALAMAN DINAMIS & BLOG
     // ==========================================
 
-   public function index()
-{
-    return Inertia::render('Welcome', [
-        // Tambahkan withDefault pada relasi atau panggil query langsung
-        'posts'      => Post::with('category')->latest()->take(6)->get(),
-        'galleries'  => Gallery::latest()->take(6)->get(),
-        'categories' => Category::all(),
-    ]);
-}
+    public function index()
+    {
+        return Inertia::render('Welcome', [
+            'posts'      => Post::with('category')->latest()->take(6)->get(),
+            'galleries'  => Gallery::latest()->take(6)->get(),
+            'categories' => Category::all(),
+        ]);
+    }
 
     public function show($slug)
     {
@@ -101,19 +100,67 @@ class PublicController extends Controller
         return Inertia::render('Jenjang/Pg');
     }
 
+
     public function tk()
     {
-        return Inertia::render('Jenjang/Tk');
+        // Fetch 8 foto galeri terbaru khusus kategori "TK"
+        $galleries = Gallery::where('category', 'TK') // atau 'tk' / 'Tk' sesuai isi data di DB
+            ->latest()
+            ->take(8)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id'    => $item->id,
+                    'title' => $item->title ?? $item->caption ?? 'Kegiatan Ananda',
+                    'src'   => $item->image ? asset('storage/' . $item->image) : null,
+                ];
+            });
+
+        return Inertia::render('Jenjang/Tk', [
+            'galleries' => $galleries,
+        ]);
     }
 
     public function sd()
     {
-        return Inertia::render('Jenjang/Sd');
+        // Fetch 8 foto galeri terbaru khusus kategori "SD"
+        $galleries = Gallery::where('category', 'SD')
+            ->latest()
+            ->take(8)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id'    => $item->id,
+                    'title' => $item->title ?? $item->caption ?? 'Kegiatan Ananda',
+                    'src'   => $item->image ? asset('storage/' . $item->image) : null,
+                ];
+            });
+
+        return Inertia::render('Jenjang/Sd', [
+            'galleries' => $galleries,
+        ]);
     }
 
-    public function smp()
+
+
+   public function smp()
     {
-        return Inertia::render('Jenjang/Smp');
+        // Fetch 8 foto galeri terbaru khusus kategori "SMP"
+        $galleries = Gallery::where('category', 'SMP')
+            ->latest()
+            ->take(8)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id'    => $item->id,
+                    'title' => $item->title ?? $item->caption ?? 'Kegiatan Ananda',
+                    'src'   => $item->image ? asset('storage/' . $item->image) : null,
+                ];
+            });
+
+        return Inertia::render('Jenjang/Smp', [
+            'galleries' => $galleries,
+        ]);
     }
 
     public function sma()

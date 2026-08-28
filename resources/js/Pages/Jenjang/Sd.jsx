@@ -201,46 +201,46 @@ const testimonials = [
 ];
 
 const GALLERY_DATA = [
-  { 
-    id: 1, 
-    src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop', 
-    title: 'Bermain & Eksplorasi Motorik' 
-  },
-  { 
-    id: 2, 
-    src: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop', 
-    title: 'Belajar Kelompok Bersama Guru' 
-  },
-  { 
-    id: 3, 
-    src: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop', 
-    title: 'Membaca & Literasi Al-Qur\'an' 
-  },
-  { 
-    id: 4, 
-    src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=800&auto=format&fit=crop', 
-    title: 'Aktivitas Kelas Interaktif' 
-  },
-  { 
-    id: 5, 
-    src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop', 
-    title: 'Seni & Mewarnai Kreatif' 
-  },
-  { 
-    id: 6, 
-    src: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=800&auto=format&fit=crop', 
-    title: 'Bermain Blok & Puzzle' 
-  },
-  { 
-    id: 7, 
-    src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop', 
-    title: 'Keceriaan Bersama Teman' 
-  },
-  { 
-    id: 8, 
-    src: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop', 
-    title: 'Praktek Sains & Eksplorasi Mini' 
-  }
+    {
+        id: 1,
+        src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop',
+        title: 'Bermain & Eksplorasi Motorik'
+    },
+    {
+        id: 2,
+        src: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop',
+        title: 'Belajar Kelompok Bersama Guru'
+    },
+    {
+        id: 3,
+        src: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop',
+        title: 'Membaca & Literasi Al-Qur\'an'
+    },
+    {
+        id: 4,
+        src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=800&auto=format&fit=crop',
+        title: 'Aktivitas Kelas Interaktif'
+    },
+    {
+        id: 5,
+        src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop',
+        title: 'Seni & Mewarnai Kreatif'
+    },
+    {
+        id: 6,
+        src: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=800&auto=format&fit=crop',
+        title: 'Bermain Blok & Puzzle'
+    },
+    {
+        id: 7,
+        src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop',
+        title: 'Keceriaan Bersama Teman'
+    },
+    {
+        id: 8,
+        src: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop',
+        title: 'Praktek Sains & Eksplorasi Mini'
+    }
 ];
 
 
@@ -274,6 +274,7 @@ function useInView(options = { threshold: 0.15 }) {
 
 
 export default function Sd({
+    galleries = [],
     title = "TK Page",
     subtitle = "Setiap jenjang, satu perjalanan. Bersama membangun generasi beradab.",
     tagline = "SEKOLAH ISLAM ATTAUFIQ",
@@ -402,7 +403,7 @@ export default function Sd({
                             </h2>
 
                             <p className="mt-8 text-lg leading-8 text-gray-200 font-light">
-                              Ruang belajar yang inspiratif untuk mengasah nalar kritis, mengembangkan potensi diri, serta menanamkan nilai-nilai Al-Qur'an dan kepemimpinan sejak dini.
+                                Ruang belajar yang inspiratif untuk mengasah nalar kritis, mengembangkan potensi diri, serta menanamkan nilai-nilai Al-Qur'an dan kepemimpinan sejak dini.
                             </p>
                         </div>
 
@@ -664,7 +665,7 @@ export default function Sd({
                                     </div>
 
                                     <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0F223D] tracking-wide">
-                                        Mengapa Memilih TK Attaufiq?
+                                        Mengapa Memilih SD Attaufiq?
                                     </h2>
                                 </div>
 
@@ -766,8 +767,8 @@ export default function Sd({
                                         key={item.id}
                                         onClick={() => setActiveIndex(index)}
                                         className={`flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-left text-xs sm:text-sm font-semibold transition-all duration-300 ease-out w-full group relative ${isActive
-                                                ? 'bg-[#0F223D] text-white shadow-lg shadow-blue-950/20 translate-x-2 border border-amber-400/30'
-                                                : 'bg-[#FFFBF7] text-gray-700 hover:bg-[#FAF0E6] border border-[#F3E2D4] hover:border-amber-300/60 hover:translate-x-1'
+                                            ? 'bg-[#0F223D] text-white shadow-lg shadow-blue-950/20 translate-x-2 border border-amber-400/30'
+                                            : 'bg-[#FFFBF7] text-gray-700 hover:bg-[#FAF0E6] border border-[#F3E2D4] hover:border-amber-300/60 hover:translate-x-1'
                                             }`}
                                     >
                                         {/* Indicator Dot Aktif */}
@@ -869,8 +870,8 @@ export default function Sd({
                                             key={idx}
                                             onClick={() => setActiveIndex(idx)}
                                             className={`h-2 rounded-full transition-all duration-300 ${idx === activeIndex
-                                                    ? 'w-7 bg-[#0F223D] shadow-sm'
-                                                    : 'w-2 bg-amber-300/50 hover:bg-amber-400'
+                                                ? 'w-7 bg-[#0F223D] shadow-sm'
+                                                : 'w-2 bg-amber-300/50 hover:bg-amber-400'
                                                 }`}
                                         />
                                     ))}
@@ -1085,7 +1086,7 @@ export default function Sd({
                         </div>
 
                         <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#0B1A30] tracking-wide">
-                            Cara Bergabung di TK Attaufiq
+                            Cara Bergabung di SD Attaufiq
                         </h2>
 
                         {/* Decorative Divider Line */}
@@ -1343,146 +1344,146 @@ export default function Sd({
             </section>
 
             {/* ==========================================
-                8. Gallery SECTION
+                Gallery SECTION - SD
             ========================================== */}
             <section className="w-full flex flex-col items-center mx-auto p-4 sm:p-6 md:p-8 bg-[#FAF6F0] relative overflow-hidden font-sans">
-      
-      {/* Ambient Background Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-10 right-10 w-72 h-72 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#0F223D]/5 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Floating Aesthetic Sparkles */}
-      <div className="absolute top-12 left-10 text-amber-500/30 text-xl pointer-events-none animate-pulse">✦</div>
-      <div className="absolute top-24 right-12 text-amber-600/30 text-lg pointer-events-none">✨</div>
-      <div className="absolute bottom-12 right-16 text-amber-500/30 text-xl pointer-events-none animate-pulse" style={{ animationDuration: '3s' }}>✦</div>
+                {/* Ambient Background Glow Orbs */}
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
+                <div className="absolute top-10 right-10 w-72 h-72 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
+                <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#0F223D]/5 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Outer Container Card */}
-      <div className="relative max-w-6xl w-full overflow-hidden bg-[#FFFBF5]/90 backdrop-blur-md border border-[#F1E4D5] rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl shadow-amber-900/5 my-6 transition-all duration-300 z-10">
+                {/* Floating Aesthetic Sparkles */}
+                <div className="absolute top-12 left-10 text-amber-500/30 text-xl pointer-events-none animate-pulse">✦</div>
+                <div className="absolute top-24 right-12 text-amber-600/30 text-lg pointer-events-none">✨</div>
+                <div className="absolute bottom-12 right-16 text-amber-500/30 text-xl pointer-events-none animate-pulse" style={{ animationDuration: '3s' }}>✦</div>
 
-        {/* Corner Ornaments */}
-        <div className="absolute top-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
-        <div className="absolute top-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
-        <div className="absolute bottom-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
-        <div className="absolute bottom-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                {/* Outer Container Card */}
+                <div className="relative max-w-6xl w-full overflow-hidden bg-[#FFFBF5]/90 backdrop-blur-md border border-[#F1E4D5] rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl shadow-amber-900/5 my-6 transition-all duration-300 z-10">
 
-        {/* Header Section */}
-        <div className="flex flex-col items-center justify-center mb-10 text-center group">
-          
-          {/* Badge Number 7 */}
-          <div className="relative mb-3 flex items-center justify-center">
-            <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
-            <div className="relative flex items-center justify-center w-11 h-11 bg-[#0F223D] text-amber-400 font-bold rounded-xl rotate-45 flex-shrink-0 shadow-lg border border-amber-300/40 transition-transform duration-500 group-hover:rotate-[225deg]">
-              <span className="-rotate-45 font-extrabold text-base transition-transform duration-500 group-hover:-rotate-[225deg]">
-                7
-              </span>
-            </div>
-          </div>
+                    {/* Corner Ornaments */}
+                    <div className="absolute top-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute top-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute bottom-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute bottom-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
 
-          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#0F223D] tracking-wide">
-            Galeri Kegiatan Ananda
-          </h2>
+                    {/* Header Section */}
+                    <div className="flex flex-col items-center justify-center mb-10 text-center group">
 
-          {/* Decorative Divider Line */}
-          <div className="flex items-center gap-2 mt-3">
-            <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-amber-400" />
-            <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
-            <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-amber-400" />
-          </div>
-        </div>
+                        {/* Badge Number 7 */}
+                        <div className="relative mb-3 flex items-center justify-center">
+                            <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
+                            <div className="relative flex items-center justify-center w-11 h-11 bg-[#0F223D] text-amber-400 font-bold rounded-xl rotate-45 flex-shrink-0 shadow-lg border border-amber-300/40 transition-transform duration-500 group-hover:rotate-[225deg]">
+                                <span className="-rotate-45 font-extrabold text-base transition-transform duration-500 group-hover:-rotate-[225deg]">
+                                    7
+                                </span>
+                            </div>
+                        </div>
 
-        {/* Multi-Row Photo Grid (2 Baris x 4 Kolom di Desktop) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 mb-10">
-          {GALLERY_DATA.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setSelectedImage(item)}
-              className="group relative h-52 sm:h-60 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-amber-500/20 bg-gray-900 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-amber-900/10"
-            >
-              {/* Gold Inner Frame Border */}
-              <div className="absolute inset-2.5 border border-amber-300/30 rounded-xl z-10 pointer-events-none group-hover:border-amber-300/70 transition-colors duration-500" />
+                        <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#0F223D] tracking-wide">
+                            Galeri Kegiatan Ananda SD
+                        </h2>
 
-              {/* Photo Image Unsplash */}
-              <img
-                src={item.src}
-                alt={item.title}
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
-              />
+                        {/* Decorative Divider Line */}
+                        <div className="flex items-center gap-2 mt-3">
+                            <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-amber-400" />
+                            <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
+                            <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-amber-400" />
+                        </div>
+                    </div>
 
-              {/* Gradient Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F223D]/90 via-[#0F223D]/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-300 z-10" />
+                    {/* Multi-Row Photo Grid (2 Baris x 4 Kolom di Desktop) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 mb-10">
+                        {(galleries || []).map((item) => (
+                            <div
+                                key={item.id}
+                                onClick={() => setSelectedImage(item)}
+                                className="group relative h-52 sm:h-60 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-amber-500/20 bg-gray-900 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-amber-900/10"
+                            >
+                                {/* Gold Inner Frame Border */}
+                                <div className="absolute inset-2.5 border border-amber-300/30 rounded-xl z-10 pointer-events-none group-hover:border-amber-300/70 transition-colors duration-500" />
 
-              {/* Content Caption Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <h4 className="text-white text-xs sm:text-sm font-semibold line-clamp-1 group-hover:text-amber-200 transition-colors">
-                  {item.title}
-                </h4>
-              </div>
+                                {/* Photo Image */}
+                                <img
+                                    src={item.src || '/images/default-gallery.jpg'}
+                                    alt={item.title}
+                                    className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
+                                />
 
-              {/* Hover Zoom Icon Indicator */}
-              <div className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-[#0F223D]/80 border border-amber-400/40 text-amber-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
-                <ImageIcon className="w-4 h-4" />
-              </div>
-            </div>
-          ))}
-        </div>
+                                {/* Gradient Dark Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0F223D]/90 via-[#0F223D]/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-300 z-10" />
 
-        {/* Footer CTA Button */}
-        <div className="flex justify-center">
-          <button
-            onClick={onViewMore}
-            className="group relative inline-flex items-center gap-3 px-8 py-3.5 bg-[#0F223D] hover:bg-[#162d4d] text-amber-300 hover:text-amber-200 font-semibold text-sm sm:text-base rounded-2xl border border-amber-400/40 shadow-lg shadow-blue-950/20 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 overflow-hidden"
-          >
-            {/* Light Sweep Animation Effect */}
-            <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-amber-400/20 to-transparent group-hover:left-[100%] transition-all duration-1000 ease-in-out" />
+                                {/* Content Caption Overlay */}
+                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                    <h4 className="text-white text-xs sm:text-sm font-semibold line-clamp-1 group-hover:text-amber-200 transition-colors">
+                                        {item.title}
+                                    </h4>
+                                </div>
 
-            <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
-            <span>Lihat Galeri Lainnya</span>
-            <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1.5 transition-transform duration-300" />
-          </button>
-        </div>
+                                {/* Hover Zoom Icon Indicator */}
+                                <div className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-[#0F223D]/80 border border-amber-400/40 text-amber-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
+                                    <ImageIcon className="w-4 h-4" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-      </div>
+                    {/* Footer CTA Button */}
+                    <div className="flex justify-center">
+                        <button
+                            onClick={onViewMore}
+                            className="group relative inline-flex items-center gap-3 px-8 py-3.5 bg-[#0F223D] hover:bg-[#162d4d] text-amber-300 hover:text-amber-200 font-semibold text-sm sm:text-base rounded-2xl border border-amber-400/40 shadow-lg shadow-blue-950/20 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 overflow-hidden"
+                        >
+                            {/* Light Sweep Animation Effect */}
+                            <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-amber-400/20 to-transparent group-hover:left-[100%] transition-all duration-1000 ease-in-out" />
 
-      {/* Lightbox / Modal Perbesar Foto */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div 
-            className="relative max-w-4xl w-full bg-[#0F223D] rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-30 p-2 rounded-full bg-black/50 text-amber-300 hover:text-white hover:bg-black/80 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
+                            <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+                            <span>Lihat Galeri Lainnya</span>
+                            <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1.5 transition-transform duration-300" />
+                        </button>
+                    </div>
 
-            {/* Modal Image */}
-            <div className="relative h-[60vh] sm:h-[70vh] w-full bg-black">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.title}
-                className="w-full h-full object-contain"
-              />
-            </div>
+                </div>
 
-            {/* Modal Description */}
-            <div className="p-6 bg-[#0F223D] flex items-center justify-between border-t border-amber-400/20">
-              <h3 className="text-white text-lg font-serif font-bold">
-                {selectedImage.title}
-              </h3>
-              <Sparkles className="w-5 h-5 text-amber-400" />
-            </div>
-          </div>
-        </div>
-      )}
+                {/* Lightbox / Modal Perbesar Foto */}
+                {selectedImage && (
+                    <div
+                        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <div
+                            className="relative max-w-4xl w-full bg-[#0F223D] rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setSelectedImage(null)}
+                                className="absolute top-4 right-4 z-30 p-2 rounded-full bg-black/50 text-amber-300 hover:text-white hover:bg-black/80 transition-colors"
+                            >
+                                <X className="w-6 h-6" />
+                            </button>
 
-    </section>
+                            {/* Modal Image */}
+                            <div className="relative h-[60vh] sm:h-[70vh] w-full bg-black">
+                                <img
+                                    src={selectedImage.src || '/images/default-gallery.jpg'}
+                                    alt={selectedImage.title}
+                                    className="w-full h-full object-contain"
+                                />
+                            </div>
+
+                            {/* Modal Description */}
+                            <div className="p-6 bg-[#0F223D] flex items-center justify-between border-t border-amber-400/20">
+                                <h3 className="text-white text-lg font-serif font-bold">
+                                    {selectedImage.title}
+                                </h3>
+                                <Sparkles className="w-5 h-5 text-amber-400" />
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+            </section>
 
         </AppLayout>
     );

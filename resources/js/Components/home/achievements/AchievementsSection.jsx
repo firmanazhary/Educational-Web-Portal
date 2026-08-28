@@ -1,8 +1,10 @@
+// resources/js/Components/home/achievements/AchievementsSection.jsx
+
 import { useEffect, useRef } from "react";
 import { Building2, Calendar, ChevronDown } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import Reveal from "@/Components/home/Reveal";
-import { achievements } from "@/data/achievements";
+import { achievements as staticAchievements } from "@/data/achievements";
 
 const BG_SRC = "/images/achievements/prestasi-bg-sky.png";
 const STAR_SRC = "/images/achievements/prestasi-star.png";
@@ -100,7 +102,12 @@ const WHEEL_RANGE = 1500;
 const PROGRESS_RATE_PER_MS = 1500 / 1100;
 const MAX_ELAPSED_MS = 32;
 
-export default function AchievementsSection() {
+export default function AchievementsSection({ achievementsData = [] }) {
+  // Gunakan data dinamis jika ada dari DB, jika kosong gunakan data statis
+  const achievements = achievementsData && achievementsData.length > 0
+    ? achievementsData
+    : staticAchievements;
+
   const containerRef = useRef(null);
   const starRefs = useRef([]);
   const lineRefs = useRef([]);
@@ -183,17 +190,12 @@ export default function AchievementsSection() {
     const targetX = closingRect.left;
     const targetY = closingRect.top;
 
-    // Di dalam fungsi positionSun():
-sun.style.position = "fixed";
-sun.style.left = `${lerp(sourceX, targetX, t)}px`;
-sun.style.top = `${lerp(sourceY, targetY, t)}px`;
-sun.style.transform = "translate(-50%, -50%)";
-sun.style.opacity = t < 0.8 ? "1" : String(Math.max(0, 1 - (t - 0.8) / 0.2));
-
-// 🚀 UBAH Z-INDEX MATAHARI KE 10
-sun.style.zIndex = "10";
-
-
+    sun.style.position = "fixed";
+    sun.style.left = `${lerp(sourceX, targetX, t)}px`;
+    sun.style.top = `${lerp(sourceY, targetY, t)}px`;
+    sun.style.transform = "translate(-50%, -50%)";
+    sun.style.opacity = t < 0.8 ? "1" : String(Math.max(0, 1 - (t - 0.8) / 0.2));
+    sun.style.zIndex = "10";
   };
 
   useEffect(() => {
@@ -320,10 +322,10 @@ sun.style.zIndex = "10";
 
   return (
     <section ref={containerRef} className="relative w-full h-[200vh] z-30">
-    <div
-  id="achievements-sticky-container"
-  className="sticky top-0 w-full h-screen flex flex-col justify-between px-6 md:px-16 lg:px-24"
->
+      <div
+        id="achievements-sticky-container"
+        className="sticky top-0 w-full h-screen flex flex-col justify-between px-6 md:px-16 lg:px-24"
+      >
         {/* Sky Background Image */}
         <div className="absolute inset-0 z-0">
           <img
@@ -367,7 +369,7 @@ sun.style.zIndex = "10";
           </Reveal>
         </div>
 
-        {/* Gambar Matahari Utama (z-50 agar selalu aman di atas background) */}
+        {/* Gambar Matahari Utama */}
         <img
           id="prestasi-sun-handoff"
           src={SUN_SRC}

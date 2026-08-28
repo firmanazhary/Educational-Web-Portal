@@ -121,66 +121,6 @@ const PEOPLE_IMAGE = "/images/home/people.png";
 const SCROLL_STOPS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
 const ROAD_CURVES = [50, 58, 66, 52, 34, 42, 64, 55, 36, 44, 50];
 
-// ==========================================
-// 3. DATA JENJANG PENDIDIKAN & RENTANG TRIGGER ANIMASI
-// ==========================================
-const JENJANG_DATA = [
-    {
-        id: 'pg',
-        badge: 'Langkah 1',
-        title: 'PG',
-        age: 'Usia 2 - 4 Tahun',
-        desc: 'Belajar merasa aman, dicintai, dan dekat dengan Al-Qur\'an.',
-        btnText: 'Lihat Program PG',
-        align: 'left',
-        imgSrc: '/images/home/pg.png',
-        triggerScroll: 0.12, // Card muncul saat scroll melewatinya
-    },
-    {
-        id: 'tk',
-        badge: 'Langkah 2',
-        title: 'TK',
-        age: 'Usia 4 - 6 Tahun',
-        desc: 'Bermain sambil belajar, mengenal adab dan akhlak islami.',
-        btnText: 'Lihat Program TK',
-        align: 'right',
-        imgSrc: '/images/home/tk.png',
-        triggerScroll: 0.32,
-    },
-    {
-        id: 'sd',
-        badge: 'Langkah 3',
-        title: 'SD',
-        age: 'Usia 7 - 12 Tahun',
-        desc: 'Menumbuhkan ilmu, rasa ingin tahu, dan akhlak mulia.',
-        btnText: 'Lihat Program SD',
-        align: 'left',
-        imgSrc: '/images/home/sd.JPG',
-        triggerScroll: 0.52,
-    },
-    {
-        id: 'smp',
-        badge: 'Langkah 4',
-        title: 'SMP',
-        age: 'Usia 13 - 15 Tahun',
-        desc: 'Menguatkan karakter, logika, dan kepemimpinan diri.',
-        btnText: 'Lihat Program SMP',
-        align: 'right',
-        imgSrc: '/images/home/smp.JPG',
-        triggerScroll: 0.72,
-    },
-    {
-        id: 'sma',
-        badge: 'Langkah 5',
-        title: 'SMA',
-        age: 'Usia 16 - 18 Tahun',
-        desc: 'Menjadi generasi pembawa manfaat dan pemimpin masa depan.',
-        btnText: 'Lihat Program SMA',
-        align: 'left',
-        imgSrc: '/images/home/sma.JPG',
-        triggerScroll: 0.90,
-    }
-];
 
 // Data konten keunggulan
 const dataKeunggulan = [
@@ -235,76 +175,6 @@ const dataKeunggulan = [
     }
 ];
 
-// PRESTASI
-const achievements = [
-    { id: 1, title: 'Juara 1 Olimpiade Matematika', level: 'Tingkat Kota', unit: 'SD Attaufiq · 2026', angle: -90, distance: 220 },
-    { id: 2, title: 'Juara Tahfiz 5 Juz', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: -45, distance: 260 },
-    { id: 3, title: 'Juara 2 Lomba Cerdas Cermat', level: 'Tingkat Kota', unit: 'SMP Attaufiq · 2026', angle: 0, distance: 280 },
-    { id: 4, title: 'Juara 1 Futsal Putra', level: 'Tingkat Kota', unit: 'SMA Attaufiq · 2026', angle: 45, distance: 260 },
-    { id: 5, title: 'Juara 1 Olimpiade IPA', level: 'Tingkat Kota', unit: 'SD Attaufiq · 2026', angle: 90, distance: 220 },
-    { id: 6, title: 'Juara 1 Lomba MTQ', level: 'Tingkat Kota', unit: 'SMA Attaufiq · 2026', angle: 135, distance: 260 },
-    { id: 7, title: 'Juara 1 Karya Ilmiah Remaja', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: 180, distance: 280 },
-    { id: 8, title: 'Juara Harapan 1 Lomba Kaligrafi', level: 'Tingkat Provinsi', unit: 'SMP Attaufiq · 2026', angle: -135, distance: 260 },
-];
-
-// EVENT & PROGRAM
-// Data Event Terbaru
-const events = [
-    {
-        id: 1,
-        title: '[ISI: Nama Event 1, mis. Tasmi Day]',
-        desc: '[ISI: ringkasan singkat event 1]',
-        link: '#',
-    },
-    {
-        id: 2,
-        title: '[ISI: Nama Event 2, mis. Business Day]',
-        desc: '[ISI: ringkasan singkat event 2]',
-        link: '#',
-    },
-];
-
-// Data Program Unggulan
-const programs = [
-    {
-        id: 1,
-        title: "[ISI: Nama Program 1, mis. Tahfizh Al-Qur'an]",
-        desc: '[ISI: ringkasan singkat program 1]',
-        link: '#',
-    },
-    {
-        id: 2,
-        title: '[ISI: Nama Program 2, mis. Interest & Talent Culture]',
-        desc: '[ISI: ringkasan singkat program 2]',
-        link: '#',
-    },
-];
-
-//   DATA BLOG
-// Data Artikel Blog (Bisa disesuaikan / dipasang props `posts`)
-const articles = [
-    {
-        id: 1,
-        title: '[ISI: Judul artikel contoh]',
-        summary: '[ISI: ringkasan singkat artikel]',
-        date: '10 Ags 2026',
-        link: '#',
-    },
-    {
-        id: 2,
-        title: '[ISI: Judul artikel contoh 2]',
-        summary: '[ISI: ringkasan singkat artikel 2]',
-        date: '05 Ags 2026',
-        link: '#',
-    },
-    {
-        id: 3,
-        title: '[ISI: Judul artikel contoh 3]',
-        summary: '[ISI: ringkasan singkat artikel 3]',
-        date: '01 Ags 2026',
-        link: '#',
-    },
-];
 
 
 // Hook Animasi Scroll Reveal
@@ -888,7 +758,7 @@ useEffect(() => {
             </section>
 
             {/* 5. PRESTASI SISWA ATQ SECTION */}
-            <AchievementsSection/>
+            <AchievementsSection />
 
 
             {/* 7. CTA ATQ SECTION */}
@@ -900,13 +770,6 @@ useEffect(() => {
 
             {/* 9. BLOG SECTION */}
             <BlogPreview posts={posts}/>
-
-
-
-
-
-
-
 
         </AppLayout>
     );
