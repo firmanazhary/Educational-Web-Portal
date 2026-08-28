@@ -5,7 +5,7 @@ export default function Create({ auth }) {
     // Inisialisasi Form Inertia
     const { data, setData, post, processing, errors, reset } = useForm({
         title: '',
-        category: 'Umum',
+        category: 'PG',
         image: null,
     });
 

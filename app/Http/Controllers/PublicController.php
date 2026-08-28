@@ -95,9 +95,24 @@ class PublicController extends Controller
         return Inertia::render('Jenjang/Jenjang');
     }
 
-    public function pg()
+   public function pg()
     {
-        return Inertia::render('Jenjang/Pg');
+        // Fetch 8 foto galeri terbaru khusus kategori "PG"
+        $galleries = Gallery::where('category', 'PG')
+            ->latest()
+            ->take(8)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id'    => $item->id,
+                    'title' => $item->title ?? $item->caption ?? 'Kegiatan Ananda PG Robbani',
+                    'src'   => $item->image ? asset('storage/' . $item->image) : null,
+                ];
+            });
+
+        return Inertia::render('Jenjang/Pg', [
+            'galleries' => $galleries,
+        ]);
     }
 
 
@@ -165,7 +180,22 @@ class PublicController extends Controller
 
     public function sma()
     {
-        return Inertia::render('Jenjang/Sma');
+        // Fetch 8 foto galeri terbaru khusus kategori "SMA"
+        $galleries = Gallery::where('category', 'SMA')
+            ->latest()
+            ->take(8)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id'    => $item->id,
+                    'title' => $item->title ?? $item->caption ?? 'Kegiatan Ananda SMA',
+                    'src'   => $item->image ? asset('storage/' . $item->image) : null,
+                ];
+            });
+
+        return Inertia::render('Jenjang/Sma', [
+            'galleries' => $galleries,
+        ]);
     }
 
     // ==========================================
