@@ -36,13 +36,15 @@ export default function HeroSlideContent({ slide, priority = false }) {
         />
       </div>
 
+      {/* Container utama: Menggunakan flex-col-reverse di mobile agar Gambar dirender DI ATAS Teks */}
       <div
-        className={`relative mx-auto flex min-h-[560px] max-w-7xl flex-col justify-center px-6 pb-16 pt-28 md:min-h-[720px] md:pb-24 md:pt-32 ${
+        className={`relative mx-auto flex min-h-[560px] max-w-7xl flex-col-reverse justify-end px-6 pb-12 pt-20 md:flex-col md:justify-center md:pb-24 md:pt-32 ${
           textLeft ? "md:pl-24" : "md:pr-24"
         }`}
       >
-        <div className={`max-w-xl ${textLeft ? "md:pr-10" : "md:pl-10 md:ml-auto"}`}>
-          <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+        {/* Teks: Di bawah pada Mobile, Sejajar di Desktop */}
+        <div className={`mt-6 max-w-xl md:mt-0 ${textLeft ? "md:pr-10" : "md:pl-10 md:ml-auto"}`}>
+          <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
             {slide.titleParts.map((part, i) =>
               part.underline ? (
                 <span key={i} className="relative inline-block">
@@ -55,13 +57,13 @@ export default function HeroSlideContent({ slide, priority = false }) {
             )}
           </h1>
 
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-white/80 md:text-lg">
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base md:mt-6 md:text-lg">
             {slide.description}
           </p>
         </div>
 
-        {/* Mobile: photo stacks below the text block */}
-        <div className="relative mt-10 h-64 w-full overflow-hidden rounded-2xl md:hidden">
+        {/* Mobile Photo Block: Diposisikan paling atas secara visual pada HP */}
+        <div className="relative h-56 w-full overflow-hidden rounded-2xl sm:h-72 md:hidden">
           <img
             src={slide.image}
             alt={slide.imageAlt}

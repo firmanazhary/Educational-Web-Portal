@@ -1,5 +1,3 @@
-// resources/js/Components/home/achievements/AchievementsSection.jsx
-
 import { useEffect, useRef } from "react";
 import { Building2, Calendar, ChevronDown } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
@@ -103,7 +101,6 @@ const PROGRESS_RATE_PER_MS = 1500 / 1100;
 const MAX_ELAPSED_MS = 32;
 
 export default function AchievementsSection({ achievementsData = [] }) {
-  // Gunakan data dinamis jika ada dari DB, jika kosong gunakan data statis
   const achievements = achievementsData && achievementsData.length > 0
     ? achievementsData
     : staticAchievements;
@@ -121,6 +118,9 @@ export default function AchievementsSection({ achievementsData = [] }) {
   const justReleasedScrollYRef = useRef(null);
 
   const applyFrame = (progress) => {
+    // Hanya jalankan logika animasi canvas jika di Desktop
+    if (window.innerWidth < 768) return;
+
     const t = Math.min(Math.max(progress, 0), 1);
     const bp = burstProgress(t);
 
@@ -157,6 +157,7 @@ export default function AchievementsSection({ achievementsData = [] }) {
   }, [reduceMotion]);
 
   const positionSun = () => {
+    if (window.innerWidth < 768) return;
     const sticky = document.getElementById("achievements-sticky-container");
     const sun = document.getElementById("prestasi-sun-handoff");
     const closingAnchor = document.getElementById("closing-sun-handoff");
@@ -230,6 +231,7 @@ export default function AchievementsSection({ achievementsData = [] }) {
     };
 
     const onWheel = (e) => {
+      if (window.innerWidth < 768) return; // Buka scroll standar di HP
       const container = containerRef.current;
       if (!container) return;
 
@@ -287,6 +289,7 @@ export default function AchievementsSection({ achievementsData = [] }) {
     window.addEventListener("wheel", onWheel, { passive: false });
 
     const onScroll = () => {
+      if (window.innerWidth < 768) return;
       if (lockedRef.current && lockedScrollYRef.current !== null) {
         if (window.scrollY !== lockedScrollYRef.current) {
           window.scrollTo(0, lockedScrollYRef.current);
@@ -305,6 +308,7 @@ export default function AchievementsSection({ achievementsData = [] }) {
     if (reduceMotion) return;
 
     const maybePositionSun = () => {
+      if (window.innerWidth < 768) return;
       const sticky = document.getElementById("achievements-sticky-container");
       if (!sticky) return;
       if (sticky.getBoundingClientRect().top >= 0) return;
@@ -321,10 +325,10 @@ export default function AchievementsSection({ achievementsData = [] }) {
   }, [reduceMotion]);
 
   return (
-    <section ref={containerRef} className="relative w-full h-[200vh] z-30">
+    <section ref={containerRef} className="relative w-full h-auto md:h-[200vh] z-30">
       <div
         id="achievements-sticky-container"
-        className="sticky top-0 w-full h-screen flex flex-col justify-between px-6 md:px-16 lg:px-24"
+        className="relative md:sticky top-0 w-full min-h-screen md:h-screen flex flex-col justify-between px-4 md:px-16 lg:px-24 py-12 md:py-0 overflow-hidden"
       >
         {/* Sky Background Image */}
         <div className="absolute inset-0 z-0">
@@ -356,34 +360,34 @@ export default function AchievementsSection({ achievementsData = [] }) {
         </div>
 
         {/* Header Text Overlay */}
-        <div className="relative z-10 pt-16 px-4 text-center max-w-xl mx-auto pointer-events-none">
+        <div className="relative z-10 pt-4 md:pt-16 px-4 text-center max-w-xl mx-auto pointer-events-none">
           <Reveal delay={0.1}>
-            <h2 className="text-4xl md:text-6xl font-serif font-normal text-white tracking-wide drop-shadow-md">
+            <h2 className="text-3xl md:text-6xl font-serif font-normal text-white tracking-wide drop-shadow-md">
               Prestasi Siswa
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-4 text-sm md:text-base text-slate-200 max-w-xs md:max-w-md mx-auto drop-shadow leading-relaxed font-light">
+            <p className="mt-2 md:mt-4 text-xs md:text-base text-slate-200 max-w-xs md:max-w-md mx-auto drop-shadow leading-relaxed font-light">
               Mendukung setiap siswa untuk berkembang, berprestasi, dan tumbuh menjadi generasi yang cerdas, mandiri serta berlandaskan nilai-nilai islami.
             </p>
           </Reveal>
         </div>
 
-        {/* Gambar Matahari Utama */}
+        {/* Gambar Matahari Utama (Desktop Only) */}
         <img
           id="prestasi-sun-handoff"
           src={SUN_SRC}
           alt="Matahari Attaufiq"
-          className="absolute z-50 w-36 h-36 md:w-48 md:h-48 -translate-x-1/2 -translate-y-1/2 object-contain filter drop-shadow-[0_0_45px_rgba(251,191,36,0.9)] pointer-events-none"
+          className="hidden md:block absolute z-50 w-36 h-36 md:w-48 md:h-48 -translate-x-1/2 -translate-y-1/2 object-contain filter drop-shadow-[0_0_45px_rgba(251,191,36,0.9)] pointer-events-none"
           style={{
             left: `${CENTER.x}%`,
             top: `${CENTER.y}%`,
           }}
         />
 
-        {/* SVG Rays */}
+        {/* SVG Rays (Desktop Only) */}
         <svg
-          className="absolute inset-0 w-full h-full pointer-events-none z-10"
+          className="hidden md:block absolute inset-0 w-full h-full pointer-events-none z-10"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
         >
@@ -413,8 +417,8 @@ export default function AchievementsSection({ achievementsData = [] }) {
           })}
         </svg>
 
-        {/* Bintang-bintang Ujung */}
-        <div className="absolute inset-0 pointer-events-none z-20">
+        {/* Bintang-bintang Ujung (Desktop Only) */}
+        <div className="hidden md:block absolute inset-0 pointer-events-none z-20">
           {POSITIONS.map((_, idx) => (
             <img
               key={idx}
@@ -430,8 +434,8 @@ export default function AchievementsSection({ achievementsData = [] }) {
           ))}
         </div>
 
-        {/* Floating Cards */}
-        <div className="absolute inset-0 z-30 pointer-events-none">
+        {/* Floating Cards (DESKTOP LAYOUT - Canvas/Floating) */}
+        <div className="hidden md:block absolute inset-0 z-30 pointer-events-none">
           {achievements.map((item, idx) => {
             const pos = CARD_POSITIONS[idx] || CARD_POSITIONS[0];
             return (
@@ -490,8 +494,51 @@ export default function AchievementsSection({ achievementsData = [] }) {
           })}
         </div>
 
-        {/* Scroll Hint */}
-        <div className="relative z-10 pb-6 text-center pointer-events-none">
+        {/* MOBILE LAYOUT (Grid 2 Kolom Sesuai Gambar Referensi) */}
+        <div className="block md:hidden relative z-30 w-full my-6">
+          <div className="grid grid-cols-2 gap-3">
+            {achievements.map((item, idx) => (
+              <div
+                key={item.id || idx}
+                className="bg-[#1a234e]/95 backdrop-blur-md border border-amber-400/50 rounded-2xl p-2.5 flex flex-col justify-between shadow-lg"
+              >
+                {/* Top Banner / Image Slot */}
+                <div className="w-full h-24 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-600 via-blue-700 to-indigo-900 flex items-center justify-center p-2 text-center mb-2.5 relative">
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  ) : (
+                    <span className="text-sm font-bold text-white leading-tight drop-shadow">
+                      {item.school || item.badgeText || "Attaufiq"}
+                    </span>
+                  )}
+                </div>
+
+                {/* Content Details */}
+                <div className="flex flex-col flex-1 justify-between">
+                  <div>
+                    <h3 className="text-xs font-bold text-white line-clamp-2 leading-tight mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-[11px] font-semibold text-amber-400">
+                      {item.level || item.category || "Tingkat Kota"}
+                    </p>
+                  </div>
+
+                  <p className="text-[10px] text-slate-300 mt-1 truncate">
+                    {item.school || item.organizer || "Attaufiq"} • {item.date || "2026"}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll Hint (Desktop Only) */}
+        <div className="hidden md:block relative z-10 pb-6 text-center pointer-events-none">
           <div className="inline-flex items-center gap-2 text-xs text-amber-200/90 bg-[#131b40]/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-amber-400/30 shadow-sm">
             <span>Scroll untuk mengeksplorasi</span>
             <ChevronDown className="w-4 h-4 animate-bounce text-amber-400" />

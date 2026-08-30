@@ -599,22 +599,22 @@ useEffect(() => {
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-amber-200/30 blur-[60px] md:blur-[100px] rounded-full pointer-events-none" />
 
                 {/* HEADER SECTION */}
-                <div className="relative z-30 text-center max-w-5xl px-4 md:px-6 mb-4 md:mb-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm mb-2"
-                    >
-                        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                        <p className="text-amber-700 font-bold tracking-wider text-[10px] md:text-sm uppercase">
-                            KEUNGGULAN ATTAUFIQ
-                        </p>
-                    </motion.div>
+               <div className="relative z-30 text-center max-w-5xl px-4 md:px-6 mb-2 md:mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm mb-3"
+        >
+          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+          <p className="text-amber-700 font-bold tracking-wider text-[10px] md:text-sm uppercase">
+            KEUNGGULAN ATTAUFIQ
+          </p>
+        </motion.div>
 
-                    <h2 className="text-lg md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight">
-                        Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
-                    </h2>
-                </div>
+        <h2 className="text-lg md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight px-2">
+          Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
+        </h2>
+      </div>
 
                 {/* Container Sticky untuk Scroll Animation */}
                 <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-6 md:pt-14">

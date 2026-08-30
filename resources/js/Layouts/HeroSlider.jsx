@@ -56,7 +56,8 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative h-[560px] w-full overflow-hidden bg-[#102380] md:h-[720px]"
+      /* Mengubah h-[560px] menjadi h-auto / min-h-screen pada HP agar tidak terpotong */
+      className="relative min-h-[600px] w-full overflow-hidden bg-[#102380] md:h-[720px]"
       role="region"
       aria-roledescription="carousel"
       aria-label="Sorotan Attaufiq"
