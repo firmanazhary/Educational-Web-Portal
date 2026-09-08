@@ -34,13 +34,13 @@ export default function Edit({ auth, gallery }) {
 
                 <div className="bg-white p-12 rounded-[40px] shadow-sm border border-slate-100">
                     <form onSubmit={submit} className="grid md:grid-cols-2 gap-10">
-                        
+
                         {/* Kolom Kiri: Input */}
                         <div className="space-y-6">
                             <div>
                                 <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4 mb-2 block">Judul Dokumentasi</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     className="w-full border-none bg-slate-50 rounded-2xl p-4 focus:ring-2 focus:ring-[#FF6600]"
                                     value={data.title}
                                     onChange={e => setData('title', e.target.value)}
@@ -50,15 +50,16 @@ export default function Edit({ auth, gallery }) {
 
                             <div>
                                 <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4 mb-2 block">Kategori Unit</label>
-                                <select 
+                                <select
                                     className="w-full border-none bg-slate-50 rounded-2xl p-4 focus:ring-2 focus:ring-[#FF6600]"
                                     value={data.category}
                                     onChange={e => setData('category', e.target.value)}
                                 >
-                                    <option value="Umum">Umum / Semua</option>
+                                    <option value="PG">PG / Semua</option>
                                     <option value="TK">TK Robbani</option>
                                     <option value="SD">SD IT At-Taufiq</option>
                                     <option value="SMP">SMP IT At-Taufiq</option>
+                                    <option value="SMA">SMA IT At-Taufiq</option>
                                 </select>
                             </div>
 
@@ -81,9 +82,9 @@ export default function Edit({ auth, gallery }) {
                             <div className="mt-4 text-center">
                                 <p className="text-[8px] font-black uppercase tracking-widest text-slate-400 mb-2">Foto Saat Ini / Preview:</p>
                                 <div className="w-48 h-48 rounded-[32px] overflow-hidden shadow-2xl border-4 border-white">
-                                    <img 
-                                        src={data.image ? URL.createObjectURL(data.image) : `/storage/${gallery.image}`} 
-                                        className="w-full h-full object-cover" 
+                                    <img
+                                        src={data.image ? URL.createObjectURL(data.image) : `/storage/${gallery.image}`}
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                             </div>

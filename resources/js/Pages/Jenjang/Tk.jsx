@@ -201,45 +201,45 @@ const testimonials = [
 ];
 
 const GALLERY_DATA = [
-  { 
-    id: 1, 
-    src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop', 
-    title: 'Bermain & Eksplorasi Motorik' 
+  {
+    id: 1,
+    src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop',
+    title: 'Bermain & Eksplorasi Motorik'
   },
-  { 
-    id: 2, 
-    src: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop', 
-    title: 'Belajar Kelompok Bersama Guru' 
+  {
+    id: 2,
+    src: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop',
+    title: 'Belajar Kelompok Bersama Guru'
   },
-  { 
-    id: 3, 
-    src: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop', 
-    title: 'Membaca & Literasi Al-Qur\'an' 
+  {
+    id: 3,
+    src: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop',
+    title: 'Membaca & Literasi Al-Qur\'an'
   },
-  { 
-    id: 4, 
-    src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=800&auto=format&fit=crop', 
-    title: 'Aktivitas Kelas Interaktif' 
+  {
+    id: 4,
+    src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=800&auto=format&fit=crop',
+    title: 'Aktivitas Kelas Interaktif'
   },
-  { 
-    id: 5, 
-    src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop', 
-    title: 'Seni & Mewarnai Kreatif' 
+  {
+    id: 5,
+    src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop',
+    title: 'Seni & Mewarnai Kreatif'
   },
-  { 
-    id: 6, 
-    src: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=800&auto=format&fit=crop', 
-    title: 'Bermain Blok & Puzzle' 
+  {
+    id: 6,
+    src: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=800&auto=format&fit=crop',
+    title: 'Bermain Blok & Puzzle'
   },
-  { 
-    id: 7, 
-    src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop', 
-    title: 'Keceriaan Bersama Teman' 
+  {
+    id: 7,
+    src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop',
+    title: 'Keceriaan Bersama Teman'
   },
-  { 
-    id: 8, 
-    src: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop', 
-    title: 'Praktek Sains & Eksplorasi Mini' 
+  {
+    id: 8,
+    src: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop',
+    title: 'Praktek Sains & Eksplorasi Mini'
   }
 ];
 
@@ -274,6 +274,7 @@ function useInView(options = { threshold: 0.15 }) {
 
 
 export default function Tk({
+    galleries = [],
     title = "TK Page",
     subtitle = "Setiap jenjang, satu perjalanan. Bersama membangun generasi beradab.",
     tagline = "SEKOLAH ISLAM ATTAUFIQ",
@@ -284,9 +285,11 @@ export default function Tk({
     bgsection2 = "/images/jenjang/bgsection2.png",
     whysection = "/images/jenjang/whysection.png",
     bgOrnament = "/images/jenjang/bgOrnament.png",
-}, { onViewMore }) {
+    onViewMore,
+}) {
     const [activeTab, setActiveTab] = useState('PG-TK');
     const [activeIndex, setActiveIndex] = useState(0);
+
     // Fungsi Navigasi
     const handlePrev = () => {
         setActiveIndex((prev) => (prev === 0 ? facilitiesData.length - 1 : prev - 1));
@@ -333,6 +336,10 @@ export default function Tk({
 
     // Galery
     const [selectedImage, setSelectedImage] = useState(null);
+
+    // DATA DATABASE
+    // Jika dari DB ada data gunakan galleries, jika belum ada/kosong fallback ke dummy GALLERY_DATA
+    const galleryList = galleries.length > 0 ? galleries : GALLERY_DATA;
 
     return (
         <AppLayout title="Jenjang At-Taufiq">
@@ -1342,11 +1349,11 @@ export default function Tk({
                 </div>
             </section>
 
-            {/* ==========================================
+{/* ==========================================
                 8. Gallery SECTION
             ========================================== */}
             <section className="w-full flex flex-col items-center mx-auto p-4 sm:p-6 md:p-8 bg-[#FAF6F0] relative overflow-hidden font-sans">
-      
+
       {/* Ambient Background Glow Orbs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-10 right-10 w-72 h-72 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
@@ -1368,7 +1375,7 @@ export default function Tk({
 
         {/* Header Section */}
         <div className="flex flex-col items-center justify-center mb-10 text-center group">
-          
+
           {/* Badge Number 7 */}
           <div className="relative mb-3 flex items-center justify-center">
             <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
@@ -1393,7 +1400,7 @@ export default function Tk({
 
         {/* Multi-Row Photo Grid (2 Baris x 4 Kolom di Desktop) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 mb-10">
-          {GALLERY_DATA.map((item) => (
+          {galleryList.map((item) => (
             <div
               key={item.id}
               onClick={() => setSelectedImage(item)}
@@ -1402,9 +1409,9 @@ export default function Tk({
               {/* Gold Inner Frame Border */}
               <div className="absolute inset-2.5 border border-amber-300/30 rounded-xl z-10 pointer-events-none group-hover:border-amber-300/70 transition-colors duration-500" />
 
-              {/* Photo Image Unsplash */}
+              {/* Photo Image */}
               <img
-                src={item.src}
+                src={item.src || '/images/default-gallery.jpg'}
                 alt={item.title}
                 className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
               />
@@ -1446,11 +1453,11 @@ export default function Tk({
 
       {/* Lightbox / Modal Perbesar Foto */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
           onClick={() => setSelectedImage(null)}
         >
-          <div 
+          <div
             className="relative max-w-4xl w-full bg-[#0F223D] rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -1465,7 +1472,7 @@ export default function Tk({
             {/* Modal Image */}
             <div className="relative h-[60vh] sm:h-[70vh] w-full bg-black">
               <img
-                src={selectedImage.src}
+                src={selectedImage.src || '/images/default-gallery.jpg'}
                 alt={selectedImage.title}
                 className="w-full h-full object-contain"
               />

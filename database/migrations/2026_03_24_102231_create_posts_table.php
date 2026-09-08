@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('slug')->unique()->nullable();
             $table->text('content')->nullable(); // Isi blog atau caption
             $table->string('image')->nullable(); // Path gambar
+            $table->string('type')->default('blog');
             $table->boolean('is_featured')->default(false); // Untuk highlight/banner
             $table->timestamps();
         });

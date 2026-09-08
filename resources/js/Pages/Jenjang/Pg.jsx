@@ -274,6 +274,7 @@ function useInView(options = { threshold: 0.15 }) {
 
 
 export default function Pg({
+    galleries = [],
     title = "PG Page",
     subtitle = "Setiap jenjang, satu perjalanan. Bersama membangun generasi beradab.",
     tagline = "SEKOLAH ISLAM ATTAUFIQ",
@@ -1348,143 +1349,143 @@ export default function Pg({
                 8. Gallery SECTION
             ========================================== */}
             <section className="w-full flex flex-col items-center mx-auto p-4 sm:p-6 md:p-8 bg-[#FAF6F0] relative overflow-hidden font-sans">
-      
-      {/* Ambient Background Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-10 right-10 w-72 h-72 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#0F223D]/5 rounded-full blur-[120px] pointer-events-none" />
+                
+                {/* Ambient Background Glow Orbs */}
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
+                <div className="absolute top-10 right-10 w-72 h-72 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
+                <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#0F223D]/5 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Floating Aesthetic Sparkles */}
-      <div className="absolute top-12 left-10 text-amber-500/30 text-xl pointer-events-none animate-pulse">✦</div>
-      <div className="absolute top-24 right-12 text-amber-600/30 text-lg pointer-events-none">✨</div>
-      <div className="absolute bottom-12 right-16 text-amber-500/30 text-xl pointer-events-none animate-pulse" style={{ animationDuration: '3s' }}>✦</div>
+                {/* Floating Aesthetic Sparkles */}
+                <div className="absolute top-12 left-10 text-amber-500/30 text-xl pointer-events-none animate-pulse">✦</div>
+                <div className="absolute top-24 right-12 text-amber-600/30 text-lg pointer-events-none">✨</div>
+                <div className="absolute bottom-12 right-16 text-amber-500/30 text-xl pointer-events-none animate-pulse" style={{ animationDuration: '3s' }}>✦</div>
 
-      {/* Outer Container Card */}
-      <div className="relative max-w-6xl w-full overflow-hidden bg-[#FFFBF5]/90 backdrop-blur-md border border-[#F1E4D5] rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl shadow-amber-900/5 my-6 transition-all duration-300 z-10">
+                {/* Outer Container Card */}
+                <div className="relative max-w-6xl w-full overflow-hidden bg-[#FFFBF5]/90 backdrop-blur-md border border-[#F1E4D5] rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl shadow-amber-900/5 my-6 transition-all duration-300 z-10">
 
-        {/* Corner Ornaments */}
-        <div className="absolute top-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
-        <div className="absolute top-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
-        <div className="absolute bottom-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
-        <div className="absolute bottom-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    {/* Corner Ornaments */}
+                    <div className="absolute top-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute top-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute bottom-4 left-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
+                    <div className="absolute bottom-4 right-4 text-amber-400/40 text-xs pointer-events-none">✦</div>
 
-        {/* Header Section */}
-        <div className="flex flex-col items-center justify-center mb-10 text-center group">
-          
-          {/* Badge Number 7 */}
-          <div className="relative mb-3 flex items-center justify-center">
-            <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
-            <div className="relative flex items-center justify-center w-11 h-11 bg-[#0F223D] text-amber-400 font-bold rounded-xl rotate-45 flex-shrink-0 shadow-lg border border-amber-300/40 transition-transform duration-500 group-hover:rotate-[225deg]">
-              <span className="-rotate-45 font-extrabold text-base transition-transform duration-500 group-hover:-rotate-[225deg]">
-                7
-              </span>
-            </div>
-          </div>
+                    {/* Header Section */}
+                    <div className="flex flex-col items-center justify-center mb-10 text-center group">
+                        
+                        {/* Badge Number 7 */}
+                        <div className="relative mb-3 flex items-center justify-center">
+                            <div className="absolute inset-0 bg-amber-400/40 rounded-xl blur-md group-hover:blur-lg transition-all duration-500" />
+                            <div className="relative flex items-center justify-center w-11 h-11 bg-[#0F223D] text-amber-400 font-bold rounded-xl rotate-45 flex-shrink-0 shadow-lg border border-amber-300/40 transition-transform duration-500 group-hover:rotate-[225deg]">
+                                <span className="-rotate-45 font-extrabold text-base transition-transform duration-500 group-hover:-rotate-[225deg]">
+                                    7
+                                </span>
+                            </div>
+                        </div>
 
-          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#0F223D] tracking-wide">
-            Galeri Kegiatan Ananda
-          </h2>
+                        <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#0F223D] tracking-wide">
+                            Galeri Kegiatan Ananda PG Robbani
+                        </h2>
 
-          {/* Decorative Divider Line */}
-          <div className="flex items-center gap-2 mt-3">
-            <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-amber-400" />
-            <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
-            <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-amber-400" />
-          </div>
-        </div>
+                        {/* Decorative Divider Line */}
+                        <div className="flex items-center gap-2 mt-3">
+                            <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-amber-400" />
+                            <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
+                            <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-amber-400" />
+                        </div>
+                    </div>
 
-        {/* Multi-Row Photo Grid (2 Baris x 4 Kolom di Desktop) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 mb-10">
-          {GALLERY_DATA.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setSelectedImage(item)}
-              className="group relative h-52 sm:h-60 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-amber-500/20 bg-gray-900 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-amber-900/10"
-            >
-              {/* Gold Inner Frame Border */}
-              <div className="absolute inset-2.5 border border-amber-300/30 rounded-xl z-10 pointer-events-none group-hover:border-amber-300/70 transition-colors duration-500" />
+                    {/* Multi-Row Photo Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 mb-10">
+                        {galleries.map((item) => (
+                            <div
+                                key={item.id}
+                                onClick={() => setSelectedImage(item)}
+                                className="group relative h-52 sm:h-60 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-amber-500/20 bg-gray-900 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-amber-900/10"
+                            >
+                                {/* Gold Inner Frame Border */}
+                                <div className="absolute inset-2.5 border border-amber-300/30 rounded-xl z-10 pointer-events-none group-hover:border-amber-300/70 transition-colors duration-500" />
 
-              {/* Photo Image Unsplash */}
-              <img
-                src={item.src}
-                alt={item.title}
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
-              />
+                                {/* Photo Image */}
+                                <img
+                                    src={item.src || '/images/default-gallery.jpg'}
+                                    alt={item.title}
+                                    className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
+                                />
 
-              {/* Gradient Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F223D]/90 via-[#0F223D]/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-300 z-10" />
+                                {/* Gradient Dark Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0F223D]/90 via-[#0F223D]/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-300 z-10" />
 
-              {/* Content Caption Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <h4 className="text-white text-xs sm:text-sm font-semibold line-clamp-1 group-hover:text-amber-200 transition-colors">
-                  {item.title}
-                </h4>
-              </div>
+                                {/* Content Caption Overlay */}
+                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                    <h4 className="text-white text-xs sm:text-sm font-semibold line-clamp-1 group-hover:text-amber-200 transition-colors">
+                                        {item.title}
+                                    </h4>
+                                </div>
 
-              {/* Hover Zoom Icon Indicator */}
-              <div className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-[#0F223D]/80 border border-amber-400/40 text-amber-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
-                <ImageIcon className="w-4 h-4" />
-              </div>
-            </div>
-          ))}
-        </div>
+                                {/* Hover Zoom Icon Indicator */}
+                                <div className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-[#0F223D]/80 border border-amber-400/40 text-amber-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
+                                    <ImageIcon className="w-4 h-4" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-        {/* Footer CTA Button */}
-        <div className="flex justify-center">
-          <button
-            onClick={onViewMore}
-            className="group relative inline-flex items-center gap-3 px-8 py-3.5 bg-[#0F223D] hover:bg-[#162d4d] text-amber-300 hover:text-amber-200 font-semibold text-sm sm:text-base rounded-2xl border border-amber-400/40 shadow-lg shadow-blue-950/20 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 overflow-hidden"
-          >
-            {/* Light Sweep Animation Effect */}
-            <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-amber-400/20 to-transparent group-hover:left-[100%] transition-all duration-1000 ease-in-out" />
+                    {/* Footer CTA Button */}
+                    <div className="flex justify-center">
+                        <button
+                            onClick={onViewMore}
+                            className="group relative inline-flex items-center gap-3 px-8 py-3.5 bg-[#0F223D] hover:bg-[#162d4d] text-amber-300 hover:text-amber-200 font-semibold text-sm sm:text-base rounded-2xl border border-amber-400/40 shadow-lg shadow-blue-950/20 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 overflow-hidden"
+                        >
+                            <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-amber-400/20 to-transparent group-hover:left-[100%] transition-all duration-1000 ease-in-out" />
 
-            <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
-            <span>Lihat Galeri Lainnya</span>
-            <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1.5 transition-transform duration-300" />
-          </button>
-        </div>
+                            <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+                            <span>Lihat Galeri Lainnya</span>
+                            <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1.5 transition-transform duration-300" />
+                        </button>
+                    </div>
 
-      </div>
+                </div>
 
-      {/* Lightbox / Modal Perbesar Foto */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div 
-            className="relative max-w-4xl w-full bg-[#0F223D] rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-30 p-2 rounded-full bg-black/50 text-amber-300 hover:text-white hover:bg-black/80 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
+                {/* Lightbox / Modal Perbesar Foto */}
+                {selectedImage && (
+                    <div 
+                        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <div 
+                            className="relative max-w-4xl w-full bg-[#0F223D] rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setSelectedImage(null)}
+                                className="absolute top-4 right-4 z-30 p-2 rounded-full bg-black/50 text-amber-300 hover:text-white hover:bg-black/80 transition-colors"
+                            >
+                                <X className="w-6 h-6" />
+                            </button>
 
-            {/* Modal Image */}
-            <div className="relative h-[60vh] sm:h-[70vh] w-full bg-black">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.title}
-                className="w-full h-full object-contain"
-              />
-            </div>
+                            {/* Modal Image */}
+                            <div className="relative h-[60vh] sm:h-[70vh] w-full bg-black">
+                                <img
+                                    src={selectedImage.src || '/images/default-gallery.jpg'}
+                                    alt={selectedImage.title}
+                                    className="w-full h-full object-contain"
+                                />
+                            </div>
 
-            {/* Modal Description */}
-            <div className="p-6 bg-[#0F223D] flex items-center justify-between border-t border-amber-400/20">
-              <h3 className="text-white text-lg font-serif font-bold">
-                {selectedImage.title}
-              </h3>
-              <Sparkles className="w-5 h-5 text-amber-400" />
-            </div>
-          </div>
-        </div>
-      )}
+                            {/* Modal Description */}
+                            <div className="p-6 bg-[#0F223D] flex items-center justify-between border-t border-amber-400/20">
+                                <h3 className="text-white text-lg font-serif font-bold">
+                                    {selectedImage.title}
+                                </h3>
+                                <Sparkles className="w-5 h-5 text-amber-400" />
+                            </div>
+                        </div>
+                    </div>
+                )}
 
-    </section>
+            </section>
+           
 
         </AppLayout>
     );
