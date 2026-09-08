@@ -1,74 +1,76 @@
-import SwooshUnderline from "@/Components/ui/SwooshUnderline";
-import HeroOrnament from "./HeroOrnament";
+import HeroOrbit, { DEFAULT_ORBIT } from "./HeroOrbit";
+import MoroccanPattern from "./MoroccanPattern";
 
-// Multi-stop, low-contrast-between-stops fade so the photo dissolves into
-// the navy panel gradually instead of cutting off in one visible band.
-const NAVY = "16, 35, 128"; // #102380 as rgb triplet, for alpha stops
+const NAVY = "16, 35, 128";
 
-function blendGradient(direction) {
-  return `linear-gradient(${direction}, rgba(${NAVY},1) 0%, rgba(${NAVY},0.85) 30%, rgba(${NAVY},0.55) 55%, rgba(${NAVY},0.22) 78%, rgba(${NAVY},0) 100%)`;
-}
+const EDGE_VIGNETTE = [
+  `linear-gradient(to bottom, rgba(${NAVY},0.85) 0%, rgba(${NAVY},0) 32%)`,
+  `linear-gradient(to top, rgba(${NAVY},0.88) 0%, rgba(${NAVY},0) 42%)`,
+  `linear-gradient(to right, rgba(${NAVY},0.75) 0%, rgba(${NAVY},0) 40%)`,
+  `linear-gradient(to left, rgba(${NAVY},0.5) 0%, rgba(${NAVY},0) 28%)`,
+  `radial-gradient(ellipse 65% 60% at 0% 100%, rgba(${NAVY},0.5) 0%, rgba(${NAVY},0) 78%)`,
+].join(", ");
+
+const TOP_RIGHT_GLOW = `radial-gradient(ellipse 60% 65% at 100% 0%, rgba(${NAVY},0.75) 0%, rgba(${NAVY},0) 75%)`;
 
 export default function HeroSlideContent({ slide, priority = false }) {
-  const textLeft = slide.textSide === "left";
-
   return (
     <>
-      <HeroOrnament side={slide.textSide} />
-
-      {/* Full-bleed photo, opposite side from the text on desktop */}
-      <div
-        className={`absolute inset-y-0 hidden w-[45%] md:block ${
-          textLeft ? "right-0" : "left-0"
-        }`}
-      >
+      {/* Layer 1 — photo */}
+      <div className="absolute inset-0">
         <img
           src={slide.image}
           alt={slide.imageAlt}
           className="h-full w-full object-cover"
-        />
-        <div
-          className="absolute inset-y-0 w-48"
-          style={{
-            [textLeft ? "left" : "right"]: 0,
-            backgroundImage: blendGradient(textLeft ? "to right" : "to left"),
-          }}
+          loading={priority ? "eager" : "lazy"}
         />
       </div>
 
-      {/* Container utama: Menggunakan flex-col-reverse di mobile agar Gambar dirender DI ATAS Teks */}
-      <div
-        className={`relative mx-auto flex min-h-[560px] max-w-7xl flex-col-reverse justify-end px-6 pb-12 pt-20 md:flex-col md:justify-center md:pb-24 md:pt-32 ${
-          textLeft ? "md:pl-24" : "md:pr-24"
-        }`}
-      >
-        {/* Teks: Di bawah pada Mobile, Sejajar di Desktop */}
-        <div className={`mt-6 max-w-xl md:mt-0 ${textLeft ? "md:pr-10" : "md:pl-10 md:ml-auto"}`}>
-          <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-            {slide.titleParts.map((part, i) =>
-              part.underline ? (
-                <span key={i} className="relative inline-block">
-                  {part.text}
-                  <SwooshUnderline className="absolute inset-x-0 -bottom-1 h-3 w-full md:-bottom-2 md:h-4" />
-                </span>
-              ) : (
-                <span key={i}>{part.text}</span>
-              )
-            )}
-          </h1>
+      {/* Layer 2 — overlay */}
+      <div className="absolute inset-0" style={{ backgroundImage: EDGE_VIGNETTE }} />
+      <div className="absolute inset-0 hidden md:block" style={{ backgroundImage: TOP_RIGHT_GLOW }} />
+      <div className="absolute inset-0 bg-[#102380]/45 md:hidden" />
 
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base md:mt-6 md:text-lg">
+      {/* Layer 3 — decorative orbit */}
+      <HeroOrbit orbit={slide.orbit ?? DEFAULT_ORBIT} />
+
+      {/* Layer 4 — Moroccan lattice */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 z-10 hidden h-64 w-64 opacity-45 md:block lg:h-80 lg:w-80"
+        style={{
+          WebkitMaskImage:
+            "radial-gradient(circle at 0% 100%, black 0%, black 55%, transparent 85%)",
+          maskImage:
+            "radial-gradient(circle at 0% 100%, black 0%, black 55%, transparent 85%)",
+        }}
+      >
+        <MoroccanPattern className="h-full w-full" />
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-0 z-10 hidden h-64 w-64 opacity-45 md:block lg:h-80 lg:w-80"
+        style={{
+          WebkitMaskImage:
+            "radial-gradient(circle at 100% 0%, black 0%, black 55%, transparent 85%)",
+          maskImage:
+            "radial-gradient(circle at 100% 0%, black 0%, black 55%, transparent 85%)",
+        }}
+      >
+        <MoroccanPattern className="h-full w-full" />
+      </div>
+
+      {/* Layer 5 — heading + description (Padding disesuaikan) */}
+      <div className="relative z-20 mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pb-12 pt-24 md:px-12 md:pb-20">
+        <div className="max-w-full md:max-w-[70%] lg:max-w-[65%]">
+          <h1 className="font-bold whitespace-nowrap text-2xl leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
+            <span className="text-white">{slide.headingWhite} </span>
+            <span className="text-[#F1B23A]">{slide.headingGold}</span>
+          </h1>
+          <p className="mt-3 text-sm leading-relaxed text-white/80 sm:text-base md:mt-4 md:text-lg">
             {slide.description}
           </p>
-        </div>
-
-        {/* Mobile Photo Block: Diposisikan paling atas secara visual pada HP */}
-        <div className="relative h-56 w-full overflow-hidden rounded-2xl sm:h-72 md:hidden">
-          <img
-            src={slide.image}
-            alt={slide.imageAlt}
-            className="h-full w-full object-cover"
-          />
         </div>
       </div>
     </>

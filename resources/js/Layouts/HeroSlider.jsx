@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { heroSlides } from "../data/heroSlides";
 import HeroSlideContent from "@/Components/home/HeroSlideContent";
 import SunNavButton from "@/Components/home/SunNavButton";
+import HeroPagination from "@/Components/home/HeroPagination";
 
 const AUTO_ADVANCE_MS = 6000;
 const SWIPE_THRESHOLD = 60;
@@ -56,8 +57,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      /* Mengubah h-[560px] menjadi h-auto / min-h-screen pada HP agar tidak terpotong */
-      className="relative min-h-[600px] w-full overflow-hidden bg-[#102380] md:h-[720px]"
+      className="relative h-screen w-full overflow-hidden bg-[#102380]"
       role="region"
       aria-roledescription="carousel"
       aria-label="Sorotan Attaufiq"
@@ -80,6 +80,15 @@ export default function HeroSlider() {
             <HeroSlideContent slide={slide} priority={i === 0} />
           </div>
         ))}
+      </div>
+
+      {/* Top-Right Pagination (Dinaikkan agar sejajar under navbar) */}
+      <div className="absolute right-8 top-24 z-30 md:right-16 md:top-28">
+        <HeroPagination
+          count={SLIDE_COUNT}
+          index={index}
+          onSelect={(i) => goTo(i)}
+        />
       </div>
 
       {/* Navigation Buttons */}
