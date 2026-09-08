@@ -362,6 +362,266 @@ useEffect(() => {
             {/* --- HERO SECTION --- */}
             <HeroSlider />
 
+            {/* --- ATQ SECTION --- */}
+            <section ref={sectionRef} className="w-full bg-[#FAF7F0] relative overflow-hidden text-slate-800 py-12 sm:py-16 md:py-24">
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[400px] md:w-[500px] h-[280px] sm:h-[400px] md:h-[500px] bg-[#FFC700]/10 rounded-full blur-3xl pointer-events-none z-0" />
+                <div className="absolute left-0 bottom-0 top-0 w-16 sm:w-36 md:w-48 pointer-events-none z-0 opacity-15 sm:opacity-20 transition-opacity duration-500 hover:opacity-30">
+                    <img src="/images/hero/bgPot-left.png" alt="Pot Decorative Left" className="h-full w-full object-cover object-left filter drop-shadow-sm" />
+                </div>
+                <div className="absolute right-0 bottom-0 top-0 w-16 sm:w-36 md:w-48 pointer-events-none z-0 opacity-15 sm:opacity-20 transition-opacity duration-500 hover:opacity-30">
+                    <img src="/images/hero/bgPot-right.png" alt="Pot Decorative Right" className="h-full w-full object-cover object-right filter drop-shadow-sm" />
+                </div>
+                <div className="hidden sm:block absolute top-2 left-4 w-36 md:w-44 pointer-events-none z-10 animate-float-slow drop-shadow-md">
+                    <img src="/images/hero/ornamenLogo-1.png" alt="Ornamen Kuning Left" className="w-full h-auto object-contain" />
+                </div>
+
+                <div className="container mx-auto px-5 sm:px-6 max-w-7xl relative z-20">
+                    <div className={`text-center max-w-4xl mx-auto space-y-5 sm:space-y-6 md:space-y-7 transition-all duration-1000 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                        <div className="flex justify-center mb-1">
+                            <img src="/images/hero/logo.png" alt="Logo Attaufiq" className="h-24 sm:h-36 md:h-60 w-auto object-contain drop-shadow-md hover:scale-[1.02] transition-transform duration-500" />
+                        </div>
+                        <div className="flex items-center justify-center gap-3 opacity-60 my-2">
+                            <span className="w-12 sm:w-16 h-[1.5px] bg-gradient-to-r from-transparent to-[#0B2545]"></span>
+                            <span className="text-[#FFC700] text-xs rotate-45 transform inline-block">◆</span>
+                            <span className="w-12 sm:w-16 h-[1.5px] bg-gradient-to-l from-transparent to-[#0B2545]"></span>
+                        </div>
+
+                        <div className="max-w-[320px] sm:max-w-2xl mx-auto px-2 sm:px-8">
+                            <div className="block sm:hidden text-center space-y-2 text-[#0B2545]/90 text-xs leading-relaxed">
+                                <p>Di Attaufiq, setiap proses belajar dirancang agar ananda:</p>
+                                <div className="flex flex-col items-center gap-1.5 py-1">
+                                    <div className="inline-flex items-center gap-1">
+                                        <span className="font-semibold text-[#0B2545] bg-[#FFC700]/25 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">paham</span>
+                                        <span>, bukan sekadar hafal;</span>
+                                    </div>
+                                    <div className="inline-flex items-center gap-1">
+                                        <span className="font-semibold text-[#0B2545] bg-[#FFC700]/25 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">berkembang</span>
+                                        <span>, bukan sekadar ikut;</span>
+                                    </div>
+                                    <div className="inline-flex items-center gap-1">
+                                        <span className="font-semibold text-[#0B2545] bg-[#FFC700]/25 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">punya arah</span>
+                                        <span>, bukan sekadar jalan.</span>
+                                    </div>
+                                </div>
+                                <p className="pt-0.5">Karena bagi kami, pendidikan harus memberi arti.</p>
+                            </div>
+
+                            <p className="hidden sm:block text-[#0B2545]/90 font-normal text-lg md:text-[19px] leading-relaxed md:leading-[1.85] tracking-wide text-center">
+                                Di Attaufiq, setiap proses belajar dirancang agar ananda:{' '}
+                                <span className="font-semibold text-[#0B2545] bg-[#FFC700]/20 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">paham</span>
+                                , bukan sekadar hafal;{' '}
+                                <span className="font-semibold text-[#0B2545] bg-[#FFC700]/20 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">berkembang</span>
+                                , bukan sekadar ikut;{' '}
+                                <span className="font-semibold text-[#0B2545] bg-[#FFC700]/20 px-2 py-0.5 rounded-md border-b-2 border-[#FFC700]">punya arah</span>
+                                , bukan sekadar jalan. Karena bagi kami, pendidikan harus memberi arti.
+                            </p>
+                        </div>
+
+                        <div className="pt-3 flex justify-center">
+                            <a
+                                href="#about-section"
+                                className="group relative inline-flex items-center gap-2 bg-[#FFC700] hover:bg-[#f5be00] text-[#0B2545] px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 ring-4 ring-[#FFC700]/20"
+                            >
+                                <span>Kenali Lebih Dekat</span>
+                                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#0B2545]/10 flex items-center justify-center group-hover:bg-[#0B2545]/20 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0B2545] transform group-hover:translate-y-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div className="relative mt-14 sm:mt-20 md:mt-24">
+                        <div className="hidden sm:block absolute -top-14 right-4 md:right-8 w-32 md:w-40 pointer-events-none z-30 animate-float-delayed drop-shadow-lg">
+                            <img src="/images/hero/ornamenLogo-2.png" alt="Ornamen Biru Right" className="w-full h-auto object-contain" />
+                        </div>
+
+                        <div className={`text-center mb-8 sm:mb-12 space-y-2 transition-all duration-700 delay-200 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <h3 className="font-sans text-lg sm:text-2xl md:text-4xl text-[#0B2545] font-extrabold tracking-tight px-4 leading-snug">
+                                Belajar yang Tak Berhenti di Kelas
+                            </h3>
+                            <p className="text-slate-500 font-normal text-xs md:text-sm max-w-[300px] sm:max-w-xl mx-auto leading-relaxed px-2">
+                                Setiap kegiatan dirancang untuk membentuk karakter, cara berpikir, dan rasa percaya diri ananda, bukan hanya nilai di atas kertas.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch relative z-20">
+                            {activities.map((act, index) => (
+                                <div
+                                    key={index}
+                                    className={`group relative rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-md hover:shadow-2xl border border-[#E8DFC8]/50 bg-[#0B2265] text-white flex flex-col justify-end h-[320px] sm:h-[340px] md:h-[380px] transition-all duration-500 ease-out transform hover:-translate-y-2 ${
+                                        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                                    }`}
+                                    style={{ transitionDelay: `${300 + index * 100}ms` }}
+                                >
+                                    <img src={act.image} alt={act.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B2265] via-[#0B2265]/80 to-transparent opacity-90 group-hover:opacity-85 transition duration-300"></div>
+
+                                    <div className="relative z-10 p-5 sm:p-6 flex items-start gap-3.5">
+                                        <div className="flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-md text-[#0B2265] mt-0.5 group-hover:scale-110 group-hover:bg-[#FFC700] transition duration-300">
+                                            {act.icon}
+                                        </div>
+                                        <div className="space-y-1">
+                                            <h4 className="font-bold text-base md:text-lg text-white leading-snug group-hover:text-[#FFC700] transition-colors duration-300">
+                                                {act.title}
+                                            </h4>
+                                            <p className="text-slate-200/90 font-light text-xs leading-relaxed">{act.desc}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className={`flex flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10 relative z-20 transition-all duration-700 delay-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+                            <Link href="/events" className="inline-flex items-center justify-center bg-[#0B2265] hover:bg-[#081848] text-white font-semibold text-xs md:text-sm px-5 sm:px-7 py-3 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex-1 sm:flex-none max-w-[150px] sm:max-w-none text-center">
+                                More Events
+                            </Link>
+                            <Link href="/programs" className="inline-flex items-center justify-center bg-[#0B2265] hover:bg-[#081848] text-white font-semibold text-xs md:text-sm px-5 sm:px-7 py-3 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex-1 sm:flex-none max-w-[150px] sm:max-w-none text-center">
+                                More Programs
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* --- 3. PERJALANAN TUMBUH BERSAMA ATTAUFIQ --- */}
+            <section className="relative w-full min-h-[85vh] bg-[#FAF6F0] flex flex-col justify-between overflow-hidden font-sans py-12 md:py-16">
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-200/25 rounded-full blur-[140px] pointer-events-none z-0" />
+                <div className="absolute bottom-10 left-10 w-[300px] h-[300px] bg-amber-100/40 rounded-full blur-[100px] pointer-events-none z-0" />
+
+                <motion.div
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    whileInView={{ opacity: 0.9, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+                    style={{ backgroundImage: `url('images/home/bgPerjalanan.png')` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/40 via-transparent to-[#F5EFE6]/90 pointer-events-none" />
+
+                <div className="relative z-10 max-w-4xl mx-auto text-center px-6 pt-6 flex flex-col items-center">
+                    <motion.span
+                        custom={0}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="inline-block px-4 py-1.5 mb-3 text-xs font-semibold tracking-wider text-[#0F1E56] bg-amber-100/60 backdrop-blur-md rounded-full border border-amber-200/50 uppercase"
+                    >
+                        Pendidikan Berkarakter
+                    </motion.span>
+
+                    <motion.h2
+                        custom={0.1}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="text-3xl sm:text-4xl md:text-[2.85rem] font-extrabold text-[#0F1E56] leading-tight tracking-tight drop-shadow-sm"
+                    >
+                        Perjalanan Tumbuh Bersama <br className="hidden sm:inline" /> Attaufiq
+                    </motion.h2>
+
+                    <motion.p
+                        custom={0.25}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="mt-5 text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl font-normal"
+                    >
+                        Setiap langkah adalah awal dari masa depan. Kami mendampingi Ananda tumbuh dalam ilmu, akhlak, dan cinta kepada Allah hingga siap menjadi generasi beradab dan bermanfaat.
+                    </motion.p>
+                </div>
+
+                <div className="relative z-10 w-full max-w-[90rem] mx-auto px-4 sm:px-8 md:px-12 pt-8 flex flex-col-reverse md:flex-row items-center md:items-end justify-between gap-0">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInLeft}
+                        className="bg-white/90 backdrop-blur-md p-8 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(15,30,86,0.06)] w-full md:max-w-xl lg:max-w-2xl border border-white/80 mb-6 z-20 md:-mr-12 lg:-mr-20 transition-transform duration-300 hover:-translate-y-1"
+                    >
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                            <span className="text-xs font-semibold uppercase tracking-widest text-amber-600">Visi Kami</span>
+                        </div>
+                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#0F1E56] leading-snug">
+                            Satu Perjalanan, Seumur Hidup
+                        </h3>
+                        <p className="mt-4 text-xs sm:text-sm lg:text-base text-[#64748B] leading-relaxed">
+                            Dari usia dini hingga remaja, Attaufiq menjadi rumah kedua yang mengantarkan Ananda menapaki tangga ilmu dan keberkahan menuju cahaya masa depan.
+                        </p>
+                    </motion.div>
+
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInRight}
+                        className="w-full md:flex-1 flex justify-center md:justify-end items-end -mb-4 md:-mb-16 -mr-0 md:-mr-10 z-10"
+                    >
+                        <img
+                            src="images/home/gedung-right.png"
+                            alt="Gedung Attaufiq"
+                            className="w-[75%] sm:w-[60%] max-w-md md:max-w-xl lg:max-w-3xl h-auto object-contain hover:opacity-100 transition-all duration-500 drop-shadow-xl"
+                        />
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* --- 4. SECTION JALANAN BERKELOK --- */}
+            <section
+                ref={roadSectionRef}
+                className={`relative w-full bg-[#FAF6EE] font-sans ${isMobileJalanan ? 'min-h-[180vh]' : 'min-h-[250vh]'}`}
+                style={{ background: 'radial-gradient(circle at 50% 50%, #FAF6EE 0%, #F4ECE0 100%)' }}
+            >
+                <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+                    {BACKGROUND_ORNAMENTS.map(({ id, Icon, size, color, top, left, right, depth }) => {
+                        const yVal = useTransform(smoothProgress, [0, 1], [0, depth * (isMobileJalanan ? 200 : 400)]);
+                        return (
+                            <motion.div
+                                key={id}
+                                className="absolute"
+                                style={{ top, left: left || 'auto', right: right || 'auto', y: yVal }}
+                            >
+                                <Icon className={`${color} animate-pulse`} size={isMobileJalanan ? size * 0.7 : size} />
+                            </motion.div>
+                        );
+                    })}
+                </div>
+
+                <div className="sticky top-0 h-screen w-full pointer-events-none z-50 flex items-center justify-center overflow-hidden">
+                    <motion.div
+                        className="absolute"
+                        style={{
+                            left: rawX,
+                            top: isMobileJalanan ? '40%' : '35%',
+                            opacity: opacityPeople,
+                        }}
+                    >
+                        <img
+                            src={PEOPLE_IMAGE}
+                            alt="People Character"
+                            className="w-12 sm:w-16 md:w-24 h-auto object-contain drop-shadow-2xl -translate-x-1/2 -translate-y-1/2"
+                        />
+                    </motion.div>
+                </div>
+
+                <div className={`relative -mt-[100vh] z-10 w-full ${isMobileJalanan ? 'min-h-[180vh] py-10' : 'min-h-[250vh] py-16'} flex flex-col justify-between pointer-events-none`}>
+                    <div className="absolute inset-0 w-full h-full flex justify-center items-center px-2 md:px-0">
+                        <img src={ROAD_IMAGE} alt="Jalan Path" className="w-full max-w-xs sm:max-w-md md:max-w-3xl h-full object-fill opacity-95" />
+                    </div>
+
+                    <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 flex flex-col justify-between h-full gap-8 md:gap-0">
+                        {JENJANG_DATA.map((step) => (
+                            <StepCard key={step.id} step={step} smoothProgress={smoothProgress} />
+                        ))}
+                    </div>
+                </div>
+            </section>
+            
             {/* ========================================================= */}
             {/* Character ATQ SECTION - LEBIH LEBAR & LEGA */}
             {/* ========================================================= */}
