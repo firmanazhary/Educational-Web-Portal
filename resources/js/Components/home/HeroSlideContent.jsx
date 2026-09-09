@@ -61,10 +61,11 @@ export default function HeroSlideContent({ slide, priority = false }) {
         <MoroccanPattern className="h-full w-full" />
       </div>
 
-      {/* Layer 5 — heading + description (Padding disesuaikan) */}
+      {/* Layer 5 — heading + description */}
       <div className="relative z-20 mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pb-12 pt-24 md:px-12 md:pb-20">
         <div className="max-w-full md:max-w-[70%] lg:max-w-[65%]">
-          <h1 className="font-bold whitespace-nowrap text-2xl leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
+          {/* Tambahan font Playfair Display */}
+          <h1 className="font-['Playfair_Display',Georgia,serif] font-bold whitespace-nowrap text-2xl leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
             <span className="text-white">{slide.headingWhite} </span>
             <span className="text-[#F1B23A]">{slide.headingGold}</span>
           </h1>

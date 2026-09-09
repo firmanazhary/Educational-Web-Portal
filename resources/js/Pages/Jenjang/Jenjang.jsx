@@ -1,298 +1,169 @@
-import React, { useState, useEffect, useRef } from 'react';
-import AppLayout from '@/Layouts/AppLayout';
-import { Head } from '@inertiajs/react';
+import React from "react";
+import { Link } from "@inertiajs/react";
+import { Sun, ChevronRight, Plus, Blocks, ImageIcon } from "lucide-react";
 
-// Custom Hook Animasi Scroll Reveal
-function useInView(options = { threshold: 0.15 }) {
-    const ref = useRef(null);
-    const [isInView, setIsInView] = useState(false);
+// Jika komponen ikon FaqSection belum tersedia, bisa disesuaikan jalurnya atau diganti
+import { PgtkIcon, SdIcon, SmpIcon, SmaIcon } from "@/Components/about/FaqSection";
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                setIsInView(true);
-                observer.unobserve(entry.target); // Animasi cuma jalan sekali pas pertama keliatan
-            }
-        }, options);
+const JENJANG_DISPLAY = [
+  {
+    slug: "pg",
+    name: "PG",
+    subtitle: "Playgroup",
+    fullLabel: "PG (Playgroup)",
+    description:
+      "Mendampingi anak usia dini untuk belajar melalui bermain, menumbuhkan kemandirian, rasa ingin tahu, dan kecintaan pada Islam sejak awal.",
+    Icon: null,
+    photo: null,
+  },
+  {
+    slug: "tk",
+    name: "TK",
+    subtitle: "Taman Kanak-Kanak",
+    fullLabel: "TK (Taman Kanak-Kanak)",
+    description:
+      "Membentuk karakter dan keterampilan dasar melalui pembelajaran yang menyenangkan dan bermakna sesuai tahap perkembangan anak.",
+    Icon: PgtkIcon,
+    photo: "/images/about/faq-pgtk.jpg",
+  },
+  {
+    slug: "sd",
+    name: "SD",
+    subtitle: "Sekolah Dasar",
+    fullLabel: "SD (Sekolah Dasar)",
+    description:
+      "Menguatkan pondasi ilmu pengetahuan dan agama, mengembangkan potensi, serta membentuk kebiasaan belajar yang baik.",
+    Icon: SdIcon,
+    photo: "/images/about/faq-sd.jpg",
+  },
+  {
+    slug: "smp",
+    name: "SMP",
+    subtitle: "Sekolah Menengah Pertama",
+    fullLabel: "SMP (Sekolah Menengah Pertama)",
+    description:
+      "Membimbing remaja dalam pencarian jati diri, penguatan akhlak, serta penguasaan ilmu untuk siap melangkah ke jenjang berikutnya.",
+    Icon: SmpIcon,
+    photo: "/images/about/faq-smp.jpg",
+  },
+  {
+    slug: "sma",
+    name: "SMA",
+    subtitle: "Sekolah Menengah Atas",
+    fullLabel: "SMA (Sekolah Menengah Atas)",
+    description:
+      "Menyiapkan generasi pemimpin masa depan yang berilmu, berdaya saing global, dan berkomitmen memberi manfaat untuk umat dan bangsa.",
+    Icon: SmaIcon,
+    photo: "/images/about/faq-sma.jpg",
+  },
+];
 
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
-
-        return () => {
-            if (ref.current) observer.unobserve(ref.current);
-        };
-    }, []);
-
-    return [ref, isInView];
+function SectionHeading({ children }) {
+  return (
+    <div className="text-center">
+      <h2 className="font-['Playfair_Display',Georgia,serif] text-3xl font-bold text-[#102380] sm:text-4xl">
+        {children}
+      </h2>
+      <div className="mx-auto mt-3 flex max-w-[140px] items-center gap-3">
+        <span className="h-px flex-1 bg-[#F1B23A]/50" />
+        <Sun aria-hidden="true" className="h-4 w-4 shrink-0 text-[#F1B23A]" />
+        <span className="h-px flex-1 bg-[#F1B23A]/50" />
+      </div>
+    </div>
+  );
 }
 
-export default function Jenjang({
-    title = "Program\nPendidikan",
-    subtitle = "Setiap jenjang, satu perjalanan. Bersama membangun generasi beradab.",
-    tagline = "SEKOLAH ISLAM ATTAUFIQ",
-    patternImage = "/images/hero/frame-left.png",
-    mosqueImage = "/images/hero/jenjang-hero-left.png"
-}) {
-    const [activeTab, setActiveTab] = useState('PG-TK');
+export default function JenjangOverviewSection() {
+  return (
+    <section className="bg-[#FAF8F5] px-6 py-16 md:py-20">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading>Pilih Jenjang Pendidikan</SectionHeading>
 
+        {/* 5 Jenjang Cards (Mihrab Shaped) */}
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {JENJANG_DISPLAY.map((j) => (
+            <Link
+              key={j.slug}
+              href={`/jenjang/${j.slug}`}
+              className="group flex flex-col items-center gap-3 rounded-t-full rounded-b-2xl border border-[#F1B23A]/30 bg-white px-4 py-6 text-center shadow-sm transition-all hover:shadow-md hover:-translate-y-1"
+            >
+              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-[#102380]">
+                <span className="h-8 w-8 text-[#F1B23A]">
+                  {j.Icon ? <j.Icon /> : <Blocks className="h-full w-full" strokeWidth={1.6} />}
+                </span>
+              </span>
+              <span className="flex flex-col gap-0.5">
+                <span className="font-['Playfair_Display',Georgia,serif] text-xl font-bold text-[#102380]">
+                  {j.name}
+                </span>
+                <span className="text-xs text-[#102380]/60">{j.subtitle}</span>
+              </span>
+              <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#102380]/15 text-[#102380]/40 transition-colors group-hover:border-[#F1B23A] group-hover:bg-[#F1B23A] group-hover:text-white">
+                <ChevronRight aria-hidden="true" className="h-3.5 w-3.5" />
+              </span>
+            </Link>
+          ))}
+        </div>
 
-    // Ref untuk Masing-masing Section Animasi
-    const [heroRef, heroInView] = useInView();
-    const [sejarahRef, sejarahInView] = useInView();
-    const [todayRef, todayInView] = useInView();
-    const [quoteRef, quoteInView] = useInView();
+        {/* Continuity heading + list */}
+        <div className="mt-16 text-center">
+          <div className="flex items-center justify-center gap-3">
+            <Sun aria-hidden="true" className="h-5 w-5 shrink-0 text-[#F1B23A]" />
+            <h3 className="font-['Playfair_Display',Georgia,serif] text-2xl font-bold text-[#102380]">
+              Satu Kesinambungan, Satu Tujuan
+            </h3>
+          </div>
+          <p className="mx-auto mt-3 max-w-2xl text-[#102380]/70">
+            Setiap jenjang di Attaufiq dirancang untuk saling melengkapi, membimbing
+            anak menjadi pribadi berilmu, berakhlak, dan berprestasi.
+          </p>
+        </div>
 
+        <div className="mt-8 flex flex-col gap-4">
+          {JENJANG_DISPLAY.map((j) => (
+            <Link
+              key={j.slug}
+              href={`/jenjang/${j.slug}`}
+              className="group flex items-stretch gap-4 overflow-hidden rounded-2xl border border-[#102380]/10 bg-white shadow-sm transition-all hover:shadow-md sm:gap-5"
+            >
+              <div className="relative w-32 shrink-0 sm:w-48 md:w-56">
+                {j.photo ? (
+                  <img
+                    src={j.photo}
+                    alt={j.fullLabel}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="grid h-full w-full place-items-center bg-[#102380]/5">
+                    <ImageIcon aria-hidden="true" className="h-6 w-6 text-[#102380]/20" />
+                  </div>
+                )}
+              </div>
 
-    const jenjangList = [
-        {
-            title: "PG",
-            subtitle: "Playgroup",
-            href: "/pg",
-            icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M5 6h14v12H5z" />
-                    <path d="M9 10h6M9 14h6" />
-                </svg>
-            ),
-        },
-        {
-            title: "TK",
-            subtitle: "Taman Kanak-Kanak",
-            href: "/tk",
-            icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M3 21h18" />
-                    <path d="M5 21V8l7-5 7 5v13" />
-                </svg>
-            ),
-        },
-        {
-            title: "SD",
-            subtitle: "Sekolah Dasar",
-            href: "/sd",
-            icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M4 5h16v14H4z" />
-                    <path d="M12 5v14" />
-                </svg>
-            ),
-        },
-        {
-            title: "SMP",
-            subtitle: "Sekolah Menengah Pertama",
-            href: "/smp",
-            icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M4 19h16" />
-                    <path d="M7 19V9l5-5 5 5v10" />
-                </svg>
-            ),
-        },
-        {
-            title: "SMA",
-            subtitle: "Sekolah Menengah Atas",
-            href: "/sma",
-            icon: (
-                <svg
-                    className="w-10 h-10 text-[#D4AF37]"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M3 8l9-5 9 5-9 5-9-5z" />
-                    <path d="M6 10v4c0 2 3 4 6 4s6-2 6-4v-4" />
-                </svg>
-            ),
-        },
-    ];
+              <div className="flex flex-1 items-center gap-4 py-4 pr-4 sm:gap-5">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#102380] sm:h-14 sm:w-14">
+                  <span className="h-6 w-6 text-[#F1B23A] sm:h-7 sm:w-7">
+                    {j.Icon ? <j.Icon /> : <Blocks className="h-full w-full" strokeWidth={1.6} />}
+                  </span>
+                </span>
 
-
-    return (
-        <AppLayout title="About At-Taufiq">
-            <Head title="About At-Taufiq Jambi | Mencetak Generasi Robbani" />
-
-            {/* ==========================================
-                1. HERO SECTION (FADE IN SANTAI)
-            ========================================== */}
-            <section ref={heroRef} className="relative w-full overflow-hidden bg-[#07327F] text-white min-h-[480px] md:min-h-[560px] flex items-center justify-center">
-                <div className="absolute top-0 right-0 w-full md:w-3/4 h-full z-0">
-                    <img
-                        src={mosqueImage}
-                        alt="Mosque Background"
-                        className="w-full h-full object-cover object-[90%_center]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#07327F] from-[38%] via-[#07327F]/20 via-[55%] to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#07327F] via-transparent to-[#07327F]/30"></div>
+                <div className="flex-1">
+                  <h4 className="font-['Playfair_Display',Georgia,serif] text-lg font-bold text-[#102380]">
+                    {j.fullLabel}
+                  </h4>
+                  <p className="mt-1 text-sm leading-relaxed text-[#102380]/70">
+                    {j.description}
+                  </p>
                 </div>
 
-                <div className="absolute top-0 left-0 h-full w-full md:w-7/12 z-10 pointer-events-none overflow-hidden">
-                    <img
-                        src={patternImage}
-                        alt="Islamic Arch Frame"
-                        className="h-full w-full object-cover object-left [mask-image:linear-gradient(to_right,black_70%,transparent_100%)]"
-                    />
-                </div>
-
-                <div className={`relative z-20 container mx-auto flex flex-col items-center justify-center text-center px-6 py-20 max-w-5xl transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <div className="flex items-center space-x-2 mb-3">
-                        <span className="text-[#D4AF37] text-xs">◆</span>
-                        <p className="text-[#F3E5AB] font-bold text-xs md:text-sm tracking-[0.25em] uppercase drop-shadow">
-                            {tagline}
-                        </p>
-                        <span className="text-[#D4AF37] text-xs">◆</span>
-                    </div>
-
-                    <div className="text-[#D4AF37] text-lg md:text-xl my-1 animate-pulse">✦</div>
-
-                    <h1
-                        className="font-serif text-5xl md:text-7xl lg:text-[72px]
-    leading-[1.15]
-    whitespace-pre-line
-    font-semibold
-    max-w-2xl
-    mx-auto
-    text-white"
-                    >
-                        {title}
-                    </h1>
-
-                    <div className="text-[#D4AF37] text-lg md:text-xl my-1 animate-pulse">✦</div>
-
-                    <div className="w-16 h-[1px] bg-[#D4AF37]/50 my-3"></div>
-
-                    <p className="text-blue-100 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed mt-1 drop-shadow">
-                        {subtitle}
-                    </p>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none translate-y-1">
-                    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block" preserveAspectRatio="none">
-                        <path d="M0 60 C 360 120, 1080 0, 1440 60 L 1440 120 L 0 120 Z" fill="#D4AF37" opacity="0.8" />
-                        <path d="M0 75 C 360 135, 1080 15, 1440 75 L 1440 120 L 0 120 Z" fill="#FAF8F5" />
-                    </svg>
-                </div>
-            </section>
-
-
-            {/* ==========================================
-                2. JENJANG PENDIDIKAN  SECTION
-            ========================================== */}
-            <section class="relative py-24 bg-[#FAF8F5] overflow-hidden flex flex-col items-center">
-
-                {/* <!-- Background Pattern --> */}
-                <div class="absolute inset-0 opacity-10 bg-[url('/images/pattern/islamic-pattern.svg')] bg-cover bg-center"></div>
-
-                <div class="relative max-w-7xl mx-auto px-6">
-
-                    {/* <!-- Heading --> */}
-                    <div class="text-center mb-16">
-
-                        <h2 class="text-[#0D2D6C] text-4xl font-serif font-semibold">
-                            Pilih Jenjang Pendidikan
-                        </h2>
-
-                        <div class="flex justify-center items-center gap-4 mt-5">
-                            <div class="w-20 h-[2px] bg-[#D4AF37]"></div>
-
-                            <span class="text-[#D4AF37] text-lg">
-                                ✦
-                            </span>
-
-                            <div class="w-20 h-[2px] bg-[#D4AF37]"></div>
-                        </div>
-
-                    </div>
-
-                    {/* <!-- Cards --> */}
-                    <div className="flex justify-center w-full">
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-5xl">
-
-                            {jenjangList.map((item) => (
-                                <a
-                                    key={item.title}
-                                    href={item.href}
-                                    className="group bg-white rounded-[90px_90px_20px_20px]
-                border border-[#E7D9C7]
-                shadow-sm hover:shadow-xl
-                hover:-translate-y-2
-                transition-all duration-300
-                pt-10 pb-5 px-6
-                text-center"
-                                >
-                                    <div
-                                        className="w-20 h-20 rounded-full
-                    bg-[#082E72]
-                    mx-auto
-                    flex items-center justify-center
-                    shadow-lg
-                    group-hover:scale-110
-                    transition"
-                                    >
-                                        {item.icon}
-                                    </div>
-
-                                    <h3 className="mt-7 text-4xl font-serif text-[#0D2D6C]">
-                                        {item.title}
-                                    </h3>
-
-                                    <p className="mt-2 text-sm text-gray-600">
-                                        {item.subtitle}
-                                    </p>
-
-                                    <div className="mt-8 text-xl text-[#0D2D6C] group-hover:translate-x-1 transition">
-                                        →
-                                    </div>
-                                </a>
-                            ))}
-
-                        </div>
-                    </div>
-
-
-                    {/* <!-- Bottom Ornament --> */}
-                    <div class="flex justify-center items-center gap-4 mt-16">
-
-                        <div class="w-20 h-[2px] bg-[#D4AF37]"></div>
-
-                        <span class="text-[#D4AF37]">
-                            ✦
-                        </span>
-
-                        <div class="w-20 h-[2px] bg-[#D4AF37]"></div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-        </AppLayout>
-    );
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#102380]/15 text-[#102380]/40 transition-colors group-hover:border-[#F1B23A] group-hover:bg-[#F1B23A] group-hover:text-white">
+                  <Plus aria-hidden="true" className="h-4 w-4" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
