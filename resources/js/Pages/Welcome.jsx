@@ -4,8 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import { Link, Head } from '@inertiajs/react';
 import HeroSlider from '@/Layouts/HeroSlider';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
-import CharacterActivitySection from "@/Components/home/CharacterActivitySection";
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import JourneySection from "@/Components/home/journey/JourneySection";
 import AchievementsSection from "@/Components/home/achievements/AchievementsSection";
 import ClosingCtaSection from '@/Components/home/closing/ClosingCtaSection';
@@ -18,20 +17,13 @@ import {
     GraduationCap,
     Heart,
     Cloud,
-    Sun,
-    Star,
     Smile,
     Compass,
-    UserPlus,
-    Calendar,
-    ArrowRight,
-    ArrowUpRight,
+    Star,
     BookOpenText,
     Lightbulb,
     Target,
-    Handshake,
-    Clock,
-    Tag
+    Handshake
 } from 'lucide-react';
 
 // ==========================================
@@ -47,13 +39,6 @@ const BACKGROUND_ORNAMENTS = [
     { id: 7, Icon: GraduationCap, size: 44, color: "text-amber-700/25", top: "84%", left: "6%", depth: 0.14 },
     { id: 8, Icon: Star, size: 26, color: "text-amber-400/50", top: "94%", right: "12%", depth: 0.06 },
 ];
-
-const ROAD_IMAGE = "/images/home/jalan2.png";
-const PEOPLE_IMAGE = "/images/home/people.png";
-
-const SCROLL_STOPS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
-const ROAD_CURVES = [50, 58, 66, 52, 34, 42, 64, 55, 36, 44, 50];
-
 
 const dataKeunggulan = [
     {
@@ -103,7 +88,6 @@ const dataKeunggulan = [
     }
 ];
 
-
 function useInView(options = { threshold: 0.15 }) {
     const ref = useRef(null);
     const [isInView, setIsInView] = useState(false);
@@ -122,35 +106,6 @@ function useInView(options = { threshold: 0.15 }) {
 
     return [ref, isInView];
 }
-
-const StepCard = ({ step, smoothProgress }) => {
-    const opacity = useTransform(smoothProgress, [step.triggerScroll - 0.08, step.triggerScroll], [0, 1]);
-    const y = useTransform(smoothProgress, [step.triggerScroll - 0.08, step.triggerScroll], [40, 0]);
-    const scale = useTransform(smoothProgress, [step.triggerScroll - 0.08, step.triggerScroll], [0.9, 1]);
-
-    return (
-        <motion.div
-            style={{ opacity, y, scale }}
-            className={`flex items-center gap-6 pointer-events-auto my-4 ${step.align === 'right' ? 'flex-row-reverse text-left' : 'flex-row text-left'}`}
-        >
-            <div className="bg-white/95 backdrop-blur-md p-6 rounded-3xl shadow-xl max-w-xs sm:max-w-sm border border-amber-100/60">
-                <span className="inline-block px-3 py-1 text-[11px] font-semibold tracking-wider text-amber-800 bg-amber-100 rounded-full mb-2">
-                    {step.badge}
-                </span>
-                <h3 className="text-2xl font-bold text-[#0F1E56]">{step.title}</h3>
-                <p className="text-xs font-semibold text-slate-400 mb-2">{step.age}</p>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">{step.desc}</p>
-                <Link href={`/${step.id}`} className="text-xs font-semibold text-[#0F1E56] bg-amber-400 hover:bg-amber-500 px-4 py-2 rounded-xl transition-all shadow-sm inline-flex items-center gap-2">
-                    {step.btnText} &rarr;
-                </Link>
-            </div>
-
-            <div className="w-24 h-36 sm:w-28 sm:h-40 rounded-t-full overflow-hidden shadow-xl border-4 border-white flex-shrink-0 bg-amber-100">
-                <img src={step.imgSrc} alt={step.title} className="w-full h-full object-cover" />
-            </div>
-        </motion.div>
-    );
-};
 
 export default function Home({ auth, posts = [], galleries = [] }) {
     const [sectionRef, isInView] = useInView();
@@ -209,152 +164,6 @@ export default function Home({ auth, posts = [], galleries = [] }) {
         },
     };
 
-    const roadSectionRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: roadSectionRef,
-        offset: ["start 40%", "end end"]
-    });
-
-    const smoothProgress = useSpring(scrollYProgress, { stiffness: 60, damping: 20, restDelta: 0.001 });
-    const rawX = useTransform(smoothProgress, SCROLL_STOPS, ROAD_CURVES.map(val => `${val}%`), { clamp: true });
-    const opacityPeople = useTransform(smoothProgress, [0, 0.94, 1.0], [1, 1, 0]);
-
-    const primaryTextColor = "text-[#0F1E56]";
-    const textShadowStyle = { textShadow: '0 2px 4px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 1)' };
-
-    const [isMobileJalanan, setIsMobileJalanan] = useState(false);
-    useEffect(() => {
-        const handleResize = () => setIsMobileJalanan(window.innerWidth < 768);
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    const containerRef = useRef(null);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const { scrollYProgress: sectionScrollProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
-
-    useEffect(() => {
-        const unsubscribe = sectionScrollProgress.on("change", (latest) => {
-            if (latest < 0.25) setActiveIndex(0);
-            else if (latest >= 0.25 && latest < 0.50) setActiveIndex(1);
-            else if (latest >= 0.50 && latest < 0.75) setActiveIndex(2);
-            else setActiveIndex(3);
-        });
-        return () => unsubscribe();
-    }, [sectionScrollProgress]);
-
-    const sunX = useTransform(sectionScrollProgress, [0, 0.25, 0.50, 0.75, 1], ["85%", "65%", "46%", "27%", "13%"]);
-    const sunY = useTransform(sectionScrollProgress, [0, 0.25, 0.50, 0.75, 1], ["58%", "21%", "11%", "23%", "69%"]);
-    const currentItem = dataKeunggulan[activeIndex];
-
-    const achievementRef = useRef(null);
-    const { scrollYProgress: achievementScroll } = useScroll({ target: achievementRef, offset: ["start start", "end end"] });
-    const lineScale = useTransform(achievementScroll, [0.1, 0.5], [0, 1]);
-    const nodeOpacity = useTransform(achievementScroll, [0.3, 0.55], [0, 1]);
-    const cardOpacity = useTransform(achievementScroll, [0.6, 0.85], [0, 1]);
-    const cardScale = useTransform(achievementScroll, [0.6, 0.85], [0.8, 1]);
-
-    const [isMobile, setIsMobile] = useState(false);
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 1024);
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.1 } },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.21, 1.11, 0.81, 0.99] } },
-    };
-
-    const sectionContainerVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.7, staggerChildren: 0.15 } },
-    };
-
-    const cardItemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    };
-
-    const blogSectionVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.15 } },
-    };
-
-    const blogCardVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    };
-
-    // MATAHARI BERJALAN
-   // 1. REFS & STATE (Menggunakan prefix 'atqKeunggulan' agar bebas bentrok)
-const atqKeunggulanSectionRef = useRef(null);
-const atqKeunggulanWrapperRef = useRef(null);
-const [atqKeunggulanActiveIndex, setAtqKeunggulanActiveIndex] = useState(0);
-
-// 2. SCROLL PROGRESS
-const { scrollYProgress: atqKeunggulanSectionProgress } = useScroll({
-    target: atqKeunggulanSectionRef,
-    offset: ["start start", "end end"]
-});
-
-const { scrollYProgress: atqKeunggulanTotalProgress } = useScroll({
-    target: atqKeunggulanWrapperRef,
-    offset: ["start start", "end end"]
-});
-
-// Listener indeks card aktif
-useEffect(() => {
-    const unsubscribeAtqKeunggulan = atqKeunggulanSectionProgress.on("change", (latestVal) => {
-        if (latestVal < 0.25) {
-            setAtqKeunggulanActiveIndex(0);
-        } else if (latestVal >= 0.25 && latestVal < 0.50) {
-            setAtqKeunggulanActiveIndex(1);
-        } else if (latestVal >= 0.50 && latestVal < 0.75) {
-            setAtqKeunggulanActiveIndex(2);
-        } else {
-            setAtqKeunggulanActiveIndex(3);
-        }
-    });
-
-    return () => unsubscribeAtqKeunggulan();
-}, [atqKeunggulanSectionProgress]);
-
-// 3. LOGIKA LINTASAN MATAHARI (Horizontal & Vertikal)
-const horizontalSunTracker = useTransform(
-    atqKeunggulanTotalProgress,
-    [0, 0.18, 0.37, 0.56, 0.75, 0.90, 1.0],
-    ["85%", "65%", "46%", "27%", "13%", "13%", "50%"]
-);
-
-const verticalSunTracker = useTransform(
-    atqKeunggulanTotalProgress,
-    [0, 0.18, 0.37, 0.56, 0.75, 0.90, 1.0],
-    ["58%", "21%", "11%", "23%", "69%", "85vh", "85vh"]
-);
-
-// Item data aktif & penanganan responsif
-const currentHighlightedKeunggulanItem = dataKeunggulan[atqKeunggulanActiveIndex];
-
-const [currentScreenIsMobileKeunggulan, setCurrentScreenIsMobileKeunggulan] = useState(false);
-
-useEffect(() => {
-    const keunggulanResizeHandler = () => {
-        setCurrentScreenIsMobileKeunggulan(window.innerWidth < 768);
-    };
-
-    keunggulanResizeHandler();
-    window.addEventListener('resize', keunggulanResizeHandler);
-    return () => window.removeEventListener('resize', keunggulanResizeHandler);
-}, []);
-
     return (
         <AppLayout title="Home">
             <Head title="SIT At-Taufiq Jambi - Mencetak Generasi Robbani" />
@@ -363,7 +172,7 @@ useEffect(() => {
             <HeroSlider />
 
             {/* --- ATQ SECTION --- */}
-            <section ref={sectionRef} className="w-full bg-[#FAF7F0] relative overflow-hidden text-slate-800 py-12 sm:py-16 md:py-24">
+            <section ref={sectionRef} id="about-section" className="w-full bg-[#FAF7F0] relative overflow-hidden text-slate-800 py-12 sm:py-16 md:py-24">
                 <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[400px] md:w-[500px] h-[280px] sm:h-[400px] md:h-[500px] bg-[#FFC700]/10 rounded-full blur-3xl pointer-events-none z-0" />
                 <div className="absolute left-0 bottom-0 top-0 w-16 sm:w-36 md:w-48 pointer-events-none z-0 opacity-15 sm:opacity-20 transition-opacity duration-500 hover:opacity-30">
                     <img src="/images/hero/bgPot-left.png" alt="Pot Decorative Left" className="h-full w-full object-cover object-left filter drop-shadow-sm" />
@@ -496,7 +305,7 @@ useEffect(() => {
                     viewport={{ once: true }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
-                    style={{ backgroundImage: `url('images/home/bgPerjalanan.png')` }}
+                    style={{ backgroundImage: `url('/images/home/bgPerjalanan.png')` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/40 via-transparent to-[#F5EFE6]/90 pointer-events-none" />
 
@@ -563,182 +372,20 @@ useEffect(() => {
                         className="w-full md:flex-1 flex justify-center md:justify-end items-end -mb-4 md:-mb-16 -mr-0 md:-mr-10 z-10"
                     >
                         <img
-                            src="images/home/gedung-right.png"
+                            src="/images/home/gedung-right.png"
                             alt="Gedung Attaufiq"
-                            className="w-[75%] sm:w-[60%] max-w-md md:max-w-xl lg:max-w-3xl h-auto object-contain hover:opacity-100 transition-all duration-500 drop-shadow-xl"
+                            className="w-[75%] sm:w-[60%] max-w-md md:max-w-lg object-contain drop-shadow-xl"
                         />
                     </motion.div>
                 </div>
             </section>
 
-            {/* --- 4. SECTION JALANAN BERKELOK --- */}
-            <section
-                ref={roadSectionRef}
-                className={`relative w-full bg-[#FAF6EE] font-sans ${isMobileJalanan ? 'min-h-[180vh]' : 'min-h-[250vh]'}`}
-                style={{ background: 'radial-gradient(circle at 50% 50%, #FAF6EE 0%, #F4ECE0 100%)' }}
-            >
-                <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-                    {BACKGROUND_ORNAMENTS.map(({ id, Icon, size, color, top, left, right, depth }) => {
-                        const yVal = useTransform(smoothProgress, [0, 1], [0, depth * (isMobileJalanan ? 200 : 400)]);
-                        return (
-                            <motion.div
-                                key={id}
-                                className="absolute"
-                                style={{ top, left: left || 'auto', right: right || 'auto', y: yVal }}
-                            >
-                                <Icon className={`${color} animate-pulse`} size={isMobileJalanan ? size * 0.7 : size} />
-                            </motion.div>
-                        );
-                    })}
-                </div>
-
-                <div className="sticky top-0 h-screen w-full pointer-events-none z-50 flex items-center justify-center overflow-hidden">
-                    <motion.div
-                        className="absolute"
-                        style={{
-                            left: rawX,
-                            top: isMobileJalanan ? '40%' : '35%',
-                            opacity: opacityPeople,
-                        }}
-                    >
-                        <img
-                            src={PEOPLE_IMAGE}
-                            alt="People Character"
-                            className="w-12 sm:w-16 md:w-24 h-auto object-contain drop-shadow-2xl -translate-x-1/2 -translate-y-1/2"
-                        />
-                    </motion.div>
-                </div>
-
-                <div className={`relative -mt-[100vh] z-10 w-full ${isMobileJalanan ? 'min-h-[180vh] py-10' : 'min-h-[250vh] py-16'} flex flex-col justify-between pointer-events-none`}>
-                    <div className="absolute inset-0 w-full h-full flex justify-center items-center px-2 md:px-0">
-                        <img src={ROAD_IMAGE} alt="Jalan Path" className="w-full max-w-xs sm:max-w-md md:max-w-3xl h-full object-fill opacity-95" />
-                    </div>
-
-                    <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 flex flex-col justify-between h-full gap-8 md:gap-0">
-                        {JENJANG_DATA.map((step) => (
-                            <StepCard key={step.id} step={step} smoothProgress={smoothProgress} />
-                        ))}
-                    </div>
-                </div>
-            </section>
-            
-            {/* ========================================================= */}
-            {/* Character ATQ SECTION - LEBIH LEBAR & LEGA */}
-            {/* ========================================================= */}
-            <CharacterActivitySection />
-
-            {/* --- 3. Journey Section --- */}
+            {/* --- SEKSI INTERAKTIF & LAINNYA --- */}
             <JourneySection />
-
-
-            {/* 4. KEUNGGULAN ATQ SECTION */}
-            <section
-                ref={containerRef}
-                className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-8 md:pt-20"
-            >
-                {/* Glow Ornamen Belakang */}
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-amber-200/30 blur-[60px] md:blur-[100px] rounded-full pointer-events-none" />
-
-                {/* HEADER SECTION */}
-               <div className="relative z-30 text-center max-w-5xl px-4 md:px-6 mb-2 md:mb-8">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm mb-3"
-        >
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <p className="text-amber-700 font-bold tracking-wider text-[10px] md:text-sm uppercase">
-            KEUNGGULAN ATTAUFIQ
-          </p>
-        </motion.div>
-
-        <h2 className="text-lg md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight px-2">
-          Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
-        </h2>
-      </div>
-
-                <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-6 md:pt-14">
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
-                        <img src="images/home/garisMatahari.png" alt="Garis Lintasan Matahari" className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]" />
-                    </div>
-
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={`gedung-${currentItem.id}`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.5 }}
-                            className={`absolute bottom-0 h-[50vh] md:h-[85vh] w-3/4 md:w-5/12 pointer-events-none z-0 ${currentItem.position === "left" ? "right-0" : "left-0 transform -scale-x-100"}`}
-                        >
-                            <img src="images/home/gedung-right.png" alt="Gedung Latar" className="w-full h-full object-cover object-bottom opacity-20 md:opacity-25" />
-                        </motion.div>
-                    </AnimatePresence>
-
-                    <motion.div style={{ left: sunX, top: sunY }} className="hidden md:block absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                        <div className="relative flex items-center justify-center">
-                            <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
-                            <img src="images/home/matahari.png" alt="Matahari" className="w-28 h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10" />
-                        </div>
-                    </motion.div>
-
-                    <div className="relative z-10 w-full max-w-4xl px-4 md:px-8 h-full flex flex-col items-center justify-start md:justify-center pt-44 md:pt-16">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={currentItem.id}
-                                initial={{ opacity: 0, y: 25 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -25 }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                className={`relative md:absolute md:inset-x-8 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10 ${currentItem.position === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'}`}
-                            >
-                                <div className="w-full md:w-1/2 flex justify-center relative">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
-                                    <div className="relative w-[160px] md:w-[260px] h-36 md:h-[280px] rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-3 md:p-4">
-                                        <span className="text-white/90 font-medium text-[11px] md:text-sm drop-shadow-md relative z-10">Foto — {currentItem.title}</span>
-                                    </div>
-                                </div>
-
-                                <div className={`w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left ${currentItem.position === 'right' ? 'md:pt-32 md:ml-10' : 'pt-0'}`}>
-                                    <div className="flex items-center gap-2 mb-1 md:mb-2">
-                                        <span className="text-lg md:text-2xl font-black text-amber-500/80 tracking-tight">0{currentItem.id}</span>
-                                        <div className="h-[2px] w-6 md:w-8 bg-amber-400/60 rounded-full" />
-                                    </div>
-                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-1.5 md:mb-3 shadow-md border border-amber-300/60">
-                                        {currentItem.icon}
-                                    </div>
-                                    <h3 className="text-base md:text-3xl font-bold text-indigo-950 mb-1 md:mb-2 leading-tight">{currentItem.title}</h3>
-                                    <p className="text-gray-600 text-[11px] md:text-sm leading-relaxed max-w-xs md:max-w-md">{currentItem.desc}</p>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        <div className="absolute bottom-6 md:bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
-                            {dataKeunggulan.map((item, idx) => (
-                                <div
-                                    key={item.id}
-                                    className={`transition-all duration-300 rounded-full ${activeIndex === idx ? "w-5 md:w-6 h-1.5 md:h-2 bg-amber-500" : "w-1.5 md:w-2 h-1.5 md:h-2 bg-amber-300/80"}`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 5. PRESTASI SISWA ATQ SECTION */}
             <AchievementsSection />
-
-
-            {/* 7. CTA ATQ SECTION */}
-            <ClosingCtaSection/>
-
-
-            {/* 8. TESTIMONIAL SECTION */}
-            <TestimonialSection/>
-
-            {/* 9. BLOG SECTION */}
-            <BlogPreview posts={posts}/>
-
+            <BlogPreview posts={posts} />
+            <TestimonialSection />
+            <ClosingCtaSection />
         </AppLayout>
     );
 }
