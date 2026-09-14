@@ -342,117 +342,149 @@ export default function Pg({
             {/* ==========================================
                 1. HERO SECTION (FADE IN SANTAI)
             ========================================== */}
-            <section className="relative overflow-hidden min-h-[70vh] lg:min-h-[600px] flex items-center">
+<section className="relative overflow-hidden min-h-[70vh] lg:min-h-[600px] flex items-center">
 
-                {/* Background Image */}
-                <img
-                    src={patternImage}
-                    alt="Hero PG"
-                    className="absolute inset-0 w-full h-full object-cover object-center"
-                />
+      {/* Background Image */}
+      <img
+        src={patternImage}
+        alt="Hero PG"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
 
-                {/* Overlay Biru */}
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        background: `linear-gradient(
-                90deg,
-                rgba(8,43,102,0.98) 0%,
-                rgba(8,43,102,0.95) 30%,
-                rgba(8,43,102,0.82) 45%,
-                rgba(8,43,102,0.55) 58%,
-                rgba(8,43,102,0.15) 72%,
-                rgba(8,43,102,0) 100%
-            )`,
-                    }}
-                />
+      {/* Overlay Biru */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(
+            90deg,
+            rgba(8,43,102,0.98) 0%,
+            rgba(8,43,102,0.95) 30%,
+            rgba(8,43,102,0.82) 45%,
+            rgba(8,43,102,0.55) 58%,
+            rgba(8,43,102,0.15) 72%,
+            rgba(8,43,102,0) 100%
+          )`,
+        }}
+      />
 
-                {/* Elemen Aesthetic Tambahan 1: Ambient Golden Light Bulb */}
-                <div className="absolute top-1/4 left-10 w-72 h-72 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
+      {/* Elemen Aesthetic Tambahan 1: Ambient Golden Light Bulb */}
+      <div className="absolute top-1/4 left-10 w-72 h-72 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
 
-                {/* Content */}
-                <div className="relative z-20 container mx-auto px-8 lg:px-20 py-20">
+      {/* Content */}
+      <div className="relative z-20 container mx-auto px-8 lg:px-20 py-20">
 
-                    <div className="max-w-2xl relative">
+        <div className="max-w-2xl relative">
 
-                        {/* Sparkle 1 (Kiri Atas Besar) */}
-                        <div className="absolute -left-10 -top-10 text-[#D4AF37] text-3xl animate-pulse drop-shadow-[0_0_8px_rgba(212,175,55,0.8)] pointer-events-none">
-                            ✦
-                        </div>
+          {/* Sparkle 1 (Kiri Atas Besar) */}
+          <div className="absolute -left-10 -top-10 text-[#D4AF37] text-3xl animate-pulse drop-shadow-[0_0_8px_rgba(212,175,55,0.8)] pointer-events-none">
+            ✦
+          </div>
 
-                        {/* Sparkle 2 (Kanan Atas Kecil) */}
-                        <div className="absolute right-12 -top-6 text-amber-300/80 text-xl animate-ping pointer-events-none" style={{ animationDuration: '3s' }}>
-                            ✦
-                        </div>
+          {/* Sparkle 2 (Kanan Atas Kecil) */}
+          <div className="absolute right-12 -top-6 text-amber-300/80 text-xl animate-ping pointer-events-none" style={{ animationDuration: '3s' }}>
+            ✦
+          </div>
 
-                        {/* Elemen Aesthetic Tambahan 2: Garis Aksen Vertikal + Konten Teks */}
-                        <div className="pl-6 border-l-2 border-gradient-to-b border-[#D4AF37] relative">
+          {/* Elemen Aesthetic Tambahan 2: Garis Aksen Vertikal + Konten Teks */}
+          <div className="pl-6 border-l-2 border-[#D4AF37] relative">
 
-                            {/* Glow Line effect */}
-                            <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#D4AF37] via-amber-200 to-transparent shadow-[0_0_12px_#D4AF37]" />
+            {/* Glow Line effect */}
+            <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#D4AF37] via-amber-200 to-transparent shadow-[0_0_12px_#D4AF37]" />
 
-                            <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white leading-tight tracking-wide">
-                                PG (Playgroup)
-                            </h1>
+            <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white leading-tight tracking-wide">
+              PG (Playgroup)
+            </h1>
 
-                            {/* Subtitle dengan Text-Gradient Emas */}
-                            <h2 className="mt-6 text-3xl font-serif leading-snug bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent drop-shadow-sm">
-                                Tempat terbaik untuk
-                                <br />
-                                langkah pertama mereka.
-                            </h2>
+            {/* Subtitle dengan Text-Gradient Emas */}
+            <h2 className="mt-6 text-3xl font-serif leading-snug bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent drop-shadow-sm">
+              Tempat terbaik untuk
+              <br />
+              langkah pertama mereka.
+            </h2>
 
-                            <p className="mt-8 text-lg leading-8 text-gray-200 font-light">
-                                Lingkungan belajar yang hangat, aman, dan menyenangkan
-                                untuk menumbuhkan kemandirian, rasa ingin tahu,
-                                dan kecintaan pada Islam sejak dini.
-                            </p>
-                        </div>
+            <p className="mt-8 text-lg leading-8 text-gray-200 font-light">
+              Lingkungan belajar yang hangat, aman, dan menyenangkan
+              untuk menumbuhkan kemandirian, rasa ingin tahu,
+              dan kecintaan pada Islam sejak dini.
+            </p>
+          </div>
 
-                    </div>
+        </div>
 
-                </div>
+      </div>
 
-                {/* Wave di bagian bawah Hero Section */}
-                <div className="absolute bottom-0 left-0 w-full pointer-events-none z-10">
-                    <svg
-                        viewBox="0 0 1440 120"
-                        className="w-full h-[120px]"
-                        preserveAspectRatio="none"
-                    >
-                        <defs>
-                            {/* Pattern Gambar */}
-                            <pattern
-                                id="bgSectionPattern"
-                                patternUnits="userSpaceOnUse"
-                                width="100%"
-                                height="120"
-                            >
-                                <image
-                                    href={bgsection2}
-                                    width="1440"
-                                    height="120"
-                                    preserveAspectRatio="none"
-                                    className="bg-bottom"
-                                />
-                            </pattern>
-                        </defs>
+      {/* Card Info Usia Aesthetic (Kubah Emas Premium) */}
+      {/* Card Info Usia (Diperbaiki Shadow & Posisi Bawahnya) */}
+<div className="absolute right-12 -bottom-6 z-30 hidden md:flex flex-col items-center justify-center w-40 h-52 bg-gradient-to-b from-[#0A3275] via-[#082B66] to-[#062052] border-[2px] border-[#D4AF37] rounded-t-[5.5rem] rounded-b-2xl shadow-[0_10px_30px_-5px_rgba(8,43,102,0.4),0_0_15px_rgba(212,175,55,0.2)] text-center px-4 py-6 group hover:-translate-y-1.5 transition-all duration-300">
+  
+  {/* Inner Border Line */}
+  <div className="absolute inset-1.5 border border-[#D4AF37]/30 rounded-t-[4.8rem] rounded-b-xl pointer-events-none" />
 
-                        {/* Path Garis Emas */}
-                        <path
-                            fill="#D4AF37"
-                            d="M0,55 C350,120 1100,0 1440,55 L1440,120 L0,120 Z"
-                        />
+  {/* Ambient Glow kecil di dalam card */}
+  <div className="absolute top-6 w-16 h-16 bg-[#D4AF37]/20 rounded-full blur-xl pointer-events-none group-hover:bg-[#D4AF37]/35 transition-all duration-500" />
 
-                        {/* Perbaikan Path Lengkungan Bawah */}
-                        <path
-                            fill="url(#bgSectionPattern)"
-                            d="M0,70 C350,135 1100,15 1440,70 L1440,120 L0,120 Z"
-                        />
-                    </svg>
-                </div>
+  {/* Icon Container dengan Ring Emas */}
+  <div className="relative z-10 w-12 h-12 rounded-full bg-gradient-to-br from-[#124294] to-[#062052] border border-[#D4AF37]/60 flex items-center justify-center text-[#D4AF37] mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
+    <Users className="w-6 h-6 stroke-[1.8] drop-shadow-[0_0_4px_rgba(212,175,55,0.6)]" />
+  </div>
 
-            </section>
+  {/* Label Usia */}
+  <span className="relative z-10 text-xs font-medium uppercase tracking-[0.2em] text-amber-200/80">
+    Usia
+  </span>
+
+  {/* Angka Usia */}
+  <span className="relative z-10 text-lg font-bold font-serif bg-gradient-to-r from-[#FFF5D1] via-[#F3E5AB] to-[#D4AF37] bg-clip-text text-transparent mt-0.5 tracking-wide drop-shadow-sm">
+    4 – 6 Tahun
+  </span>
+
+  {/* Sparkle Aksen Kecil */}
+  <div className="absolute top-3 right-4 text-[#D4AF37]/70 text-xs animate-pulse pointer-events-none">
+    ✦
+  </div>
+</div>
+      
+
+      {/* Wave di bagian bawah Hero Section */}
+      <div className="absolute bottom-0 left-0 w-full pointer-events-none z-10">
+        <svg
+          viewBox="0 0 1440 120"
+          className="w-full h-[120px]"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            {/* Pattern Gambar */}
+            <pattern
+              id="bgSectionPattern"
+              patternUnits="userSpaceOnUse"
+              width="100%"
+              height="120"
+            >
+              <image
+                href={bgsection2}
+                width="1440"
+                height="120"
+                preserveAspectRatio="none"
+                className="bg-bottom"
+              />
+            </pattern>
+          </defs>
+
+          {/* Path Garis Emas */}
+          <path
+            fill="#D4AF37"
+            d="M0,55 C350,120 1100,0 1440,55 L1440,120 L0,120 Z"
+          />
+
+          {/* Perbaikan Path Lengkungan Bawah */}
+          <path
+            fill="url(#bgSectionPattern)"
+            d="M0,70 C350,135 1100,15 1440,70 L1440,120 L0,120 Z"
+          />
+        </svg>
+      </div>
+
+    </section>
 
             {/* ==========================================
                 2. PILAR SECTION
