@@ -134,7 +134,7 @@ export default function JenjangPage() {
             {JENJANG_DISPLAY.map((j) => (
               <Link
                 key={j.slug}
-                href={`/jenjang/${j.slug}`}
+                href={`/${j.slug}`}
                 className="group flex items-stretch gap-4 overflow-hidden rounded-2xl border border-[#102380]/10 bg-white shadow-sm transition-all hover:shadow-md sm:gap-5"
               >
                 <div className="relative w-32 shrink-0 sm:w-48 md:w-56">
