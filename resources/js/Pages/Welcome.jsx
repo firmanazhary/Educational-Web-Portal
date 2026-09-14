@@ -7,10 +7,12 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import CharacterActivitySection from "@/Components/home/CharacterActivitySection";
 import JourneySection from "@/Components/home/journey/JourneySection";
+import KeunggulanSection from '@/Components/home/keunggulan/KeunggulanSection';
 import AchievementsSection from "@/Components/home/achievements/AchievementsSection";
 import ClosingCtaSection from '@/Components/home/closing/ClosingCtaSection';
 import TestimonialSection from '@/Components/home/testimonials/TestimonialSection';
 import BlogPreview from '@/Components/home/BlogPreview';
+import PhotoFrame from '@/Components/home/keunggulan/PhotoFrame';
 
 import {
     Sparkles,
@@ -513,66 +515,66 @@ export default function Home({ auth, posts = [], galleries = [] }) {
     };
 
     // MATAHARI BERJALAN
-   // 1. REFS & STATE (Menggunakan prefix 'atqKeunggulan' agar bebas bentrok)
-const atqKeunggulanSectionRef = useRef(null);
-const atqKeunggulanWrapperRef = useRef(null);
-const [atqKeunggulanActiveIndex, setAtqKeunggulanActiveIndex] = useState(0);
+    // 1. REFS & STATE (Menggunakan prefix 'atqKeunggulan' agar bebas bentrok)
+    const atqKeunggulanSectionRef = useRef(null);
+    const atqKeunggulanWrapperRef = useRef(null);
+    const [atqKeunggulanActiveIndex, setAtqKeunggulanActiveIndex] = useState(0);
 
-// 2. SCROLL PROGRESS
-const { scrollYProgress: atqKeunggulanSectionProgress } = useScroll({
-    target: atqKeunggulanSectionRef,
-    offset: ["start start", "end end"]
-});
-
-const { scrollYProgress: atqKeunggulanTotalProgress } = useScroll({
-    target: atqKeunggulanWrapperRef,
-    offset: ["start start", "end end"]
-});
-
-// Listener indeks card aktif
-useEffect(() => {
-    const unsubscribeAtqKeunggulan = atqKeunggulanSectionProgress.on("change", (latestVal) => {
-        if (latestVal < 0.25) {
-            setAtqKeunggulanActiveIndex(0);
-        } else if (latestVal >= 0.25 && latestVal < 0.50) {
-            setAtqKeunggulanActiveIndex(1);
-        } else if (latestVal >= 0.50 && latestVal < 0.75) {
-            setAtqKeunggulanActiveIndex(2);
-        } else {
-            setAtqKeunggulanActiveIndex(3);
-        }
+    // 2. SCROLL PROGRESS
+    const { scrollYProgress: atqKeunggulanSectionProgress } = useScroll({
+        target: atqKeunggulanSectionRef,
+        offset: ["start start", "end end"]
     });
 
-    return () => unsubscribeAtqKeunggulan();
-}, [atqKeunggulanSectionProgress]);
+    const { scrollYProgress: atqKeunggulanTotalProgress } = useScroll({
+        target: atqKeunggulanWrapperRef,
+        offset: ["start start", "end end"]
+    });
 
-// 3. LOGIKA LINTASAN MATAHARI (Horizontal & Vertikal)
-const horizontalSunTracker = useTransform(
-    atqKeunggulanTotalProgress,
-    [0, 0.18, 0.37, 0.56, 0.75, 0.90, 1.0],
-    ["85%", "65%", "46%", "27%", "13%", "13%", "50%"]
-);
+    // Listener indeks card aktif
+    useEffect(() => {
+        const unsubscribeAtqKeunggulan = atqKeunggulanSectionProgress.on("change", (latestVal) => {
+            if (latestVal < 0.25) {
+                setAtqKeunggulanActiveIndex(0);
+            } else if (latestVal >= 0.25 && latestVal < 0.50) {
+                setAtqKeunggulanActiveIndex(1);
+            } else if (latestVal >= 0.50 && latestVal < 0.75) {
+                setAtqKeunggulanActiveIndex(2);
+            } else {
+                setAtqKeunggulanActiveIndex(3);
+            }
+        });
 
-const verticalSunTracker = useTransform(
-    atqKeunggulanTotalProgress,
-    [0, 0.18, 0.37, 0.56, 0.75, 0.90, 1.0],
-    ["58%", "21%", "11%", "23%", "69%", "85vh", "85vh"]
-);
+        return () => unsubscribeAtqKeunggulan();
+    }, [atqKeunggulanSectionProgress]);
 
-// Item data aktif & penanganan responsif
-const currentHighlightedKeunggulanItem = dataKeunggulan[atqKeunggulanActiveIndex];
+    // 3. LOGIKA LINTASAN MATAHARI (Horizontal & Vertikal)
+    const horizontalSunTracker = useTransform(
+        atqKeunggulanTotalProgress,
+        [0, 0.18, 0.37, 0.56, 0.75, 0.90, 1.0],
+        ["85%", "65%", "46%", "27%", "13%", "13%", "50%"]
+    );
 
-const [currentScreenIsMobileKeunggulan, setCurrentScreenIsMobileKeunggulan] = useState(false);
+    const verticalSunTracker = useTransform(
+        atqKeunggulanTotalProgress,
+        [0, 0.18, 0.37, 0.56, 0.75, 0.90, 1.0],
+        ["58%", "21%", "11%", "23%", "69%", "85vh", "85vh"]
+    );
 
-useEffect(() => {
-    const keunggulanResizeHandler = () => {
-        setCurrentScreenIsMobileKeunggulan(window.innerWidth < 768);
-    };
+    // Item data aktif & penanganan responsif
+    const currentHighlightedKeunggulanItem = dataKeunggulan[atqKeunggulanActiveIndex];
 
-    keunggulanResizeHandler();
-    window.addEventListener('resize', keunggulanResizeHandler);
-    return () => window.removeEventListener('resize', keunggulanResizeHandler);
-}, []);
+    const [currentScreenIsMobileKeunggulan, setCurrentScreenIsMobileKeunggulan] = useState(false);
+
+    useEffect(() => {
+        const keunggulanResizeHandler = () => {
+            setCurrentScreenIsMobileKeunggulan(window.innerWidth < 768);
+        };
+
+        keunggulanResizeHandler();
+        window.addEventListener('resize', keunggulanResizeHandler);
+        return () => window.removeEventListener('resize', keunggulanResizeHandler);
+    }, []);
 
     return (
         <AppLayout title="Home">
@@ -592,184 +594,177 @@ useEffect(() => {
 
             {/* 4. KEUNGGULAN ATQ SECTION */}
             <section
-                ref={containerRef}
-                className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-8 md:pt-20"
-            >
-                {/* Glow Ornamen Belakang */}
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-amber-200/30 blur-[60px] md:blur-[100px] rounded-full pointer-events-none" />
-
-                {/* HEADER SECTION */}
-               <div className="relative z-30 text-center max-w-5xl px-4 md:px-6 mb-2 md:mb-8">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm mb-3"
+            ref={containerRef}
+            className="relative h-[450vh] bg-[#FFFBEF] flex flex-col items-center pt-8 md:pt-20"
         >
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <p className="text-amber-700 font-bold tracking-wider text-[10px] md:text-sm uppercase">
-            KEUNGGULAN ATTAUFIQ
-          </p>
-        </motion.div>
+            {/* Glow Ornamen Belakang */}
+            <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-amber-200/30 blur-[60px] md:blur-[100px] rounded-full pointer-events-none" />
 
-        <h2 className="text-lg md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight px-2">
-          Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
-        </h2>
-      </div>
+            {/* HEADER SECTION */}
+            <div className="relative z-30 text-center max-w-5xl px-4 md:px-6 mb-2 md:mb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/60 shadow-sm mb-3"
+                >
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                    <p className="text-amber-700 font-bold tracking-wider text-[10px] md:text-sm uppercase">
+                        KEUNGGULAN ATTAUFIQ
+                    </p>
+                </motion.div>
 
-                {/* Container Sticky untuk Scroll Animation */}
-                <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-6 md:pt-14">
+                <h2 className="text-lg md:text-4xl font-extrabold text-indigo-950 leading-snug md:leading-tight px-2">
+                    Fondasi kuat yang menjadi alasan orang tua percaya, dan anak–anak tumbuh luar biasa.
+                </h2>
+            </div>
 
-                    {/* Ornamen Awan & Bintang */}
+            {/* Container Sticky untuk Scroll Animation */}
+            <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-6 md:pt-14">
+
+                {/* Ornamen Awan & Bintang */}
+                <motion.div
+                    animate={{ x: [0, 25, 0] }}
+                    transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+                    className="absolute top-8 md:top-12 left-[4%] md:left-[8%] opacity-40 pointer-events-none z-10"
+                >
+                    <svg className="w-16 h-8 md:w-24 md:h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
+                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                    </svg>
+                </motion.div>
+
+                <motion.div
+                    animate={{ x: [0, -20, 0] }}
+                    transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+                    className="absolute top-16 md:top-20 right-[4%] md:right-[10%] opacity-30 pointer-events-none z-10"
+                >
+                    <svg className="w-20 h-10 md:w-28 md:h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
+                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                    </svg>
+                </motion.div>
+
+                <div className="absolute top-24 md:top-32 left-[12%] md:left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none text-xs md:text-base">✦</div>
+                <div className="absolute top-12 md:top-16 right-[14%] md:right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none text-xs md:text-base">✦</div>
+
+                {/* Gambar Garis Lintasan Matahari */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
+                    <img
+                        src="images/home/garisMatahari.png"
+                        alt="Garis Lintasan Matahari"
+                        className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
+                    />
+                </div>
+
+                {/* Gedung Latar Belakang */}
+                <AnimatePresence mode="wait">
                     <motion.div
-                        animate={{ x: [0, 25, 0] }}
-                        transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
-                        className="absolute top-8 md:top-12 left-[4%] md:left-[8%] opacity-40 pointer-events-none z-10"
+                        key={`gedung-${currentItem.id}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className={`absolute bottom-0 h-[50vh] md:h-[85vh] w-3/4 md:w-5/12 pointer-events-none z-0 ${currentItem.position === "left"
+                                ? "right-0"
+                                : "left-0 transform -scale-x-100"
+                            }`}
                     >
-                        <svg className="w-16 h-8 md:w-24 md:h-12 text-amber-200/70 fill-current" viewBox="0 0 24 24">
-                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-                        </svg>
-                    </motion.div>
-
-                    <motion.div
-                        animate={{ x: [0, -20, 0] }}
-                        transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
-                        className="absolute top-16 md:top-20 right-[4%] md:right-[10%] opacity-30 pointer-events-none z-10"
-                    >
-                        <svg className="w-20 h-10 md:w-28 md:h-14 text-amber-300/60 fill-current" viewBox="0 0 24 24">
-                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-                        </svg>
-                    </motion.div>
-
-                    <div className="absolute top-24 md:top-32 left-[12%] md:left-[20%] text-amber-400 opacity-60 animate-pulse pointer-events-none text-xs md:text-base">✦</div>
-                    <div className="absolute top-12 md:top-16 right-[14%] md:right-[22%] text-amber-300 opacity-70 animate-bounce pointer-events-none text-xs md:text-base">✦</div>
-
-                    {/* Gambar Garis Lintasan Matahari */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 scale-x-105 md:scale-x-110">
                         <img
-                            src="images/home/garisMatahari.png"
-                            alt="Garis Lintasan Matahari"
-                            className="w-full h-full object-contain opacity-90 filter drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]"
+                            src="images/home/gedung-right.png"
+                            alt="Gedung Latar"
+                            className="w-full h-full object-cover object-bottom opacity-20 md:opacity-25"
+                        />
+                    </motion.div>
+                </AnimatePresence>
+
+                {/* MATAHARI BERJALAN (Laptop only) */}
+                <motion.div
+                    style={{ left: sunX, top: sunY }}
+                    className="hidden md:block absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                >
+                    <div className="relative flex items-center justify-center">
+                        <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
+                        <img
+                            src="images/home/matahari.png"
+                            alt="Matahari"
+                            className="w-28 h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
                         />
                     </div>
+                </motion.div>
 
-                    {/* Gedung Latar Belakang */}
+                {/* KONTEN UTAMA (KARTU FOTO & TEKS) */}
+                <div className="relative z-10 w-full max-w-4xl px-4 md:px-8 h-full flex flex-col items-center justify-start md:justify-center pt-32 md:pt-16">
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={`gedung-${currentItem.id}`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.5 }}
-                            className={`absolute bottom-0 h-[50vh] md:h-[85vh] w-3/4 md:w-5/12 pointer-events-none z-0 ${currentItem.position === "left"
-                                    ? "right-0"
-                                    : "left-0 transform -scale-x-100"
+                            key={currentItem.id}
+                            initial={{ opacity: 0, y: 25 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -25 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className={`relative md:absolute md:inset-x-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 ${currentItem.position === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'
                                 }`}
                         >
-                            <img
-                                src="images/home/gedung-right.png"
-                                alt="Gedung Latar"
-                                className="w-full h-full object-cover object-bottom opacity-20 md:opacity-25"
+                            {/* KOMPONEN PHOTO FRAME KUBAH */}
+                            <PhotoFrame
+                                title={currentItem.title}
+                                src={currentItem.image}
                             />
+
+                            {/* TEKS DESKRIPSI */}
+                            <div
+                                className={`w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left ${currentItem.position === 'right' ? 'md:pt-16 md:ml-10' : 'pt-0'
+                                    }`}
+                            >
+                                <div className="flex items-center gap-2 mb-1 md:mb-2">
+                                    <span className="text-lg md:text-2xl font-black text-amber-500/80 tracking-tight">
+                                        0{currentItem.id}
+                                    </span>
+                                    <div className="h-[2px] w-6 md:w-8 bg-amber-400/60 rounded-full" />
+                                </div>
+
+                                <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-1.5 md:mb-3 shadow-md border border-amber-300/60">
+                                    {currentItem.icon}
+                                </div>
+
+                                <h3 className="text-base md:text-3xl font-bold text-indigo-950 mb-1 md:mb-2 leading-tight">
+                                    {currentItem.title}
+                                </h3>
+
+                                <p className="text-gray-600 text-[11px] md:text-sm leading-relaxed max-w-xs md:max-w-md">
+                                    {currentItem.desc}
+                                </p>
+                            </div>
                         </motion.div>
                     </AnimatePresence>
 
-                    {/* MATAHARI BERJALAN (Hanya Aktif di Laptop via hidden md:block) */}
-                    <motion.div
-                        style={{ left: sunX, top: sunY }}
-                        className="hidden md:block absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                    >
-                        <div className="relative flex items-center justify-center">
-                            <div className="absolute w-28 h-28 bg-yellow-400/40 rounded-full blur-xl animate-pulse" />
-                            <img
-                                src="images/home/matahari.png"
-                                alt="Matahari"
-                                className="w-28 h-28 object-contain drop-shadow-[0_0_32px_rgba(253,224,71,0.95)] relative z-10"
-                            />
-                        </div>
-                    </motion.div>
-
-                    {/* KONTEN UTAMA (KARTU FOTO & TEKS) */}
-                    {/* Penyesuaian Mobile: pt-44 untuk menurunkan konten di bawah lengkungan garis */}
-                    <div className="relative z-10 w-full max-w-4xl px-4 md:px-8 h-full flex flex-col items-center justify-start md:justify-center pt-44 md:pt-16">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={currentItem.id}
-                                initial={{ opacity: 0, y: 25 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -25 }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                className={`relative md:absolute md:inset-x-8 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10 ${currentItem.position === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'
+                    {/* INDICATOR DOTS */}
+                    <div className="absolute bottom-6 md:bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
+                        {dataKeunggulan.map((item, idx) => (
+                            <div
+                                key={item.id}
+                                className={`transition-all duration-300 rounded-full ${activeIndex === idx
+                                        ? "w-5 md:w-6 h-1.5 md:h-2 bg-amber-500"
+                                        : "w-1.5 md:w-2 h-1.5 md:h-2 bg-amber-300/80"
                                     }`}
-                            >
-                                {/* FOTO */}
-                                <div className="w-full md:w-1/2 flex justify-center relative">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-amber-300/30 to-sky-300/30 rounded-t-full blur-lg transform scale-105 pointer-events-none" />
-
-                                    <div className="relative w-[160px] md:w-[260px] h-36 md:h-[280px] rounded-t-full rounded-b-2xl overflow-hidden border-4 border-amber-300/90 shadow-xl bg-gradient-to-b from-sky-400 via-sky-200 to-amber-100 flex items-center justify-center text-center p-3 md:p-4">
-                                        <span className="text-white/90 font-medium text-[11px] md:text-sm drop-shadow-md relative z-10">
-                                            Foto — {currentItem.title}
-                                        </span>
-                                        <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
-                                    </div>
-                                </div>
-
-                                {/* TEKS DESKRIPSI */}
-                                <div
-                                    className={`w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left ${currentItem.position === 'right' ? 'md:pt-32 md:ml-10' : 'pt-0'
-                                        }`}
-                                >
-                                    <div className="flex items-center gap-2 mb-1 md:mb-2">
-                                        <span className="text-lg md:text-2xl font-black text-amber-500/80 tracking-tight">
-                                            0{currentItem.id}
-                                        </span>
-                                        <div className="h-[2px] w-6 md:w-8 bg-amber-400/60 rounded-full" />
-                                    </div>
-
-                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200/80 flex items-center justify-center mb-1.5 md:mb-3 shadow-md border border-amber-300/60">
-                                        {currentItem.icon}
-                                    </div>
-
-                                    <h3 className="text-base md:text-3xl font-bold text-indigo-950 mb-1 md:mb-2 leading-tight">
-                                        {currentItem.title}
-                                    </h3>
-
-                                    <p className="text-gray-600 text-[11px] md:text-sm leading-relaxed max-w-xs md:max-w-md">
-                                        {currentItem.desc}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        {/* INDICATOR DOTS */}
-                        <div className="absolute bottom-6 md:bottom-12 flex items-center gap-2 z-30 bg-amber-100/60 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/60 shadow-sm">
-                            {dataKeunggulan.map((item, idx) => (
-                                <div
-                                    key={item.id}
-                                    className={`transition-all duration-300 rounded-full ${activeIndex === idx
-                                            ? "w-5 md:w-6 h-1.5 md:h-2 bg-amber-500"
-                                            : "w-1.5 md:w-2 h-1.5 md:h-2 bg-amber-300/80"
-                                        }`}
-                                />
-                            ))}
-                        </div>
+                            />
+                        ))}
                     </div>
-
                 </div>
-            </section>
+
+            </div>
+        </section>
 
             {/* 5. PRESTASI SISWA ATQ SECTION */}
             <AchievementsSection />
 
 
             {/* 7. CTA ATQ SECTION */}
-            <ClosingCtaSection/>
+            <ClosingCtaSection />
 
 
             {/* 8. TESTIMONIAL SECTION */}
-            <TestimonialSection/>
+            <TestimonialSection />
 
             {/* 9. BLOG SECTION */}
-            <BlogPreview posts={posts}/>
+            <BlogPreview posts={posts} />
 
         </AppLayout>
     );
