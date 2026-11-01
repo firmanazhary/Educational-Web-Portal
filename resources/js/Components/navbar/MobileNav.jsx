@@ -65,17 +65,6 @@ export default function MobileNav({ items, open, onClose }) {
                             transition={{ duration: 0.2, ease: "easeInOut" }}
                             className="overflow-hidden pl-4 pb-2 my-1 ml-2 border-l-2 border-gold/40 flex flex-col gap-1"
                           >
-                            {/* Link utama ke halaman induk */}
-                            <li>
-                              <Link
-                                href={item.href}
-                                onClick={onClose}
-                                className="flex min-h-10 items-center text-xs font-bold uppercase tracking-wider text-gold hover:underline transition-colors"
-                              >
-                                Lihat Semua {item.label} →
-                              </Link>
-                            </li>
-
                             {item.children.map((child, idx) => (
                               <li key={child.href || idx}>
                                 <Link

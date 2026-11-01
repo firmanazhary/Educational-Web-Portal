@@ -82,13 +82,6 @@ export default function DesktopNavItem({ item }) {
                 isRightAligned ? "right-0" : "left-0"
               }`}
             >
-              <Link
-                href={item.href}
-                className="block px-4 py-2 text-xs font-bold uppercase tracking-wider text-gold hover:bg-navy/5 transition-colors"
-              >
-                Lihat Semua {item.label} →
-              </Link>
-              <div className="my-1 border-t border-slate-100" />
               {item.children.map((child, idx) => (
                 <Link
                   key={child.href || idx}

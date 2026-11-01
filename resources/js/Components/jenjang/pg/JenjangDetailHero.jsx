@@ -15,12 +15,13 @@ const ARCH_PATH =
 // commonly-used SVG glyph (lucide's Users), not a hand-traced one.
 function UsiaBadge({ ageLabel }) {
   const reduceMotion = useReducedMotion();
+  const displayLabel = ageLabel.replace(/^Usia\s*/i, "");
   return (
     <motion.div
       initial={reduceMotion ? undefined : { opacity: 0, y: 20 }}
       animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-      className="absolute bottom-0 right-6 z-20 h-48 w-32 translate-y-1/3 drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)] sm:right-10 md:right-14">
+      className="absolute bottom-0 right-6 z-20 hidden h-48 w-32 translate-y-1/3 drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)] sm:right-10 md:block md:right-14">
       <svg viewBox="0 0 245 299" className="absolute inset-0 h-full w-full" aria-hidden="true">
         <path d={ARCH_PATH} fill="#102380" />
         <path
@@ -39,7 +40,7 @@ function UsiaBadge({ ageLabel }) {
         <Users aria-hidden="true" className="h-8 w-8 text-gold" strokeWidth={1.6} />
         <div>
           <p className="text-sm font-semibold text-white">Usia</p>
-          <p className="text-sm font-semibold text-white">{ageLabel}</p>
+          <p className="text-sm font-semibold text-white">{displayLabel}</p>
         </div>
       </div>
     </motion.div>
@@ -121,6 +122,8 @@ export default function JenjangDetailHero({
   const textInitial = reduceMotion ? undefined : { opacity: 0, y: 16 };
   const textAnimate = reduceMotion ? undefined : { opacity: 1, y: 0 };
 
+  const fullAgeLabel = ageLabel.startsWith("Usia") ? ageLabel : `Usia ${ageLabel}`;
+
   return (
     <section className="relative" style={{ backgroundColor: ASSET_NAVY }}>
       <motion.div
@@ -138,23 +141,10 @@ export default function JenjangDetailHero({
         <div className="absolute inset-0" style={{ backgroundColor: ASSET_NAVY, opacity: 0.8 }} />
       </div>
 
-      {/* Centered between the left edge and the true center point — NOT
-          mx-auto (that was the earlier bug: mx-auto centers this w-1/2
-          box within the FULL section, i.e. the 25%-75% middle, instead
-          of pinning it to the true left half at 0%-50%). Dropping
-          mx-auto lets it sit naturally at the section's own left edge,
-          so items-center then correctly centers the text block within
-          just that left half (0-50%), landing its center at the 25%
-          mark like requested. Text itself stays left-aligned. */}
-      <div className="relative flex min-h-[420px] flex-col items-center justify-center px-6 py-20 text-left sm:min-h-[480px] md:min-h-[560px] md:w-1/2">
-        {/* Single wrapping block so items-center centers the whole group
-            as one unit — heading/tagline/description share one left
-            edge. Without this wrapper, items-center centers each of the
-            three lines INDIVIDUALLY (since they're separate flex
-            children with different natural widths), which is exactly
-            why a short heading like "TK (Taman Kanak-Kanak)" drifted out
-            of alignment with the wider tagline/description below it. */}
-        <div>
+      {/* Centered between the left edge and the true center point on desktop; full width with ample vertical breathing room on mobile */}
+      <div className="relative flex min-h-[460px] w-full flex-col justify-center px-6 pt-24 pb-20 text-left sm:min-h-[480px] sm:pt-28 sm:pb-24 md:min-h-[560px] md:w-1/2 md:items-center md:py-20">
+        {/* Single wrapping block so items-center centers the whole group as one unit on desktop */}
+        <div className="w-full max-w-lg">
           <motion.h1
             initial={textInitial}
             animate={textAnimate}
@@ -167,7 +157,7 @@ export default function JenjangDetailHero({
             initial={textInitial}
             animate={textAnimate}
             transition={{ duration: 0.6, delay: 0.22, ease: "easeOut" }}
-            className="font-heading mt-4 max-w-lg text-3xl leading-snug text-gold sm:text-4xl"
+            className="font-heading mt-4 text-2xl leading-snug text-gold sm:text-3xl md:text-4xl"
           >
             {tagline}
           </motion.p>
@@ -175,10 +165,25 @@ export default function JenjangDetailHero({
             initial={textInitial}
             animate={textAnimate}
             transition={{ duration: 0.6, delay: 0.34, ease: "easeOut" }}
-            className="mt-5 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg"
+            className="mt-4 text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base md:text-lg"
           >
             {description}
           </motion.p>
+
+          {/* Mobile-only age pill badge: inline directly below description so it never covers text */}
+          <motion.div
+            initial={textInitial}
+            animate={textAnimate}
+            transition={{ duration: 0.6, delay: 0.46, ease: "easeOut" }}
+            className="mt-6 md:hidden"
+          >
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-gold/70 bg-[#102380]/60 px-4 py-2 backdrop-blur-xs shadow-sm">
+              <Users aria-hidden="true" className="h-4 w-4 text-gold sm:h-5 sm:w-5" strokeWidth={1.8} />
+              <span className="text-xs font-semibold tracking-wide text-white sm:text-sm">
+                {fullAgeLabel}
+              </span>
+            </div>
+          </motion.div>
         </div>
       </div>
 

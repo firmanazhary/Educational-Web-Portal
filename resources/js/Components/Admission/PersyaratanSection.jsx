@@ -93,90 +93,107 @@ function PersyaratanTab({
   Icon,
   name,
   subtitle,
-  isDesktop,
 }) {
-  const sunSize = isDesktop ? 16 : 12;
-  const iconBoxSize = isDesktop ? 32 : 20;
-  const nameSize = isDesktop ? 16 : 12;
-  const subtitleSize = isDesktop ? 12 : 11;
-
   return (
-    <div
-      className={
-        active
-          ? "persyaratan-tab-active relative w-full aspect-[245/299] shrink-0 drop-shadow-[0_10px_18px_rgba(16,35,128,0.35)] sm:h-44 sm:w-36"
-          : "persyaratan-tab-inactive relative w-full aspect-[245/299] shrink-0 drop-shadow-[0_6px_10px_rgba(16,35,128,0.2)] sm:h-36 sm:w-28"
-      }
-    >
-      <svg viewBox="0 0 245 299" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <path d={ARCH_PATH} fill={active ? "#102380" : "#FAF8F4"} />
-        <path
-          d={ARCH_PATH}
-          fill="none"
-          stroke="#FDD000"
-          strokeWidth={active ? 5 : 3}
-          transform="translate(122.5,149.5) scale(0.93) translate(-122.5,-149.5)"
-        />
-      </svg>
-
-      <div className="relative flex h-full flex-col items-center px-1.5 pt-[22%] text-center sm:px-2">
-        {active && (
-          <Sun
-            aria-hidden="true"
-            className="relative mb-1.5 shrink-0 text-gold"
-            style={{ width: sunSize, height: sunSize, top: "-0.5cm" }}
+    <>
+      {/* ================= MOBILE VIEW (< sm) ================= */}
+      {/* Compact arch with Icon + Name only (NO subtitle, NO button), perfectly fitting 5 in a row */}
+      <div
+        className={`relative mx-auto w-full aspect-[245/299] shrink-0 sm:hidden transition-all duration-200 ${
+          active
+            ? "drop-shadow-[0_8px_14px_rgba(16,35,128,0.35)] scale-105 z-10"
+            : "drop-shadow-[0_4px_8px_rgba(16,35,128,0.15)] opacity-95"
+        }`}
+      >
+        <svg viewBox="0 0 245 299" className="absolute inset-0 h-full w-full" aria-hidden="true">
+          <path d={ARCH_PATH} fill={active ? "#102380" : "#FAF8F4"} />
+          <path
+            d={ARCH_PATH}
+            fill="none"
+            stroke="#FDD000"
+            strokeWidth={active ? 6 : 3.5}
+            transform="translate(122.5,149.5) scale(0.93) translate(-122.5,-149.5)"
           />
-        )}
-        <div
-          className="shrink-0"
-          style={{
-            width: iconBoxSize,
-            height: iconBoxSize,
-            color: active ? "#ffffff" : "#102380",
-          }}
-        >
-          <Icon />
+        </svg>
+        <div className="relative flex h-full flex-col items-center justify-center pt-[22%] text-center px-0.5">
+          <div
+            className="h-5 w-5 shrink-0"
+            style={{ color: active ? "#ffffff" : "#102380" }}
+          >
+            <Icon />
+          </div>
+          <span
+            className={`font-heading mt-1 text-[11px] sm:text-xs font-bold leading-none ${
+              active ? "text-white" : "text-navy"
+            }`}
+          >
+            {name}
+          </span>
         </div>
-        <span
-          className="font-heading mt-2 font-bold leading-none"
-          style={{
-            color: active ? "#ffffff" : "#102380",
-            fontSize: nameSize,
-          }}
-        >
-          {name}
-        </span>
-        <span
-          className="mt-1 hidden leading-tight sm:block"
-          style={{
-            color: active ? "rgba(255,255,255,0.7)" : "rgba(16,35,128,0.5)",
-            fontSize: subtitleSize,
-          }}
-        >
-          {subtitle}
-        </span>
       </div>
 
-      <span
-        className={`absolute inline-flex items-center gap-1.5 whitespace-nowrap font-semibold ${
-          active ? "bg-gold text-navy" : "border border-gold/40 text-navy"
+      {/* ================= DESKTOP VIEW (>= sm) ================= */}
+      {/* Full arch with Icon, Name, Subtitle, and properly spaced Lihat Button without collisions */}
+      <div
+        className={`relative hidden sm:flex flex-col items-center shrink-0 aspect-[245/299] transition-all duration-300 ${
+          active
+            ? "w-36 md:w-40 lg:w-44 -translate-y-2 z-10 drop-shadow-[0_14px_24px_rgba(16,35,128,0.35)]"
+            : "w-30 sm:w-32 md:w-36 lg:w-38 drop-shadow-[0_8px_16px_rgba(16,35,128,0.18)] hover:-translate-y-1 opacity-95"
         }`}
-        style={{
-          bottom: "calc(7% + 0.3cm)",
-          left: "50%",
-          transform: "translateX(-50%)",
-          paddingLeft: isDesktop ? 9.64 : 10,
-          paddingRight: isDesktop ? 9.64 : 10,
-          paddingTop: isDesktop ? 4.82 : 5,
-          paddingBottom: isDesktop ? 4.82 : 5,
-          fontSize: isDesktop ? 9.64 : 11,
-          borderRadius: 8,
-        }}
       >
-        Lihat
-        <ChevronRight aria-hidden="true" className="h-3 w-3" />
-      </span>
-    </div>
+        <svg viewBox="0 0 245 299" className="absolute inset-0 h-full w-full" aria-hidden="true">
+          <path d={ARCH_PATH} fill={active ? "#102380" : "#FAF8F4"} />
+          <path
+            d={ARCH_PATH}
+            fill="none"
+            stroke="#FDD000"
+            strokeWidth={active ? 5 : 3.5}
+            transform="translate(122.5,149.5) scale(0.93) translate(-122.5,-149.5)"
+          />
+        </svg>
+
+        <div className="relative flex h-full w-full flex-col items-center px-2 pt-[22%] text-center">
+          {active && (
+            <Sun
+              aria-hidden="true"
+              className="absolute -top-3.5 left-1/2 -translate-x-1/2 h-5 w-5 text-gold shrink-0 drop-shadow-xs"
+            />
+          )}
+          <div
+            className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
+            style={{ color: active ? "#ffffff" : "#102380" }}
+          >
+            <Icon />
+          </div>
+          <span
+            className={`font-heading mt-1.5 sm:mt-2 text-base sm:text-lg font-bold leading-none ${
+              active ? "text-white" : "text-navy"
+            }`}
+          >
+            {name}
+          </span>
+          <span
+            className={`mt-1 text-[11px] sm:text-xs leading-tight max-w-[125px] px-1 line-clamp-2 ${
+              active ? "text-white/80" : "text-navy/60"
+            }`}
+          >
+            {subtitle}
+          </span>
+
+          {/* Button is pinned at bottom with guaranteed vertical distance from subtitle */}
+          <span
+            className={`absolute bottom-3 sm:bottom-4 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-colors ${
+              active
+                ? "bg-gold text-navy shadow-sm"
+                : "border border-gold/50 text-navy hover:bg-gold/10"
+            }`}
+          >
+            Lihat
+            <ChevronRight aria-hidden="true" className="h-3 w-3" />
+          </span>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -234,7 +251,7 @@ export default function PersyaratanSection() {
           </Reveal>
 
           <div
-            className="relative mt-8 grid grid-cols-5 items-start gap-1.5 sm:mx-auto sm:mt-12 sm:flex sm:flex-wrap sm:justify-center sm:gap-8 lg:-mx-[min(4cm,calc((100vw-100%)/2-1rem))]"
+            className="relative mt-8 grid grid-cols-5 items-start gap-1.5 sm:mx-auto sm:mt-12 sm:flex sm:justify-center sm:items-end sm:gap-4 md:gap-5 lg:gap-6 lg:-mx-[min(4cm,calc((100vw-100%)/2-1rem))]"
           >
             {JENJANG.map((j, i) => {
               const isActive = active === i;
@@ -244,14 +261,13 @@ export default function PersyaratanSection() {
                     type="button"
                     onClick={() => setActive(i)}
                     aria-pressed={isActive}
-                    className="persyaratan-tab-btn flex w-full cursor-pointer flex-col items-center"
+                    className="persyaratan-tab-btn flex w-full cursor-pointer flex-col items-center focus:outline-none"
                   >
                     <PersyaratanTab
                       active={isActive}
                       Icon={j.icon}
                       name={j.name}
                       subtitle={j.subtitle}
-                      isDesktop={isDesktop}
                     />
                   </button>
                 </Reveal>
