@@ -27,7 +27,7 @@ export default function SectionBox({ children }) {
     <div className="relative">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute z-0"
+        className="pointer-events-none absolute z-0 hidden sm:block"
         style={{
           left: "-3cm",
           right: "-3cm",
@@ -47,7 +47,7 @@ export default function SectionBox({ children }) {
           WebkitMaskComposite: "source-in",
         }}
       />
-      <div className="relative z-10 overflow-hidden rounded-3xl border border-navy/[0.06] bg-ivory shadow-[0_2px_8px_rgba(16,35,128,0.08)]">
+      <div className="relative z-10 overflow-hidden rounded-2xl sm:rounded-3xl border border-navy/[0.06] bg-ivory shadow-[0_2px_8px_rgba(16,35,128,0.08)]">
         {children}
       </div>
     </div>

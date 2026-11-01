@@ -41,9 +41,11 @@ class HandleInertiaRequests extends Middleware
             // Data navigasi dinamis dari database (otomatis terupdate ketika admin input)
             'navEvents' => function () {
                 try {
-                    return \App\Models\Event::where('type', 'event')
-                        ->where('is_active', true)
-                        ->select('id', 'title', 'slug')
+                    return \App\Models\Event::whereIn('type', ['event', 'Event'])
+                        ->where(function ($q) {
+                            $q->where('is_active', true)->orWhere('is_active', 1);
+                        })
+                        ->select('id', 'title', 'slug', 'created_at')
                         ->latest()
                         ->get();
                 } catch (\Throwable $e) {
@@ -52,9 +54,11 @@ class HandleInertiaRequests extends Middleware
             },
             'navPrograms' => function () {
                 try {
-                    return \App\Models\Event::where('type', 'program')
-                        ->where('is_active', true)
-                        ->select('id', 'title', 'slug')
+                    return \App\Models\Event::whereIn('type', ['program', 'Program'])
+                        ->where(function ($q) {
+                            $q->where('is_active', true)->orWhere('is_active', 1);
+                        })
+                        ->select('id', 'title', 'slug', 'created_at')
                         ->latest()
                         ->get();
                 } catch (\Throwable $e) {

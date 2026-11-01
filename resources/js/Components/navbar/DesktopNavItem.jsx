@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import SwooshUnderline from "@/Components/ui/SwooshUnderline";
 
 const CLOSE_DELAY = 150;
@@ -34,6 +35,7 @@ export default function DesktopNavItem({ item }) {
   };
 
   const hasChildren = !!item.children?.length;
+  const isRightAligned = item.label === "Programs" || item.label === "Events";
 
   return (
     <li
@@ -50,11 +52,19 @@ export default function DesktopNavItem({ item }) {
         href={item.href}
         aria-haspopup={hasChildren ? "true" : undefined}
         aria-expanded={hasChildren ? open : undefined}
-        className={`relative inline-block px-1 py-2 text-sm font-medium transition-colors duration-200 ${
+        className={`relative inline-flex items-center gap-1 px-1 py-2 text-sm font-medium transition-colors duration-200 ${
           isActive ? "text-white" : "text-white/85 hover:text-gold"
         }`}
       >
-        {item.label}
+        <span>{item.label}</span>
+        {hasChildren && (
+          <ChevronDown
+            aria-hidden="true"
+            className={`h-3.5 w-3.5 transition-transform duration-200 ${
+              open ? "rotate-180 text-gold" : "text-white/70"
+            }`}
+          />
+        )}
         {isActive && (
           <SwooshUnderline className="absolute inset-x-0 -bottom-1 h-2 w-full" />
         )}
@@ -68,13 +78,22 @@ export default function DesktopNavItem({ item }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="absolute left-0 top-full z-40 min-w-[220px] max-h-[75vh] overflow-y-auto rounded-xl bg-white py-2 shadow-xl custom-scrollbar"
+              className={`absolute top-full z-40 min-w-[240px] max-h-[75vh] overflow-y-auto rounded-xl bg-white py-2 shadow-2xl custom-scrollbar border border-gold/20 ${
+                isRightAligned ? "right-0" : "left-0"
+              }`}
             >
-              {item.children.map((child) => (
+              <Link
+                href={item.href}
+                className="block px-4 py-2 text-xs font-bold uppercase tracking-wider text-gold hover:bg-navy/5 transition-colors"
+              >
+                Lihat Semua {item.label} →
+              </Link>
+              <div className="my-1 border-t border-slate-100" />
+              {item.children.map((child, idx) => (
                 <Link
-                  key={child.href}
+                  key={child.href || idx}
                   href={child.href}
-                  className="block px-4 py-2 text-sm text-navy hover:bg-ivory hover:text-navy transition-colors"
+                  className="block px-4 py-2 text-sm text-navy hover:bg-ivory hover:text-navy transition-colors font-medium"
                 >
                   {child.label}
                 </Link>

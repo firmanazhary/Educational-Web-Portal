@@ -66,57 +66,67 @@ export default function JoinSection({
   title = "Cara Bergabung di PG Attaufiq",
 }) {
   return (
-    <section className="bg-ivory px-6 py-14">
+    <section className="bg-ivory px-3.5 py-10 sm:px-6 sm:py-14">
       <div className="mx-auto" style={{ maxWidth: "calc(72rem + 6cm)" }}>
         <Reveal>
-        <SectionBox>
-          <div className="p-6 sm:p-8">
-            <div className="flex items-center justify-center gap-3">
-              <ScallopBadge n={5} />
-              <h2 className="font-heading text-2xl text-navy sm:text-3xl">{title}</h2>
-            </div>
+          <SectionBox>
+            <div className="p-4 sm:p-8">
+              <div className="flex items-center justify-center gap-2.5 sm:gap-3 text-center">
+                <ScallopBadge n={5} />
+                <h2 className="font-heading text-xl text-navy sm:text-2xl md:text-3xl">{title}</h2>
+              </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-[1fr_1fr_1fr_400px]">
-              {STEPS.map((step, i) => (
+              {/* 3 steps + CTA in one row only from xl; lg: 3 steps with CTA below; under lg: single column */}
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 lg:grid-cols-3 xl:grid-cols-[1fr_1fr_1fr_400px]">
+                {STEPS.map((step, i) => (
+                  <Reveal
+                    key={step.number}
+                    delay={i * 0.1}
+                    className="flex items-start gap-3 border-b border-navy/10 pb-4 last-of-type:border-0 sm:gap-4 sm:rounded-2xl sm:border sm:border-navy/10 sm:p-5 sm:last-of-type:border"
+                  >
+                    {/* Phones: compact rows (small icon, number inline with title, divider lines) */}
+                    <div className="h-10 w-10 shrink-0 text-navy sm:h-14 sm:w-14">
+                      <step.Icon />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-baseline gap-2 sm:block">
+                        <span className="font-heading text-base font-bold text-gold sm:text-lg">{step.number}</span>
+                        <h3 className="font-heading text-base font-bold text-navy">{step.title}</h3>
+                      </div>
+                      <p className="mt-1 text-xs leading-relaxed text-navy/70 sm:mt-2 sm:text-sm">{step.description}</p>
+                    </div>
+                  </Reveal>
+                ))}
+
                 <Reveal
-                  key={step.number}
-                  delay={i * 0.1}
-                  className="flex items-start gap-4 rounded-2xl border border-navy/10 p-5"
+                  delay={STEPS.length * 0.1}
+                  className="flex items-center justify-between gap-3 rounded-2xl bg-navy p-4 text-white sm:gap-4 sm:p-5 lg:col-span-3 xl:col-span-1"
                 >
-                  <div className="h-14 w-14 shrink-0 text-navy">
-                    <step.Icon />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs leading-relaxed sm:text-sm">
+                      Info lengkap &amp; pendaftaran kunjungi halaman Admission
+                    </p>
+                    <LinkButton
+                      href="/admission"
+                      variant="gold"
+                      size="sm"
+                      className="mt-3 w-fit max-w-full text-center px-4 text-xs sm:mt-4"
+                    >
+                      Lihat Halaman Admission &gt;
+                    </LinkButton>
                   </div>
-                  <div>
-                    <span className="font-heading text-lg font-bold text-gold">{step.number}</span>
-                    <h3 className="font-heading text-base font-bold text-navy">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-navy/70">{step.description}</p>
+
+                  <div className="relative h-12 w-12 shrink-0 sm:h-20 sm:w-20 md:h-24 md:w-24">
+                    <img
+                      src="/images/brand/logo-mark-color.png"
+                      alt="Logo SIT Attaufiq"
+                      className="h-full w-full object-contain"
+                    />
                   </div>
                 </Reveal>
-              ))}
-
-              <Reveal delay={STEPS.length * 0.1} className="flex items-center gap-4 rounded-2xl bg-navy p-5 text-white">
-                <div className="flex-1">
-                  <p className="text-sm leading-relaxed">
-                    Info lengkap &amp; pendaftaran kunjungi halaman Admission
-                  </p>
-                  <LinkButton
-                    href="/admission"
-                    variant="gold"
-                    size="sm"
-                    className="mt-4 w-fit whitespace-nowrap px-4 text-xs"
-                  >
-                    Lihat Halaman Admission
-                    <span aria-hidden="true">&gt;</span>
-                  </LinkButton>
-                </div>
-
-                <div className="relative h-28 w-28 shrink-0">
-                  <img src="/images/brand/logo-mark-color.png" alt="Logo SIT Attaufiq" className="h-full w-full object-contain" />
-                </div>
-              </Reveal>
+              </div>
             </div>
-          </div>
-        </SectionBox>
+          </SectionBox>
         </Reveal>
       </div>
     </section>

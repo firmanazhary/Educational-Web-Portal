@@ -106,34 +106,59 @@ function PillarCard({ title, description, Icon, inverted }) {
   const iconColor = inverted ? NAVY : GOLD;
 
   return (
-    <div className="relative mx-auto w-full max-w-[280px]" style={{ aspectRatio: "1260 / 1145" }}>
-      <svg
-        viewBox="10 10 1260 1145"
-        preserveAspectRatio="none"
-        className="absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        <path d={DOME_PATH} fill={bg} />
-        <path d={DOME_INNER_TRIM_PATH} fill="none" stroke={outline} strokeWidth="10" />
-      </svg>
-
-      {/* Icon + text: raised 2cm from the original position, then lowered
-          1.5cm back per follow-up instruction, netting a 0.5cm raise. */}
-      <div
-        className="relative z-10 flex h-full flex-col items-center px-6 text-center"
-        style={{ paddingTop: "calc(4rem - 0.5cm)" }}
-      >
-        <div className="h-14 w-14">
-          <Icon color={iconColor} />
+    <>
+      {/* Mobile: sleek, compact card (mini dome badge with centered icon, balanced text) */}
+      <div className="flex items-center gap-3.5 rounded-2xl border border-gold/30 bg-white/85 p-3 text-left shadow-xs sm:hidden">
+        <div className="relative h-12 w-12 shrink-0 flex items-center justify-center">
+          <svg
+            viewBox="10 10 1260 1145"
+            preserveAspectRatio="none"
+            className="absolute inset-0 h-full w-full drop-shadow-xs"
+            aria-hidden="true"
+          >
+            <path d={DOME_PATH} fill={bg} />
+            <path d={DOME_INNER_TRIM_PATH} fill="none" stroke={outline} strokeWidth="22" />
+          </svg>
+          <div className="relative z-10 flex h-6 w-6 items-center justify-center translate-y-1">
+            <Icon color={iconColor} />
+          </div>
         </div>
-        <h3 className={`font-heading mt-3 text-2xl font-bold ${inverted ? "text-navy" : "text-white"}`}>
-          {title}
-        </h3>
-        <p className={`mt-3 text-sm leading-relaxed ${inverted ? "text-navy/70" : "text-white/70"}`}>
-          {description}
-        </p>
+        <div className="min-w-0 flex-1">
+          <h3 className="font-heading text-base font-bold text-navy">{title}</h3>
+          <p className="mt-0.5 text-xs leading-relaxed text-navy/70">{description}</p>
+        </div>
       </div>
-    </div>
+
+      {/* Desktop (>= sm): Original full mihrab dome arch */}
+      <div className="relative mx-auto hidden w-full max-w-[280px] sm:block" style={{ aspectRatio: "1260 / 1145" }}>
+        <svg
+          viewBox="10 10 1260 1145"
+          preserveAspectRatio="none"
+          className="absolute inset-0 h-full w-full"
+          aria-hidden="true"
+        >
+          <path d={DOME_PATH} fill={bg} />
+          <path d={DOME_INNER_TRIM_PATH} fill="none" stroke={outline} strokeWidth="10" />
+        </svg>
+
+        {/* Icon + text: raised 2cm from the original position, then lowered
+            1.5cm back per follow-up instruction, netting a 0.5cm raise. */}
+        <div
+          className="relative z-10 flex h-full flex-col items-center px-6 text-center"
+          style={{ paddingTop: "calc(4rem - 0.5cm)" }}
+        >
+          <div className="h-14 w-14">
+            <Icon color={iconColor} />
+          </div>
+          <h3 className={`font-heading mt-3 text-2xl font-bold ${inverted ? "text-navy" : "text-white"}`}>
+            {title}
+          </h3>
+          <p className={`mt-3 text-sm leading-relaxed ${inverted ? "text-navy/70" : "text-white/70"}`}>
+            {description}
+          </p>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -147,7 +172,7 @@ export default function JenjangPillarsSection() {
           is unchanged (opaque near the bottom of this region — i.e. near
           the cards / the gold line — fading out going up toward the
           heading), per instruction. */}
-      <div className="relative overflow-hidden px-6 pt-16 md:pt-20">
+      <div className="relative overflow-hidden px-4 pt-8 pb-4 sm:px-6 sm:pt-16 sm:pb-0 md:pt-20">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.138]"
@@ -179,12 +204,12 @@ export default function JenjangPillarsSection() {
         </div>
 
         <div className="relative mx-auto max-w-6xl">
-          <Reveal className="flex items-center justify-center gap-3">
+          <Reveal className="flex items-center justify-center gap-2.5 sm:gap-3">
             <ScallopBadge n={1} />
-            <h2 className="font-heading text-2xl text-navy sm:text-3xl">3 Pilar Utama Kami</h2>
+            <h2 className="font-heading text-xl text-navy sm:text-2xl md:text-3xl">3 Pilar Utama Kami</h2>
           </Reveal>
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-3">
+          <div className="mt-6 grid gap-2.5 sm:mt-12 sm:grid-cols-3 sm:gap-8">
             {PILLARS.map((pillar, i) => (
               <Reveal key={pillar.title} delay={i * 0.12}>
                 <PillarCard {...pillar} />
@@ -196,7 +221,7 @@ export default function JenjangPillarsSection() {
         {/* Pushes Region A's own bottom edge (and therefore the gold
             divider + pattern anchor right after it) 1cm past the cards'
             bottom edge, per instruction. */}
-        <div style={{ height: "1cm" }} />
+        <div className="hidden sm:block" style={{ height: "1cm" }} />
       </div>
 
       {/* Gold divider — immediately follows Region A (which now carries an
@@ -204,7 +229,7 @@ export default function JenjangPillarsSection() {
           domes' own bottom outline. Below this line: plain ivory, no
           pattern at all. */}
       <div className="h-px w-full bg-gold/[0.147]" />
-      <div className="pb-16 md:pb-20" />
+      <div className="pb-6 sm:pb-16 md:pb-20" />
     </section>
   );
 }

@@ -16,7 +16,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   
   // Ambil data navigasi dinamis dari database via shared Inertia props
-  const { navEvents = [], navPrograms = [] } = usePage().props;
+  const props = usePage().props || {};
+  const navEvents = props.navEvents || [];
+  const navPrograms = props.navPrograms || [];
   const navItems = getNavItems({ navEvents, navPrograms });
 
   useEffect(() => {
