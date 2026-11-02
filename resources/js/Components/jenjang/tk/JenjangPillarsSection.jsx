@@ -108,8 +108,8 @@ function PillarCard({ title, description, Icon, inverted }) {
   return (
     <>
       {/* Mobile: sleek, compact card (mini dome badge with centered icon, balanced text) */}
-      <div className="flex items-center gap-3.5 rounded-2xl border border-gold/30 bg-white/85 p-3 text-left shadow-xs sm:hidden">
-        <div className="relative h-12 w-12 shrink-0 flex items-center justify-center">
+      <div className="flex items-center gap-3 rounded-xl border border-gold/30 bg-white/95 p-2.5 text-left shadow-xs sm:hidden">
+        <div className="relative h-10 w-10 shrink-0 flex items-center justify-center">
           <svg
             viewBox="10 10 1260 1145"
             preserveAspectRatio="none"
@@ -119,13 +119,13 @@ function PillarCard({ title, description, Icon, inverted }) {
             <path d={DOME_PATH} fill={bg} />
             <path d={DOME_INNER_TRIM_PATH} fill="none" stroke={outline} strokeWidth="22" />
           </svg>
-          <div className="relative z-10 flex h-6 w-6 items-center justify-center translate-y-1">
+          <div className="relative z-10 flex h-5 w-5 items-center justify-center translate-y-0.5">
             <Icon color={iconColor} />
           </div>
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-heading text-base font-bold text-navy">{title}</h3>
-          <p className="mt-0.5 text-xs leading-relaxed text-navy/70">{description}</p>
+          <h3 className="font-heading text-sm font-bold text-navy leading-tight">{title}</h3>
+          <p className="mt-0.5 text-[11px] leading-snug text-navy/70 break-words">{description}</p>
         </div>
       </div>
 
@@ -209,7 +209,7 @@ export default function JenjangPillarsSection() {
             <h2 className="font-heading text-xl text-navy sm:text-2xl md:text-3xl">3 Pilar Utama Kami</h2>
           </Reveal>
 
-          <div className="mt-6 grid gap-2.5 sm:mt-12 sm:grid-cols-3 sm:gap-8">
+          <div className="mt-4 grid gap-2 sm:mt-12 sm:grid-cols-3 sm:gap-8">
             {PILLARS.map((pillar, i) => (
               <Reveal key={pillar.title} delay={i * 0.12}>
                 <PillarCard {...pillar} />

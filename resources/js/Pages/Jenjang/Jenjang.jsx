@@ -80,8 +80,8 @@ function SectionHeading({ children }) {
 export default function JenjangPage() {
   return (
     <AppLayout title="Jenjang Pendidikan">
-         <PageHeroBanner
-        heading="Program Pendidikan"
+      <PageHeroBanner
+        heading="Jenjang Pendidikan"
         subheading={["Setiap jenjang, satu perjalanan.", "Bersama membangun generasi beradab."]}
         photoSrc="/images/hero-banner/hero-banner-photo-example.jpg"
       />

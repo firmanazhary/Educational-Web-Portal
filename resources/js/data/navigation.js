@@ -6,10 +6,20 @@ import { programsList } from "./programs";
 // Submenu Events & Programs dapat menerima data dinamis dari database (via Inertia props).
 // Jika database belum diisi, otomatis menggunakan fallback static data.
 export function getNavItems({ navEvents = [], navPrograms = [] } = {}) {
-  const safeEvents = Array.isArray(navEvents) ? navEvents.filter((e) => e && (e.title || e.name)) : [];
-  const safePrograms = Array.isArray(navPrograms) ? navPrograms.filter((p) => p && (p.title || p.name)) : [];
-
+  const rawEvents = Array.isArray(navEvents)
+    ? navEvents
+    : navEvents && typeof navEvents === "object"
+      ? Object.values(navEvents)
+      : [];
+  const safeEvents = rawEvents.filter((e) => e && (e.title || e.name));
   const eventsData = safeEvents.length > 0 ? safeEvents : eventsList;
+
+  const rawPrograms = Array.isArray(navPrograms)
+    ? navPrograms
+    : navPrograms && typeof navPrograms === "object"
+      ? Object.values(navPrograms)
+      : [];
+  const safePrograms = rawPrograms.filter((p) => p && (p.title || p.name));
   const programsData = safePrograms.length > 0 ? safePrograms : programsList;
 
   return [
@@ -28,14 +38,14 @@ export function getNavItems({ navEvents = [], navPrograms = [] } = {}) {
       href: "/jenjang",
       children: [...jenjangList]
         .sort((a, b) => a.order - b.order)
-        .map((j) => ({ label: j.name, href: `/${j.slug}` })),
+        .map((j) => ({ label: j.name, href: `/jenjang/${j.slug}` })),
     },
     { label: "Admission", href: "/admission" },
     {
       label: "Events",
       href: "/events",
       children: eventsData.map((e) => {
-        const title = e.title || e.name;
+        const title = e.title || e.name || "Event";
         const slug = e.slug || encodeURIComponent(title.toLowerCase().replace(/\s+/g, "-"));
         return {
           label: title,
@@ -47,7 +57,7 @@ export function getNavItems({ navEvents = [], navPrograms = [] } = {}) {
       label: "Programs",
       href: "/programs",
       children: programsData.map((p) => {
-        const title = p.title || p.name;
+        const title = p.title || p.name || "Program";
         const slug = p.slug || encodeURIComponent(title.toLowerCase().replace(/\s+/g, "-"));
         return {
           label: title,

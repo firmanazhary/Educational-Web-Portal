@@ -135,13 +135,13 @@ function PersyaratanTab({
       {/* ================= DESKTOP VIEW (>= sm) ================= */}
       {/* Full arch with Icon, Name, Subtitle, and properly spaced Lihat Button without collisions */}
       <div
-        className={`relative hidden sm:flex flex-col items-center shrink-0 aspect-[245/299] transition-all duration-300 ${
+        className={`relative hidden sm:flex flex-col items-center shrink-0 aspect-[245/310] transition-all duration-300 ${
           active
-            ? "w-36 md:w-40 lg:w-44 -translate-y-2 z-10 drop-shadow-[0_14px_24px_rgba(16,35,128,0.35)]"
-            : "w-30 sm:w-32 md:w-36 lg:w-38 drop-shadow-[0_8px_16px_rgba(16,35,128,0.18)] hover:-translate-y-1 opacity-95"
+            ? "w-36 sm:w-40 md:w-44 lg:w-48 -translate-y-2 z-10 drop-shadow-[0_14px_24px_rgba(16,35,128,0.35)]"
+            : "w-32 sm:w-34 md:w-38 lg:w-40 drop-shadow-[0_8px_16px_rgba(16,35,128,0.18)] hover:-translate-y-1 opacity-95"
         }`}
       >
-        <svg viewBox="0 0 245 299" className="absolute inset-0 h-full w-full" aria-hidden="true">
+        <svg viewBox="0 0 245 299" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
           <path d={ARCH_PATH} fill={active ? "#102380" : "#FAF8F4"} />
           <path
             d={ARCH_PATH}
@@ -152,37 +152,39 @@ function PersyaratanTab({
           />
         </svg>
 
-        <div className="relative flex h-full w-full flex-col items-center px-2 pt-[22%] text-center">
+        <div className="relative flex h-full w-full flex-col items-center justify-between px-2 pt-[16%] pb-3 sm:pb-4 text-center">
           {active && (
             <Sun
               aria-hidden="true"
               className="absolute -top-3.5 left-1/2 -translate-x-1/2 h-5 w-5 text-gold shrink-0 drop-shadow-xs"
             />
           )}
-          <div
-            className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
-            style={{ color: active ? "#ffffff" : "#102380" }}
-          >
-            <Icon />
+          <div className="flex flex-col items-center w-full">
+            <div
+              className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 shrink-0"
+              style={{ color: active ? "#ffffff" : "#102380" }}
+            >
+              <Icon />
+            </div>
+            <span
+              className={`font-heading mt-1 sm:mt-1.5 text-sm sm:text-base md:text-lg font-bold leading-none ${
+                active ? "text-white" : "text-navy"
+              }`}
+            >
+              {name}
+            </span>
+            <span
+              className={`mt-0.5 sm:mt-1 text-[10px] sm:text-[11px] md:text-xs leading-tight max-w-[125px] px-1 line-clamp-2 ${
+                active ? "text-white/80" : "text-navy/60"
+              }`}
+            >
+              {subtitle}
+            </span>
           </div>
-          <span
-            className={`font-heading mt-1.5 sm:mt-2 text-base sm:text-lg font-bold leading-none ${
-              active ? "text-white" : "text-navy"
-            }`}
-          >
-            {name}
-          </span>
-          <span
-            className={`mt-1 text-[11px] sm:text-xs leading-tight max-w-[125px] px-1 line-clamp-2 ${
-              active ? "text-white/80" : "text-navy/60"
-            }`}
-          >
-            {subtitle}
-          </span>
 
-          {/* Button is pinned at bottom with guaranteed vertical distance from subtitle */}
+          {/* Button is positioned in normal flow at bottom with guaranteed spacing */}
           <span
-            className={`absolute bottom-3 sm:bottom-4 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-colors ${
+            className={`mt-auto inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-colors ${
               active
                 ? "bg-gold text-navy shadow-sm"
                 : "border border-gold/50 text-navy hover:bg-gold/10"

@@ -25,25 +25,35 @@ export default function MobileNav({ items, open, onClose }) {
                 return (
                   <li key={item.label} className="py-1">
                     {hasChildren ? (
-                      /* Jika menu punya dropdown, seluruh baris bisa diklik untuk buka/tutup */
-                      <button
-                        type="button"
-                        aria-label={`Buka submenu ${item.label}`}
-                        aria-expanded={isExpanded}
-                        onClick={() =>
-                          setExpanded(isExpanded ? null : item.label)
-                        }
-                        className="flex min-h-12 w-full items-center justify-between text-left text-base font-medium text-white hover:text-gold transition-colors cursor-pointer"
-                      >
-                        <span>{item.label}</span>
-                        <motion.span
-                          animate={{ rotate: isExpanded ? 180 : 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="grid h-12 w-12 place-items-center text-gold text-sm"
+                      /* Jika menu punya dropdown: klik nama navigasi ke halaman induk, klik tombol panah buka dropdown */
+                      <div className="flex min-h-12 w-full items-center justify-between">
+                        <Link
+                          href={item.href}
+                          onClick={onClose}
+                          className="flex-1 py-3 text-base font-medium text-white hover:text-gold transition-colors"
                         >
-                          ▾
-                        </motion.span>
-                      </button>
+                          {item.label}
+                        </Link>
+                        <button
+                          type="button"
+                          aria-label={`Buka atau tutup submenu ${item.label}`}
+                          aria-expanded={isExpanded}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setExpanded(isExpanded ? null : item.label);
+                          }}
+                          className="grid h-12 w-12 place-items-center text-gold cursor-pointer hover:bg-white/5 active:bg-white/10 rounded-lg transition-colors"
+                        >
+                          <motion.span
+                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="text-sm font-bold"
+                          >
+                            ▾
+                          </motion.span>
+                        </button>
+                      </div>
                     ) : (
                       /* Menu langsung (tanpa dropdown) */
                       <Link
