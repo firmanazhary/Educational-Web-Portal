@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { AlertCircle, Blocks, CheckCircle2, ChevronRight, Sun } from "lucide-react";
@@ -13,178 +11,196 @@ function PgIcon() {
 }
 
 const JENJANG = [
-  { name: "PG", subtitle: "Playgroup", icon: PgIcon },
-  { name: "TK", subtitle: "Taman Kanak-kanak", icon: PgtkIcon },
-  { name: "SD", subtitle: "Sekolah Dasar", icon: SdIcon },
-  { name: "SMP", subtitle: "Sekolah Menengah Pertama", icon: SmpIcon },
-  { name: "SMA", subtitle: "Sekolah Menengah Atas", icon: SmaIcon },
+  {
+    name: "PG",
+    subtitle: "Playgroup",
+    icon: PgIcon,
+    theme: { navy: true },
+  },
+  {
+    name: "TK",
+    subtitle: "Taman Kanak-Kanak",
+    icon: PgtkIcon,
+    theme: { navy: true },
+  },
+  {
+    name: "SD",
+    subtitle: "Sekolah Dasar",
+    icon: SdIcon,
+    theme: { navy: true },
+  },
+  {
+    name: "SMP",
+    subtitle: "Sekolah Menengah Pertama",
+    icon: SmpIcon,
+    theme: { navy: true },
+  },
+  {
+    name: "SMA",
+    subtitle: "Sekolah Menengah Atas",
+    icon: SmaIcon,
+    theme: { navy: true },
+  },
+];
+
+const PERSYARATAN_ITEMS_LEFT = [
+  {
+    name: "Fotokopi Akta Kelahiran",
+    description: "Dokumen resmi, jelas, dan terbaca",
+  },
+  {
+    name: "Fotokopi Kartu Keluarga (KK)",
+    description: "Terbaru dan sesuai domisili",
+  },
+  {
+    name: "Fotokopi KTP Orang Tua",
+    description: "Ayah dan Ibu masing-masing 1 lembar",
+  },
+];
+
+const PERSYARATAN_ITEMS_RIGHT = [
+  {
+    name: "Pas Foto Berwarna Terbaru",
+    description: "Ukuran standar sekolah",
+  },
+  {
+    name: "Surat Keterangan dari Sekolah Asal",
+    description: "Sesuai jenjang yang didaftar",
+  },
+  {
+    name: "Formulir Pendaftaran",
+    description: "Telah diisi lengkap",
+  },
 ];
 
 const CATATAN_PENTING = [
   {
-    title: "Semua berkas",
-    description: "Wajib dalam format PDF atau JPG, ukuran max 2MB per file.",
+    title: "Dokumen Asli",
+    description: "Harap membawa dokumen asli saat verifikasi berkas",
   },
   {
-    title: "Pastikan data",
-    description: "Yang diunggah jelas dan dapat dibaca dengan baik.",
+    title: "Kelengkapan Berkas",
+    description: "Berkas yang tidak lengkap dapat memperlambat proses seleksi",
   },
   {
-    title: "Berkas asli",
-    description: "Wajib dibawa saat verifikasi di sekolah.",
+    title: "Format Digital",
+    description: "Pendaftaran online memerlukan scan dokumen dalam format PDF/JPG",
   },
 ];
 
-const REQUIREMENTS_BY_JENJANG = {
-  PG: {
-    left: [
-      { name: "Fotokopi Akta Kelahiran", description: "1 lembar dokumen resmi yang jelas dan terbaca" },
-      { name: "Fotokopi Kartu Keluarga (KK)", description: "1 lembar Kartu Keluarga domisili terbaru" },
-      { name: "Fotokopi KTP Orang Tua", description: "Ayah dan Ibu masing-masing 1 lembar" },
-    ],
-    right: [
-      { name: "Pas Foto Berwarna Terbaru", description: "Ukuran 3x4 berwarna sebanyak 2 lembar" },
-      { name: "Formulir Pendaftaran", description: "Telah diisi lengkap secara online atau fisik" },
-      { name: "Buku KIA / Riwayat Tumbuh Kembang", description: "Catatan imunisasi dan kesehatan tumbuh kembang anak" },
-    ],
-  },
-  TK: {
-    left: [
-      { name: "Fotokopi Akta Kelahiran", description: "1 lembar (usia minimal 4 tahun TK-A, 5 tahun TK-B)" },
-      { name: "Fotokopi Kartu Keluarga (KK)", description: "1 lembar Kartu Keluarga domisili terbaru" },
-      { name: "Fotokopi KTP Orang Tua", description: "Ayah dan Ibu masing-masing 1 lembar" },
-    ],
-    right: [
-      { name: "Pas Foto Berwarna Terbaru", description: "Ukuran 3x4 berwarna sebanyak 2 lembar" },
-      { name: "Surat Keterangan Playgroup", description: "1 lembar dari sekolah asal (jika sebelumnya PG)" },
-      { name: "Formulir Pendaftaran", description: "Telah diisi lengkap dan ditandatangani orang tua" },
-    ],
-  },
-  SD: {
-    left: [
-      { name: "Fotokopi Akta Kelahiran", description: "1 lembar (usia minimal 6 tahun per 1 Juli tahun berjalan)" },
-      { name: "Fotokopi Kartu Keluarga (KK)", description: "1 lembar Kartu Keluarga domisili terbaru" },
-      { name: "Fotokopi KTP Orang Tua", description: "Ayah dan Ibu masing-masing 1 lembar" },
-    ],
-    right: [
-      { name: "Pas Foto Berwarna Terbaru", description: "Ukuran 3x4 berwarna sebanyak 3 lembar" },
-      { name: "Ijazah TK / Surat Keterangan", description: "Fotokopi ijazah atau surat keterangan lulus TK" },
-      { name: "Surat Keterangan Sehat", description: "Dari dokter atau klinik/puskesmas terdekat" },
-    ],
-  },
-  SMP: {
-    left: [
-      { name: "Fotokopi Akta Kelahiran & KK", description: "Masing-masing 1 lembar dokumen legalisir" },
-      { name: "Fotokopi KTP Orang Tua", description: "Ayah dan Ibu masing-masing 1 lembar" },
-      { name: "Rapor SD Kelas 4 - 5", description: "Fotokopi rapor semester terakhir yang dilegalisir" },
-    ],
-    right: [
-      { name: "Pas Foto Berwarna Terbaru", description: "Ukuran 3x4 latar biru/merah sebanyak 3 lembar" },
-      { name: "Surat Keterangan Lulus / Ijazah SD", description: "Asli dan fotokopi legalisir dari SD asal" },
-      { name: "Sertifikat Prestasi & Tahfidz", description: "Piagam penghargaan atau hafalan Qur'an (jika ada)" },
-    ],
-  },
-  SMA: {
-    left: [
-      { name: "Fotokopi Akta Kelahiran & KK", description: "Masing-masing 1 lembar dokumen legalisir" },
-      { name: "Fotokopi KTP Orang Tua", description: "Ayah dan Ibu masing-masing 1 lembar" },
-      { name: "Rapor SMP Kelas 7 - 8", description: "Fotokopi rapor semester terakhir yang dilegalisir" },
-    ],
-    right: [
-      { name: "Pas Foto Berwarna Terbaru", description: "Ukuran 3x4 latar belakang merah sebanyak 3 lembar" },
-      { name: "Surat Keterangan Lulus / Ijazah SMP", description: "Asli dan fotokopi legalisir dari SMP asal" },
-      { name: "Sertifikat Prestasi & Tahfidz", description: "Dokumen sertifikat jalur prestasi atau beasiswa" },
-    ],
-  },
-};
-
-function PersyaratanTab({ active, Icon, name, subtitle, isDesktop }) {
-  const archWidth = isDesktop ? 195 : 160;
-  const archHeight = isDesktop ? 220 : 185;
-  const iconSize = isDesktop ? 41 : 32;
-  const sunSize = isDesktop ? 18 : 14;
-  const nameSize = isDesktop ? 18 : 15;
-  const subtitleSize = isDesktop ? 12 : 10.5;
-
+function PersyaratanTab({
+  active,
+  Icon,
+  name,
+  subtitle,
+}) {
   return (
-    <div
-      className="relative shrink-0"
-      style={{
-        width: archWidth,
-        height: archHeight,
-        filter: "drop-shadow(0 12px 22px rgba(16,35,128,0.28))",
-      }}
-    >
-      <svg viewBox="0 0 245 299" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <path d={ARCH_PATH} fill={active ? "#102380" : "#FBF6EA"} />
-        <path
-          d={ARCH_PATH}
-          fill="none"
-          stroke="#FDD000"
-          strokeWidth={4}
-          transform="translate(122.5,149.5) scale(0.93) translate(-122.5,-149.5)"
-        />
-      </svg>
-
-      <div className="relative flex h-full flex-col items-center px-2 text-center" style={{ paddingTop: "24%" }}>
-        {active && (
-          <Sun
-            aria-hidden="true"
-            className="relative mb-1.5 shrink-0 text-gold"
-            style={{ width: sunSize, height: sunSize, top: isDesktop ? "-0.5cm" : "-0.3cm" }}
+    <>
+      {/* ================= MOBILE VIEW (< sm) ================= */}
+      {/* Compact arch with Icon + Name only (NO subtitle, NO button), perfectly fitting 5 in a row */}
+      <div
+        className={`relative mx-auto w-full aspect-[245/299] shrink-0 sm:hidden transition-all duration-200 ${
+          active
+            ? "drop-shadow-[0_8px_14px_rgba(16,35,128,0.35)] scale-105 z-10"
+            : "drop-shadow-[0_4px_8px_rgba(16,35,128,0.15)] opacity-95"
+        }`}
+      >
+        <svg viewBox="0 0 245 299" className="absolute inset-0 h-full w-full" aria-hidden="true">
+          <path d={ARCH_PATH} fill={active ? "#102380" : "#FAF8F4"} />
+          <path
+            d={ARCH_PATH}
+            fill="none"
+            stroke="#FDD000"
+            strokeWidth={active ? 6 : 3.5}
+            transform="translate(122.5,149.5) scale(0.93) translate(-122.5,-149.5)"
           />
-        )}
-        <div
-          className="shrink-0"
-          style={{ width: iconSize, height: iconSize, color: active ? "#ffffff" : "#8B7048" }}
-        >
-          <Icon />
+        </svg>
+        <div className="relative flex h-full flex-col items-center justify-center pt-[22%] text-center px-0.5">
+          <div
+            className="h-5 w-5 shrink-0"
+            style={{ color: active ? "#ffffff" : "#102380" }}
+          >
+            <Icon />
+          </div>
+          <span
+            className={`font-heading mt-1 text-[11px] sm:text-xs font-bold leading-none ${
+              active ? "text-white" : "text-navy"
+            }`}
+          >
+            {name}
+          </span>
         </div>
-        <span
-          className="font-heading mt-2 font-bold leading-none"
-          style={{ fontSize: nameSize, color: active ? "#ffffff" : "#102380" }}
-        >
-          {name}
-        </span>
-        <span
-          className="mt-1.5 leading-tight"
-          style={{
-            fontSize: subtitleSize,
-            color: active ? "rgba(255,255,255,0.7)" : "rgba(16,35,128,0.5)",
-          }}
-        >
-          {subtitle}
-        </span>
       </div>
 
-      <span
-        className={`absolute inline-flex items-center gap-1.5 whitespace-nowrap font-semibold ${
-          active ? "bg-gold text-navy" : "border border-gold/40 text-navy"
+      {/* ================= DESKTOP VIEW (>= sm) ================= */}
+      {/* Full arch with Icon, Name, Subtitle, and properly spaced Lihat Button without collisions */}
+      <div
+        className={`relative hidden sm:flex flex-col items-center shrink-0 aspect-[245/310] transition-all duration-300 ${
+          active
+            ? "w-36 sm:w-40 md:w-44 lg:w-48 -translate-y-2 z-10 drop-shadow-[0_14px_24px_rgba(16,35,128,0.35)]"
+            : "w-32 sm:w-34 md:w-38 lg:w-40 drop-shadow-[0_8px_16px_rgba(16,35,128,0.18)] hover:-translate-y-1 opacity-95"
         }`}
-        style={{
-          bottom: "calc(7% + 0.3cm)",
-          left: "50%",
-          transform: "translateX(-50%)",
-          paddingLeft: 9.64,
-          paddingRight: 9.64,
-          paddingTop: 4.82,
-          paddingBottom: 4.82,
-          fontSize: isDesktop ? 9.64 : 8.36,
-          borderRadius: 8,
-        }}
       >
-        Lihat Persyaratan
-        <ChevronRight aria-hidden="true" style={{ width: 9.64, height: 9.64 }} />
-      </span>
-    </div>
+        <svg viewBox="0 0 245 299" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
+          <path d={ARCH_PATH} fill={active ? "#102380" : "#FAF8F4"} />
+          <path
+            d={ARCH_PATH}
+            fill="none"
+            stroke="#FDD000"
+            strokeWidth={active ? 5 : 3.5}
+            transform="translate(122.5,149.5) scale(0.93) translate(-122.5,-149.5)"
+          />
+        </svg>
+
+        <div className="relative flex h-full w-full flex-col items-center justify-between px-2 pt-[16%] pb-3 sm:pb-4 text-center">
+          {active && (
+            <Sun
+              aria-hidden="true"
+              className="absolute -top-3.5 left-1/2 -translate-x-1/2 h-5 w-5 text-gold shrink-0 drop-shadow-xs"
+            />
+          )}
+          <div className="flex flex-col items-center w-full">
+            <div
+              className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 shrink-0"
+              style={{ color: active ? "#ffffff" : "#102380" }}
+            >
+              <Icon />
+            </div>
+            <span
+              className={`font-heading mt-1 sm:mt-1.5 text-sm sm:text-base md:text-lg font-bold leading-none ${
+                active ? "text-white" : "text-navy"
+              }`}
+            >
+              {name}
+            </span>
+            <span
+              className={`mt-0.5 sm:mt-1 text-[10px] sm:text-[11px] md:text-xs leading-tight max-w-[125px] px-1 line-clamp-2 ${
+                active ? "text-white/80" : "text-navy/60"
+              }`}
+            >
+              {subtitle}
+            </span>
+          </div>
+
+          {/* Button is positioned in normal flow at bottom with guaranteed spacing */}
+          <span
+            className={`mt-auto inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-colors ${
+              active
+                ? "bg-gold text-navy shadow-sm"
+                : "border border-gold/50 text-navy hover:bg-gold/10"
+            }`}
+          >
+            Lihat
+            <ChevronRight aria-hidden="true" className="h-3 w-3" />
+          </span>
+        </div>
+      </div>
+    </>
   );
 }
 
 export default function PersyaratanSection() {
   const [active, setActive] = useState(0);
-  const currentJenjang = JENJANG[active];
-  const ActiveIcon = currentJenjang.icon;
-  const currentReqs = REQUIREMENTS_BY_JENJANG[currentJenjang.name] || REQUIREMENTS_BY_JENJANG.SD;
 
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
@@ -195,22 +211,20 @@ export default function PersyaratanSection() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  const ActiveIcon = JENJANG[active].icon;
+
   const titleRef = useRef(null);
-  const [dividerTop, setDividerTop] = useState(undefined);
+  const [dividerTop, setDividerTop] = useState();
   useEffect(() => {
-    if (titleRef.current) {
-      setDividerTop(titleRef.current.offsetTop + titleRef.current.offsetHeight);
+    const el = titleRef.current;
+    if (el) {
+      setDividerTop(el.offsetTop + el.offsetHeight);
     }
-  }, [active, isDesktop]);
+  }, [active]);
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-28">
-      <style>{`
-        .persyaratan-tab-btn { transition: transform 0.2s ease; }
-        .persyaratan-tab-btn:hover { transform: translateY(-6px); }
-      `}</style>
-
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-ivory py-20 md:py-28">
+      <div className="relative mx-auto max-w-6xl px-6">
         <div className="relative">
           <div
             className="pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2"
@@ -219,7 +233,7 @@ export default function PersyaratanSection() {
             <img
               src="/images/admission/persyaratan-bg.png"
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-top"
+              className="h-full w-full object-cover object-top"
             />
           </div>
 
@@ -228,58 +242,45 @@ export default function PersyaratanSection() {
             <span className="mt-3 block text-xs font-bold uppercase tracking-[0.2em] text-gold">
               Persyaratan Pendaftaran
             </span>
-            <h2 className="font-heading mt-4 text-3xl leading-[1.15] text-navy sm:text-4xl md:text-5xl">
+            <h2 className="font-heading mt-4 text-4xl leading-[1.1] text-navy md:text-5xl">
               Pilih Jenjang Pendidikan
             </h2>
-            <p className="mt-4 text-xs leading-relaxed text-navy/70 sm:text-sm md:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-navy/70 sm:text-base">
               Setiap jenjang memiliki persyaratan yang berbeda.
               <br />
               Silakan pilih jenjang yang sesuai untuk melihat detail persyaratan.
             </p>
           </Reveal>
 
-          {/* Arched tabs: horizontally swipeable on mobile/tablet, centered on desktop */}
           <div
-            className="relative mx-auto mt-10 sm:mt-12 flex gap-4 overflow-x-auto pb-4 pt-2 -mx-4 px-4 scrollbar-none snap-x snap-mandatory justify-start lg:justify-center sm:gap-6 lg:gap-8 lg:overflow-visible lg:mx-0 lg:px-0"
-            style={{
-              marginLeft: isDesktop ? "-4cm" : undefined,
-              marginRight: isDesktop ? "-4cm" : undefined,
-            }}
+            className="relative mt-8 grid grid-cols-5 items-start gap-1.5 sm:mx-auto sm:mt-12 sm:flex sm:justify-center sm:items-end sm:gap-4 md:gap-5 lg:gap-6 lg:-mx-[min(4cm,calc((100vw-100%)/2-1rem))]"
           >
             {JENJANG.map((j, i) => {
               const isActive = active === i;
               return (
-                <div key={j.name} className="snap-center shrink-0">
-                  <Reveal delay={i * 0.08}>
-                    <button
-                      type="button"
-                      onClick={() => setActive(i)}
-                      aria-pressed={isActive}
-                      className="persyaratan-tab-btn flex cursor-pointer flex-col items-center"
-                    >
-                      <PersyaratanTab
-                        active={isActive}
-                        Icon={j.icon}
-                        name={j.name}
-                        subtitle={j.subtitle}
-                        isDesktop={isDesktop}
-                      />
-                    </button>
-                  </Reveal>
-                </div>
+                <Reveal key={j.name} delay={i * 0.08} className="min-w-0 sm:shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setActive(i)}
+                    aria-pressed={isActive}
+                    className="persyaratan-tab-btn flex w-full cursor-pointer flex-col items-center focus:outline-none"
+                  >
+                    <PersyaratanTab
+                      active={isActive}
+                      Icon={j.icon}
+                      name={j.name}
+                      subtitle={j.subtitle}
+                    />
+                  </button>
+                </Reveal>
               );
             })}
           </div>
         </div>
 
-        {/* Detail panel with 4-column SectionBox */}
         <Reveal
           delay={0.1}
-          className="mt-8 sm:mt-10"
-          style={{
-            marginLeft: isDesktop ? "-4cm" : undefined,
-            marginRight: isDesktop ? "-4cm" : undefined,
-          }}
+          className="mt-10 lg:-mx-[min(4cm,calc((100vw-100%)/2-1rem))]"
         >
           <SectionBox>
             <motion.div
@@ -290,9 +291,7 @@ export default function PersyaratanSection() {
               style={{ overflow: "hidden" }}
             >
               <div className="grid grid-cols-1 lg:grid-cols-4">
-                {/* Column 1: Left Navy Card */}
-                <div className="flex flex-col items-center gap-6 bg-navy px-6 pb-6 pt-8 text-center sm:pb-8 lg:col-span-1">
-                  {/* Row 1 — mini arch with active icon */}
+                <div className="flex flex-col items-center gap-6 bg-navy px-6 py-5 text-center lg:pb-0 lg:pt-8">
                   <div className="flex w-full max-w-[220px] items-center gap-3">
                     <div className="relative shrink-0" style={{ width: 56, height: 68 }}>
                       <svg viewBox="0 0 245 299" className="absolute inset-0 h-full w-full" aria-hidden="true">
@@ -315,14 +314,13 @@ export default function PersyaratanSection() {
                     </div>
                     <div className="text-left">
                       <p className="font-heading text-2xl font-bold text-white">
-                        {currentJenjang.name}
+                        {JENJANG[active].name}
                       </p>
-                      <p className="text-sm text-white/60">{currentJenjang.subtitle}</p>
+                      <p className="text-sm text-white/60">{JENJANG[active].subtitle}</p>
                     </div>
                   </div>
 
-                  {/* Row 2 — fade line / sun / fade line */}
-                  <div className="flex w-full max-w-[180px] items-center gap-3">
+                  <div className="hidden w-full max-w-[180px] items-center gap-3 lg:flex">
                     <span
                       className="h-px flex-1"
                       style={{ background: "linear-gradient(to right, transparent, #FDD000)" }}
@@ -334,8 +332,7 @@ export default function PersyaratanSection() {
                     />
                   </div>
 
-                  {/* Row 3 — Tagline image */}
-                  <div className="relative w-full max-w-[220px]" style={{ aspectRatio: "3192 / 1468" }}>
+                  <div className="relative hidden w-full max-w-[220px] lg:block" style={{ aspectRatio: "3192 / 1468" }}>
                     <img
                       src="/images/admission/persyaratan-tagline.png"
                       alt="Memberi Arti itu Attaufiq"
@@ -344,42 +341,32 @@ export default function PersyaratanSection() {
                     />
                   </div>
 
-                  {/* Row 4 — FooterArchLineArt */}
-                  <FooterArchLineArt domeOnly className="w-full max-w-[160px]" />
+                  <FooterArchLineArt domeOnly className="hidden w-full max-w-[160px] lg:block" />
                 </div>
 
-                {/* Column 2 & 3: Requirements Checklist */}
                 <div className="relative p-6 sm:p-8 lg:col-span-2">
-                  {isDesktop && (
-                    <div
-                      className="absolute w-px bg-gold/30"
-                      style={{
-                        left: "calc(50% + 1cm)",
-                        top: dividerTop !== undefined ? dividerTop + 37.7952755906 : undefined,
-                        bottom: "1.5cm",
-                      }}
-                    />
-                  )}
+                  <div
+                    className="absolute hidden w-px bg-gold/30 sm:block"
+                    style={{
+                      left: "calc(50% + 1cm)",
+                      top: dividerTop !== undefined ? dividerTop + 37.7952755906 : undefined,
+                      bottom: "1.5cm",
+                    }}
+                  />
 
                   <h3
                     ref={titleRef}
-                    className="font-heading text-2xl text-navy sm:text-3xl text-center sm:text-left"
+                    className="font-heading text-2xl text-navy sm:text-3xl"
                   >
-                    Persyaratan Pendaftaran {currentJenjang.name}
+                    Persyaratan Pendaftaran {JENJANG[active].name}
                   </h3>
 
-                  <div
-                    className="flex flex-col sm:flex-row"
-                    style={{ marginTop: isDesktop ? "1cm" : "1.5rem", gap: "2rem" }}
-                  >
+                  <div className="mt-4 flex flex-col gap-3 sm:mt-[1cm] sm:flex-row sm:gap-8">
                     <div
-                      className="flex flex-col"
-                      style={{
-                        width: isDesktop ? "calc(50% + 1cm - 1rem)" : "100%",
-                        gap: isDesktop ? "calc(1rem + 0.5cm)" : "1rem",
-                      }}
+                      className="flex w-full flex-col sm:w-[calc(50%+1cm-1rem)]"
+                      style={{ gap: isDesktop ? "calc(1rem + 0.5cm)" : "0.75rem" }}
                     >
-                      {currentReqs.left.map((item) => (
+                      {PERSYARATAN_ITEMS_LEFT.map((item) => (
                         <div key={item.name} className="flex items-start gap-2.5">
                           <CheckCircle2
                             aria-hidden="true"
@@ -387,7 +374,7 @@ export default function PersyaratanSection() {
                           />
                           <div>
                             <p className="text-sm font-semibold text-navy">{item.name}</p>
-                            <p className="mt-0.5 text-xs leading-relaxed text-navy/70">
+                            <p className="mt-0.5 text-sm leading-relaxed text-navy/70 lg:text-xs">
                               {item.description}
                             </p>
                           </div>
@@ -396,13 +383,10 @@ export default function PersyaratanSection() {
                     </div>
 
                     <div
-                      className="flex flex-col"
-                      style={{
-                        width: isDesktop ? "calc(50% - 1cm - 1rem)" : "100%",
-                        gap: isDesktop ? "calc(1rem + 0.5cm)" : "1rem",
-                      }}
+                      className="flex w-full flex-col sm:w-[calc(50%-1cm-1rem)]"
+                      style={{ gap: isDesktop ? "calc(1rem + 0.5cm)" : "0.75rem" }}
                     >
-                      {currentReqs.right.map((item) => (
+                      {PERSYARATAN_ITEMS_RIGHT.map((item) => (
                         <div key={item.name} className="flex items-start gap-2.5">
                           <CheckCircle2
                             aria-hidden="true"
@@ -410,7 +394,7 @@ export default function PersyaratanSection() {
                           />
                           <div>
                             <p className="text-sm font-semibold text-navy">{item.name}</p>
-                            <p className="mt-0.5 text-xs leading-relaxed text-navy/70">
+                            <p className="mt-0.5 text-sm leading-relaxed text-navy/70 lg:text-xs">
                               {item.description}
                             </p>
                           </div>
@@ -420,8 +404,7 @@ export default function PersyaratanSection() {
                   </div>
                 </div>
 
-                {/* Column 4: Catatan Penting */}
-                <div className="p-6 sm:p-8 lg:col-span-1">
+                <div className="p-6 pt-0 sm:p-8 sm:pt-0 lg:pt-8">
                   <div
                     className="relative h-full overflow-hidden rounded-2xl border p-5"
                     style={{ borderColor: "rgba(253, 208, 0, 0.4)", backgroundColor: "#F3ECD9" }}
@@ -441,7 +424,7 @@ export default function PersyaratanSection() {
                       }}
                     />
 
-                    <div className="relative z-10 flex flex-col gap-4">
+                    <div className="relative z-10 flex flex-col gap-3 lg:gap-4">
                       <p className="font-heading text-center text-lg font-bold text-navy">
                         Catatan Penting
                       </p>
@@ -466,7 +449,7 @@ export default function PersyaratanSection() {
                           />
                           <div>
                             <p className="text-sm font-semibold text-navy">{item.title}</p>
-                            <p className="mt-0.5 text-xs leading-relaxed text-navy/70">
+                            <p className="mt-0.5 text-sm leading-relaxed text-navy/70 lg:text-xs">
                               {item.description}
                             </p>
                           </div>

@@ -80,36 +80,36 @@ function SectionHeading({ children }) {
 export default function JenjangPage() {
   return (
     <AppLayout title="Jenjang Pendidikan">
-         <PageHeroBanner
-        heading="Program Pendidikan"
+      <PageHeroBanner
+        heading="Jenjang Pendidikan"
         subheading={["Setiap jenjang, satu perjalanan.", "Bersama membangun generasi beradab."]}
         photoSrc="/images/hero-banner/hero-banner-photo-example.jpg"
       />
-      <section className="bg-[#FAF8F5] px-6 py-16 md:py-20">
+      <section className="bg-[#FAF8F5] px-4 py-12 sm:px-6 sm:py-16 md:py-20">
         
         <div className="mx-auto max-w-6xl">
           <SectionHeading>Pilih Jenjang Pendidikan</SectionHeading>
 
-          {/* 5 Jenjang Cards (Mihrab Shaped) */}
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {/* 5 Jenjang Cards (Mihrab Shaped) - 5 in a single row on mobile, full features on desktop */}
+          <div className="mt-8 grid grid-cols-5 gap-1.5 sm:mt-10 sm:gap-4 lg:gap-6">
             {JENJANG_DISPLAY.map((j) => (
               <Link
                 key={j.slug}
                 href={`/jenjang/${j.slug}`}
-                className="group flex flex-col items-center gap-3 rounded-t-full rounded-b-2xl border border-[#F1B23A]/30 bg-white px-4 py-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+                className="group flex flex-col items-center rounded-t-full rounded-b-xl border border-[#F1B23A]/30 bg-white px-1 py-2.5 text-center shadow-xs transition-all hover:-translate-y-1 hover:shadow-md sm:gap-3 sm:rounded-b-2xl sm:px-4 sm:py-6 sm:shadow-sm"
               >
-                <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-[#102380]">
-                  <span className="h-8 w-8 text-[#F1B23A]">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#102380] sm:h-16 sm:w-16">
+                  <span className="h-5 w-5 text-[#F1B23A] sm:h-8 sm:w-8">
                     {j.Icon ? <j.Icon /> : <Blocks className="h-full w-full" strokeWidth={1.6} />}
                   </span>
                 </span>
-                <span className="flex flex-col gap-0.5">
-                  <span className="font-['Playfair_Display',Georgia,serif] text-xl font-bold text-[#102380]">
+                <span className="mt-1 flex flex-col gap-0.5 sm:mt-0">
+                  <span className="font-['Playfair_Display',Georgia,serif] text-xs font-bold text-[#102380] sm:text-xl">
                     {j.name}
                   </span>
-                  <span className="text-xs text-[#102380]/60">{j.subtitle}</span>
+                  <span className="hidden text-xs text-[#102380]/60 sm:block">{j.subtitle}</span>
                 </span>
-                <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#102380]/15 text-[#102380]/40 transition-colors group-hover:border-[#F1B23A] group-hover:bg-[#F1B23A] group-hover:text-white">
+                <span className="mt-1 hidden h-7 w-7 shrink-0 place-items-center rounded-full border border-[#102380]/15 text-[#102380]/40 transition-colors group-hover:border-[#F1B23A] group-hover:bg-[#F1B23A] group-hover:text-white sm:grid">
                   <ChevronRight aria-hidden="true" className="h-3.5 w-3.5" />
                 </span>
               </Link>
@@ -134,10 +134,10 @@ export default function JenjangPage() {
             {JENJANG_DISPLAY.map((j) => (
               <Link
                 key={j.slug}
-                href={`/${j.slug}`}
-                className="group flex items-stretch gap-4 overflow-hidden rounded-2xl border border-[#102380]/10 bg-white shadow-sm transition-all hover:shadow-md sm:gap-5"
+                href={`/jenjang/${j.slug}`}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-[#102380]/10 bg-white shadow-sm transition-all hover:shadow-md sm:flex-row sm:items-stretch sm:gap-5"
               >
-                <div className="relative w-32 shrink-0 sm:w-48 md:w-56">
+                <div className="relative h-44 w-full shrink-0 sm:h-auto sm:w-[calc(11rem+5cm)]">
                   {j.photo ? (
                     <img
                       src={j.photo}
@@ -151,15 +151,15 @@ export default function JenjangPage() {
                   )}
                 </div>
 
-                <div className="flex flex-1 items-center gap-4 py-4 pr-4 sm:gap-5">
+                <div className="flex flex-1 items-center gap-4 p-4 sm:gap-5 sm:pl-0">
                   <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#102380] sm:h-14 sm:w-14">
                     <span className="h-6 w-6 text-[#F1B23A] sm:h-7 sm:w-7">
                       {j.Icon ? <j.Icon /> : <Blocks className="h-full w-full" strokeWidth={1.6} />}
                     </span>
                   </span>
 
-                  <div className="flex-1">
-                    <h4 className="font-[#102380] font-['Playfair_Display',Georgia,serif] text-lg font-bold">
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-['Playfair_Display',Georgia,serif] text-lg font-bold text-[#102380]">
                       {j.fullLabel}
                     </h4>
                     <p className="mt-1 text-sm leading-relaxed text-[#102380]/70">
@@ -167,7 +167,7 @@ export default function JenjangPage() {
                     </p>
                   </div>
 
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#102380]/15 text-[#102380]/40 transition-colors group-hover:border-[#F1B23A] group-hover:bg-[#F1B23A] group-hover:text-white">
+                  <span className="hidden h-9 w-9 shrink-0 place-items-center rounded-full border border-[#102380]/15 text-[#102380]/40 transition-colors group-hover:border-[#F1B23A] group-hover:bg-[#F1B23A] group-hover:text-white sm:grid">
                     <Plus aria-hidden="true" className="h-4 w-4" />
                   </span>
                 </div>
