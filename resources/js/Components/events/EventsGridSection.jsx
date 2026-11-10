@@ -88,6 +88,9 @@ export default function EventsGridSection({ items }) {
                       }
                       alt={event.title}
                       className="h-full w-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = "/images/hero/hero-slide-1-tahfizh-malam.jpg";
+                      }}
                     />
                   ) : (
                     <ImagePlaceholder label={`[ISI: Foto ${event.title}]`} className="h-full w-full" />

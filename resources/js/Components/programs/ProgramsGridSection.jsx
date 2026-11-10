@@ -88,6 +88,9 @@ export default function ProgramsGridSection({ items }) {
                       }
                       alt={program.title}
                       className="h-full w-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = "/images/hero/hero-slide-1-tahfizh-malam.jpg";
+                      }}
                     />
                   ) : (
                     <ImagePlaceholder label={`[ISI: Foto ${program.title}]`} className="h-full w-full" />

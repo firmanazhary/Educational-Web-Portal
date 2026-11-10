@@ -17,10 +17,12 @@ export default function EventDetail({ event, relatedEvents = [] }) {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [copied, setCopied] = useState(false);
 
+    const FALLBACK_IMAGE = '/images/hero/hero-slide-1-tahfizh-malam.jpg';
+
     // Helper Resolve URL File
     const resolveImageUrl = (path) => {
-        if (!path) return '/images/placeholder.jpg';
-        if (path.startsWith('http') || path.startsWith('/images') || path.startsWith('/storage')) {
+        if (!path) return FALLBACK_IMAGE;
+        if (path.startsWith('http') || path.startsWith('/images') || path.startsWith('/storage') || path.startsWith('data:')) {
             return path;
         }
         return `/storage/${path}`;
@@ -34,13 +36,15 @@ export default function EventDetail({ event, relatedEvents = [] }) {
         }
         if (Array.isArray(event?.gallery) && event.gallery.length > 0) {
             event.gallery.forEach((img) => {
-                const url = resolveImageUrl(img);
-                if (!list.includes(url)) {
-                    list.push(url);
+                if (img && typeof img === 'string') {
+                    const url = resolveImageUrl(img);
+                    if (!list.includes(url)) {
+                        list.push(url);
+                    }
                 }
             });
         }
-        return list.length > 0 ? list : ['/images/placeholder.jpg'];
+        return list.length > 0 ? list : [FALLBACK_IMAGE];
     };
 
     const gallery = getGalleryList();
@@ -133,7 +137,20 @@ export default function EventDetail({ event, relatedEvents = [] }) {
                                     src={gallery[activeImageIndex]} 
                                     alt={`${event?.title} - Gambar ${activeImageIndex + 1}`} 
                                     className="w-full h-full object-cover transition duration-500" 
+                                    onError={(e) => {
+                                        e.currentTarget.src = FALLBACK_IMAGE;
+                                    }}
                                 />
+
+                                {/* Maximize Button */}
+                                <button
+                                    type="button"
+                                    onClick={() => window.open(gallery[activeImageIndex], '_blank')}
+                                    className="absolute right-3 top-3 w-9 h-9 rounded-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#051736] flex items-center justify-center transition shadow-md"
+                                    title="Perbesar Foto"
+                                >
+                                    <Maximize2 size={16} />
+                                </button>
 
                                 {/* Prev & Next Arrows */}
                                 {gallery.length > 1 && (
@@ -172,7 +189,14 @@ export default function EventDetail({ event, relatedEvents = [] }) {
                                                     : 'border-[#E8DFC8] opacity-70 hover:opacity-100'
                                             }`}
                                         >
-                                            <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-cover" />
+                                            <img 
+                                                src={imgUrl} 
+                                                alt="Thumbnail" 
+                                                className="w-full h-full object-cover" 
+                                                onError={(e) => {
+                                                    e.currentTarget.src = FALLBACK_IMAGE;
+                                                }}
+                                            />
                                         </button>
                                     ))}
                                 </div>

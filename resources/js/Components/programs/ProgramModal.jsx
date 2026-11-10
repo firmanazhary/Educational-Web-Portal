@@ -1,41 +1,75 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "@inertiajs/react";
 import {
   ArrowLeft,
   ArrowRight,
   Check,
   ChevronLeft,
   ChevronRight,
+  ExternalLink,
   Maximize2,
   Sun,
   X,
 } from "lucide-react";
-import ImagePlaceholder from "@/Components/ui/ImagePlaceholder";
 
 const ASSET_NAVY = "#002672";
-const GALLERY_COUNT = 5;
+const FALLBACK_IMAGE = "/images/hero/hero-slide-1-tahfizh-malam.jpg";
+
+const resolveImageUrl = (path) => {
+  if (!path) return FALLBACK_IMAGE;
+  if (path.startsWith("http") || path.startsWith("/images") || path.startsWith("/storage") || path.startsWith("data:")) {
+    return path;
+  }
+  return `/storage/${path}`;
+};
 
 function galleryFor(program) {
-  if (Array.isArray(program.gallery) && program.gallery.length > 0) {
-    return program.gallery;
+  const list = [];
+  if (program?.image) {
+    list.push(resolveImageUrl(program.image));
   }
-  return Array.from({ length: GALLERY_COUNT }, (_, i) => `[ISI: Foto ${program.title} #${i + 1}]`);
+  if (Array.isArray(program?.gallery) && program.gallery.length > 0) {
+    program.gallery.forEach((img) => {
+      if (img && typeof img === "string") {
+        const url = resolveImageUrl(img);
+        if (!list.includes(url)) {
+          list.push(url);
+        }
+      }
+    });
+  }
+  if (list.length === 0) {
+    return [
+      "/images/hero/hero-slide-1-tahfizh-malam.jpg",
+      "/images/hero/hero-slide-2-metode-modern.jpg",
+      "/images/hero/hero-slide-3-kebersamaan.jpg",
+    ];
+  }
+  return list;
 }
 
 export default function ProgramModal({ program, onClose, onNext }) {
   const [activeImage, setActiveImage] = useState(0);
   const gallery = galleryFor(program);
 
+  // Reset index foto ketika berpindah program
   useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+    setActiveImage(0);
+  }, [program?.id, program?.slug]);
 
   const goPrev = () => setActiveImage((i) => (i - 1 + gallery.length) % gallery.length);
   const goNext = () => setActiveImage((i) => (i + 1) % gallery.length);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose, gallery.length]);
 
   return (
     <div className="fixed inset-0 z-[100] flex flex-col">
@@ -50,7 +84,7 @@ export default function ProgramModal({ program, onClose, onNext }) {
           className="flex items-center gap-2 text-sm font-medium text-white transition-colors hover:text-gold"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          Kembali ke Daftar Kegiatan
+          Kembali ke Daftar Program
         </button>
       </div>
 
@@ -75,68 +109,102 @@ export default function ProgramModal({ program, onClose, onNext }) {
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
 
-          {/* Gallery */}
-          <div>
-            <div className="relative overflow-hidden rounded-2xl">
-              <ImagePlaceholder label={gallery[activeImage]} className="aspect-[4/3] w-full" />
+          {/* Gallery Slider */}
+          <div className="flex flex-col">
+            <div className="relative overflow-hidden rounded-2xl bg-navy/5 shadow-md">
+              <img
+                key={gallery[activeImage]}
+                src={gallery[activeImage]}
+                alt={`${program.title} - Foto ${activeImage + 1}`}
+                className="aspect-[4/3] w-full object-cover transition-all duration-300"
+                onError={(e) => {
+                  e.currentTarget.src = FALLBACK_IMAGE;
+                }}
+              />
 
+              {/* Tombol Perbesar Foto */}
               <button
                 type="button"
+                onClick={() => window.open(gallery[activeImage], "_blank")}
                 aria-label="Perbesar foto"
-                className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-gold text-navy shadow"
+                title="Buka foto ukuran penuh"
+                className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-gold text-navy shadow-md hover:bg-gold/90 transition-transform active:scale-95"
               >
                 <Maximize2 className="h-4 w-4" aria-hidden="true" />
               </button>
 
-              <button
-                type="button"
-                onClick={goPrev}
-                aria-label="Foto sebelumnya"
-                className="absolute left-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full bg-navy/70 text-white transition-colors hover:bg-navy"
-              >
-                <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                onClick={goNext}
-                aria-label="Foto berikutnya"
-                className="absolute right-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full bg-navy/70 text-white transition-colors hover:bg-navy"
-              >
-                <ChevronRight className="h-4 w-4" aria-hidden="true" />
-              </button>
+              {/* Tombol Prev & Next */}
+              {gallery.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={goPrev}
+                    aria-label="Foto sebelumnya"
+                    className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-navy/80 text-white backdrop-blur-sm transition-all hover:bg-navy hover:scale-105 active:scale-95 shadow-md"
+                  >
+                    <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goNext}
+                    aria-label="Foto berikutnya"
+                    className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-navy/80 text-white backdrop-blur-sm transition-all hover:bg-navy hover:scale-105 active:scale-95 shadow-md"
+                  >
+                    <ChevronRight className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                </>
+              )}
 
-              <span className="absolute bottom-3 left-3 rounded-full bg-navy/70 px-2.5 py-1 text-xs font-medium text-white">
+              {/* Counter Badge */}
+              <span className="absolute bottom-3 left-3 rounded-full bg-navy/80 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm shadow-sm">
                 {activeImage + 1} / {gallery.length}
               </span>
             </div>
 
-            <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-              {gallery.map((label, i) => (
-                <button
-                  key={label}
-                  type="button"
-                  onClick={() => setActiveImage(i)}
-                  aria-label={`Lihat ${label}`}
-                  className={`shrink-0 overflow-hidden rounded-lg border-2 transition-colors ${
-                    i === activeImage ? "border-gold" : "border-transparent"
-                  }`}
-                >
-                  <ImagePlaceholder label="" className="h-16 w-20" />
-                </button>
-              ))}
-            </div>
+            {/* Thumbnail Strip */}
+            {gallery.length > 1 && (
+              <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
+                {gallery.map((imgUrl, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveImage(i)}
+                    aria-label={`Lihat foto ${i + 1}`}
+                    className={`relative shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
+                      i === activeImage
+                        ? "border-gold ring-2 ring-gold/40 scale-105 shadow-md"
+                        : "border-transparent opacity-70 hover:opacity-100"
+                    }`}
+                  >
+                    <img
+                      src={imgUrl}
+                      alt={`Thumbnail ${i + 1}`}
+                      className="h-16 w-20 object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = FALLBACK_IMAGE;
+                      }}
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
 
-            <div className="mt-3 flex justify-center gap-1.5">
-              {gallery.map((_, i) => (
-                <span
-                  key={i}
-                  aria-hidden="true"
-                  className={`h-1.5 rounded-full transition-all ${
-                    i === activeImage ? "w-4 bg-gold" : "w-1.5 bg-navy/20"
-                  }`}
-                />
-              ))}
-            </div>
+            {/* Dot Indicators */}
+            {gallery.length > 1 && (
+              <div className="mt-3 flex justify-center gap-1.5">
+                {gallery.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveImage(i)}
+                    aria-label={`Ke foto ${i + 1}`}
+                    className={`h-1.5 rounded-full transition-all ${
+                      i === activeImage ? "w-5 bg-gold" : "w-1.5 bg-navy/20 hover:bg-navy/50"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Info */}
@@ -177,11 +245,23 @@ export default function ProgramModal({ program, onClose, onNext }) {
             <button
               type="button"
               onClick={onNext}
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-3xl bg-navy px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-navy-dark md:mt-auto"
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-3xl bg-navy px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-navy-dark md:mt-auto shadow-md"
             >
               Next Programs
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
+
+            {program.slug && (
+              <div className="mt-3 flex justify-center">
+                <Link
+                  href={route("events.show", program.slug)}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-navy/70 hover:text-gold transition-colors"
+                >
+                  <span>Lihat Halaman Detail Lengkap</span>
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
+              </div>
+            )}
           </div>
         </motion.div>
       </div>
